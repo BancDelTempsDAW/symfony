@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array('name' => $name));
     }
+    
+    public function iniciAction()
+    {
+        return $this->render('bonavallBancdeltempsBundle:Default:inici.html.twig', array());
+    }
 }

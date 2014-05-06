@@ -135,6 +135,20 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // bonavall_bancdeltemps_homepage
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'bonavall_bancdeltemps_homepage')), array (  '_controller' => 'bonavall\\BancdeltempsBundle\\Controller\\DefaultController::indexAction',));
+        }
+
+        // bonavall_bancdeltemps_inici
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'bonavall_bancdeltemps_inici');
+            }
+
+            return array (  '_controller' => 'bonavall\\BancdeltempsBundle\\Controller\\DefaultController::iniciAction',  '_route' => 'bonavall_bancdeltemps_inici',);
+        }
+
         // _welcome
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
