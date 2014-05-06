@@ -1,0 +1,3 @@
+bonavall_bancdeltemps_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:index }

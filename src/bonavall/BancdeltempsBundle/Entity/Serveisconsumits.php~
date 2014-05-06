@@ -1,0 +1,45 @@
+<?php
+
+namespace bonavall\BancdeltempsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Serveisconsumits
+ *
+ * @ORM\Table(name="serveisconsumits", indexes={@ORM\Index(name="fk_idservei_oferit", columns={"idServei"}), @ORM\Index(name="fk_idusuari_consumidor", columns={"idUsuari"})})
+ * @ORM\Entity
+ */
+class Serveisconsumits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \Serveis
+     *
+     * @ORM\ManyToOne(targetEntity="Serveis")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idServei", referencedColumnName="id")
+     * })
+     */
+    private $idservei;
+
+    /**
+     * @var \Usuari
+     *
+     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idUsuari", referencedColumnName="id")
+     * })
+     */
+    private $idusuari;
+
+
+}

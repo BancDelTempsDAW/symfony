@@ -1,0 +1,63 @@
+<?php
+
+namespace bonavall\BancdeltempsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Missatges
+ *
+ * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_idusuari_idemisor", columns={"idEmisor"}), @ORM\Index(name="fk_idusuari_idreceptor", columns={"idReceptor"})})
+ * @ORM\Entity
+ */
+class Missatges
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="missatge", type="text", nullable=false)
+     */
+    private $missatge;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data", type="date", nullable=false)
+     */
+    private $data;
+
+    /**
+     * @var \Usuari
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idReceptor", referencedColumnName="id")
+     * })
+     */
+    private $idreceptor;
+
+    /**
+     * @var \Usuari
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idEmisor", referencedColumnName="id")
+     * })
+     */
+    private $idemisor;
+
+
+}

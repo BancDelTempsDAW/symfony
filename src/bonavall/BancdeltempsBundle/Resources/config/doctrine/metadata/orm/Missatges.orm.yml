@@ -1,0 +1,48 @@
+Missatges:
+    type: entity
+    table: missatges
+    indexes:
+        fk_idusuari_idemisor:
+            columns:
+                - idEmisor
+        fk_idusuari_idreceptor:
+            columns:
+                - idReceptor
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+    fields:
+        missatge:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        data:
+            type: date
+            nullable: false
+            comment: ''
+    oneToOne:
+        idreceptor:
+            targetEntity: Usuari
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idReceptor:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idemisor:
+            targetEntity: Usuari
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idEmisor:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

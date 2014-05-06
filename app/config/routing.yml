@@ -1,0 +1,4 @@
+bonavall_bancdeltemps:
+    resource: "@bonavallBancdeltempsBundle/Resources/config/routing.yml"
+    prefix:   /
+

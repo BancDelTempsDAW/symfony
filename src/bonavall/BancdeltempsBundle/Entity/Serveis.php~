@@ -1,0 +1,84 @@
+<?php
+
+namespace bonavall\BancdeltempsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Serveis
+ *
+ * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id"})})
+ * @ORM\Entity
+ */
+class Serveis
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idDonant", type="integer", nullable=false)
+     */
+    private $iddonant;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="preu", type="integer", nullable=false)
+     */
+    private $preu;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_inici", type="date", nullable=false)
+     */
+    private $dataInici;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="durada", type="date", nullable=false)
+     */
+    private $durada;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_final", type="date", nullable=true)
+     */
+    private $dataFinal;
+
+    /**
+     * @var \EstatServei
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="EstatServei")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="estat_servei_id", referencedColumnName="id")
+     * })
+     */
+    private $estatServei;
+
+    /**
+     * @var \TipusServei
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="TipusServei")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipus_servei_id", referencedColumnName="id")
+     * })
+     */
+    private $tipusServei;
+
+
+}

@@ -1,0 +1,66 @@
+Serveis:
+    type: entity
+    table: serveis
+    indexes:
+        fk_idusuari_iddonant:
+            columns:
+                - idDonant
+        fk_serveis_estat_servei1:
+            columns:
+                - estat_servei_id
+        fk_serveis_tipus_servei1:
+            columns:
+                - tipus_servei_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+    fields:
+        iddonant:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: idDonant
+        preu:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        dataInici:
+            type: date
+            nullable: false
+            comment: ''
+            column: data_inici
+        durada:
+            type: date
+            nullable: false
+            comment: ''
+        dataFinal:
+            type: date
+            nullable: true
+            comment: ''
+            column: data_final
+    oneToOne:
+        estatServei:
+            targetEntity: EstatServei
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                estat_servei_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipusServei:
+            targetEntity: TipusServei
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipus_servei_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

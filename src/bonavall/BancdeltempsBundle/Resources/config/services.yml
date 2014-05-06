@@ -1,0 +1,7 @@
+parameters:
+#    bonavall_bancdeltemps.example.class: bonavall\BancdeltempsBundle\Example
+
+services:
+#    bonavall_bancdeltemps.example:
+#        class: %bonavall_bancdeltemps.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

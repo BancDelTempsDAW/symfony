@@ -1,0 +1,39 @@
+<?php
+
+namespace bonavall\BancdeltempsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TipusServei
+ *
+ * @ORM\Table(name="tipus_servei")
+ * @ORM\Entity
+ */
+class TipusServei
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=55, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcio", type="text", nullable=false)
+     */
+    private $descripcio;
+
+
+}

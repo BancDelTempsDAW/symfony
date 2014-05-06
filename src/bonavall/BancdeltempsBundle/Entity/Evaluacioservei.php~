@@ -1,0 +1,61 @@
+<?php
+
+namespace bonavall\BancdeltempsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Evaluacioservei
+ *
+ * @ORM\Table(name="EvaluacioServei", indexes={@ORM\Index(name="fk_usuari_has_serveis_serveis2", columns={"serveis_id", "serveis_tipus_servei_id", "serveis_estat_servei_id"}), @ORM\Index(name="fk_usuari_has_serveis_usuari2", columns={"usuari_id"})})
+ * @ORM\Entity
+ */
+class Evaluacioservei
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="valoracioServei", type="integer", nullable=false)
+     */
+    private $valoracioservei;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Comentari", type="string", length=45, nullable=true)
+     */
+    private $comentari;
+
+    /**
+     * @var \Usuari
+     *
+     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuari_id", referencedColumnName="id")
+     * })
+     */
+    private $usuari;
+
+    /**
+     * @var \Serveis
+     *
+     * @ORM\ManyToOne(targetEntity="Serveis")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="serveis_id", referencedColumnName="id"),
+     *   @ORM\JoinColumn(name="serveis_tipus_servei_id", referencedColumnName="tipus_servei_id"),
+     *   @ORM\JoinColumn(name="serveis_estat_servei_id", referencedColumnName="estat_servei_id")
+     * })
+     */
+    private $serveis;
+
+
+}

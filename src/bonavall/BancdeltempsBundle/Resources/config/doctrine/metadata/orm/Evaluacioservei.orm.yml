@@ -1,0 +1,59 @@
+Evaluacioservei:
+    type: entity
+    table: EvaluacioServei
+    indexes:
+        fk_usuari_has_serveis_serveis2:
+            columns:
+                - serveis_id
+                - serveis_tipus_servei_id
+                - serveis_estat_servei_id
+        fk_usuari_has_serveis_usuari2:
+            columns:
+                - usuari_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        valoracioservei:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: valoracioServei
+        comentari:
+            type: string
+            nullable: true
+            length: 45
+            fixed: false
+            comment: ''
+            column: Comentari
+    manyToOne:
+        usuari:
+            targetEntity: Usuari
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuari_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        serveis:
+            targetEntity: Serveis
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                serveis_id:
+                    referencedColumnName: id
+                serveis_tipus_servei_id:
+                    referencedColumnName: tipus_servei_id
+                serveis_estat_servei_id:
+                    referencedColumnName: estat_servei_id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
