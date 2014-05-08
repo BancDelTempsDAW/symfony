@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Usuari
  *
- * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_grup1", columns={"grup_id"})})
+ * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_Persona1", columns={"Persona_id"})})
  * @ORM\Entity
  */
 class Usuari
@@ -36,14 +36,49 @@ class Usuari
     private $cognom;
 
     /**
-     * @var \Grup
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Grup")
+     * @ORM\Column(name="adreca", type="string", length=255, nullable=false)
+     */
+    private $adreca;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefon", type="string", length=15, nullable=false)
+     */
+    private $telefon;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
+     */
+    private $fotografia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="presentacio", type="string", length=255, nullable=false)
+     */
+    private $presentacio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="punts", type="integer", nullable=false)
+     */
+    private $punts;
+
+    /**
+     * @var \Persona
+     *
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="grup_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="Persona_id", referencedColumnName="id")
      * })
      */
-    private $grup;
+    private $persona;
 
 
 
@@ -104,25 +139,140 @@ class Usuari
     }
 
     /**
-     * Set grup
+     * Set adreca
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Grup $grup
+     * @param string $adreca
      * @return Usuari
      */
-    public function setGrup(\bonavall\BancdeltempsBundle\Entity\Grup $grup = null)
+    public function setAdreca($adreca)
     {
-        $this->grup = $grup;
+        $this->adreca = $adreca;
 
         return $this;
     }
 
     /**
-     * Get grup
+     * Get adreca
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Grup 
+     * @return string 
      */
-    public function getGrup()
+    public function getAdreca()
     {
-        return $this->grup;
+        return $this->adreca;
+    }
+
+    /**
+     * Set telefon
+     *
+     * @param string $telefon
+     * @return Usuari
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+
+        return $this;
+    }
+
+    /**
+     * Get telefon
+     *
+     * @return string 
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * Set fotografia
+     *
+     * @param string $fotografia
+     * @return Usuari
+     */
+    public function setFotografia($fotografia)
+    {
+        $this->fotografia = $fotografia;
+
+        return $this;
+    }
+
+    /**
+     * Get fotografia
+     *
+     * @return string 
+     */
+    public function getFotografia()
+    {
+        return $this->fotografia;
+    }
+
+    /**
+     * Set presentacio
+     *
+     * @param string $presentacio
+     * @return Usuari
+     */
+    public function setPresentacio($presentacio)
+    {
+        $this->presentacio = $presentacio;
+
+        return $this;
+    }
+
+    /**
+     * Get presentacio
+     *
+     * @return string 
+     */
+    public function getPresentacio()
+    {
+        return $this->presentacio;
+    }
+
+    /**
+     * Set punts
+     *
+     * @param integer $punts
+     * @return Usuari
+     */
+    public function setPunts($punts)
+    {
+        $this->punts = $punts;
+
+        return $this;
+    }
+
+    /**
+     * Get punts
+     *
+     * @return integer 
+     */
+    public function getPunts()
+    {
+        return $this->punts;
+    }
+
+    /**
+     * Set persona
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $persona
+     * @return Usuari
+     */
+    public function setPersona(\bonavall\BancdeltempsBundle\Entity\Persona $persona = null)
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * Get persona
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     */
+    public function getPersona()
+    {
+        return $this->persona;
     }
 }

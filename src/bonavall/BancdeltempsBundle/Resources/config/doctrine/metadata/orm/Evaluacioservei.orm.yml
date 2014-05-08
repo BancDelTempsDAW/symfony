@@ -10,6 +10,9 @@ Evaluacioservei:
         fk_usuari_has_serveis_usuari2:
             columns:
                 - usuari_id
+        IDX_C2BD0F3DA55C797F:
+            columns:
+                - serveis_id
     id:
         id:
             type: integer
@@ -20,6 +23,18 @@ Evaluacioservei:
             generator:
                 strategy: IDENTITY
     fields:
+        serveisTipusServeiId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: serveis_tipus_servei_id
+        serveisEstatServeiId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: serveis_estat_servei_id
         valoracioservei:
             type: integer
             nullable: false
@@ -51,9 +66,5 @@ Evaluacioservei:
             joinColumns:
                 serveis_id:
                     referencedColumnName: id
-                serveis_tipus_servei_id:
-                    referencedColumnName: tipus_servei_id
-                serveis_estat_servei_id:
-                    referencedColumnName: estat_servei_id
             orphanRemoval: false
     lifecycleCallbacks: {  }

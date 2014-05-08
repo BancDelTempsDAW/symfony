@@ -1,0 +1,15 @@
+Rol:
+    type: entity
+    table: rol
+    id:
+        userRole:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+            id: true
+            column: user_role
+            generator:
+                strategy: IDENTITY
+    lifecycleCallbacks: {  }

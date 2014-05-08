@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Missatges
  *
- * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_idusuari_idemisor", columns={"idEmisor"}), @ORM\Index(name="fk_idusuari_idreceptor", columns={"idReceptor"})})
+ * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_missatges_Solicituts1", columns={"Solicituts_id"})})
  * @ORM\Entity
  */
 class Missatges
@@ -17,7 +17,7 @@ class Missatges
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -36,28 +36,21 @@ class Missatges
     private $data;
 
     /**
-     * @var \Usuari
+     * @var string
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Usuari")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idReceptor", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="autor", type="string", length=55, nullable=false)
      */
-    private $idreceptor;
+    private $autor;
 
     /**
-     * @var \Usuari
+     * @var \Solicituts
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Solicituts")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEmisor", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="Solicituts_id", referencedColumnName="id")
      * })
      */
-    private $idemisor;
+    private $solicituts;
 
 
 }

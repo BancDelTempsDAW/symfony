@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Usuari
  *
- * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_grup1", columns={"grup_id"})})
+ * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_Persona1", columns={"Persona_id"})})
  * @ORM\Entity
  */
 class Usuari
@@ -36,14 +36,49 @@ class Usuari
     private $cognom;
 
     /**
-     * @var \Grup
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Grup")
+     * @ORM\Column(name="adreca", type="string", length=255, nullable=false)
+     */
+    private $adreca;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefon", type="string", length=15, nullable=false)
+     */
+    private $telefon;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
+     */
+    private $fotografia;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="presentacio", type="string", length=255, nullable=false)
+     */
+    private $presentacio;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="punts", type="integer", nullable=false)
+     */
+    private $punts;
+
+    /**
+     * @var \Persona
+     *
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="grup_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="Persona_id", referencedColumnName="id")
      * })
      */
-    private $grup;
+    private $persona;
 
 
 }

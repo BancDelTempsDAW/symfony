@@ -5,12 +5,12 @@ namespace bonavall\BancdeltempsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Grup
+ * ValoracioServei
  *
- * @ORM\Table(name="grup")
+ * @ORM\Table(name="valoracio_servei")
  * @ORM\Entity
  */
-class Grup
+class ValoracioServei
 {
     /**
      * @var integer
@@ -24,16 +24,9 @@ class Grup
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=55, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=45, nullable=false)
      */
     private $nom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="descripcio", type="string", length=100, nullable=false)
-     */
-    private $descripcio;
 
 
 
@@ -51,7 +44,7 @@ class Grup
      * Set nom
      *
      * @param string $nom
-     * @return Grup
+     * @return ValoracioServei
      */
     public function setNom($nom)
     {
@@ -68,28 +61,5 @@ class Grup
     public function getNom()
     {
         return $this->nom;
-    }
-
-    /**
-     * Set descripcio
-     *
-     * @param string $descripcio
-     * @return Grup
-     */
-    public function setDescripcio($descripcio)
-    {
-        $this->descripcio = $descripcio;
-
-        return $this;
-    }
-
-    /**
-     * Get descripcio
-     *
-     * @return string 
-     */
-    public function getDescripcio()
-    {
-        return $this->descripcio;
     }
 }
