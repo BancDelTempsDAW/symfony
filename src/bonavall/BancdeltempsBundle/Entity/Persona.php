@@ -3,14 +3,14 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+
 /**
  * Persona
  *
- * @ORM\Table(name="Persona", indexes={@ORM\Index(name="fk_Persona_rol1", columns={"rol_user_role"})})
+ * @ORM\Table(name="Persona", indexes={@ORM\Index(name="fk_Persona_rol1", columns={"rol_id"})})
  * @ORM\Entity
  */
-class Persona implements UserInterface, \Serializable
+class Persona
 {
     /**
      * @var integer
@@ -47,17 +47,12 @@ class Persona implements UserInterface, \Serializable
      *
      * @ORM\ManyToOne(targetEntity="Rol")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rol_user_role", referencedColumnName="user_role")
+     *   @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
      * })
      */
-    private $rolUserRole;
-    
-    
-    function __construct() {
-        $this->salt = md5(uniqid(null,true));        
-    }
+    private $rol;
 
-    
+
 
     /**
      * Get id
@@ -139,45 +134,25 @@ class Persona implements UserInterface, \Serializable
     }
 
     /**
-     * Set rolUserRole
+     * Set rol
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolUserRole
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
      * @return Persona
      */
-    public function setRolUserRole(\bonavall\BancdeltempsBundle\Entity\Rol $rolUserRole = null)
+    public function setRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol = null)
     {
-        $this->rolUserRole = $rolUserRole;
+        $this->rol = $rol;
 
         return $this;
     }
 
     /**
-     * Get rolUserRole
+     * Get rol
      *
      * @return \bonavall\BancdeltempsBundle\Entity\Rol 
      */
-    public function getRolUserRole()
+    public function getRol()
     {
-        return $this->rolUserRole;
-    }
-
-    public function eraseCredentials() {
-        
-    }
-
-    public function getRoles() {
-        return array($this->getRolUserRole()->getUserRole());
-    }
-
-    public function getUsername() {
-        
-    }
-
-    public function serialize() {
-        
-    }
-
-    public function unserialize($serialized) {
-        
+        return $this->rol;
     }
 }

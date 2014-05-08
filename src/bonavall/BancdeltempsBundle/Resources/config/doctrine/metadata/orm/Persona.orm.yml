@@ -4,7 +4,7 @@ Persona:
     indexes:
         fk_Persona_rol1:
             columns:
-                - rol_user_role
+                - rol_id
     id:
         id:
             type: integer
@@ -34,13 +34,13 @@ Persona:
             fixed: false
             comment: ''
     manyToOne:
-        rolUserRole:
+        rol:
             targetEntity: Rol
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                rol_user_role:
-                    referencedColumnName: user_role
+                rol_id:
+                    referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

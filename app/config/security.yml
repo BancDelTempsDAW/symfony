@@ -11,35 +11,31 @@ security:
     providers:
         usuaris:
             entity: { class: bonavall\BancdeltempsBundle\Entity\Persona, property: email }
+        
+        in_memory:
+          memory:
+              users:
+                  ryan:  { password: ryanpass, roles: 'ROLE_USER' }
+                  admin: { password: kitten, roles: 'ROLE_ADMIN' }
  
     firewalls:
         main:
-          pattern: ^/
-         # http_basic: ~
-          form_login:
-                login_path: login
+            pattern: /.*
+            provider: usuaris
+            form_login:
+                login_path: /login
                 check_path: /login_check
-          logout:
-                path: logout
+                remember_me: true
+            logout:
+                path: /logout
                 target: /
-          anonymous: ~
-
-#            pattern: /.*
-#            provider: usuaris
-#            form_login:
-#                login_path: /login
-#                check_path: /login_check
-#                remember_me: true
-#            logout:
-#                path: /logout
-#                target: /
-#            remember_me:
-#                key: sessionCookie
-#                lifetime: 1800
-#                path: /.*
-#                domain: ~
-#            security: ~
-#            anonymous: ~
+            remember_me:
+                key: sessionCookie
+                lifetime: 1800
+                path: /.*
+                domain: ~
+            security: ~
+            anonymous: ~
     access_control:
         - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /user, roles: ROLE_USER }
