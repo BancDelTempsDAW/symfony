@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Missatges
  *
- * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_idusuari_idemisor", columns={"idEmisor"}), @ORM\Index(name="fk_idusuari_idreceptor", columns={"idReceptor"})})
+ * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_missatges_Solicituts1", columns={"Solicituts_id"})})
  * @ORM\Entity
  */
 class Missatges
@@ -17,7 +17,7 @@ class Missatges
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -36,43 +36,23 @@ class Missatges
     private $data;
 
     /**
-     * @var \Usuari
+     * @var string
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Usuari")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idReceptor", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="autor", type="string", length=55, nullable=false)
      */
-    private $idreceptor;
+    private $autor;
 
     /**
-     * @var \Usuari
+     * @var \Solicituts
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Solicituts")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idEmisor", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="Solicituts_id", referencedColumnName="id")
      * })
      */
-    private $idemisor;
+    private $solicituts;
 
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return Missatges
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -131,48 +111,48 @@ class Missatges
     }
 
     /**
-     * Set idreceptor
+     * Set autor
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $idreceptor
+     * @param string $autor
      * @return Missatges
      */
-    public function setIdreceptor(\bonavall\BancdeltempsBundle\Entity\Usuari $idreceptor)
+    public function setAutor($autor)
     {
-        $this->idreceptor = $idreceptor;
+        $this->autor = $autor;
 
         return $this;
     }
 
     /**
-     * Get idreceptor
+     * Get autor
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     * @return string 
      */
-    public function getIdreceptor()
+    public function getAutor()
     {
-        return $this->idreceptor;
+        return $this->autor;
     }
 
     /**
-     * Set idemisor
+     * Set solicituts
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $idemisor
+     * @param \bonavall\BancdeltempsBundle\Entity\Solicituts $solicituts
      * @return Missatges
      */
-    public function setIdemisor(\bonavall\BancdeltempsBundle\Entity\Usuari $idemisor)
+    public function setSolicituts(\bonavall\BancdeltempsBundle\Entity\Solicituts $solicituts = null)
     {
-        $this->idemisor = $idemisor;
+        $this->solicituts = $solicituts;
 
         return $this;
     }
 
     /**
-     * Get idemisor
+     * Get solicituts
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     * @return \bonavall\BancdeltempsBundle\Entity\Solicituts 
      */
-    public function getIdemisor()
+    public function getSolicituts()
     {
-        return $this->idemisor;
+        return $this->solicituts;
     }
 }

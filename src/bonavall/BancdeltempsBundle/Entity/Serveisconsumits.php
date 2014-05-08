@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Serveisconsumits
  *
- * @ORM\Table(name="serveisconsumits", indexes={@ORM\Index(name="fk_idservei_oferit", columns={"idServei"}), @ORM\Index(name="fk_idusuari_consumidor", columns={"idUsuari"})})
+ * @ORM\Table(name="serveisconsumits", indexes={@ORM\Index(name="fk_idservei_oferit", columns={"idServei"}), @ORM\Index(name="fk_serveisconsumits_valoracio_servei1", columns={"valoracio_servei_id"}), @ORM\Index(name="fk_idusuari_consumidor", columns={"idUsuari"})})
  * @ORM\Entity
  */
 class Serveisconsumits
@@ -20,6 +20,13 @@ class Serveisconsumits
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comentaris", type="string", length=255, nullable=true)
+     */
+    private $comentaris;
 
     /**
      * @var \Serveis
@@ -41,6 +48,16 @@ class Serveisconsumits
      */
     private $idusuari;
 
+    /**
+     * @var \ValoracioServei
+     *
+     * @ORM\ManyToOne(targetEntity="ValoracioServei")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="valoracio_servei_id", referencedColumnName="id")
+     * })
+     */
+    private $valoracioServei;
+
 
 
     /**
@@ -51,6 +68,29 @@ class Serveisconsumits
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set comentaris
+     *
+     * @param string $comentaris
+     * @return Serveisconsumits
+     */
+    public function setComentaris($comentaris)
+    {
+        $this->comentaris = $comentaris;
+
+        return $this;
+    }
+
+    /**
+     * Get comentaris
+     *
+     * @return string 
+     */
+    public function getComentaris()
+    {
+        return $this->comentaris;
     }
 
     /**
@@ -97,5 +137,28 @@ class Serveisconsumits
     public function getIdusuari()
     {
         return $this->idusuari;
+    }
+
+    /**
+     * Set valoracioServei
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\ValoracioServei $valoracioServei
+     * @return Serveisconsumits
+     */
+    public function setValoracioServei(\bonavall\BancdeltempsBundle\Entity\ValoracioServei $valoracioServei = null)
+    {
+        $this->valoracioServei = $valoracioServei;
+
+        return $this;
+    }
+
+    /**
+     * Get valoracioServei
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\ValoracioServei 
+     */
+    public function getValoracioServei()
+    {
+        return $this->valoracioServei;
     }
 }

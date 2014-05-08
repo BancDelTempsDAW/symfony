@@ -2,14 +2,12 @@ Solicituts:
     type: entity
     table: Solicituts
     indexes:
-        fk_usuari_has_serveis_serveis1:
-            columns:
-                - serveis_id
-                - serveis_tipus_servei_id
-                - serveis_estat_servei_id
         fk_usuari_has_serveis_usuari1:
             columns:
-                - usuari_id
+                - solicitant_id
+        fk_Solicituts_serveis1:
+            columns:
+                - servei_solicitat_id
     id:
         id:
             type: integer
@@ -27,26 +25,22 @@ Solicituts:
             comment: ''
             column: estatSolicitut
     manyToOne:
-        usuari:
+        solicitant:
             targetEntity: Usuari
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                usuari_id:
+                solicitant_id:
                     referencedColumnName: id
             orphanRemoval: false
-        serveis:
+        serveiSolicitat:
             targetEntity: Serveis
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                serveis_id:
+                servei_solicitat_id:
                     referencedColumnName: id
-                serveis_tipus_servei_id:
-                    referencedColumnName: tipus_servei_id
-                serveis_estat_servei_id:
-                    referencedColumnName: estat_servei_id
             orphanRemoval: false
     lifecycleCallbacks: {  }

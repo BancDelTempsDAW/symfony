@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Serveis
  *
- * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id"})})
+ * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_usuari1", columns={"usuari_ofertant_id"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"})})
  * @ORM\Entity
  */
 class Serveis
@@ -17,7 +17,7 @@ class Serveis
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
@@ -57,43 +57,36 @@ class Serveis
     private $dataFinal;
 
     /**
+     * @var \Usuari
+     *
+     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuari_ofertant_id", referencedColumnName="id")
+     * })
+     */
+    private $usuariOfertant;
+
+    /**
+     * @var \TipusServei
+     *
+     * @ORM\ManyToOne(targetEntity="TipusServei")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="tipus_servei_id1", referencedColumnName="id")
+     * })
+     */
+    private $tipusServei1;
+
+    /**
      * @var \EstatServei
      *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="EstatServei")
+     * @ORM\ManyToOne(targetEntity="EstatServei")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="estat_servei_id", referencedColumnName="id")
      * })
      */
     private $estatServei;
 
-    /**
-     * @var \TipusServei
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="TipusServei")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipus_servei_id", referencedColumnName="id")
-     * })
-     */
-    private $tipusServei;
 
-
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     * @return Serveis
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
 
     /**
      * Get id
@@ -221,12 +214,58 @@ class Serveis
     }
 
     /**
+     * Set usuariOfertant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant
+     * @return Serveis
+     */
+    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant = null)
+    {
+        $this->usuariOfertant = $usuariOfertant;
+
+        return $this;
+    }
+
+    /**
+     * Get usuariOfertant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     */
+    public function getUsuariOfertant()
+    {
+        return $this->usuariOfertant;
+    }
+
+    /**
+     * Set tipusServei1
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1
+     * @return Serveis
+     */
+    public function setTipusServei1(\bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1 = null)
+    {
+        $this->tipusServei1 = $tipusServei1;
+
+        return $this;
+    }
+
+    /**
+     * Get tipusServei1
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\TipusServei 
+     */
+    public function getTipusServei1()
+    {
+        return $this->tipusServei1;
+    }
+
+    /**
      * Set estatServei
      *
      * @param \bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei
      * @return Serveis
      */
-    public function setEstatServei(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei)
+    public function setEstatServei(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei = null)
     {
         $this->estatServei = $estatServei;
 
@@ -241,28 +280,5 @@ class Serveis
     public function getEstatServei()
     {
         return $this->estatServei;
-    }
-
-    /**
-     * Set tipusServei
-     *
-     * @param \bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei
-     * @return Serveis
-     */
-    public function setTipusServei(\bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei)
-    {
-        $this->tipusServei = $tipusServei;
-
-        return $this;
-    }
-
-    /**
-     * Get tipusServei
-     *
-     * @return \bonavall\BancdeltempsBundle\Entity\TipusServei 
-     */
-    public function getTipusServei()
-    {
-        return $this->tipusServei;
     }
 }

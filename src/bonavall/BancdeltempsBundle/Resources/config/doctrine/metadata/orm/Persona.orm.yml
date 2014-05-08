@@ -1,10 +1,10 @@
-Missatges:
+Persona:
     type: entity
-    table: missatges
+    table: Persona
     indexes:
-        fk_missatges_Solicituts1:
+        fk_Persona_rol1:
             columns:
-                - Solicituts_id
+                - rol_user_role
     id:
         id:
             type: integer
@@ -15,30 +15,26 @@ Missatges:
             generator:
                 strategy: IDENTITY
     fields:
-        missatge:
-            type: text
-            nullable: false
-            length: null
-            fixed: false
-            comment: ''
-        data:
-            type: date
-            nullable: false
-            comment: ''
-        autor:
+        email:
             type: string
             nullable: false
-            length: 55
+            length: 75
+            fixed: false
+            comment: ''
+        password:
+            type: string
+            nullable: false
+            length: 45
             fixed: false
             comment: ''
     manyToOne:
-        solicituts:
-            targetEntity: Solicituts
+        rolUserRole:
+            targetEntity: Rol
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                Solicituts_id:
-                    referencedColumnName: id
+                rol_user_role:
+                    referencedColumnName: user_role
             orphanRemoval: false
     lifecycleCallbacks: {  }

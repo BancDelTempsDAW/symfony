@@ -2,9 +2,9 @@ Usuari:
     type: entity
     table: usuari
     indexes:
-        fk_usuari_grup1:
+        fk_usuari_Persona1:
             columns:
-                - grup_id
+                - Persona_id
     id:
         id:
             type: integer
@@ -27,14 +27,43 @@ Usuari:
             length: 55
             fixed: false
             comment: ''
+        adreca:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        telefon:
+            type: string
+            nullable: false
+            length: 15
+            fixed: false
+            comment: ''
+        fotografia:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        presentacio:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        punts:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
     manyToOne:
-        grup:
-            targetEntity: Grup
+        persona:
+            targetEntity: Persona
             cascade: {  }
             mappedBy: null
             inversedBy: null
             joinColumns:
-                grup_id:
+                Persona_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

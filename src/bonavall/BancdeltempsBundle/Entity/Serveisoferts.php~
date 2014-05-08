@@ -42,4 +42,60 @@ class Serveisoferts
     private $idusuari;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idservei
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Serveis $idservei
+     * @return Serveisoferts
+     */
+    public function setIdservei(\bonavall\BancdeltempsBundle\Entity\Serveis $idservei = null)
+    {
+        $this->idservei = $idservei;
+
+        return $this;
+    }
+
+    /**
+     * Get idservei
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Serveis 
+     */
+    public function getIdservei()
+    {
+        return $this->idservei;
+    }
+
+    /**
+     * Set idusuari
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $idusuari
+     * @return Serveisoferts
+     */
+    public function setIdusuari(\bonavall\BancdeltempsBundle\Entity\Usuari $idusuari = null)
+    {
+        $this->idusuari = $idusuari;
+
+        return $this;
+    }
+
+    /**
+     * Get idusuari
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     */
+    public function getIdusuari()
+    {
+        return $this->idusuari;
+    }
 }

@@ -5,12 +5,15 @@ Serveis:
         fk_idusuari_iddonant:
             columns:
                 - idDonant
+        fk_serveis_usuari1:
+            columns:
+                - usuari_ofertant_id
+        fk_serveis_tipus_servei1:
+            columns:
+                - tipus_servei_id1
         fk_serveis_estat_servei1:
             columns:
                 - estat_servei_id
-        fk_serveis_tipus_servei1:
-            columns:
-                - tipus_servei_id
     id:
         id:
             type: integer
@@ -18,6 +21,8 @@ Serveis:
             unsigned: false
             comment: ''
             id: true
+            generator:
+                strategy: IDENTITY
     fields:
         iddonant:
             type: integer
@@ -44,7 +49,25 @@ Serveis:
             nullable: true
             comment: ''
             column: data_final
-    oneToOne:
+    manyToOne:
+        usuariOfertant:
+            targetEntity: Usuari
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                usuari_ofertant_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        tipusServei1:
+            targetEntity: TipusServei
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tipus_servei_id1:
+                    referencedColumnName: id
+            orphanRemoval: false
         estatServei:
             targetEntity: EstatServei
             cascade: {  }
@@ -52,15 +75,6 @@ Serveis:
             inversedBy: null
             joinColumns:
                 estat_servei_id:
-                    referencedColumnName: id
-            orphanRemoval: false
-        tipusServei:
-            targetEntity: TipusServei
-            cascade: {  }
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                tipus_servei_id:
                     referencedColumnName: id
             orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Evaluacioservei
  *
- * @ORM\Table(name="EvaluacioServei", indexes={@ORM\Index(name="fk_usuari_has_serveis_serveis2", columns={"serveis_id", "serveis_tipus_servei_id", "serveis_estat_servei_id"}), @ORM\Index(name="fk_usuari_has_serveis_usuari2", columns={"usuari_id"})})
+ * @ORM\Table(name="EvaluacioServei", indexes={@ORM\Index(name="fk_usuari_has_serveis_serveis2", columns={"serveis_id", "serveis_tipus_servei_id", "serveis_estat_servei_id"}), @ORM\Index(name="fk_usuari_has_serveis_usuari2", columns={"usuari_id"}), @ORM\Index(name="IDX_C2BD0F3DA55C797F", columns={"serveis_id"})})
  * @ORM\Entity
  */
 class Evaluacioservei
@@ -20,6 +20,20 @@ class Evaluacioservei
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="serveis_tipus_servei_id", type="integer", nullable=false)
+     */
+    private $serveisTipusServeiId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="serveis_estat_servei_id", type="integer", nullable=false)
+     */
+    private $serveisEstatServeiId;
 
     /**
      * @var integer
@@ -50,9 +64,7 @@ class Evaluacioservei
      *
      * @ORM\ManyToOne(targetEntity="Serveis")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="serveis_id", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="serveis_tipus_servei_id", referencedColumnName="tipus_servei_id"),
-     *   @ORM\JoinColumn(name="serveis_estat_servei_id", referencedColumnName="estat_servei_id")
+     *   @ORM\JoinColumn(name="serveis_id", referencedColumnName="id")
      * })
      */
     private $serveis;

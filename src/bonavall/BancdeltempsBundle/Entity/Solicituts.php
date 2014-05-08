@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Solicituts
  *
- * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_serveis1", columns={"serveis_id", "serveis_tipus_servei_id", "serveis_estat_servei_id"}), @ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"usuari_id"})})
+ * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"solicitant_id"}), @ORM\Index(name="fk_Solicituts_serveis1", columns={"servei_solicitat_id"})})
  * @ORM\Entity
  */
 class Solicituts
@@ -33,22 +33,20 @@ class Solicituts
      *
      * @ORM\ManyToOne(targetEntity="Usuari")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuari_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="solicitant_id", referencedColumnName="id")
      * })
      */
-    private $usuari;
+    private $solicitant;
 
     /**
      * @var \Serveis
      *
      * @ORM\ManyToOne(targetEntity="Serveis")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="serveis_id", referencedColumnName="id"),
-     *   @ORM\JoinColumn(name="serveis_tipus_servei_id", referencedColumnName="tipus_servei_id"),
-     *   @ORM\JoinColumn(name="serveis_estat_servei_id", referencedColumnName="estat_servei_id")
+     *   @ORM\JoinColumn(name="servei_solicitat_id", referencedColumnName="id")
      * })
      */
-    private $serveis;
+    private $serveiSolicitat;
 
 
 
@@ -86,48 +84,48 @@ class Solicituts
     }
 
     /**
-     * Set usuari
+     * Set solicitant
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $usuari
+     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $solicitant
      * @return Solicituts
      */
-    public function setUsuari(\bonavall\BancdeltempsBundle\Entity\Usuari $usuari = null)
+    public function setSolicitant(\bonavall\BancdeltempsBundle\Entity\Usuari $solicitant = null)
     {
-        $this->usuari = $usuari;
+        $this->solicitant = $solicitant;
 
         return $this;
     }
 
     /**
-     * Get usuari
+     * Get solicitant
      *
      * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
      */
-    public function getUsuari()
+    public function getSolicitant()
     {
-        return $this->usuari;
+        return $this->solicitant;
     }
 
     /**
-     * Set serveis
+     * Set serveiSolicitat
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Serveis $serveis
+     * @param \bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat
      * @return Solicituts
      */
-    public function setServeis(\bonavall\BancdeltempsBundle\Entity\Serveis $serveis = null)
+    public function setServeiSolicitat(\bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat = null)
     {
-        $this->serveis = $serveis;
+        $this->serveiSolicitat = $serveiSolicitat;
 
         return $this;
     }
 
     /**
-     * Get serveis
+     * Get serveiSolicitat
      *
      * @return \bonavall\BancdeltempsBundle\Entity\Serveis 
      */
-    public function getServeis()
+    public function getServeiSolicitat()
     {
-        return $this->serveis;
+        return $this->serveiSolicitat;
     }
 }
