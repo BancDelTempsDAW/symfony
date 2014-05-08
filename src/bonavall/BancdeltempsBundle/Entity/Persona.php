@@ -3,14 +3,14 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Persona
  *
  * @ORM\Table(name="Persona", indexes={@ORM\Index(name="fk_Persona_rol1", columns={"rol_user_role"})})
  * @ORM\Entity
  */
-class Persona
+class Persona implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -24,6 +24,13 @@ class Persona
     /**
      * @var string
      *
+     * @ORM\Column(name="salt", type="string", length=40, nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
     private $email;
@@ -31,7 +38,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=45, nullable=false)
+     * @ORM\Column(name="password", type="string", length=60, nullable=false)
      */
     private $password;
 
@@ -44,8 +51,13 @@ class Persona
      * })
      */
     private $rolUserRole;
+    
+    
+    function __construct() {
+        $this->salt = md5(uniqid(null,true));        
+    }
 
-
+    
 
     /**
      * Get id
@@ -55,6 +67,29 @@ class Persona
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return Persona
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
     }
 
     /**
@@ -124,5 +159,25 @@ class Persona
     public function getRolUserRole()
     {
         return $this->rolUserRole;
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {
+        return array($this->getRolUserRole()->getUserRole());
+    }
+
+    public function getUsername() {
+        
+    }
+
+    public function serialize() {
+        
+    }
+
+    public function unserialize($serialized) {
+        
     }
 }

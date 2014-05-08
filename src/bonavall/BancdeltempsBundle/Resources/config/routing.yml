@@ -6,13 +6,16 @@ bonavall_bancdeltemps_inici:
     pattern:  /
     defaults: { _controller: bonavallBancdeltempsBundle:Default:inici }
     
-bonavall_bancdeltemps_login:
-    pattern: /login
-    defaults: { _controller: bonavallBancdeltempsBundle:Security:login }
- 
-bonavall_bancdeltemps_login_check:
-    pattern: /login_check
- 
+bonavall_bancdeltemps_user:
+    pattern:  /user
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
+    
 bonavall_bancdeltemps_logout:
     pattern: /logout
     
+login:
+    pattern:   /login
+    defaults:  { _controller: bonavallBancdeltempsBundle:Security:login }
+    
+login_check:
+    pattern:   /login_check

@@ -4,15 +4,18 @@ namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
-{
-    public function indexAction($name)
-    {
+class DefaultController extends Controller {
+
+    public function indexAction($name) {
         return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array('name' => $name));
     }
-    
-    public function iniciAction()
-    {
+
+    public function iniciAction() {
         return $this->render('bonavallBancdeltempsBundle:Default:inici.html.twig', array());
     }
+
+    public function userAction() {
+        return $this->render('bonavallBancdeltempsBundle:Default:user.html.twig', array());
+    }
+
 }
