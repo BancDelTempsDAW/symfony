@@ -3,6 +3,7 @@
 {% if error %}
 <div class="bg-danger"><h3>{{ error.message }}</h3></div>
 {% endif %}
+
 <form role="form" action="{{ path('login_check') }}" method="post">
     <div class="form-group">
         <label for="username">Email:</label>
@@ -15,3 +16,4 @@
     <input type="submit" name="login" class="btn btn-default"/>
 </form>
 {% endblock %}
+

@@ -1,0 +1,7 @@
+bonavall\Bancdeltemps\Entity\Persona:
+    properties:
+        email:
+          - NotBlank: ~
+        password:
+          - NotBlank: ~
+          
