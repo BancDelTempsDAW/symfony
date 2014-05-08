@@ -15,6 +15,12 @@ Persona:
             generator:
                 strategy: IDENTITY
     fields:
+        salt:
+            type: string
+            nullable: true
+            length: 40
+            fixed: false
+            comment: ''
         email:
             type: string
             nullable: false
@@ -24,7 +30,7 @@ Persona:
         password:
             type: string
             nullable: false
-            length: 45
+            length: 60
             fixed: false
             comment: ''
     manyToOne:

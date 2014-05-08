@@ -1,35 +1,45 @@
 security:
-    encoders:
-        bonavall\BancdeltempsBundle\Entity\Usuari:
-            algorithm: sha512
-            encode-as-base64: true
-            iterations: 10
+    #encoders:
+       # bonavall\BancdeltempsBundle\Entity\Persona:
+            #algorithm: sha512
+            #encode-as-base64: true
+            #iterations: 10
  
 #    role_hierarchy:
 #        ROLE_USER: [ROLE_USER]
  
     providers:
         usuaris:
-            entity: { class: bonavall\BancdeltempsBundle\Entity\Usuari, property: email }
+            entity: { class: bonavall\BancdeltempsBundle\Entity\Persona, property: email }
  
     firewalls:
         main:
-            pattern: /.*
-            provider: usuaris
-            form_login:
-                login_path: /login
+          pattern: ^/
+         # http_basic: ~
+          form_login:
+                login_path: login
                 check_path: /login_check
-                remember_me: true
-            logout:
-                path: /logout
+          logout:
+                path: logout
                 target: /
-            remember_me:
-                key: sessionCookie
-                lifetime: 1800
-                path: /.*
-                domain: ~
-            security: true
-            anonymous: true
+          anonymous: ~
+
+#            pattern: /.*
+#            provider: usuaris
+#            form_login:
+#                login_path: /login
+#                check_path: /login_check
+#                remember_me: true
+#            logout:
+#                path: /logout
+#                target: /
+#            remember_me:
+#                key: sessionCookie
+#                lifetime: 1800
+#                path: /.*
+#                domain: ~
+#            security: ~
+#            anonymous: ~
     access_control:
         - { path: /login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: /user, roles: ROLE_USER }
