@@ -1,0 +1,4 @@
+## YAML Template.
+---
+persona.email.not_blank: És necessari introduir l'email.
+persona.password.not_blank: És necessari introduir el password.
