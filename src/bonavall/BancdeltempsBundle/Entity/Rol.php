@@ -3,7 +3,6 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
@@ -12,8 +11,8 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * @ORM\Table(name="rol")
  * @ORM\Entity
  */
-class Rol implements RoleInterface
-{
+class Rol implements RoleInterface {
+
     /**
      * @var integer
      *
@@ -29,6 +28,7 @@ class Rol implements RoleInterface
      * @ORM\Column(name="nom", type="string", length=45, nullable=false)
      */
     private $nom;
+
     public function getRole() {
         
     }
@@ -38,8 +38,7 @@ class Rol implements RoleInterface
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -49,8 +48,7 @@ class Rol implements RoleInterface
      * @param string $nom
      * @return Rol
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -61,8 +59,12 @@ class Rol implements RoleInterface
      *
      * @return string 
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
+
+    public function __toString() {
+        return $this->nom;
+    }
+
 }

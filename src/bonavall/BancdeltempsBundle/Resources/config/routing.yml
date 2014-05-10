@@ -19,3 +19,71 @@ login:
     
 login_check:
     pattern:   /login_check
+    
+persona:
+  pattern: /Persona/
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:index }
+persona_create:
+  pattern: /Persona/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:create }
+persona_update:
+  pattern: /Persona/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:update }
+persona_show:
+  pattern: /Persona/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:show }
+persona_edit:
+  pattern: /Persona/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:edit }
+persona_new:
+  pattern: /Persona/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:new }
+persona_delete:
+  pattern: /Persona/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Persona:delete }
+
+usuari:
+  pattern: /Usuari/
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:index }
+usuari_create:
+  pattern: /Usuari/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:create }
+usuari_update:
+  pattern: /Usuari/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:update }
+usuari_show:
+  pattern: /Usuari/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:show }
+usuari_edit:
+  pattern: /Usuari/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:edit }
+usuari_new:
+  pattern: /Usuari/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:new }
+usuari_delete:
+  pattern: /Usuari/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:delete }
+  
+  
+  
+herencia:
+  pattern: /Herencia/
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:index }
+herencia_create:
+  pattern: /Herencia/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:create }
+herencia_update:
+  pattern: /Herencia/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:update }
+herencia_show:
+  pattern: /Herencia/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:show }
+herencia_edit:
+  pattern: /Herencia/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:edit }
+herencia_new:
+  pattern: /Herencia/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:new }
+herencia_delete:
+  pattern: /Herencia/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:delete }

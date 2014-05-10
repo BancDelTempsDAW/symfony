@@ -5,12 +5,17 @@ namespace bonavall\BancdeltempsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * Persona
  *
  * @ORM\Table(name="Persona")
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string");
+ * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})
  */
+ 
 class Persona implements UserInterface, \Serializable
 {
     /**
@@ -238,5 +243,9 @@ class Persona implements UserInterface, \Serializable
     public function getRolId()
     {
         return $this->rol_id;
+    }
+    
+    public function __toString() {
+        return $this->email;
     }
 }

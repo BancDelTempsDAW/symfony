@@ -3,18 +3,16 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use bonavall\BancdeltempsBundle\Entity\Persona;
 
 /**
- * Usuari
- *
- * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_Persona1", columns={"Persona_id"})})
- * @ORM\Entity
+ * Hereda de la classe persona
  */
-class Usuari
+
+class Usuari extends Persona
 {
     /**
-     * @var integer
-     *
+     * @var integer     
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -79,6 +77,37 @@ class Usuari
      * })
      */
     private $persona;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=40, nullable=true)
+     */
+    private $salt;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=75, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     */
+    private $password;
+
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="persona_rol",
+     *     joinColumns={@ORM\JoinColumn(name="persona_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
+     * )
+     */
+    private $rol;
 
 
 
