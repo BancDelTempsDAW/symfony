@@ -81,4 +81,198 @@ class Usuari
     private $persona;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Usuari
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set cognom
+     *
+     * @param string $cognom
+     * @return Usuari
+     */
+    public function setCognom($cognom)
+    {
+        $this->cognom = $cognom;
+
+        return $this;
+    }
+
+    /**
+     * Get cognom
+     *
+     * @return string 
+     */
+    public function getCognom()
+    {
+        return $this->cognom;
+    }
+
+    /**
+     * Set adreca
+     *
+     * @param string $adreca
+     * @return Usuari
+     */
+    public function setAdreca($adreca)
+    {
+        $this->adreca = $adreca;
+
+        return $this;
+    }
+
+    /**
+     * Get adreca
+     *
+     * @return string 
+     */
+    public function getAdreca()
+    {
+        return $this->adreca;
+    }
+
+    /**
+     * Set telefon
+     *
+     * @param string $telefon
+     * @return Usuari
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+
+        return $this;
+    }
+
+    /**
+     * Get telefon
+     *
+     * @return string 
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * Set fotografia
+     *
+     * @param string $fotografia
+     * @return Usuari
+     */
+    public function setFotografia($fotografia)
+    {
+        $this->fotografia = $fotografia;
+
+        return $this;
+    }
+
+    /**
+     * Get fotografia
+     *
+     * @return string 
+     */
+    public function getFotografia()
+    {
+        return $this->fotografia;
+    }
+
+    /**
+     * Set presentacio
+     *
+     * @param string $presentacio
+     * @return Usuari
+     */
+    public function setPresentacio($presentacio)
+    {
+        $this->presentacio = $presentacio;
+
+        return $this;
+    }
+
+    /**
+     * Get presentacio
+     *
+     * @return string 
+     */
+    public function getPresentacio()
+    {
+        return $this->presentacio;
+    }
+
+    /**
+     * Set punts
+     *
+     * @param integer $punts
+     * @return Usuari
+     */
+    public function setPunts($punts)
+    {
+        $this->punts = $punts;
+
+        return $this;
+    }
+
+    /**
+     * Get punts
+     *
+     * @return integer 
+     */
+    public function getPunts()
+    {
+        return $this->punts;
+    }
+
+    /**
+     * Set persona
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $persona
+     * @return Usuari
+     */
+    public function setPersona(\bonavall\BancdeltempsBundle\Entity\Persona $persona = null)
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+    /**
+     * Get persona
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     */
+    public function getPersona()
+    {
+        return $this->persona;
+    }
 }

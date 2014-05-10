@@ -3,21 +3,22 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Persona
  *
- * @ORM\Table(name="Persona", indexes={@ORM\Index(name="fk_Persona_rol1", columns={"rol_id"})})
+ * @ORM\Table(name="Persona")
  * @ORM\Entity
  */
-class Persona
+class Persona implements UserInterface, \Serializable
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -42,15 +43,22 @@ class Persona
      */
     private $password;
 
+    
     /**
-     * @var \Rol
-     *
-     * @ORM\ManyToOne(targetEntity="Rol")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="persona_rol",
+     *     joinColumns={@ORM\JoinColumn(name="persona_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
+     * )
      */
     private $rol;
+    
+    
+    public function __construct()
+    {
+        //$this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
 
 
@@ -154,5 +162,81 @@ class Persona
     public function getRol()
     {
         return $this->rol;
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {        
+        return array('ROLE_USER');
+    }
+
+    public function getUsername() {
+        
+    }
+
+    public function serialize() {
+        
+    }
+
+    public function unserialize($serialized) {
+        
+    }
+
+    /**
+     * Add rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     * @return Persona
+     */
+    public function addRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
+    {
+        $this->rol[] = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     */
+    public function removeRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
+    {
+        $this->rol->removeElement($rol);
+    }
+
+    /**
+     * Add rol_id
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
+     * @return Persona
+     */
+    public function addRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId)
+    {
+        $this->rol_id[] = $rolId;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol_id
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
+     */
+    public function removeRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId)
+    {
+        $this->rol_id->removeElement($rolId);
+    }
+
+    /**
+     * Get rol_id
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRolId()
+    {
+        return $this->rol_id;
     }
 }

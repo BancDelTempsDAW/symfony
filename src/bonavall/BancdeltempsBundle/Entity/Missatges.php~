@@ -53,4 +53,106 @@ class Missatges
     private $solicituts;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set missatge
+     *
+     * @param string $missatge
+     * @return Missatges
+     */
+    public function setMissatge($missatge)
+    {
+        $this->missatge = $missatge;
+
+        return $this;
+    }
+
+    /**
+     * Get missatge
+     *
+     * @return string 
+     */
+    public function getMissatge()
+    {
+        return $this->missatge;
+    }
+
+    /**
+     * Set data
+     *
+     * @param \DateTime $data
+     * @return Missatges
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return \DateTime 
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Set autor
+     *
+     * @param string $autor
+     * @return Missatges
+     */
+    public function setAutor($autor)
+    {
+        $this->autor = $autor;
+
+        return $this;
+    }
+
+    /**
+     * Get autor
+     *
+     * @return string 
+     */
+    public function getAutor()
+    {
+        return $this->autor;
+    }
+
+    /**
+     * Set solicituts
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Solicituts $solicituts
+     * @return Missatges
+     */
+    public function setSolicituts(\bonavall\BancdeltempsBundle\Entity\Solicituts $solicituts = null)
+    {
+        $this->solicituts = $solicituts;
+
+        return $this;
+    }
+
+    /**
+     * Get solicituts
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Solicituts 
+     */
+    public function getSolicituts()
+    {
+        return $this->solicituts;
+    }
 }

@@ -10,7 +10,7 @@ bonavall_bancdeltemps_user:
     pattern:  /user
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
     
-bonavall_bancdeltemps_logout:
+logout:
     pattern: /logout
     
 login:
