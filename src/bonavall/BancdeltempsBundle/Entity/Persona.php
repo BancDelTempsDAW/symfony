@@ -25,28 +25,28 @@ class Persona implements UserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=40, nullable=true)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
      */
-    private $password;
+    protected $password;
 
     
     /**
@@ -56,7 +56,7 @@ class Persona implements UserInterface, \Serializable
      *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
      * )
      */
-    private $rol;
+    protected $rol;
     
     
     public function __construct()

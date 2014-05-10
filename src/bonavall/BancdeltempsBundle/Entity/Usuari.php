@@ -6,7 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use bonavall\BancdeltempsBundle\Entity\Persona;
 
 /**
- * Hereda de la classe persona
+ * Usuari
+ * @ORM\Entity
+ * @ORM\Table(name="usuari")
+ * 
  */
 
 class Usuari extends Persona
@@ -15,9 +18,9 @@ class Usuari extends Persona
      * @var integer     
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -67,37 +70,27 @@ class Usuari extends Persona
      * @ORM\Column(name="punts", type="integer", nullable=false)
      */
     private $punts;
-
-    /**
-     * @var \Persona
-     *
-     * @ORM\ManyToOne(targetEntity="Persona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Persona_id", referencedColumnName="id")
-     * })
-     */
-    private $persona;
     
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=40, nullable=true)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
      */
-    private $password;
+    protected $password;
 
     
     /**
@@ -107,8 +100,14 @@ class Usuari extends Persona
      *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
      * )
      */
-    private $rol;
-
+    protected $rol;
+    
+    
+    public function __construct()
+    {
+        //$this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
 
     /**
@@ -282,26 +281,107 @@ class Usuari extends Persona
         return $this->punts;
     }
 
+   
+
     /**
-     * Set persona
+     * Set salt
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Persona $persona
+     * @param string $salt
      * @return Usuari
      */
-    public function setPersona(\bonavall\BancdeltempsBundle\Entity\Persona $persona = null)
+    public function setSalt($salt)
     {
-        $this->persona = $persona;
+        $this->salt = $salt;
 
         return $this;
     }
 
     /**
-     * Get persona
+     * Get salt
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     * @return string 
      */
-    public function getPersona()
+    public function getSalt()
     {
-        return $this->persona;
+        return $this->salt;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Usuari
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Usuari
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Add rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     * @return Usuari
+     */
+    public function addRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
+    {
+        $this->rol[] = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     */
+    public function removeRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
+    {
+        $this->rol->removeElement($rol);
+    }
+
+    /**
+     * Get rol
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRol()
+    {
+        return $this->rol;
     }
 }
