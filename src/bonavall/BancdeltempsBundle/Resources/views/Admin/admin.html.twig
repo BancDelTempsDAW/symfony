@@ -1,6 +1,10 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
-Hola {{ dump(app.user) }}
+Hola {{ app.user.username }}
+
+{% if is_granted('ROLE_USER') %}
+    <a href="...">Delete</a>
+{% endif %}
 
 <br />
 

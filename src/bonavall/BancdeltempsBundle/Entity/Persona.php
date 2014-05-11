@@ -168,29 +168,29 @@ class Persona implements UserInterface, \Serializable {
     }
 
     public function getUsername() {
-        //return $this->getEmail();
+        return $this->getEmail();
     }
 
     public function serialize() {
-        /*return serialize(array(
+        return serialize(array(
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             // see section on salt below
             // $this->salt,
-        ));*/
+        ));
         
     }
 
     public function unserialize($serialized) {
         
-        /*list (
+        list (
             $this->id,
-            $this->username,
+            $this->email,
             $this->password,
             // see section on salt below
             // $this->salt
-        ) = unserialize($serialized);*/
+        ) = unserialize($serialized);
     }
 
     /**
