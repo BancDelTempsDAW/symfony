@@ -10,6 +10,10 @@ bonavall_bancdeltemps_user:
     pattern:  /user
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
     
+bonavall_bancdeltemps_admin:
+    pattern:  /admin/
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:admin }
+    
 logout:
     pattern: /logout
     
@@ -21,69 +25,251 @@ login_check:
     pattern:   /login_check
     
 persona:
-  pattern: /Persona/
+  pattern: /admin/persona/
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:index }
 persona_create:
-  pattern: /Persona/create
+  pattern: /admin/persona/create
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:create }
 persona_update:
-  pattern: /Persona/update{id}
+  pattern: /admin/persona/update{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:update }
 persona_show:
-  pattern: /Persona/show{id}
+  pattern: /admin/persona/show{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:show }
 persona_edit:
-  pattern: /Persona/edit{id}
+  pattern: /admin/persona/edit{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:edit }
 persona_new:
-  pattern: /Persona/new
+  pattern: /admin/persona/new
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:new }
 persona_delete:
-  pattern: /Persona/delete{id}
+  pattern: /admin/persona/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:delete }
 
 usuari:
-  pattern: /Usuari/
+  pattern: /admin/usuari/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:index }
 usuari_create:
-  pattern: /Usuari/create
+  pattern: /admin/usuari/create
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:create }
 usuari_update:
-  pattern: /Usuari/update{id}
+  pattern: /admin/usuari/update{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:update }
 usuari_show:
-  pattern: /Usuari/show{id}
+  pattern: /admin/usuari/show{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:show }
 usuari_edit:
-  pattern: /Usuari/edit{id}
+  pattern: /admin/usuari/edit{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:edit }
 usuari_new:
-  pattern: /Usuari/new
+  pattern: /admin/usuari/new
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:new }
 usuari_delete:
-  pattern: /Usuari/delete{id}
+  pattern: /admin/usuari/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:delete }
+
+Admin_bancdeltemps:
+  pattern: /admin/bancdeltemps/
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:index }
+Admin_bancdeltemps_create:
+  pattern: /admin/bancdeltemps/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:create }
+Admin_bancdeltemps_update:
+  pattern: /admin/bancdeltemps/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:update }
+Admin_bancdeltemps_show:
+  pattern: /admin/bancdeltemps/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:show }
+Admin_bancdeltemps_edit:
+  pattern: /admin/bancdeltemps/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:edit }
+Admin_bancdeltemps_new:
+  pattern: /admin/bancdeltemps/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:new }
+Admin_bancdeltemps_delete:
+  pattern: /admin/bancdeltemps/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:delete }
+  
+admin_serveis:
+  pattern: /admin/serveis/
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
+admin_serveis_create:
+  pattern: /admin/serveis/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:create }
+admin_serveis_update:
+  pattern: /admin/serveis/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:update }
+admin_serveis_show:
+  pattern: /admin/serveis/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:show }
+admin_serveis_edit:
+  pattern: /admin/serveis/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:edit }
+admin_serveis_new:
+  pattern: /admin/serveis/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:new }
+admin_serveis_delete:
+  pattern: /admin/serveis/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:delete }
+  
+  
+admin_tipusservei:
+  pattern: /admin/tipusservei/
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:index }
+admin_tipusservei_create:
+  pattern: /admin/tipusservei/create
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:create }
+admin_tipusservei_update:
+  pattern: /admin/tipusservei/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:update }
+admin_tipusservei_show:
+  pattern: /admin/tipusservei/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:show }
+admin_tipusservei_edit:
+  pattern: /admin/tipusservei/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:edit }
+admin_tipusservei_new:
+  pattern: /admin/tipusservei/new
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:new }
+admin_tipusservei_delete:
+  pattern: /admin/tipusservei/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:TipusServei:delete }
+  
+  
+admin_estatservei:
+  pattern: /admin/estatservei/
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:index }
+admin_estatservei_create:
+  pattern: /admin/estatservei/create
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:create }
+admin_estatservei_update:
+  pattern: /admin/estatservei/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:update }
+admin_estatservei_show:
+  pattern: /admin/estatservei/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:show }
+admin_estatservei_edit:
+  pattern: /admin/estatservei/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:edit }
+admin_estatservei_new:
+  pattern: /admin/estatservei/new
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:new }
+admin_estatservei_delete:
+  pattern: /admin/estatservei/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:delete }
+  
+  
+admin_serveisconsumits:
+  pattern: /admin/serveisconsumits/
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:index }
+admin_serveisconsumits_create:
+  pattern: /admin/serveisconsumits/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:create }
+admin_serveisconsumits_update:
+  pattern: /admin/serveisconsumits/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:update }
+admin_serveisconsumits_show:
+  pattern: /admin/serveisconsumits/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:show }
+admin_serveisconsumits_edit:
+  pattern: /admin/serveisconsumits/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:edit }
+admin_serveisconsumits_new:
+  pattern: /admin/serveisconsumits/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:new }
+admin_serveisconsumits_delete:
+  pattern: /admin/serveisconsumits/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:delete }
   
   
   
-herencia:
-  pattern: /Herencia/
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:index }
-herencia_create:
-  pattern: /Herencia/create
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:create }
-herencia_update:
-  pattern: /Herencia/update{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:update }
-herencia_show:
-  pattern: /Herencia/show{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:show }
-herencia_edit:
-  pattern: /Herencia/edit{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:edit }
-herencia_new:
-  pattern: /Herencia/new
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:new }
-herencia_delete:
-  pattern: /Herencia/delete{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Herencia:delete }
+admin_valoracioservei:
+  pattern: /admin/valoracioservei/
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:index }
+admin_valoracioservei_create:
+  pattern: /admin/valoracioservei/create
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:create }
+admin_valoracioservei_update:
+  pattern: /admin/valoracioservei/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:update }
+admin_valoracioservei_show:
+  pattern: /admin/valoracioservei/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:show }
+admin_valoracioservei_edit:
+  pattern: /admin/valoracioservei/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:edit }
+admin_valoracioservei_new:
+  pattern: /admin/valoracioservei/new
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:new }
+admin_valoracioservei_delete:
+  pattern: /admin/valoracioservei/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:delete }
+
+  
+admin_evaluacioservei:
+  pattern: /admin/evaluacioservei/
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:index }
+admin_evaluacioservei_create:
+  pattern: /admin/evaluacioservei/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:create }
+admin_evaluacioservei_update:
+  pattern: /admin/evaluacioservei/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:update }
+admin_evaluacioservei_show:
+  pattern: /admin/evaluacioservei/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:show }
+admin_evaluacioservei_edit:
+  pattern: /admin/evaluacioservei/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:edit }
+admin_evaluacioservei_new:
+  pattern: /admin/evaluacioservei/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:new }
+admin_evaluacioservei_delete:
+  pattern: /admin/evaluacioservei/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Evaluacioservei:delete }
+  
+  
+admin_solicituts:
+  pattern: /admin/solicituts/
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
+admin_solicituts_create:
+  pattern: /admin/solicituts/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:create }
+admin_solicituts_update:
+  pattern: /admin/solicituts/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:update }
+admin_solicituts_show:
+  pattern: /admin/solicituts/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:show }
+admin_solicituts_edit:
+  pattern: /admin/solicituts/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:edit }
+admin_solicituts_new:
+  pattern: /admin/solicituts/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:new }
+admin_solicituts_delete:
+  pattern: /admin/solicituts/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:delete }  
+
+  
+admin_missatges:
+  pattern: /admin/missatges/
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:index }
+admin_missatges_create:
+  pattern: /admin/missatges/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:create }
+admin_missatges_update:
+  pattern: /admin/missatges/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:update }
+admin_missatges_show:
+  pattern: /admin/missatges/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:show }
+admin_missatges_edit:
+  pattern: /admin/missatges/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:edit }
+admin_missatges_new:
+  pattern: /admin/missatges/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:new }
+admin_missatges_delete:
+  pattern: /admin/missatges/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    

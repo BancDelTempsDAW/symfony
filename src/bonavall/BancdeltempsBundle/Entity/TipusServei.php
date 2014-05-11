@@ -92,4 +92,9 @@ class TipusServei
     {
         return $this->descripcio;
     }
+    
+    public function __toString() {
+        return $this->getNom();
+    }
+
 }

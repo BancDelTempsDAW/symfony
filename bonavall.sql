@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-05-2014 a las 13:06:35
+-- Tiempo de generación: 11-05-2014 a las 18:59:18
 -- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.3.10-1ubuntu3.11
 
@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS `bancdeltemps` (
   `temps_inactivitat` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nom_UNIQUE` (`nom`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `bancdeltemps`
+--
+
+INSERT INTO `bancdeltemps` (`id`, `nom`, `saldo_minim`, `temps_inactivitat`) VALUES
+(1, 'Banc del Temps', 100, 30);
 
 -- --------------------------------------------------------
 
@@ -93,15 +100,25 @@ CREATE TABLE IF NOT EXISTS `Persona` (
   `salt` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(75) COLLATE utf8_spanish_ci NOT NULL,
   `password` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `discr` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `nom` varchar(55) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cognom` varchar(55) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `adreca` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefon` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fotografia` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `presentacio` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `punts` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `Persona`
 --
 
-INSERT INTO `Persona` (`id`, `salt`, `email`, `password`) VALUES
-(1, NULL, 'carles.puerto@gmail.com', 'calespass');
+INSERT INTO `Persona` (`id`, `salt`, `email`, `password`, `discr`, `nom`, `cognom`, `adreca`, `telefon`, `fotografia`, `presentacio`, `punts`) VALUES
+(1, NULL, 'carles.puerto@gmail.com', 'carlespass', 'persona', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'e2a11a29e8e9ce3fd09643b2f363beb8', 'rita@rita.com', 'rita', 'persona', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'ebeef9d36da7a4566aaa0eaeaf87dd13', 'argagr', 'agraeg', 'usuari', 'aegraeg', 'agage', 'aregag', 'aegraegr', 'argaegr', 'aregagr', 5);
 
 -- --------------------------------------------------------
 
@@ -122,8 +139,9 @@ CREATE TABLE IF NOT EXISTS `persona_rol` (
 --
 
 INSERT INTO `persona_rol` (`persona_id`, `rol_id`) VALUES
-(1, 1),
-(1, 2);
+(1, 2),
+(2, 1),
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -183,23 +201,8 @@ CREATE TABLE IF NOT EXISTS `serveisconsumits` (
   PRIMARY KEY (`id`),
   KEY `fk_idservei_oferit` (`idServei`),
   KEY `fk_serveisconsumits_valoracio_servei1` (`valoracio_servei_id`),
-  KEY `fk_idusuari_consumidor` (`idUsuari`)
+  KEY `FK_FB978542BDD3C65` (`idUsuari`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serveisoferts`
---
-
-CREATE TABLE IF NOT EXISTS `serveisoferts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idServei` int(11) DEFAULT NULL,
-  `idUsuari` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `IDX_D770FEE9B319B480` (`idServei`),
-  KEY `IDX_D770FEE9BDD3C65` (`idUsuari`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -228,7 +231,14 @@ CREATE TABLE IF NOT EXISTS `tipus_servei` (
   `nom` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
   `descripcio` text COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `tipus_servei`
+--
+
+INSERT INTO `tipus_servei` (`id`, `nom`, `descripcio`) VALUES
+(1, 'Informàtic', 'Quàlsevol tipus de servei relacionat amb la informàtica.');
 
 -- --------------------------------------------------------
 
@@ -237,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `tipus_servei` (
 --
 
 CREATE TABLE IF NOT EXISTS `usuari` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nom` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
   `cognom` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
   `adreca` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
@@ -245,10 +255,8 @@ CREATE TABLE IF NOT EXISTS `usuari` (
   `fotografia` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `presentacio` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `punts` int(11) NOT NULL,
-  `Persona_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_usuari_Persona1` (`Persona_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -260,7 +268,14 @@ CREATE TABLE IF NOT EXISTS `valoracio_servei` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `valoracio_servei`
+--
+
+INSERT INTO `valoracio_servei` (`id`, `nom`) VALUES
+(1, 'bò');
 
 --
 -- Restricciones para tablas volcadas
@@ -270,6 +285,7 @@ CREATE TABLE IF NOT EXISTS `valoracio_servei` (
 -- Filtros para la tabla `EvaluacioServei`
 --
 ALTER TABLE `EvaluacioServei`
+  ADD CONSTRAINT `FK_C2BD0F3D5F263030` FOREIGN KEY (`usuari_id`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_usuari_has_serveis_serveis2` FOREIGN KEY (`serveis_id`) REFERENCES `serveis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_usuari_has_serveis_usuari2` FOREIGN KEY (`usuari_id`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -283,13 +299,15 @@ ALTER TABLE `missatges`
 -- Filtros para la tabla `persona_rol`
 --
 ALTER TABLE `persona_rol`
-  ADD CONSTRAINT `FK_D7C9A4014BAB96C` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`),
-  ADD CONSTRAINT `FK_D7C9A401F5F88DB9` FOREIGN KEY (`persona_id`) REFERENCES `Persona` (`id`);
+  ADD CONSTRAINT `persona_rol_ibfk_1` FOREIGN KEY (`persona_id`) REFERENCES `Persona` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `persona_rol_ibfk_3` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `serveis`
 --
 ALTER TABLE `serveis`
+  ADD CONSTRAINT `serveis_ibfk_1` FOREIGN KEY (`idDonant`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_E6BC3E6D8851B3FF` FOREIGN KEY (`usuari_ofertant_id`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_serveis_estat_servei1` FOREIGN KEY (`estat_servei_id`) REFERENCES `estat_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_serveis_tipus_servei1` FOREIGN KEY (`tipus_servei_id1`) REFERENCES `tipus_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_serveis_usuari1` FOREIGN KEY (`usuari_ofertant_id`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -298,21 +316,16 @@ ALTER TABLE `serveis`
 -- Filtros para la tabla `serveisconsumits`
 --
 ALTER TABLE `serveisconsumits`
+  ADD CONSTRAINT `FK_FB978542BDD3C65` FOREIGN KEY (`idUsuari`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_idservei_oferit` FOREIGN KEY (`idServei`) REFERENCES `serveis` (`id`),
   ADD CONSTRAINT `fk_idusuari_consumidor` FOREIGN KEY (`idUsuari`) REFERENCES `usuari` (`id`),
   ADD CONSTRAINT `fk_serveisconsumits_valoracio_servei1` FOREIGN KEY (`valoracio_servei_id`) REFERENCES `valoracio_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `serveisoferts`
---
-ALTER TABLE `serveisoferts`
-  ADD CONSTRAINT `FK_D770FEE9BDD3C65` FOREIGN KEY (`idUsuari`) REFERENCES `usuari` (`id`),
-  ADD CONSTRAINT `FK_D770FEE9B319B480` FOREIGN KEY (`idServei`) REFERENCES `serveis` (`id`);
-
---
 -- Filtros para la tabla `Solicituts`
 --
 ALTER TABLE `Solicituts`
+  ADD CONSTRAINT `FK_8563CE46F2A4207` FOREIGN KEY (`solicitant_id`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_Solicituts_serveis1` FOREIGN KEY (`servei_solicitat_id`) REFERENCES `serveis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_usuari_has_serveis_usuari1` FOREIGN KEY (`solicitant_id`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
@@ -320,7 +333,7 @@ ALTER TABLE `Solicituts`
 -- Filtros para la tabla `usuari`
 --
 ALTER TABLE `usuari`
-  ADD CONSTRAINT `fk_usuari_Persona1` FOREIGN KEY (`Persona_id`) REFERENCES `Persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_68CC94FFBF396750` FOREIGN KEY (`id`) REFERENCES `Persona` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

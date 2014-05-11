@@ -5,7 +5,6 @@ namespace bonavall\BancdeltempsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
 /**
  * Persona
  *
@@ -15,9 +14,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\DiscriminatorColumn(name="discr", type="string");
  * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})
  */
- 
-class Persona implements UserInterface, \Serializable
-{
+class Persona implements UserInterface, \Serializable {
+
     /**
      * @var integer
      *
@@ -48,7 +46,6 @@ class Persona implements UserInterface, \Serializable
      */
     protected $password;
 
-    
     /**
      * @ORM\ManyToMany(targetEntity="Rol")
      * @ORM\JoinTable(name="persona_rol",
@@ -57,23 +54,18 @@ class Persona implements UserInterface, \Serializable
      * )
      */
     protected $rol;
-    
-    
-    public function __construct()
-    {
+
+    public function __construct() {
         //$this->isActive = true;
         $this->salt = md5(uniqid(null, true));
     }
-
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -83,8 +75,7 @@ class Persona implements UserInterface, \Serializable
      * @param string $salt
      * @return Persona
      */
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
 
         return $this;
@@ -95,8 +86,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @return string 
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return $this->salt;
     }
 
@@ -106,8 +96,7 @@ class Persona implements UserInterface, \Serializable
      * @param string $email
      * @return Persona
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -118,8 +107,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -129,8 +117,7 @@ class Persona implements UserInterface, \Serializable
      * @param string $password
      * @return Persona
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -141,8 +128,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -152,8 +138,7 @@ class Persona implements UserInterface, \Serializable
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
      * @return Persona
      */
-    public function setRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol = null)
-    {
+    public function setRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol = null) {
         $this->rol = $rol;
 
         return $this;
@@ -164,8 +149,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @return \bonavall\BancdeltempsBundle\Entity\Rol 
      */
-    public function getRol()
-    {
+    public function getRol() {
         return $this->rol;
     }
 
@@ -173,20 +157,40 @@ class Persona implements UserInterface, \Serializable
         
     }
 
-    public function getRoles() {        
-        return array('ROLE_USER');
+    public function getRoles() {
+        //return array('ROLE_USER');
+        $roles = array();
+        foreach ($this->rol as $role) {
+            $roles[] = $role->getRole();
+        }
+
+        return $roles;
     }
 
     public function getUsername() {
-        
+        //return $this->getEmail();
     }
 
     public function serialize() {
+        /*return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));*/
         
     }
 
     public function unserialize($serialized) {
         
+        /*list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);*/
     }
 
     /**
@@ -195,8 +199,7 @@ class Persona implements UserInterface, \Serializable
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
      * @return Persona
      */
-    public function addRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
-    {
+    public function addRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol) {
         $this->rol[] = $rol;
 
         return $this;
@@ -207,8 +210,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
      */
-    public function removeRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol)
-    {
+    public function removeRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol) {
         $this->rol->removeElement($rol);
     }
 
@@ -218,8 +220,7 @@ class Persona implements UserInterface, \Serializable
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
      * @return Persona
      */
-    public function addRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId)
-    {
+    public function addRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId) {
         $this->rol_id[] = $rolId;
 
         return $this;
@@ -230,8 +231,7 @@ class Persona implements UserInterface, \Serializable
      *
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
      */
-    public function removeRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId)
-    {
+    public function removeRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId) {
         $this->rol_id->removeElement($rolId);
     }
 
@@ -240,12 +240,12 @@ class Persona implements UserInterface, \Serializable
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRolId()
-    {
+    public function getRolId() {
         return $this->rol_id;
     }
-    
+
     public function __toString() {
         return $this->email;
     }
+
 }

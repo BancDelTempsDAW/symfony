@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use bonavall\BancdeltempsBundle\Entity\Herencia;
-use bonavall\BancdeltempsBundle\Form\HerenciaType;
+use bonavall\BancdeltempsBundle\Entity\Solicituts;
+use bonavall\BancdeltempsBundle\Form\SolicitutsType;
 
 /**
- * Herencia controller.
+ * Solicituts controller.
  *
- * @Route("/herencia")
+ * @Route("/admin/solicituts")
  */
-class HerenciaController extends Controller
+class SolicitutsController extends Controller
 {
 
     /**
-     * Lists all Herencia entities.
+     * Lists all Solicituts entities.
      *
-     * @Route("/", name="herencia")
+     * @Route("/", name="admin_solicituts")
      * @Method("GET")
      * @Template()
      */
@@ -29,22 +29,22 @@ class HerenciaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('bonavallBancdeltempsBundle:Herencia')->findAll();
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Herencia entity.
+     * Creates a new Solicituts entity.
      *
-     * @Route("/", name="herencia_create")
+     * @Route("/", name="admin_solicituts_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Herencia:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:Solicituts:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Herencia();
+        $entity = new Solicituts();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +53,7 @@ class HerenciaController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('herencia_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('admin_solicituts_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +63,16 @@ class HerenciaController extends Controller
     }
 
     /**
-    * Creates a form to create a Herencia entity.
+    * Creates a form to create a Solicituts entity.
     *
-    * @param Herencia $entity The entity
+    * @param Solicituts $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Herencia $entity)
+    private function createCreateForm(Solicituts $entity)
     {
-        $form = $this->createForm(new HerenciaType(), $entity, array(
-            'action' => $this->generateUrl('herencia_create'),
+        $form = $this->createForm(new SolicitutsType(), $entity, array(
+            'action' => $this->generateUrl('admin_solicituts_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +82,15 @@ class HerenciaController extends Controller
     }
 
     /**
-     * Displays a form to create a new Herencia entity.
+     * Displays a form to create a new Solicituts entity.
      *
-     * @Route("/new", name="herencia_new")
+     * @Route("/new", name="admin_solicituts_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Herencia();
+        $entity = new Solicituts();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +100,9 @@ class HerenciaController extends Controller
     }
 
     /**
-     * Finds and displays a Herencia entity.
+     * Finds and displays a Solicituts entity.
      *
-     * @Route("/{id}", name="herencia_show")
+     * @Route("/{id}", name="admin_solicituts_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +110,10 @@ class HerenciaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Herencia')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Herencia entity.');
+            throw $this->createNotFoundException('Unable to find Solicituts entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +125,9 @@ class HerenciaController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Herencia entity.
+     * Displays a form to edit an existing Solicituts entity.
      *
-     * @Route("/{id}/edit", name="herencia_edit")
+     * @Route("/{id}/edit", name="admin_solicituts_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +135,10 @@ class HerenciaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Herencia')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Herencia entity.');
+            throw $this->createNotFoundException('Unable to find Solicituts entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +152,16 @@ class HerenciaController extends Controller
     }
 
     /**
-    * Creates a form to edit a Herencia entity.
+    * Creates a form to edit a Solicituts entity.
     *
-    * @param Herencia $entity The entity
+    * @param Solicituts $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Herencia $entity)
+    private function createEditForm(Solicituts $entity)
     {
-        $form = $this->createForm(new HerenciaType(), $entity, array(
-            'action' => $this->generateUrl('herencia_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new SolicitutsType(), $entity, array(
+            'action' => $this->generateUrl('admin_solicituts_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +170,20 @@ class HerenciaController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Herencia entity.
+     * Edits an existing Solicituts entity.
      *
-     * @Route("/{id}", name="herencia_update")
+     * @Route("/{id}", name="admin_solicituts_update")
      * @Method("PUT")
-     * @Template("bonavallBancdeltempsBundle:Herencia:edit.html.twig")
+     * @Template("bonavallBancdeltempsBundle:Solicituts:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Herencia')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Herencia entity.');
+            throw $this->createNotFoundException('Unable to find Solicituts entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +193,7 @@ class HerenciaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('herencia_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_solicituts_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +203,9 @@ class HerenciaController extends Controller
         );
     }
     /**
-     * Deletes a Herencia entity.
+     * Deletes a Solicituts entity.
      *
-     * @Route("/{id}", name="herencia_delete")
+     * @Route("/{id}", name="admin_solicituts_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +215,21 @@ class HerenciaController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('bonavallBancdeltempsBundle:Herencia')->find($id);
+            $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Herencia entity.');
+                throw $this->createNotFoundException('Unable to find Solicituts entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('herencia'));
+        return $this->redirect($this->generateUrl('admin_solicituts'));
     }
 
     /**
-     * Creates a form to delete a Herencia entity by id.
+     * Creates a form to delete a Solicituts entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +238,7 @@ class HerenciaController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('herencia_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_solicituts_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

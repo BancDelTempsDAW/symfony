@@ -21,11 +21,15 @@ class Serveis
      */
     private $id;
 
-    /**
-     * @var integer
+     /**
+     * @var \Usuari
      *
-     * @ORM\Column(name="idDonant", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idDonant", referencedColumnName="id")
+     * })
      */
+     
     private $iddonant;
 
     /**

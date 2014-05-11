@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Role\RoleInterface;
  * @ORM\Table(name="rol")
  * @ORM\Entity
  */
-class Rol implements RoleInterface {
+class Rol implements RoleInterface, \Serializable {
 
     /**
      * @var integer
@@ -30,7 +30,7 @@ class Rol implements RoleInterface {
     private $nom;
 
     public function getRole() {
-        
+        return $this->nom;
     }
 
     /**
@@ -65,6 +65,14 @@ class Rol implements RoleInterface {
 
     public function __toString() {
         return $this->nom;
+    }
+
+    public function serialize() {
+        
+    }
+
+    public function unserialize($serialized) {
+        
     }
 
 }
