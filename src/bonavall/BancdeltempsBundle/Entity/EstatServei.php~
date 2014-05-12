@@ -29,4 +29,37 @@ class EstatServei
     private $descripcio;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set descripcio
+     *
+     * @param string $descripcio
+     * @return EstatServei
+     */
+    public function setDescripcio($descripcio)
+    {
+        $this->descripcio = $descripcio;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcio
+     *
+     * @return string 
+     */
+    public function getDescripcio()
+    {
+        return $this->descripcio;
+    }
 }

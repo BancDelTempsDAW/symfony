@@ -2,13 +2,10 @@
 app/bootstrap.php.cache
 app/bootstrap_cache.php.cache
 app/config/parameters.ini
-app/config/parameters.yml
 app/cache/*
 app/logs/*
 vendor/*
 web/bundles/*
-web/css/*
-web/js/*
 web/uploads/*
 
 # -- Composer -----------------------------------------
@@ -86,3 +83,4 @@ Icon
 .Spotlight-V100
 .Trashes
 !/web/css/bancdeltemps.css
+!/web/js/main.js

@@ -3,6 +3,7 @@
 namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller {
 
@@ -16,6 +17,11 @@ class DefaultController extends Controller {
 
     public function userAction() {
         return $this->render('bonavallBancdeltempsBundle:Default:user.html.twig', array());
+    }
+    
+    public function adminAction() {
+        
+        return $this->render('bonavallBancdeltempsBundle:Admin:admin.html.twig', array());
     }
 
 }

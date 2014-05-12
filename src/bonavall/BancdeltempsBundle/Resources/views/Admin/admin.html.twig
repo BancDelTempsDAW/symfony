@@ -1,0 +1,78 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+Hola {{ app.user.username }}
+
+{% if is_granted('ROLE_USER') %}
+    <a href="...">Delete</a>
+{% endif %}
+
+<br />
+
+<div style="margin-left: 95%">
+    <a  href="{{path('logout')}}" class="btn btn-danger btn-large"><i class="icon-white icon-off"></i> logout</a>
+
+</div>
+<div class="navbar navbar-default">
+    <div class="container">
+        
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="{{ path('Admin_bancdeltemps') }}">
+                    Configuracions BDT
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('persona') }}">
+                    Persones
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('usuari') }}">
+                    Usuaris
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_serveis') }}">
+                    Serveis
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_tipusservei') }}">
+                    Tipus de Serveis
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_estatservei') }}">
+                    Estat de Serveis
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_serveisconsumits') }}">
+                    Serveis Consumits
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_valoracioservei') }}">
+                    Valoracio Serveis
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_evaluacioservei') }}">
+                    Evaluacio Serveis
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_solicituts') }}">
+                    Solicituts
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('admin_missatges') }}">
+                    Missatges
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
