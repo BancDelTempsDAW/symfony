@@ -42,7 +42,7 @@ class Persona implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     protected $password;
 
@@ -87,7 +87,7 @@ class Persona implements UserInterface, \Serializable {
      * @return string 
      */
     public function getSalt() {
-        return $this->salt;
+        return Null;
     }
 
     /**
