@@ -107,6 +107,7 @@ class Usuari extends Persona
     {
         //$this->isActive = true;
         $this->salt = md5(uniqid(null, true));
+        $this->rol = "ROLE_USER";
     }
 
 
