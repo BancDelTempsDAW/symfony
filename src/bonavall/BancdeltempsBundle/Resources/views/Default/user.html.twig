@@ -1,1 +1,6 @@
-Hola usuari
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+Hola {{ app.user.username }} 
+
+<br />
+
+<a href="{{ path('logout') }}">Logout</a>

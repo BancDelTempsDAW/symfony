@@ -49,4 +49,83 @@ class Solicituts
     private $serveiSolicitat;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set estatsolicitut
+     *
+     * @param integer $estatsolicitut
+     * @return Solicituts
+     */
+    public function setEstatsolicitut($estatsolicitut)
+    {
+        $this->estatsolicitut = $estatsolicitut;
+
+        return $this;
+    }
+
+    /**
+     * Get estatsolicitut
+     *
+     * @return integer 
+     */
+    public function getEstatsolicitut()
+    {
+        return $this->estatsolicitut;
+    }
+
+    /**
+     * Set solicitant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $solicitant
+     * @return Solicituts
+     */
+    public function setSolicitant(\bonavall\BancdeltempsBundle\Entity\Usuari $solicitant = null)
+    {
+        $this->solicitant = $solicitant;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     */
+    public function getSolicitant()
+    {
+        return $this->solicitant;
+    }
+
+    /**
+     * Set serveiSolicitat
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat
+     * @return Solicituts
+     */
+    public function setServeiSolicitat(\bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat = null)
+    {
+        $this->serveiSolicitat = $serveiSolicitat;
+
+        return $this;
+    }
+
+    /**
+     * Get serveiSolicitat
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Serveis 
+     */
+    public function getServeiSolicitat()
+    {
+        return $this->serveiSolicitat;
+    }
 }

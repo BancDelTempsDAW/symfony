@@ -36,4 +36,60 @@ class TipusServei
     private $descripcio;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return TipusServei
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set descripcio
+     *
+     * @param string $descripcio
+     * @return TipusServei
+     */
+    public function setDescripcio($descripcio)
+    {
+        $this->descripcio = $descripcio;
+
+        return $this;
+    }
+
+    /**
+     * Get descripcio
+     *
+     * @return string 
+     */
+    public function getDescripcio()
+    {
+        return $this->descripcio;
+    }
 }
