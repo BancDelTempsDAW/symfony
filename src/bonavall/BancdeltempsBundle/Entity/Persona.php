@@ -3,64 +3,69 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Persona
  *
- * @ORM\Table(name="Persona", indexes={@ORM\Index(name="fk_Persona_rol1", columns={"rol_id"})})
+ * @ORM\Table(name="Persona")
  * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="discr", type="string");
+ * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})
  */
-class Persona
-{
+class Persona implements UserInterface, \Serializable {
+
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=40, nullable=true)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=60, nullable=false)
      */
-    private $password;
+    protected $password;
 
     /**
-     * @var \Rol
-     *
-     * @ORM\ManyToOne(targetEntity="Rol")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="rol_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="persona_rol",
+     *     joinColumns={@ORM\JoinColumn(name="persona_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
+     * )
      */
-    private $rol;
+    protected $rol;
 
-
+    public function __construct() {
+        //$this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -70,8 +75,7 @@ class Persona
      * @param string $salt
      * @return Persona
      */
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
 
         return $this;
@@ -82,8 +86,7 @@ class Persona
      *
      * @return string 
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return $this->salt;
     }
 
@@ -93,8 +96,7 @@ class Persona
      * @param string $email
      * @return Persona
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -105,8 +107,7 @@ class Persona
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -116,8 +117,7 @@ class Persona
      * @param string $password
      * @return Persona
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -128,8 +128,7 @@ class Persona
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -139,8 +138,7 @@ class Persona
      * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
      * @return Persona
      */
-    public function setRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol = null)
-    {
+    public function setRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol = null) {
         $this->rol = $rol;
 
         return $this;
@@ -151,8 +149,103 @@ class Persona
      *
      * @return \bonavall\BancdeltempsBundle\Entity\Rol 
      */
-    public function getRol()
-    {
+    public function getRol() {
         return $this->rol;
     }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getRoles() {
+        //return array('ROLE_USER');
+        $roles = array();
+        foreach ($this->rol as $role) {
+            $roles[] = $role->getRole();
+        }
+
+        return $roles;
+    }
+
+    public function getUsername() {
+        return $this->getEmail();
+    }
+
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+        
+    }
+
+    public function unserialize($serialized) {
+        
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
+    /**
+     * Add rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     * @return Persona
+     */
+    public function addRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol) {
+        $this->rol[] = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rol
+     */
+    public function removeRol(\bonavall\BancdeltempsBundle\Entity\Rol $rol) {
+        $this->rol->removeElement($rol);
+    }
+
+    /**
+     * Add rol_id
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
+     * @return Persona
+     */
+    public function addRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId) {
+        $this->rol_id[] = $rolId;
+
+        return $this;
+    }
+
+    /**
+     * Remove rol_id
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Rol $rolId
+     */
+    public function removeRolId(\bonavall\BancdeltempsBundle\Entity\Rol $rolId) {
+        $this->rol_id->removeElement($rolId);
+    }
+
+    /**
+     * Get rol_id
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRolId() {
+        return $this->rol_id;
+    }
+
+    public function __toString() {
+        return $this->email;
+    }
+
 }

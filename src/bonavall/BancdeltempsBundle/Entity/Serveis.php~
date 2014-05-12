@@ -87,4 +87,198 @@ class Serveis
     private $estatServei;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set iddonant
+     *
+     * @param integer $iddonant
+     * @return Serveis
+     */
+    public function setIddonant($iddonant)
+    {
+        $this->iddonant = $iddonant;
+
+        return $this;
+    }
+
+    /**
+     * Get iddonant
+     *
+     * @return integer 
+     */
+    public function getIddonant()
+    {
+        return $this->iddonant;
+    }
+
+    /**
+     * Set preu
+     *
+     * @param integer $preu
+     * @return Serveis
+     */
+    public function setPreu($preu)
+    {
+        $this->preu = $preu;
+
+        return $this;
+    }
+
+    /**
+     * Get preu
+     *
+     * @return integer 
+     */
+    public function getPreu()
+    {
+        return $this->preu;
+    }
+
+    /**
+     * Set dataInici
+     *
+     * @param \DateTime $dataInici
+     * @return Serveis
+     */
+    public function setDataInici($dataInici)
+    {
+        $this->dataInici = $dataInici;
+
+        return $this;
+    }
+
+    /**
+     * Get dataInici
+     *
+     * @return \DateTime 
+     */
+    public function getDataInici()
+    {
+        return $this->dataInici;
+    }
+
+    /**
+     * Set durada
+     *
+     * @param \DateTime $durada
+     * @return Serveis
+     */
+    public function setDurada($durada)
+    {
+        $this->durada = $durada;
+
+        return $this;
+    }
+
+    /**
+     * Get durada
+     *
+     * @return \DateTime 
+     */
+    public function getDurada()
+    {
+        return $this->durada;
+    }
+
+    /**
+     * Set dataFinal
+     *
+     * @param \DateTime $dataFinal
+     * @return Serveis
+     */
+    public function setDataFinal($dataFinal)
+    {
+        $this->dataFinal = $dataFinal;
+
+        return $this;
+    }
+
+    /**
+     * Get dataFinal
+     *
+     * @return \DateTime 
+     */
+    public function getDataFinal()
+    {
+        return $this->dataFinal;
+    }
+
+    /**
+     * Set usuariOfertant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant
+     * @return Serveis
+     */
+    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant = null)
+    {
+        $this->usuariOfertant = $usuariOfertant;
+
+        return $this;
+    }
+
+    /**
+     * Get usuariOfertant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     */
+    public function getUsuariOfertant()
+    {
+        return $this->usuariOfertant;
+    }
+
+    /**
+     * Set tipusServei1
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1
+     * @return Serveis
+     */
+    public function setTipusServei1(\bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1 = null)
+    {
+        $this->tipusServei1 = $tipusServei1;
+
+        return $this;
+    }
+
+    /**
+     * Get tipusServei1
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\TipusServei 
+     */
+    public function getTipusServei1()
+    {
+        return $this->tipusServei1;
+    }
+
+    /**
+     * Set estatServei
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei
+     * @return Serveis
+     */
+    public function setEstatServei(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei = null)
+    {
+        $this->estatServei = $estatServei;
+
+        return $this;
+    }
+
+    /**
+     * Get estatServei
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\EstatServei 
+     */
+    public function getEstatServei()
+    {
+        return $this->estatServei;
+    }
 }

@@ -1,6 +1,6 @@
 security:
-    #encoders:
-       # bonavall\BancdeltempsBundle\Entity\Persona:
+    encoders:
+        bonavall\BancdeltempsBundle\Entity\Persona: plaintext
             #algorithm: sha512
             #encode-as-base64: true
             #iterations: 10

@@ -3,6 +3,7 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
  * Rol
@@ -10,56 +11,68 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="rol")
  * @ORM\Entity
  */
-class Rol
-{
+class Rol implements RoleInterface, \Serializable {
+
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="user_role", type="string", length=45, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=45, nullable=false)
      */
-    private $userRole;
+    private $nom;
 
-
+    public function getRole() {
+        return $this->nom;
+    }
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
-     * Set userRole
+     * Set nom
      *
-     * @param string $userRole
+     * @param string $nom
      * @return Rol
      */
-    public function setUserRole($userRole)
-    {
-        $this->userRole = $userRole;
+    public function setNom($nom) {
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * Get userRole
+     * Get nom
      *
      * @return string 
      */
-    public function getUserRole()
-    {
-        return $this->userRole;
+    public function getNom() {
+        return $this->nom;
     }
+
+    public function __toString() {
+        return $this->nom;
+    }
+
+    public function serialize() {
+        
+    }
+
+    public function unserialize($serialized) {
+        
+    }
+
 }

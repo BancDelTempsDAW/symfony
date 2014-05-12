@@ -3,18 +3,19 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use bonavall\BancdeltempsBundle\Entity\Persona;
 
 /**
  * Usuari
- *
- * @ORM\Table(name="usuari", indexes={@ORM\Index(name="fk_usuari_Persona1", columns={"Persona_id"})})
  * @ORM\Entity
+ * @ORM\Table(name="usuari")
+ * 
  */
-class Usuari
+
+class Usuari extends Persona
 {
     /**
-     * @var integer
-     *
+     * @var integer     
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -69,16 +70,216 @@ class Usuari
      * @ORM\Column(name="punts", type="integer", nullable=false)
      */
     private $punts;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="salt", type="string", length=40, nullable=true)
+     */
+    private $salt;
 
     /**
-     * @var \Persona
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Persona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="Persona_id", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
-    private $persona;
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=60, nullable=false)
+     */
+    private $password;
+
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="persona_rol",
+     *     joinColumns={@ORM\JoinColumn(name="persona_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="rol_id", referencedColumnName="id")}
+     * )
+     */
+    private $rol;
+    
+    
+    public function __construct()
+    {
+        //$this->isActive = true;
+        $this->salt = md5(uniqid(null, true));
+    }
 
 
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Usuari
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set cognom
+     *
+     * @param string $cognom
+     * @return Usuari
+     */
+    public function setCognom($cognom)
+    {
+        $this->cognom = $cognom;
+
+        return $this;
+    }
+
+    /**
+     * Get cognom
+     *
+     * @return string 
+     */
+    public function getCognom()
+    {
+        return $this->cognom;
+    }
+
+    /**
+     * Set adreca
+     *
+     * @param string $adreca
+     * @return Usuari
+     */
+    public function setAdreca($adreca)
+    {
+        $this->adreca = $adreca;
+
+        return $this;
+    }
+
+    /**
+     * Get adreca
+     *
+     * @return string 
+     */
+    public function getAdreca()
+    {
+        return $this->adreca;
+    }
+
+    /**
+     * Set telefon
+     *
+     * @param string $telefon
+     * @return Usuari
+     */
+    public function setTelefon($telefon)
+    {
+        $this->telefon = $telefon;
+
+        return $this;
+    }
+
+    /**
+     * Get telefon
+     *
+     * @return string 
+     */
+    public function getTelefon()
+    {
+        return $this->telefon;
+    }
+
+    /**
+     * Set fotografia
+     *
+     * @param string $fotografia
+     * @return Usuari
+     */
+    public function setFotografia($fotografia)
+    {
+        $this->fotografia = $fotografia;
+
+        return $this;
+    }
+
+    /**
+     * Get fotografia
+     *
+     * @return string 
+     */
+    public function getFotografia()
+    {
+        return $this->fotografia;
+    }
+
+    /**
+     * Set presentacio
+     *
+     * @param string $presentacio
+     * @return Usuari
+     */
+    public function setPresentacio($presentacio)
+    {
+        $this->presentacio = $presentacio;
+
+        return $this;
+    }
+
+    /**
+     * Get presentacio
+     *
+     * @return string 
+     */
+    public function getPresentacio()
+    {
+        return $this->presentacio;
+    }
+
+    /**
+     * Set punts
+     *
+     * @param integer $punts
+     * @return Usuari
+     */
+    public function setPunts($punts)
+    {
+        $this->punts = $punts;
+
+        return $this;
+    }
+
+    /**
+     * Get punts
+     *
+     * @return integer 
+     */
+    public function getPunts()
+    {
+        return $this->punts;
+    }
+
+   
 }
