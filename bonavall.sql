@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-05-2014 a las 18:59:18
+-- Tiempo de generación: 14-05-2014 a las 01:46:46
 -- Versión del servidor: 5.5.37
 -- Versión de PHP: 5.3.10-1ubuntu3.11
 
@@ -83,10 +83,12 @@ CREATE TABLE IF NOT EXISTS `missatges` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `missatge` text COLLATE utf8_spanish_ci NOT NULL,
   `data` date NOT NULL,
-  `autor` varchar(55) COLLATE utf8_spanish_ci NOT NULL,
+  `hora` time NOT NULL,
+  `autor` int(11) NOT NULL,
   `Solicituts_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_missatges_Solicituts1` (`Solicituts_id`)
+  KEY `fk_missatges_Solicituts1` (`Solicituts_id`),
+  KEY `autor` (`autor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -99,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `Persona` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `salt` varchar(40) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(75) COLLATE utf8_spanish_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `discr` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `nom` varchar(55) COLLATE utf8_spanish_ci DEFAULT NULL,
   `cognom` varchar(55) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -109,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `Persona` (
   `presentacio` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `punts` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `Persona`
@@ -118,7 +120,8 @@ CREATE TABLE IF NOT EXISTS `Persona` (
 INSERT INTO `Persona` (`id`, `salt`, `email`, `password`, `discr`, `nom`, `cognom`, `adreca`, `telefon`, `fotografia`, `presentacio`, `punts`) VALUES
 (1, NULL, 'carles.puerto@gmail.com', 'carlespass', 'persona', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, 'e2a11a29e8e9ce3fd09643b2f363beb8', 'rita@rita.com', 'rita', 'persona', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'ebeef9d36da7a4566aaa0eaeaf87dd13', 'argagr', 'agraeg', 'usuari', 'aegraeg', 'agage', 'aregag', 'aegraegr', 'argaegr', 'aregagr', 5);
+(3, 'ebeef9d36da7a4566aaa0eaeaf87dd13', 'argagr', 'agraeg', 'usuari', 'aegraeg', 'agage', 'aregag', 'aegraegr', 'argaegr', 'aregagr', 5),
+(5, NULL, 'admin@admin.com', 'admin', 'persona', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -141,7 +144,8 @@ CREATE TABLE IF NOT EXISTS `persona_rol` (
 INSERT INTO `persona_rol` (`persona_id`, `rol_id`) VALUES
 (1, 2),
 (2, 1),
-(3, 1);
+(3, 1),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -172,9 +176,11 @@ INSERT INTO `rol` (`id`, `nom`) VALUES
 CREATE TABLE IF NOT EXISTS `serveis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idDonant` int(11) NOT NULL,
-  `preu` int(11) NOT NULL,
+  `punts` int(11) NOT NULL,
+  `descripcioServei` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
+  `CodiPostal` int(11) NOT NULL,
   `data_inici` date NOT NULL,
-  `durada` date NOT NULL,
+  `durada` int(11) NOT NULL,
   `data_final` date DEFAULT NULL,
   `usuari_ofertant_id` int(11) DEFAULT NULL,
   `tipus_servei_id1` int(11) DEFAULT NULL,
@@ -214,10 +220,12 @@ CREATE TABLE IF NOT EXISTS `Solicituts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `solicitant_id` int(11) DEFAULT NULL,
   `servei_solicitat_id` int(11) DEFAULT NULL,
+  `data_solicitut` date NOT NULL,
   `estatSolicitut` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_usuari_has_serveis_usuari1` (`solicitant_id`),
-  KEY `fk_Solicituts_serveis1` (`servei_solicitat_id`)
+  KEY `fk_Solicituts_serveis1` (`servei_solicitat_id`),
+  KEY `estatSolicitut` (`estatSolicitut`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -293,7 +301,8 @@ ALTER TABLE `EvaluacioServei`
 -- Filtros para la tabla `missatges`
 --
 ALTER TABLE `missatges`
-  ADD CONSTRAINT `fk_missatges_Solicituts1` FOREIGN KEY (`Solicituts_id`) REFERENCES `Solicituts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_missatges_Solicituts1` FOREIGN KEY (`Solicituts_id`) REFERENCES `Solicituts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `missatges_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `Persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `persona_rol`
@@ -306,11 +315,11 @@ ALTER TABLE `persona_rol`
 -- Filtros para la tabla `serveis`
 --
 ALTER TABLE `serveis`
-  ADD CONSTRAINT `serveis_ibfk_1` FOREIGN KEY (`idDonant`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_E6BC3E6D8851B3FF` FOREIGN KEY (`usuari_ofertant_id`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_serveis_estat_servei1` FOREIGN KEY (`estat_servei_id`) REFERENCES `estat_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_serveis_tipus_servei1` FOREIGN KEY (`tipus_servei_id1`) REFERENCES `tipus_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_serveis_usuari1` FOREIGN KEY (`usuari_ofertant_id`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `serveis_ibfk_2` FOREIGN KEY (`idDonant`) REFERENCES `Persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `serveis_ibfk_3` FOREIGN KEY (`usuari_ofertant_id`) REFERENCES `Persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `serveisconsumits`
@@ -325,9 +334,10 @@ ALTER TABLE `serveisconsumits`
 -- Filtros para la tabla `Solicituts`
 --
 ALTER TABLE `Solicituts`
+  ADD CONSTRAINT `Solicituts_ibfk_2` FOREIGN KEY (`estatSolicitut`) REFERENCES `estat_servei` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_8563CE46F2A4207` FOREIGN KEY (`solicitant_id`) REFERENCES `Persona` (`id`),
   ADD CONSTRAINT `fk_Solicituts_serveis1` FOREIGN KEY (`servei_solicitat_id`) REFERENCES `serveis` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuari_has_serveis_usuari1` FOREIGN KEY (`solicitant_id`) REFERENCES `usuari` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `Solicituts_ibfk_1` FOREIGN KEY (`solicitant_id`) REFERENCES `Persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `usuari`

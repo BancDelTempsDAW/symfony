@@ -62,9 +62,4 @@ class EstatServei
     {
         return $this->descripcio;
     }
-    
-    public function __toString() {
-        return $this->descripcio;
-    }
-
 }

@@ -15,11 +15,11 @@ class ServeisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('iddonant')
-            ->add('preu')
+            ->add('punts')
             ->add('dataInici')
             ->add('durada')
             ->add('dataFinal')
+            ->add('iddonant')
             ->add('usuariOfertant')
             ->add('tipusServei1')
             ->add('estatServei')
