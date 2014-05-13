@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Missatges
  *
- * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_missatges_Solicituts1", columns={"Solicituts_id"})})
+ * @ORM\Table(name="missatges", indexes={@ORM\Index(name="fk_missatges_Solicituts1", columns={"Solicituts_id"}), @ORM\Index(name="missatges_ibfk_1", columns={"autor"})})
  * @ORM\Entity
  */
 class Missatges
@@ -34,11 +34,21 @@ class Missatges
      * @ORM\Column(name="data", type="date", nullable=false)
      */
     private $data;
+    
+    /**
+     * @var \Time
+     *
+     * @ORM\Column(name="hora", type="time", nullable=false)
+     */
+    private $hora;
 
     /**
-     * @var string
+     * @var \Persona
      *
-     * @ORM\Column(name="autor", type="string", length=55, nullable=false)
+     * @ORM\ManyToOne(targetEntity="Persona")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="autor", referencedColumnName="id")
+     * })
      */
     private $autor;
 
@@ -109,14 +119,23 @@ class Missatges
     {
         return $this->data;
     }
+    
+    public function getHora() {
+        return $this->hora;
+    }
 
+    public function setHora(\Time $hora) {
+        $this->hora = $hora;
+    }
+
+    
     /**
      * Set autor
      *
-     * @param string $autor
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $autor
      * @return Missatges
      */
-    public function setAutor($autor)
+    public function setAutor(\bonavall\BancdeltempsBundle\Entity\Persona $autor = null)
     {
         $this->autor = $autor;
 
@@ -125,8 +144,8 @@ class Missatges
 
     /**
      * Get autor
-     *
-     * @return string 
+     * 
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
      */
     public function getAutor()
     {

@@ -9,7 +9,7 @@
                 <th>Id</th>
                 <th>Missatge</th>
                 <th>Data</th>
-                <th>Autor</th>
+                <th>Hora</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -19,7 +19,7 @@
                 <td><a href="{{ path('admin_missatges_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.missatge }}</td>
                 <td>{% if entity.data %}{{ entity.data|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.autor }}</td>
+                <td>{{ entity.hora }}</td>
                 <td>
                 <ul>
                     <li>

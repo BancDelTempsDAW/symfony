@@ -16,8 +16,10 @@ class SolicitutsType extends AbstractType
     {
         $builder
             ->add('estatsolicitut')
+            ->add('dataSolicitut')
             ->add('solicitant')
             ->add('serveiSolicitat')
+            ->add('estatSolicitut')
         ;
     }
     
