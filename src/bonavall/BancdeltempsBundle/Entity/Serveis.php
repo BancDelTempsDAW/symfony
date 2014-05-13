@@ -22,9 +22,9 @@ class Serveis
     private $id;
 
      /**
-     * @var \Usuari
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idDonant", referencedColumnName="id")
      * })
@@ -35,9 +35,23 @@ class Serveis
     /**
      * @var integer
      *
-     * @ORM\Column(name="preu", type="integer", nullable=false)
+     * @ORM\Column(name="punts", type="integer", nullable=false)
      */
-    private $preu;
+    private $punts;
+            
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="descripcioServei", type="string", length=255, nullable=true)
+     */
+    private $descripcioServei;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CodiPostal", type="integer", nullable=false)
+     */
+    private $codiPostal;
 
     /**
      * @var \DateTime
@@ -47,9 +61,9 @@ class Serveis
     private $dataInici;
 
     /**
-     * @var \DateTime
+     * @var \integer
      *
-     * @ORM\Column(name="durada", type="date", nullable=false)
+     * @ORM\Column(name="durada", type="integer", nullable=false)
      */
     private $durada;
 
@@ -61,9 +75,9 @@ class Serveis
     private $dataFinal;
 
     /**
-     * @var \Usuari
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuari_ofertant_id", referencedColumnName="id")
      * })
@@ -126,29 +140,45 @@ class Serveis
     }
 
     /**
-     * Set preu
+     * Set punts
      *
-     * @param integer $preu
+     * @param integer $punts
      * @return Serveis
      */
-    public function setPreu($preu)
+    public function setPunts($punts)
     {
-        $this->preu = $preu;
+        $this->punts = $punts;
 
         return $this;
     }
 
     /**
-     * Get preu
+     * Get punts
      *
      * @return integer 
      */
-    public function getPreu()
+    public function getPunts()
     {
-        return $this->preu;
+        return $this->punts;
+    }
+    
+    public function getDescripcioServei() {
+        return $this->descripcioServei;
     }
 
-    /**
+    public function getCodiPostal() {
+        return $this->codiPostal;
+    }
+
+    public function setDescripcioServei($descripcioServei) {
+        $this->descripcioServei = $descripcioServei;
+    }
+
+    public function setCodiPostal($codiPostal) {
+        $this->codiPostal = $codiPostal;
+    }
+
+        /**
      * Set dataInici
      *
      * @param \DateTime $dataInici
@@ -220,10 +250,10 @@ class Serveis
     /**
      * Set usuariOfertant
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant
      * @return Serveis
      */
-    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant = null)
+    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant = null)
     {
         $this->usuariOfertant = $usuariOfertant;
 
@@ -233,7 +263,7 @@ class Serveis
     /**
      * Get usuariOfertant
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
      */
     public function getUsuariOfertant()
     {
