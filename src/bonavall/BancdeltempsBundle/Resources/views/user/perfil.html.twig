@@ -13,8 +13,8 @@ Hola {{ app.user.username }}
         
         <ul class="nav navbar-nav">
             <li class="active">
-                <a href="{{ path('perfil_user') }}">
-                    El meu perfil
+                <a href="{{ path('usuari_update', { 'id': entity.id }) }}">
+                    Editar el meu perfil
                 </a>
             </li>
             <li>
