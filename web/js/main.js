@@ -29,5 +29,3 @@ function marcaError(elem, idMsg, error){
 		return true;
 	}
 }
-
-
