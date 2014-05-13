@@ -1,10 +1,6 @@
-bonavall_bancdeltemps_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
-    
 bonavall_bancdeltemps_inici:
     pattern:  /
-    defaults: { _controller: bonavallBancdeltempsBundle:Default:inici }
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
     
 bonavall_bancdeltemps_user:
     pattern:  /user
