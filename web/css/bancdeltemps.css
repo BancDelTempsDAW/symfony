@@ -2,7 +2,20 @@ body{
     width: 80%;
     margin: 0 auto;
     text-align: justify;
+    padding-top: 100px;
+    padding-bottom: 70px;
+}
 
+#navbar-head{
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+#navbar-foot{
+    width: 80%;
+    margin: 0 auto;
+    
 }
 
 .inici-cos{
