@@ -1,5 +1,25 @@
 body{
     width: 80%;
     margin: 0 auto;
+    text-align: justify;
+
 }
 
+.inici-cos{
+    padding: 5px;
+
+    //clear:left;
+}
+
+.section-feste-soci{
+    padding: 5px;
+}
+
+.section-novetats{
+    padding: 5px;
+}
+
+.user-message{
+    color: white;
+    
+}
