@@ -22,9 +22,9 @@ class Serveis
     private $id;
 
      /**
-     * @var \Usuari
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idDonant", referencedColumnName="id")
      * })
@@ -61,9 +61,9 @@ class Serveis
     private $dataFinal;
 
     /**
-     * @var \Usuari
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="usuari_ofertant_id", referencedColumnName="id")
      * })
@@ -220,10 +220,10 @@ class Serveis
     /**
      * Set usuariOfertant
      *
-     * @param \bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant
      * @return Serveis
      */
-    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Usuari $usuariOfertant = null)
+    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant = null)
     {
         $this->usuariOfertant = $usuariOfertant;
 
@@ -233,7 +233,7 @@ class Serveis
     /**
      * Get usuariOfertant
      *
-     * @return \bonavall\BancdeltempsBundle\Entity\Usuari 
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
      */
     public function getUsuariOfertant()
     {
