@@ -244,6 +244,4 @@ class EstatServeiController extends Controller
             ->getForm()
         ;
     }
-    
-    
 }
