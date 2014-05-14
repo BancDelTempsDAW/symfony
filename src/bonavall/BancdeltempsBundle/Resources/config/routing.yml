@@ -1,4 +1,3 @@
-
 #Rutes inicials
 bonavall_bancdeltemps_homepage:
     pattern:  /hello/{name}
