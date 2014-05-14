@@ -16,16 +16,11 @@ class DefaultController extends Controller {
     }
 
     public function userAction() {
-        return $this->render('bonavallBancdeltempsBundle:Default:user.html.twig', array());
+        return $this->render('bonavallBancdeltempsBundle:user:user.html.twig', array());
     }
     
     public function adminAction() {
-        
         return $this->render('bonavallBancdeltempsBundle:Admin:admin.html.twig', array());
-    }
-
-    public function altaAction() {
-        return $this->render('bonavallBancdeltempsBundle:Default:alta.html.twig', array());
     }
 
 }

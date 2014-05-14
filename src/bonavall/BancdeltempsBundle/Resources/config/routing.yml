@@ -1,17 +1,18 @@
+#Rutes inicials
+bonavall_bancdeltemps_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
+
 bonavall_bancdeltemps_inici:
     pattern:  /
     defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
- 
-bonavall_bancdeltemps_alta:
-    pattern:  /alta
-    defaults: { _controller: bonavallBancdeltempsBundle:Default:alta }
-
+    
 bonavall_bancdeltemps_user:
     pattern:  /user
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
     
 bonavall_bancdeltemps_admin:
-    pattern:  /admin
+    pattern:  /admin/
     defaults: { _controller: bonavallBancdeltempsBundle:Default:admin }
     
 logout:
@@ -23,7 +24,8 @@ login:
     
 login_check:
     pattern:   /login_check
-    
+
+#Rutes Administrador
 persona:
   pattern: /admin/persona/
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:index }
@@ -45,6 +47,7 @@ persona_new:
 persona_delete:
   pattern: /admin/persona/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Persona:delete }
+
 
 usuari:
   pattern: /admin/usuari/
@@ -68,6 +71,7 @@ usuari_delete:
   pattern: /admin/usuari/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:delete }
 
+
 Admin_bancdeltemps:
   pattern: /admin/bancdeltemps/
   defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:index }
@@ -89,6 +93,7 @@ Admin_bancdeltemps_new:
 Admin_bancdeltemps_delete:
   pattern: /admin/bancdeltemps/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Bancdeltemps:delete }
+  
   
 admin_serveis:
   pattern: /admin/serveis/
@@ -182,7 +187,6 @@ admin_serveisconsumits_delete:
   defaults: { _controller: bonavallBancdeltempsBundle:Serveisconsumits:delete }
   
   
-  
 admin_valoracioservei:
   pattern: /admin/valoracioservei/
   defaults: { _controller: bonavallBancdeltempsBundle:ValoracioServei:index }
@@ -272,4 +276,16 @@ admin_missatges_new:
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:new }
 admin_missatges_delete:
   pattern: /admin/missatges/delete{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }
+
+
+#Rutes de user no administrador
+perfil_user:
+  pattern: /user/perfil/
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
+gestio_solicituds:
+  pattern: /user/solicituds/
+  defaults: { _controller: bonavallBancdeltempsBundle:Solicituds:index }
+gestio_serveis:
+  pattern: /user/serveis/
+  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
