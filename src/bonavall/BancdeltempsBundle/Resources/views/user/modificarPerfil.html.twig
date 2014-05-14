@@ -1,0 +1,30 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+
+<div class='row col-lg-1'>
+    <form action="http://algunsitio.com/prog/usuarionuevo" method="post">
+        
+        <label for="email">Email: </label>
+        <input type="text" id="email"><br>
+        <label for="password">Password: </label>
+        <input type="text" id="password"><br>
+        <label for="nom">Nom: </label>
+        <input type="text" id="nom"><br>
+        <label for="cognom">Cognom: </label>
+        <input type="text" id="cognom"><br>
+        <label for="adreca">Adreça: </label>
+        <input type="text" id="adreca"><br>
+        <label for="telefon">Telefon: </label>
+        <input type="text" id="telefon"><br>
+        <label for="imatge">Imatge: </label>
+        <input type="text" id="fotografia"><br>
+        <label for="presentacio">Presentació: </label>
+        <input type="text" id="presentacio"><br>
+        
+        <input type="radio" name="sexo" value="Varón"> Varón<br>
+        <INPUT type="radio" name="sexo" value="Mujer"> Mujer<BR>
+        <INPUT type="submit" value="Enviar"> <INPUT type="reset">
+    </FORM>
+</div>
+
+{% endblock %}

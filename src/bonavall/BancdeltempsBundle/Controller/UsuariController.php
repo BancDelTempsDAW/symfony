@@ -245,9 +245,14 @@ class UsuariController extends Controller
         ;
     }
     
+    #Accions usuari no administrador
     public function perfilAction()
     {
         return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
+    }
+    public function modificarAction()
+    {
+        return $this->render('bonavallBancdeltempsBundle:user:modificarPerfil.html.twig', array());
     }
  
 }
