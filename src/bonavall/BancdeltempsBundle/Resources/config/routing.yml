@@ -6,6 +6,10 @@ bonavall_bancdeltemps_homepage:
 bonavall_bancdeltemps_inici:
     pattern:  /
     defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
+
+bonavall_bancdeltemps_alta:
+    pattern:  /alta
+    defaults: { _controller: bonavallBancdeltempsBundle:Default:alta }
     
 bonavall_bancdeltemps_user:
     pattern:  /user

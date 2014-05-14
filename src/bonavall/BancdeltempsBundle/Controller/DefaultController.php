@@ -23,4 +23,8 @@ class DefaultController extends Controller {
         return $this->render('bonavallBancdeltempsBundle:Admin:admin.html.twig', array());
     }
 
+    public function altaAction() {
+        return $this->render('bonavallBancdeltempsBundle:Default:alta.html.twig', array());
+    }
+
 }
