@@ -74,11 +74,13 @@
                       </div>
                     </form>
                 
-                {% else %} 
-                    <div class="navbar-right">
-                          <a id="login-button" class="btn btn-primary" data-toggle="tooltip" title="Benvingut!" href="{{path('login')}}" ><span class="glyphicon glyphicon-user"></span> Accedeix</a>
-                          <a id="register-button" class="btn btn-success" data-toggle="tooltip" title="Es gratis eh!" href="{{path('login')}}" ><span class="glyphicon glyphicon-pencil"></span> Registra't</a>
-                    </div>
+                {% else %}
+                    <form class="navbar-form navbar-right">
+                        <li class="form-group">
+                            <a id="login-button" class="btn btn-primary" data-toggle="tooltip" title="Benvingut!" href="{{path('login')}}" ><span class="glyphicon glyphicon-user"></span> Accedeix</a>
+                            <a id="register-button" class="btn btn-success" data-toggle="tooltip" title="Es gratis eh!" href="{{path('login')}}" ><span class="glyphicon glyphicon-pencil"></span> Registra't</a>
+                        </li>
+                     </form>
                 {% endif %}
                 {% endblock %}
                 </ul>
@@ -88,6 +90,7 @@
 
         {% endblock %}
         {% block body %}{% endblock %}
+        <hr>
         <nav id="navbar-foot" class="navbar navbar-default navbar-static-bottom" role="navigation">
           <div class="container">
               <p>&copy; Bonavall 2014</p>
