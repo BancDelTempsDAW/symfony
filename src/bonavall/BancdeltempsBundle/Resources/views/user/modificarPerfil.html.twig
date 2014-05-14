@@ -1,30 +1,55 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
+{#{% if error %}
+    <div class="bg-danger"><h3>{{ error.message|trans}}</h3></div>
+{% endif %}#}
 
-<div class='row col-lg-1'>
-    <form action="http://algunsitio.com/prog/usuarionuevo" method="post">
-        
-        <label for="email">Email: </label>
-        <input type="text" id="email"><br>
-        <label for="password">Password: </label>
-        <input type="text" id="password"><br>
-        <label for="nom">Nom: </label>
-        <input type="text" id="nom"><br>
-        <label for="cognom">Cognom: </label>
-        <input type="text" id="cognom"><br>
-        <label for="adreca">Adreça: </label>
-        <input type="text" id="adreca"><br>
-        <label for="telefon">Telefon: </label>
-        <input type="text" id="telefon"><br>
-        <label for="imatge">Imatge: </label>
-        <input type="text" id="fotografia"><br>
-        <label for="presentacio">Presentació: </label>
-        <input type="text" id="presentacio"><br>
-        
-        <input type="radio" name="sexo" value="Varón"> Varón<br>
-        <INPUT type="radio" name="sexo" value="Mujer"> Mujer<BR>
-        <INPUT type="submit" value="Enviar"> <INPUT type="reset">
-    </FORM>
+    <form role="form" action="{{ path('modificar_perfil_check') }}" method="post">
+        <div style="width: 300px" >
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input id="user_email" type="text" name="_email" value="" placeholder="{{ app.user.email }}" class="form-control" style="" />
+                <span class="bg-danger" id="emailMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input id="user_password" type="password" name="_password" value="" placeholder="{{ app.user.password }}" class="form-control" />
+                <span class="bg-danger" id="passwordMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input id="user_nom" type="text" name="_nom" value="" placeholder="{{ app.user.nom }}" class="form-control" />
+                <span class="bg-danger" id="nomMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="cognom">Cognom:</label>
+                <input id="user_cognom" type="text" name="_cognom" value="" placeholder="{{ app.user.cognom }}" class="form-control" />
+                <span class="bg-danger" id="cognomMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="adreca">Adreça:</label>
+                <input id="user_adreca" type="text" name="_adreca" value="" placeholder="{{ app.user.adreca }}" class="form-control" />
+                <span class="bg-danger" id="adrecaMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="telefon">Telefon:</label>
+                <input id="user_telefon" type="text" name="_telefon" value="" placeholder="{{ app.user.telefon }}" class="form-control" />
+                <span class="bg-danger" id="telefonMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="fotografia">Fotografia:</label>
+                <input id="user_fotografia" type="text" name="_fotografia" value="" placeholder="{{ app.user.fotografia }}" class="form-control" />
+                <span class="bg-danger" id="fotografiaMsg"></span>
+            </div>
+            <div class="form-group">
+                <label for="presentacio">Presentació:</label>
+                <input id="user_presentacio" type="textarea" name="_presentacio" value="" placeholder="{{ app.user.presentacio }}" class="form-control" />
+                <span class="bg-danger" id="presentacioMsg"></span>
+            </div>
+        </div>
+        <input type="submit" id="botoModificarUser" name="modificarUser" class="btn btn-default"/>
+
+    </form>
 </div>
 
 {% endblock %}

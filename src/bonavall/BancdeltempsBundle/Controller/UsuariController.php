@@ -245,7 +245,7 @@ class UsuariController extends Controller
         ;
     }
     
-    #Accions usuari no administrador
+    ############################################################################
     public function perfilAction()
     {
         return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
@@ -253,6 +253,30 @@ class UsuariController extends Controller
     public function modificarAction()
     {
         return $this->render('bonavallBancdeltempsBundle:user:modificarPerfil.html.twig', array());
+    }
+    public function modifcarCheckAction(Request $request){
+        
+        $session = $request->getSession();
+ 
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(
+                SecurityContext::AUTHENTICATION_ERROR
+            );
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+ 
+        return $this->render(
+            'bonavallBancdeltempsBundle:user:modificarPerfil.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+                'error'         => $error,
+            )
+        );
+        
     }
  
 }
