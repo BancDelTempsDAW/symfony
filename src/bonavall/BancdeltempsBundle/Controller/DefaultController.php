@@ -7,8 +7,8 @@ use Symfony\Component\Security\Core\SecurityContext;
 
 class DefaultController extends Controller {
 
-    public function indexAction($name) {
-        return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array('name' => $name));
+    public function indexAction() {
+        return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array());
     }
 
     public function iniciAction() {
