@@ -244,4 +244,10 @@ class UsuariController extends Controller
             ->getForm()
         ;
     }
+    
+    public function perfilAction()
+    {
+        return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
+    }
+ 
 }
