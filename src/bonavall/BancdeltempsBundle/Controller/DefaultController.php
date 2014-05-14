@@ -20,7 +20,6 @@ class DefaultController extends Controller {
     }
     
     public function adminAction() {
-        
         return $this->render('bonavallBancdeltempsBundle:Admin:admin.html.twig', array());
     }
 
