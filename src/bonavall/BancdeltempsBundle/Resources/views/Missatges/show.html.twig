@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 
 {% block body -%}
     <h1>Missatges</h1>
@@ -16,10 +16,6 @@
             <tr>
                 <th>Data</th>
                 <td>{{ entity.data|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Hora</th>
-                <td>{{ entity.hora }}</td>
             </tr>
         </tbody>
     </table>

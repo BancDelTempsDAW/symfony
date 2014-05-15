@@ -315,4 +315,9 @@ class Serveis
     {
         return $this->estatServei;
     }
+    
+    public function __toString() {
+        return $this->descripcioServei;
+    }
+
 }

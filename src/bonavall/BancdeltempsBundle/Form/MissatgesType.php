@@ -16,7 +16,7 @@ class MissatgesType extends AbstractType
     {
         $builder
             ->add('missatge')
-            ->add('data')
+            ->add('data','datetime')
             ->add('autor')
             ->add('solicituts')
         ;

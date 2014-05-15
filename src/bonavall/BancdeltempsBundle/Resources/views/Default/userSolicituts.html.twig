@@ -1,0 +1,21 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+<script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
+<table>
+{% for solicitut in solicituts %}
+<tr>    
+   <tr> <td id="sol_id">{{ solicitut.id }}</td></tr>
+   <tr> <td>{{ solicitut.solicitant }}</td></tr>
+    <tr><td>{{ solicitut.serveiSolicitat }}</td></tr>
+    <tr><td>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</td></tr>
+    <tr><td>{{ solicitut.estatSolicitut }}</td></tr>
+    <tr><td><div id="content">
+  <a id="miss_btn_{{solicitud.id}}" class="btn btn-default" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span>Missatges</a>
+ </div>
+ <div id="output_{{solicitud.id}}">
+ </div>
+</div></td></tr>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

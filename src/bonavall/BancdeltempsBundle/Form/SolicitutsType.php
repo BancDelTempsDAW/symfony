@@ -15,7 +15,6 @@ class SolicitutsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('estatsolicitut')
             ->add('dataSolicitut')
             ->add('solicitant')
             ->add('serveiSolicitat')

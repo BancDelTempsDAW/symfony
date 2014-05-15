@@ -22,13 +22,6 @@ class Solicituts
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="estatSolicitut", type="integer", nullable=false)
-     */
-    private $estatsolicitut;
-
-    /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -51,7 +44,7 @@ class Solicituts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_solicitut", type="date", nullable=false)
+     * @ORM\Column(name="data_solicitut", type="datetime", nullable=false)
      */
     private $dataSolicitut;
     
@@ -154,5 +147,9 @@ class Solicituts
         return $this->serveiSolicitat;
     }
     
+    public function __toString() {
+        return (String)$this->serveiSolicitat;        
+    }
+
     
 }
