@@ -84,7 +84,6 @@ Icon
 .Trashes
 !/web/css/bancdeltemps.css
 !/web/js/main.js
-!/vendor/composer/
 !/vendor/doctrine/
 !/vendor/symfony/
 !/vendor/sonata-project/
