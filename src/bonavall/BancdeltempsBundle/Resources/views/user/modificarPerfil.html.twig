@@ -1,54 +1,64 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
-{#{% if error %}
-    <div class="bg-danger"><h3>{{ error.message|trans}}</h3></div>
-{% endif %}#}
 
-    <form role="form" action="{{ path('modificar_perfil_check') }}" method="post">
+    <form role="form" action="{{ path('modificar_perfil_check') }}" method="post" >
         <div style="width: 300px" >
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input id="user_email" type="text" name="_email" value="" placeholder="{{ app.user.email }}" class="form-control" style="" />
-                <span class="bg-danger" id="emailMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input id="user_password" type="password" name="_password" value="" placeholder="{{ app.user.password }}" class="form-control" />
-                <span class="bg-danger" id="passwordMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="nom">Nom:</label>
-                <input id="user_nom" type="text" name="_nom" value="" placeholder="{{ app.user.nom }}" class="form-control" />
-                <span class="bg-danger" id="nomMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="cognom">Cognom:</label>
-                <input id="user_cognom" type="text" name="_cognom" value="" placeholder="{{ app.user.cognom }}" class="form-control" />
-                <span class="bg-danger" id="cognomMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="adreca">Adreça:</label>
-                <input id="user_adreca" type="text" name="_adreca" value="" placeholder="{{ app.user.adreca }}" class="form-control" />
-                <span class="bg-danger" id="adrecaMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="telefon">Telefon:</label>
-                <input id="user_telefon" type="text" name="_telefon" value="" placeholder="{{ app.user.telefon }}" class="form-control" />
-                <span class="bg-danger" id="telefonMsg"></span>
-            </div>
-            <div class="form-group">
-                <label for="fotografia">Fotografia:</label>
+            
+            <div class="form-inline" >
+                <label for="fotografia">Fotografia:</label><br>
                 <input id="user_fotografia" type="text" name="_fotografia" value="" placeholder="{{ app.user.fotografia }}" class="form-control" />
+                <input type="submit" id="botoModificarFotografia" name="modificarFotografia" class="btn btn-primary" value="Modificar" />
                 <span class="bg-danger" id="fotografiaMsg"></span>
             </div>
+            
+            <div class="form-inline">
+                <label for="nom">Nom:</label><br>
+                <input id="user_nom" type="text" name="_nom" value="" placeholder="{{ app.user.nom }}" class="form-control" />
+                <input type="submit" id="botoModificarNom" name="modificarNom" class="btn btn-primary" value="Modificar" />
+                <span class="bg-danger" id="nomMsg"></span>
+            </div>
+            
+            <div class="form-inline">
+                <label for="cognom">Cognom:</label><br>
+                <input id="user_cognom" type="text" name="_cognom" value="" placeholder="{{ app.user.cognom }}" class="form-control" />
+                <input type="submit" id="botoModificarCognom" name="modificarCognom" class="btn btn-primary" value="Modificar" />
+                <span class="bg-danger" id="cognomMsg"></span>
+            </div>
+            
+            <div class="form-inline">
+                <label for="adreca">Adreça:</label><br>
+                <input id="user_adreca" type="text" name="_adreca" value="" placeholder="{{ app.user.adreca }}" class="form-control" />
+                <input type="submit" id="botoModificarAdreca" name="modificarAdreca" class="btn btn-primary" value="Modificar" />
+                <span class="bg-danger" id="adrecaMsg"></span>
+            </div>
+            
+            <div class="form-inline">
+                <label for="telefon">Telefon:</label><br>
+                <input id="user_telefon" type="text" name="_telefon" value="" placeholder="{{ app.user.telefon }}" class="form-control" />
+                <input type="submit" id="botoModificarTelefon" name="modificarTelefon" class="btn btn-primary" value="Modificar" />
+                <span class="bg-danger" id="telefonMsg"></span>
+            </div>
+            
+            <div class="form-inline">
+                <label for="email">Email:</label><br>
+                <input id="user_email" type="text" name="_email" value="" placeholder="{{ app.user.email }}" class="form-control" />
+                <input type="submit" id="botoModificarEmail" name="modificarEmail" class="btn btn-primary" value="Modificar" />
+                <span class="bg-danger" id="emailMsg"></span>
+            </div>
+            
             <div class="form-group">
                 <label for="presentacio">Presentació:</label>
-                <input id="user_presentacio" type="textarea" name="_presentacio" value="" placeholder="{{ app.user.presentacio }}" class="form-control" />
+                <textarea id="user_presentacio" type="text" name="_presentacio" value="" placeholder="{{ app.user.presentacio }}" class="form-control" style="width: 500px; height: 200px"></textarea><br>
+                <input type="submit" id="botoModificarPresentacio" name="modificarPresentacio" class="btn btn-primary" value="Modificar" />
                 <span class="bg-danger" id="presentacioMsg"></span>
             </div>
+            
+            <div class="form-group">
+                <label for="punts">Punts:</label>
+                <input id="user_punts" type="text" name="_punts" value="" placeholder="{{ app.user.punts }}" readonly="" class="form-control" />
+            </div>
+            
         </div>
-        <input type="submit" id="botoModificarUser" name="modificarUser" class="btn btn-default"/>
-
     </form>
 </div>
 
