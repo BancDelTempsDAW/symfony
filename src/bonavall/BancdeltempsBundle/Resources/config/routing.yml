@@ -295,9 +295,12 @@ missatges_ajax:
 perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
-gestio_solicituds:
+gestio_solicituds_enviades:
   pattern: /user/solicituts/
-  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:index }
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexEnviades }
+gestio_solicituds_rebudes:
+  pattern: /user/solicituts/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexRebudes }
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
