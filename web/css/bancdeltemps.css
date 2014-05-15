@@ -6,6 +6,16 @@ body{
     padding-bottom: 70px;
 }
 
+.llista-missatges{
+    max-height: 308px;
+    overflow-y:scroll; 
+}
+
+#missatges-panel{
+    width: 50%;
+    padding-top: 20px;
+}
+
 #navbar-head{
     width: 80%;
     margin: 0 auto;
