@@ -15,7 +15,7 @@ use bonavall\BancdeltempsBundle\Form\UsuariType;
  *
  * @Route("/usuari")
  */
-class UsuariController extends Controller
+class UserController extends Controller
 {
 
     /**
@@ -243,5 +243,13 @@ class UsuariController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }    
+    }
+      
+    public function perfilAction() {
+        return $this->render('bonavallBancdeltempsBundle:user:Perfil.html.twig', array());
+    }
+    public function baixaAction() {
+        return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
+    }
+    
 }

@@ -294,11 +294,11 @@ missatges_ajax:
 #Rutes de user no administrador
 veure_perfil:
   pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
+  defaults: { _controller: bonavallBancdeltempsBundle:User:perfil }
 
 baixa_perfil:
   pattern: /user/perfil/baixa/
-  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:baixa }
+  defaults: { _controller: bonavallBancdeltempsBundle:User:baixa }
 modificar_perfil_check:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:validate }
