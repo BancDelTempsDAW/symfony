@@ -10,7 +10,14 @@ bonavall_bancdeltemps_inici:
 bonavall_bancdeltemps_alta:
     pattern:  /alta
     defaults: { _controller: bonavallBancdeltempsBundle:Registre:index }
-    
+
+### Prova nova alta usuari
+bonavall_bancdeltemps_altausuari:
+    pattern:  /altausuari/
+    defaults: { _controller: bonavallBancdeltempsBundle:Altausuari:registre }
+### Final Prova
+
+
 bonavall_bancdeltemps_user:
     pattern:  /user
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
