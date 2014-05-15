@@ -84,3 +84,4 @@ Icon
 .Trashes
 !/web/css/bancdeltemps.css
 !/web/js/main.js
+!/vendor/composer/

@@ -10,9 +10,9 @@
     <tr><td>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</td></tr>
     <tr><td>{{ solicitut.estatSolicitut }}</td></tr>
     <tr><td><div id="content">
-  <a id="miss_btn_{{solicitud.id}}" class="btn btn-default" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span>Missatges</a>
+  <a id="miss_btn_{{solicitut.id}}" class="btn btn-default" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span>Missatges</a>
  </div>
- <div id="output_{{solicitud.id}}">
+ <div id="output_{{solicitut.id}}">
  </div>
 </div></td></tr>
 </tr>
