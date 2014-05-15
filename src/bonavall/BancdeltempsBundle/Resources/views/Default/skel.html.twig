@@ -19,7 +19,9 @@
         {% block javascripts %}
             <script src="{{ asset('js/jquery-1.11.1.min.js') }}" type="text/javascript"></script>
             <script src="{{ asset('js/skel.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('js/main.js') }}" type="text/javascript"></script>
+            {% if is_granted('ROLE_USER') %}
+            <script src="{{ asset('js/user.js') }}" type="text/javascript"></script>
+            {% endif %}
             <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
         {% endblock %}
     </head>
@@ -27,13 +29,40 @@
         {% block navbar %}
           <nav id="navbar-head" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
-              <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header">
                 <a class="navbar-brand" href="{{path('bonavall_bancdeltemps_inici')}}">Banc del temps</a>
               </div>
+              {% if is_granted('ROLE_ADMIN') %}
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>                                       
+                        <ul class="dropdown-menu">
+                            <li><a href="{{path('persona')}}">Persona</a></li>
+                            <li><a href="{{path('usuari')}}">Usuari</a></li>
+                            <li><a href="{{path('admin_serveis')}}">Serveis</a></li>
+                            <li><a href="{{path('admin_estatservei')}}">Estats</a></li>
+                            <li><a href="{{path('admin_serveisconsumits')}}">Serveis Consumits</a></li>
+                            <li><a href="{{path('admin_valoracioservei')}}">Valoració Serveis</a></li>
+                            <li><a href="{{path('admin_evaluacioservei')}}">Evaluació Serveis</a></li>
+                            <li><a href="{{path('admin_missatges')}}">Missatges</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{path('Admin_bancdeltemps')}}">Configuració Global</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <form class="navbar-form navbar-right">
+                      <div class="form-group">
+                          Hola <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
+                          <a id="disconnect-button" class="btn btn-danger" data-toggle="tooltip" title="Tornaras Aviat?" href="{{path('logout')}}" ><span class="glyphicon glyphicon-off"></span> Desconnecta't</a>
+                      </div>
+                    </form>
+                </ul>
+                </div>
 
-              <!-- Collect the nav links, forms, and other content for toggling -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              {% else %}
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li>
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Serveis<b class="caret"></b></a>
@@ -58,8 +87,9 @@
                         <li class="dropdown">
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Perfil<b class="caret"></b></a>
                              <ul class="dropdown-menu">
-                                 <li><a href="#">Informació Personal</a></li>
-                                 <li><a href="#">Historial</a></li>
+                                 <li><a href="{{path('perfil_user')}}">Informació Personal</a></li>
+                                 <li><a href="{{path('gestio_solicituds')}}">Solicituds</a></li>
+                                 <li><a href="{{path('gestio_serveis')}}">Els meus serveis</a></li>
                              </ul>
                          </li>
                      {% endif %}
@@ -85,6 +115,7 @@
                 {% endblock %}
                 </ul>
               </div><!-- /.navbar-collapse -->
+              {% endif %}
             </div><!-- /.container-fluid -->
           </nav>
 
