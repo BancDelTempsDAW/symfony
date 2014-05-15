@@ -1,0 +1,14 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+{% for missatge in missatges %}
+<table>
+<tr>
+    
+    <td>{{ missatge.missatge }}</td>
+    <td>{{ missatge.autor }}</td>
+    <td>{% if missatge.data %}{{ missatge.data|date('Y-m-d H:i:s') }}{% endif %}</td>
+    
+</tr>
+</table>
+{% endfor %}
+{% endblock %}

@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Sonata\\IntlBundle\\' => array($vendorDir . '/sonata-project/intl-bundle'),
+    'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
 );

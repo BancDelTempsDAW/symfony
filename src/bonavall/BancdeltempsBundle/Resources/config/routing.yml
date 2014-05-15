@@ -280,16 +280,31 @@ admin_missatges_new:
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:new }
 admin_missatges_delete:
   pattern: /admin/missatges/delete{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    
+  
+user_miss:
+    pattern: /missatges/
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
+
+
+missatges_ajax:
+      pattern: /user/solicituts/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:greeting }
+      requirements:
+        _method:  POST
+  
 
 
 #Rutes de user no administrador
 perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
-gestio_solicituds:
-  pattern: /user/solicituds/
-  defaults: { _controller: bonavallBancdeltempsBundle:Solicituds:index }
+gestio_solicituds_enviades:
+  pattern: /user/solicituts/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexEnviades }
+gestio_solicituds_rebudes:
+  pattern: /user/solicituts/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexRebudes }
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
