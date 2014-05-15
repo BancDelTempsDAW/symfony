@@ -281,20 +281,20 @@ admin_missatges_delete:
 
 #Rutes de user no administrador
 veure_perfil:
-  pattern: /user/perfil
+  pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
-modificar_perfil:
-  pattern: /user/perfil/modificar
-  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:modificar }
+baixa_perfil:
+  pattern: /user/perfil/baixa/
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:baixa }
 modificar_perfil_check:
-  pattern: /user/perfil/modificar_check
-  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:modificarCheck }
+  pattern: /user/perfil/
+  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:validate }
   
 gestionar_serveis:
-  pattern: /user/serveis
+  pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
   
 gestionar_solicituds:
-  pattern: /user/solicituts
+  pattern: /user/solicituts/
   defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
 

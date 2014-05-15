@@ -2,6 +2,7 @@
 
 namespace bonavall\BancdeltempsBundle\Controller;
 
+
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -30,7 +31,7 @@ class UsuariController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findAll();
-
+        
         return array(
             'entities' => $entities,
         );
@@ -254,29 +255,15 @@ class UsuariController extends Controller
     {
         return $this->render('bonavallBancdeltempsBundle:user:modificarPerfil.html.twig', array());
     }
-    public function modifcarCheckAction(Request $request){
+    public function baixaAction()
+    {
+        return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
+    }
+    
+    public function validateAction (){
         
-        $session = $request->getSession();
- 
-        // get the login error if there is one
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(
-                SecurityContext::AUTHENTICATION_ERROR
-            );
-        } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
- 
-        return $this->render(
-            'bonavallBancdeltempsBundle:user:modificarPerfil.html.twig',
-            array(
-                // last username entered by the user
-                'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-                'error'         => $error,
-            )
-        );
+        echo "S'ha modificat amb exit!";
         
     }
- 
+       
 }
