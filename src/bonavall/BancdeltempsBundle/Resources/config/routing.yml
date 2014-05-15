@@ -276,15 +276,13 @@ admin_missatges_new:
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:new }
 admin_missatges_delete:
   pattern: /admin/missatges/delete{id}
-<<<<<<< HEAD
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    
   
 user_miss:
     pattern: /missatges/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
     
-=======
-  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }
+  
 
 
 #Rutes de user no administrador
@@ -297,4 +295,3 @@ gestio_solicituds:
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
->>>>>>> master

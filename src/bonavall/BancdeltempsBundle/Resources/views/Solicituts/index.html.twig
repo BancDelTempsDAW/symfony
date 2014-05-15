@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 
 {% block body -%}
     <h1>Solicituts list</h1>
@@ -7,7 +7,6 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Estatsolicitut</th>
                 <th>Datasolicitut</th>
                 <th>Actions</th>
             </tr>
@@ -16,7 +15,6 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('admin_solicituts_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.estatsolicitut }}</td>
                 <td>{% if entity.dataSolicitut %}{{ entity.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
                 <ul>
