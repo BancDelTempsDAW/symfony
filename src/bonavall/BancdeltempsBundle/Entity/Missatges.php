@@ -35,12 +35,7 @@ class Missatges
      */
     private $data;
     
-    /**
-     * @var \Time
-     *
-     * @ORM\Column(name="hora", type="time", nullable=false)
-     */
-    private $hora;
+    
 
     /**
      * @var \Persona
@@ -120,13 +115,8 @@ class Missatges
         return $this->data;
     }
     
-    public function getHora() {
-        return $this->hora;
-    }
-
-    public function setHora(\Time $hora) {
-        $this->hora = $hora;
-    }
+    
+    
 
     
     /**

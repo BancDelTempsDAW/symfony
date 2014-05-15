@@ -84,3 +84,15 @@ Icon
 .Trashes
 !/web/css/bancdeltemps.css
 !/web/js/main.js
+!/vendor/doctrine/
+!/vendor/symfony/
+!/vendor/sonata-project/
+!/vendor/incenteev/
+!/vendor/sensio/
+!/vendor/twig/
+!/vendor/kriswallsmith/
+!/vendor/psr/
+!/vendor/monolog/
+!/vendor/jdorn/
+!/vendor/swiftmailer/
+!/vendor/composer/
