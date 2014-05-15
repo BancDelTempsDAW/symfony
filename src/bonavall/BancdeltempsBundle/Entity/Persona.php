@@ -45,6 +45,13 @@ class Persona implements UserInterface, \Serializable {
      * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     protected $password;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="actiu", type="boolean", nullable=false)
+     */
+    protected $isActive;
 
     /**
      * @ORM\ManyToMany(targetEntity="Rol")
@@ -246,6 +253,19 @@ class Persona implements UserInterface, \Serializable {
 
     public function __toString() {
         return $this->email;
+    }
+    
+    public function getIsActive() {
+        return $this->isActive;
+    }
+
+    public function setIsActive($isActive) {
+        $this->isActive = $isActive;
+    }
+    
+    public function isEnabled()
+    {
+        return $this->isActive;
     }
 
 }

@@ -1,4 +1,4 @@
-{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
     <h1>Serveis</h1>
@@ -12,6 +12,10 @@
             <tr>
                 <th>Punts</th>
                 <td>{{ entity.punts }}</td>
+            </tr>
+            <tr>
+                <th>Nomservei</th>
+                <td>{{ entity.nomServei }}</td>
             </tr>
             <tr>
                 <th>Descripcioservei</th>

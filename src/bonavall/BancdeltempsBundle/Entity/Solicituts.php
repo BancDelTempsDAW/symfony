@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Solicituts
  *
- * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"solicitant_id"}), @ORM\Index(name="fk_Solicituts_serveis1", columns={"servei_solicitat_id"}), @ORM\Index(name="Solicituts_ibfk_2", columns={"estatSolicitut"})})
+ * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"solicitant_id"}), @ORM\Index(name="Solicituts_ibfk_13", columns={"ofertant_id"}), @ORM\Index(name="fk_Solicituts_serveis1", columns={"servei_solicitat_id"}), @ORM\Index(name="Solicituts_ibfk_2", columns={"estatSolicitut"})})
  * @ORM\Entity
  */
 class Solicituts
@@ -30,7 +30,18 @@ class Solicituts
      * })
      */
     private $solicitant;
-
+    
+    /**
+     * @var \Persona
+     *
+     * @ORM\ManyToOne(targetEntity="Persona")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ofertant_id", referencedColumnName="id")
+     * })
+     */
+    private $ofertant;
+    
+    
     /**
      * @var \Serveis
      *
@@ -92,7 +103,8 @@ class Solicituts
     {
         return $this->estatSolicitut;
     }
-
+    
+    
     /**
      * Set solicitant
      *
@@ -114,6 +126,29 @@ class Solicituts
     public function getSolicitant()
     {
         return $this->solicitant;
+    }
+    
+    
+     /* Set ofertant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $ofertant
+     * @return Solicituts
+     */
+    public function setOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $ofertant = null)
+    {
+        $this->ofertant = $ofertant;
+
+        return $this;
+    }
+
+    /**
+     * Get ofertant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     */
+    public function getOfertant()
+    {
+        return $this->ofertant;
     }
     
     public function getDataSolicitut() {

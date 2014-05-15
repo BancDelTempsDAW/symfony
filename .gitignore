@@ -95,3 +95,4 @@ Icon
 !/vendor/monolog/
 !/vendor/jdorn/
 !/vendor/swiftmailer/
+!/vendor/composer/
