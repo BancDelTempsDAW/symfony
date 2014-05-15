@@ -2,31 +2,45 @@
 {% block body %}
     <form role="form">
         <div class="row">
-            <div class="col-xs-6 col-md-4 col-sm-4 col-lg-3 col-md-offset-4">
+            <div class="col-xs-12 col-md-6 col-sm-6 col-lg-6 col-md-offset-3">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Nom:</label>
+                    <label for="nom">Nom:</label>
                     <input type="text" class="form-control" id="nom" placeholder="Nom">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Cognoms</label>
+                    <label for="cognom">Cognoms</label>
                     <input type="text" class="form-control" id="cognoms" placeholder="Cognoms">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Adreça</label>
-                    <input type="email" class="form-control" id="adreca" placeholder="Adreça">
+                    <label for="InputEmail1">Correu Electrònic</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Correu Electrònic">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Telèfon</label>
-                    <input type="password" class="form-control" id="telefon" placeholder="Telèfon">
+                    <label for="adreca">Adreça</label>
+                    <input type="text" class="form-control" id="adreca" placeholder="Adreça">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputFile">File input</label>
-                    <input type="file" id="exampleInputFile">
-                    <p class="help-block">Example block-level help text here.</p>
+                    <label for="ciutat">Ciutat</label>
+                    <input type="text" class="form-control" id="ciutat" placeholder="Ciutat">
+                </div>
+                <div class="form-group">
+                    <label for="cp">Codi Postal</label>
+                    <input type="text" class="form-control" id="cp" placeholder="Codi Postal">
+                </div>
+                <div class="form-group">
+                    <label for="provincia">Provincia</label>
+                    <input type="text" class="form-control" id="provincia" placeholder="Provincia">
+                </div>
+                <div class="form-group">
+                    <label for="telefon">Telèfon</label>
+                    <input type="text" class="form-control" id="telefon" placeholder="Telèfon">
+                </div>
+                <div class="form-group">
+                    <label for="file">Inserir fotografia</label>
+                    <input type="file" id="InputFile">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
         </div>
-
     </form>
 {% endblock %}
