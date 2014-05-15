@@ -9,20 +9,50 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Missatges;
 use bonavall\BancdeltempsBundle\Form\MissatgesType;
-
+use Symfony\Component\HttpFoundation\Response;
 
 class UserMissController extends Controller {
 
-    
-    public function indexAction() {
+    /**
+     * Return a ajax response
+     */
+    public function greetingAction() {
+        $request = $this->get('request');
+        $sol_id = $request->request->get('formName');
+        //$name = $request->request->get('formName');
         $repository = $this->getDoctrine()
                 ->getRepository('bonavallBancdeltempsBundle:Missatges');
 
         //$entities = $em->getRepository('bonavallBancdeltempsBundle:Missatges');
 
         $query = $repository->createQueryBuilder('p')
+                ->where('p.autor = :autor  AND p.solicituts = :solicituts')
+                ->setParameter('autor', $this->getUser())
+                ->setParameter('solicituts', $sol_id)
+                ->orderBy('p.missatge', 'ASC')
+                ->getQuery();
+
+        $missatges = $query->getArrayResult();
+
+        if ($missatges != "") {//if the user has written his name
+            $greeting = $missatges;
+            $return = array("responseCode" => 200, "greeting" => $greeting);
+        } else {
+            $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+        }
+
+        $return = json_encode($return); //jscon encode the array
+        return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
+        //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
+    }
+
+    public function indexAction() {
+        $repository = $this->getDoctrine()
+                ->getRepository('bonavallBancdeltempsBundle:Missatges');
+
+        $query = $repository->createQueryBuilder('p')
                 ->where('p.autor = :autor')
-                ->setParameter('autor', 1)
+                ->setParameter('autor', $this->getUser())
                 ->orderBy('p.missatge', 'ASC')
                 ->getQuery();
 

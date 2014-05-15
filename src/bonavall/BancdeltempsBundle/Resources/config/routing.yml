@@ -281,7 +281,13 @@ admin_missatges_delete:
 user_miss:
     pattern: /missatges/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
-    
+
+
+missatges_ajax:
+      pattern: /user/solicituts/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:greeting }
+      requirements:
+        _method:  POST
   
 
 
@@ -290,8 +296,8 @@ perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
 gestio_solicituds:
-  pattern: /user/solicituds/
-  defaults: { _controller: bonavallBancdeltempsBundle:Solicituds:index }
+  pattern: /user/solicituts/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:index }
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
