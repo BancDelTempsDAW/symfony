@@ -269,3 +269,8 @@ admin_missatges_new:
 admin_missatges_delete:
   pattern: /admin/missatges/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    
+  
+user_miss:
+    pattern: /missatges/
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
+    
