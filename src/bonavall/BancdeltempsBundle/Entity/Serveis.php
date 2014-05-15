@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Serveis
  *
- * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_usuari1", columns={"usuari_ofertant_id"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"})})
+ * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"})})
  * @ORM\Entity
  */
 class Serveis
@@ -38,6 +38,13 @@ class Serveis
      * @ORM\Column(name="punts", type="integer", nullable=false)
      */
     private $punts;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomServei", type="string", length=55, nullable=true)
+     */
+    private $nomServei;
             
      /**
      * @var string
@@ -73,16 +80,7 @@ class Serveis
      * @ORM\Column(name="data_final", type="date", nullable=true)
      */
     private $dataFinal;
-
-    /**
-     * @var \Persona
-     *
-     * @ORM\ManyToOne(targetEntity="Persona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuari_ofertant_id", referencedColumnName="id")
-     * })
-     */
-    private $usuariOfertant;
+    
 
     /**
      * @var \TipusServei
@@ -115,7 +113,16 @@ class Serveis
     {
         return $this->id;
     }
+    
+    public function getNomServei() {
+        return $this->nomServei;
+    }
 
+    public function setNomServei($nomServei) {
+        $this->nomServei = $nomServei;
+    }
+
+    
     /**
      * Set iddonant
      *
@@ -245,30 +252,7 @@ class Serveis
     public function getDataFinal()
     {
         return $this->dataFinal;
-    }
-
-    /**
-     * Set usuariOfertant
-     *
-     * @param \bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant
-     * @return Serveis
-     */
-    public function setUsuariOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $usuariOfertant = null)
-    {
-        $this->usuariOfertant = $usuariOfertant;
-
-        return $this;
-    }
-
-    /**
-     * Get usuariOfertant
-     *
-     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
-     */
-    public function getUsuariOfertant()
-    {
-        return $this->usuariOfertant;
-    }
+    }    
 
     /**
      * Set tipusServei1

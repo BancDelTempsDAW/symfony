@@ -26,7 +26,7 @@ class UserMissController extends Controller {
         //$entities = $em->getRepository('bonavallBancdeltempsBundle:Missatges');
 
         $query = $repository->createQueryBuilder('p')
-                ->where('p.autor = :autor  AND p.solicituts = :solicituts')
+                ->where('p.autor = :autor AND p.solicituts = :solicituts')
                 ->setParameter('autor', $this->getUser())
                 ->setParameter('solicituts', $sol_id)
                 ->orderBy('p.missatge', 'ASC')

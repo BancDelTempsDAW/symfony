@@ -16,13 +16,13 @@ class ServeisType extends AbstractType
     {
         $builder
             ->add('punts')
+            ->add('nomServei')
             ->add('descripcioServei')
             ->add('codiPostal')
             ->add('dataInici')
             ->add('durada')
             ->add('dataFinal')
             ->add('iddonant')
-            ->add('usuariOfertant')
             ->add('tipusServei1')
             ->add('estatServei')
         ;
