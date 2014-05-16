@@ -43,19 +43,7 @@ class UsuariPerfilController extends Controller
     public function baixaAction() {
         return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
-    
-    public function checkAction($id){
-        
-        $request = $this->getRequest();
-
-        if ($request->isXmlHttpRequest()) {
-        
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
-
-            return $this->render('bonavallBancdeltempsBundle:user:Perfil.html.twig', array(
-                'entity' => $entity
-            ));
-        }
+    public function checkAction(){
+        return success;
     }
 }

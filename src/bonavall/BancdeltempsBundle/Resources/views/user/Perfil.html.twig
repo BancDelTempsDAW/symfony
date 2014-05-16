@@ -14,7 +14,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-        $("#ok").hide();
+        $("#ok").show();
         $("#checkForm").validate({
             rules: {
                 user_nom: {required: true},
@@ -34,15 +34,13 @@
             },
             submitHandler: function(form) {
                 var dataString = 'nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
-                document.wrtie(dataString);
                 $.ajax({
                     type: "POST",
                     url: "{{ path('perfil_user_check') }}",
                     data: dataString,
                     success: function(data) {
                         $("#ok").html(data);
-                        $("#ok").show();
-                            $("#formid").hide();
+                        $("#formid").hide();
                     }
                 });
 
