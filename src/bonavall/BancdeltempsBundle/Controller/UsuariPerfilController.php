@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
-use bonavall\BancdeltempsBundle\Form\modificarPerfilType;
+use bonavall\BancdeltempsBundle\Form\UsuariType;
 
 /**
  * Usuari controller.
@@ -40,7 +40,7 @@ class UsuariPerfilController extends Controller
      *
      * @Route("/", name="usuari_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:user:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:Usuari:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -71,7 +71,7 @@ class UsuariPerfilController extends Controller
     */
     private function createCreateForm(Usuari $entity)
     {
-        $form = $this->createForm(new modificarPerfilTypeType(), $entity, array(
+        $form = $this->createForm(new UsuariType(), $entity, array(
             'action' => $this->generateUrl('usuari_create'),
             'method' => 'POST',
         ));
@@ -160,7 +160,7 @@ class UsuariPerfilController extends Controller
     */
     private function createEditForm(Usuari $entity)
     {
-        $form = $this->createForm(new modificarPerfilTypeType(), $entity, array(
+        $form = $this->createForm(new UsuariType(), $entity, array(
             'action' => $this->generateUrl('usuari_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -243,8 +243,7 @@ class UsuariPerfilController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
-    
+    }    
     public function perfilAction() {
         return $this->render('bonavallBancdeltempsBundle:user:Perfil.html.twig', array());
     }
@@ -252,5 +251,4 @@ class UsuariPerfilController extends Controller
     public function baixaAction() {
         return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
-
 }
