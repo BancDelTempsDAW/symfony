@@ -13,9 +13,9 @@ class AltaUsuariType extends AbstractType
     {
         $builder->add('nom', 'text', array())
                 ->add('cognom', array(
+                    'type' => 'text',
                     'options' => array(
-                        'label' => 'Cognoms: ')
-                    ))
+                        'label' => 'Cognoms: ')))
                 ->add('adreca', 'textarea')
                 ->add('poblacio')
                 ->add('codi_postal')
@@ -40,7 +40,7 @@ class AltaUsuariType extends AbstractType
 
     }
 
-    public function getDefaultOptions(array $options) //array $options
+    public function getDefaultOptions(array $options)
     {
         return array(
             'data_class' => 'bonavall\BancdeltempsBundle\Entity\Usuari'
