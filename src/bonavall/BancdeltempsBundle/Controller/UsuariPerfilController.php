@@ -9,51 +9,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
 use bonavall\BancdeltempsBundle\Form\UsuariType;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Usuari controller.
- *
- * @Route("/usuari")
- */
-class UsuariPerfilController extends Controller
-{
+class UsuariPerfilController extends Controller {
 
-    /**
-     * Lists all Usuari entities.
-     *
-     * @Route("/", name="usuari")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+    public function perfilAction(Request $request) {
+        if ($request->isXmlHttpRequest()) {
+            $request = $this->get('request');
+            $dades = $request->request->get('nomUsuari');
+            $dades = "hola";
+            /* $repository = $this->getDoctrine()
+              ->getRepository('bonavallBancdeltempsBundle:Missatges'); */
+            if ($dades) {
+                throw $this->createNotFoundException('Unable to find Missatges entity. ' . $dades);
+            }
 
-        $entities = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findAll();
+            if ($dades == "") {//if the user has written his name
+                $greeting = $dades;
+                $return = array("responseCode" => 200, "greeting" => $greeting);
+            } else {
+                $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+            }
 
-        return array(
-            'entities' => $entities,
-        );
-    }
-    
-    public function perfilAction() {
-        return $this->render('bonavallBancdeltempsBundle:user:Perfil.html.twig', array());
+            return $this->render('bonavallBancdeltempsBundle:UsuariPerfil:perfil.html.twig', array('missatges' => $dades));
+            $return = json_encode($return); //jscon encode the array
+            //return new Response($return, 200, array('Content-Type' => 'application/json'));
+        }else{
+            return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
+        }
     }
 
     public function baixaAction() {
         return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
-    public function checkAction(){
-       
-        $request = $this->getRequest();
-        echo $request;
-//        if ($request->isXmlHttpRequest()) {
-//        
-//            
-//
-//        return $this->render('xxxBundle:User:roles.html.twig', array(
-//                    'entity' => $entity
-//                ));
-//        }
-    }
+
+    /**
+     * Return a ajax response
+     */
 }

@@ -12,6 +12,30 @@ use bonavall\BancdeltempsBundle\Form\MissatgesType;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserMissController extends Controller {
+    /*
+     * @Route("/user/perfil/", name="perfil_check")
+     */
+    public function checkAction(Request $request){
+       $request = $this->get('request');
+       $dades = $request->request->get('nomUsuari');
+        $dades[]="hola";
+        /*$repository = $this->getDoctrine()
+                ->getRepository('bonavallBancdeltempsBundle:Missatges');*/
+        if ($dades) {
+            throw $this->createNotFoundException('Unable to find Missatges entity. '.$dades);
+        }
+       
+       if ($dades == "") {//if the user has written his name
+            $greeting = $dades;
+            $return = array("responseCode" => 200, "greeting" => $greeting);
+        } else {
+            $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+        }
+        
+        //return $this->render('bonavallBancdeltempsBundle:UsuariPerfil:perfil.html.twig', array('missatges' => $dades));
+        $return = json_encode($return); //jscon encode the array
+        return new Response($return, 200, array('Content-Type' => 'application/json'));
+    }
 
     /**
      * Return a ajax response

@@ -292,12 +292,18 @@ missatges_ajax:
 
 
 #Rutes de usuari no persona
+
 perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:perfil }
-perfil_user_check:
-  pattern: /user/perfil/check
-  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:check }
+
+#perfil_check:
+#  pattern: /user/perfil/
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:check }
+#  requirements:
+#        _method:  POST
+
+
 baixa_perfil:
   pattern: /user/perfil/baixa/
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:baixa }
