@@ -14,6 +14,7 @@ class UsuariType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $builder
             ->add('salt')
             ->add('email')
@@ -26,7 +27,14 @@ class UsuariType extends AbstractType
             ->add('fotografia')
             ->add('presentacio')
             ->add('punts')
-            ->add('rol')
+            ->add('rol','entity',new Rol())
+           /* ->add('rol','entity', array(
+                'class' => 'bonavall\BancdeltempsBundle\Entity\Rol',
+                'property' => 'nom',
+                'multiple' => true,
+                'expanded' => true,
+                'empty_value' => false
+              ))*/
         ;
     }
     

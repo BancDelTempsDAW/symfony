@@ -4,12 +4,14 @@ namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Persona
  *
  * @ORM\Table(name="Persona")
  * @ORM\Entity
+ * @UniqueEntity("email")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string");
  * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})
@@ -35,7 +37,7 @@ class Persona implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=75, nullable=false)
+     * @ORM\Column(name="email", type="string", unique=true, length=75, nullable=false)
      */
     protected $email;
 

@@ -29,7 +29,7 @@ class UserMissController extends Controller {
                 ->where('p.autor = :autor AND p.solicituts = :solicituts')
                 ->setParameter('autor', $this->getUser())
                 ->setParameter('solicituts', $sol_id)
-                ->orderBy('p.missatge', 'ASC')
+                ->orderBy('p.data', 'DESC')
                 ->getQuery();
 
         $missatges = $query->getArrayResult();
@@ -38,7 +38,7 @@ class UserMissController extends Controller {
             $greeting = $missatges;
             $return = array("responseCode" => 200, "greeting" => $greeting);
         } else {
-            $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+            $return = array("responseCode" => 400, "greeting" => "No hi han missatges!");
         }
 
         $return = json_encode($return); //jscon encode the array
