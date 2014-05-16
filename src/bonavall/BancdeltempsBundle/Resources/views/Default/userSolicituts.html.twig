@@ -8,21 +8,26 @@
         <div class="solicitut panel panel-primary">
             <div class="panel-heading"><h3 class="panel-title">Nom del Servei</h3></div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12 col-md-8">
-                        <div class="sol_id">{{ solicitut.id }}</div>
-                        <div>{{ solicitut.solicitant }}</div>
-                        <div>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</div>
-                        <div>{{ solicitut.estatSolicitut }}</div>                    
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8">
+                            <div class="sol_id">{{ solicitut.id }}</div>
+                            <div>{{ solicitut.solicitant }}</div>
+                            <div>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</div>
+                            <div>{{ solicitut.estatSolicitut }}</div>                    
+                        </div>
+                        <div class="">
+                            <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-info" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span> Missatges</a></div>
+                        </div>
                     </div>
-                    <div class="">
-                        <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-default" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span> Missatges</a></div>
-                    </div>
-                </div>
-                <div id="row_missatges_{{solicitut.id}}" class="row">
-                    <div class="col-xs-12 col-md-8">
-                        <div id="output_{{solicitut.id}}">
+                    <div id="row_missatges_{{solicitut.id}}" class="row">
+                        <div class="col-md-8">
+                            <div id="output_{{solicitut.id}}">
 
+                            </div>
+                            <div id="outputButton_{{solicitut.id}}">
+                                
+                            </div>  
                         </div>
                     </div>
                 </div>

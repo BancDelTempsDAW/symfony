@@ -34,6 +34,7 @@ $(document).ready(function() {
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
+                $('#outputButton_'+id).html("<div><a id='nou_miss_{{solicitut.id}}' class='btn btn-success' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
@@ -46,6 +47,7 @@ $(document).ready(function() {
 
               //if you want to print the error:
               $('#output_'+id).html(data);
+              
            }
        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
