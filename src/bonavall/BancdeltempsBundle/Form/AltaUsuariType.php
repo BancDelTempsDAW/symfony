@@ -12,10 +12,7 @@ class AltaUsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('nom', 'text', array())
-                ->add('cognom', array(
-                    'type' => 'text',
-                    'options' => array(
-                        'label' => 'Cognoms: ')))
+                ->add('cognom')
                 ->add('adreca', 'textarea')
                 ->add('poblacio')
                 ->add('codi_postal')
