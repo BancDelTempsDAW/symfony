@@ -1,27 +1,66 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
 <script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
+<h1>Solicituds</h1>
 <div class="panel panel-default">
-     <div id="missatges-body-header" class="panel-heading"><h1 class="panel-title">Solicituds</h1></div>
      <div id="missatges-panel" class="container-fluid">
     {% for solicitut in solicituts %}
+        <div id="modal_{{solicitut.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Cancelar Solicitud</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Estas segur que vols cancelar la solicitud a <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
+                            <b>{{solicitut.ofertant.email}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y H:i') }}</b> ?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="cancelar_solicitud_{{solicitut.id}}" type="button" class="btn btn-primary">Cancelar Solicitut</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                    </div>
+                 </div>
+             </div>
+        </div>
         <div class="solicitut panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title">Nom del Servei</h3></div>
+            <div class="panel-heading">
+                <div class="panel-title">
+                    <div class="container-fluid" >
+                        <div class="row">
+                            <h4 class="col-md-10">{{solicitut.serveiSolicitat.nomServei}} - {{solicitut.ofertant.email}}</h4>
+                            <div class="col-md-2" >
+                                <div class="btn btn-default" data-toggle="modal" data-target="#modal_{{solicitut.id}}">
+                                    <span id="cancelar_{{solicitut.id}}" class="glyphicon glyphicon-remove"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="panel-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xs-12 col-md-8">
+                        <div class="col-md-8">
                             <div class="sol_id">{{ solicitut.id }}</div>
-                            <div>{{ solicitut.solicitant }}</div>
-                            <div>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</div>
-                            <div>{{ solicitut.estatSolicitut }}</div>                    
+                            <div>Punts {{ solicitut.serveiSolicitat.punts }}</div>
+                            <div>Codi Postal {{ solicitut.serveiSolicitat.codiPostal }}</div>
+                            <div>Inici {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y H:i') }}</div>
+                            <div>Durada {{ solicitut.serveiSolicitat.durada }}</div>
+                            <div>Final {{ solicitut.serveiSolicitat.dataFinal|date('d-m-Y H:i') }}</div>
+                            <div>Descripcio{{ solicitut.serveiSolicitat.descripcioServei }}</div>
+                            <div>Data Solicitut{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('d-m-Y H:i') }}{% endif %}</div>                    
                         </div>
-                        <div class="">
-                            <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-info" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span> Missatges</a></div>
+                        <div class="col-md-4">
+                            <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-info" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-comment"></span> Missatges</a></div><br>
+                            {{}}
+                                <div><a id="acceptar_btn_{{solicitut.id}}" class="btn btn-info" href="#" ><span class="glyphicon glyphicon-comment"></span> Acceptar Solicitud</a></div>
+                            {{}}
                         </div>
                     </div>
                     <div id="row_missatges_{{solicitut.id}}" class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div id="output_{{solicitut.id}}">
 
                             </div>
