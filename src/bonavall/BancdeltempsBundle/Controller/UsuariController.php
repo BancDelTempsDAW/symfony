@@ -243,5 +243,5 @@ class UsuariController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
-    }
+    }    
 }
