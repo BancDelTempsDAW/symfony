@@ -17,15 +17,16 @@ class AltaUsuariType extends AbstractType
                 ->add('codi_postal')
                 ->add('poblacio')
                 ->add('dni', 'text', array('label' => 'DNI'))
+                ->add('Email', 'email')
 
 
 
                 // Arreglar correo para que funciones el formulario
-                ->add('correu', array(
+                /*->add('correu', array(
                     'type' => 'email',
                     'options' => array('label' => 'Correu Electrònic: '),
                     'required' => true
-                ))
+                ))*/
 
                 ->add('password', 'repeated', array(
                     'type' => 'password',
