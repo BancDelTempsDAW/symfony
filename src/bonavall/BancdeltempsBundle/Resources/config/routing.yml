@@ -14,7 +14,7 @@ bonavall_bancdeltemps_alta:
 ### Prova nova alta usuari
 bonavall_bancdeltemps_altausuari:
     pattern:  /altausuari/
-    defaults: { _controller: bonavallBancdeltempsBundle:Altausuari:registre }
+    defaults: { _controller: bonavallBancdeltempsBundle:AltaUsuari:registre }
 ### Final Prova
 
 
