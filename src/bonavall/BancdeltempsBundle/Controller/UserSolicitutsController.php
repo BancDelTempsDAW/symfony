@@ -25,7 +25,7 @@ class UserSolicitutsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexEnviadesAction()
+    public function enviadesAction()
     {
         $repository = $this->getDoctrine()
                 ->getRepository('bonavallBancdeltempsBundle:Solicituts');
@@ -40,23 +40,14 @@ class UserSolicitutsController extends Controller
         return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
     }
     
-    public function indexRebudesAction()
-    {
-        $repository2 = $this->getDoctrine()
-                ->getRepository('bonavallBancdeltempsBundle:Servei');
-        $query2 = $repository2->createQueryBuilder('p')
-                ->where('p.iddonant = :iddonant')
-                ->setParameter('iddonant', $this->getUser())
-                ->orderBy('p.id', 'ASC')
-                ->getQuery();
-        $solicituts2 = $query2->getResult();
-        
+    public function rebudesAction()
+    {        
         $repository = $this->getDoctrine()
                 ->getRepository('bonavallBancdeltempsBundle:Solicituts');
 
         $query = $repository->createQueryBuilder('p')
-                ->where('p.serveiSolicitat = :serveiSolicitat')
-                ->setParameter('serveiSolicitat', $this->getUser())
+                ->where('p.ofertant = :ofertant')
+                ->setParameter('ofertant', $this->getUser())
                 ->orderBy('p.dataSolicitut', 'ASC')
                 ->getQuery();
 

@@ -1,4 +1,4 @@
-{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block body -%}
     <h1>Persona list</h1>
@@ -10,6 +10,7 @@
                 <th>Salt</th>
                 <th>Email</th>
                 <th>Password</th>
+                <th>Isactive</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ entity.salt }}</td>
                 <td>{{ entity.email }}</td>
                 <td>{{ entity.password }}</td>
+                <td>{{ entity.isActive }}</td>
                 <td>
                 <ul>
                     <li>

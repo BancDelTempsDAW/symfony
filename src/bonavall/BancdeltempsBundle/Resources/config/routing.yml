@@ -307,11 +307,11 @@ perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:Usuari:perfil }
 gestio_solicituds_enviades:
-  pattern: /user/solicituts/
-  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexEnviades }
+  pattern: /user/solicituts/enviades/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:enviades }
 gestio_solicituds_rebudes:
-  pattern: /user/solicituts/
-  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:indexRebudes }
+  pattern: /user/solicituts/rebudes/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:rebudes }
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
