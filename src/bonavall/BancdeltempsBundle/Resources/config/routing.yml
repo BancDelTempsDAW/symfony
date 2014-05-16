@@ -295,7 +295,9 @@ missatges_ajax:
 perfil_user:
   pattern: /user/perfil/
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:perfil }
-
+perfil_user_check:
+  pattern: /user/perfil/check
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:check }
 baixa_perfil:
   pattern: /user/perfil/baixa/
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:baixa }
