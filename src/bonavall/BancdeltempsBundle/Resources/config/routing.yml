@@ -8,7 +8,7 @@ bonavall_bancdeltemps_inici:
     defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
     
 bonavall_bancdeltemps_user:
-    pattern:  /user
+    pattern:  /user/
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
     
 bonavall_bancdeltemps_admin:
@@ -291,20 +291,18 @@ missatges_ajax:
   
 
 
-#Rutes de user no administrador
-veure_perfil:
+#Rutes de usuari no persona
+perfil_user:
   pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:User:perfil }
-
-baixa_perfil:
-  pattern: /user/perfil/baixa/
-  defaults: { _controller: bonavallBancdeltempsBundle:User:baixa }
+  defaults: { _controller: bonavallBancdeltempsBundle:UserPerfil:perfil }
 modificar_perfil_check:
   pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:Usuari:validate }
-  
+  defaults: { _controller: bonavallBancdeltempsBundle:UserPerfil:validar }
+baixa_perfil:
+  pattern: /user/perfil/baixa/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserPerfil:baixa }
 
-
+#Rutes de gestio de solicituds
 gestio_solicituds_enviades:
   pattern: /user/solicituts/enviades/
   defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:enviades }

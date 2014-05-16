@@ -8,14 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
-use bonavall\BancdeltempsBundle\Form\UsuariType;
+use bonavall\BancdeltempsBundle\Form\modificarPerfilType;
 
 /**
  * Usuari controller.
  *
  * @Route("/usuari")
  */
-class UserController extends Controller
+class UsuariPerfilController extends Controller
 {
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
      *
      * @Route("/", name="usuari_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Usuari:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:user:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -71,7 +71,7 @@ class UserController extends Controller
     */
     private function createCreateForm(Usuari $entity)
     {
-        $form = $this->createForm(new UsuariType(), $entity, array(
+        $form = $this->createForm(new modificarPerfilTypeType(), $entity, array(
             'action' => $this->generateUrl('usuari_create'),
             'method' => 'POST',
         ));
@@ -160,7 +160,7 @@ class UserController extends Controller
     */
     private function createEditForm(Usuari $entity)
     {
-        $form = $this->createForm(new UsuariType(), $entity, array(
+        $form = $this->createForm(new modificarPerfilTypeType(), $entity, array(
             'action' => $this->generateUrl('usuari_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -244,12 +244,13 @@ class UserController extends Controller
             ->getForm()
         ;
     }
-      
+    
     public function perfilAction() {
         return $this->render('bonavallBancdeltempsBundle:user:Perfil.html.twig', array());
     }
+
     public function baixaAction() {
         return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
-    
+
 }
