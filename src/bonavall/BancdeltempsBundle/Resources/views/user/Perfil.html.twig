@@ -33,7 +33,7 @@
                 user_presentacio: "El campo Mensaje es obligatorio."
             },
             submitHandler: function(form) {
-                var dataString = 'nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
+                var dataString = 'nom=' + $('#user_nom').val();
                 $.ajax({
                     type: "POST",
                     url: "{{ path('perfil_user_check') }}",
