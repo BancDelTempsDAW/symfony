@@ -13,28 +13,29 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsuariPerfilController extends Controller {
 
+    /**
+     * Return a ajax response
+     */
     public function perfilAction(Request $request) {
+
+        #http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
+        
         if ($request->isXmlHttpRequest()) {
-            $request = $this->get('request');
-            $dades = $request->request->get('nomUsuari');
-            $dades = "hola";
-            /* $repository = $this->getDoctrine()
-              ->getRepository('bonavallBancdeltempsBundle:Missatges'); */
-            if ($dades) {
-                throw $this->createNotFoundException('Unable to find Missatges entity. ' . $dades);
-            }
+            $em = $this->getDoctrine()->getManager();
 
-            if ($dades == "") {//if the user has written his name
-                $greeting = $dades;
-                $return = array("responseCode" => 200, "greeting" => $greeting);
+            $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById(5);
+            if (is_object($usuari)) {
+                $request = $this->get('request');
+                $return = array(
+                    'responseCode' => 200,
+                );
             } else {
-                $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+                $return = array(
+                    'responseCode' => 400,
+                );
             }
-
-            return $this->render('bonavallBancdeltempsBundle:UsuariPerfil:perfil.html.twig', array('missatges' => $dades));
-            $return = json_encode($return); //jscon encode the array
-            //return new Response($return, 200, array('Content-Type' => 'application/json'));
-        }else{
+            return new Response(json_encode($return), $return['responseCode']);
+        } else {
             return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
         }
     }
@@ -43,7 +44,4 @@ class UsuariPerfilController extends Controller {
         return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
 
-    /**
-     * Return a ajax response
-     */
 }
