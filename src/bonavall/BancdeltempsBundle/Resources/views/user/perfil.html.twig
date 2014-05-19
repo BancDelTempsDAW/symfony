@@ -13,6 +13,9 @@
 	margin-top:-150px; 
 	margin-left:-300px;
     }
+    #label.error {
+        color: #CC0033;
+    }
 </style>
 
 <script src="{{ asset('js/validate/dist/jquery.validate.min.js') }}" type="text/javascript"></script>
@@ -22,22 +25,28 @@
 
     <div style="width: 300px" >
 
-        <label for="fotografia">Fotografia:</label><br>
+        <label for="fotografia">Fotografia:</label>
         <input id="user_fotografia" type="file" name="user_fotografia" value="{{ app.user.fotografia }}" />
 
-        <label for="nom">Nom:</label><br>
-        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}" class="form-control" />
+        <label for="nom">Password:</label>
+        <input id="user_pass" type="password" name="user_pass" class="form-control" />
+        
+        <label for="nom">Confirmació del password:</label>
+        <input id="user_passRepeat" type="password" name="user_passRepeat" class="form-control" />
+        
+        <label for="nom">Nom:</label>
+        <input id="user_nom" type="text" name="user_nom" value="" class="form-control" />
 
-        <label for="cognom">Cognom:</label><br>
+        <label for="cognom">Cognom:</label>
         <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" class="form-control" />
 
-        <label for="adreca">Adreça:</label><br>
+        <label for="adreca">Adreça:</label>
         <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" class="form-control" />
 
-        <label for="telefon">Telefon:</label><br>
+        <label for="telefon">Telefon:</labe>
         <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" class="form-control" />
 
-        <label for="email">Email:</label><br>
+        <label for="email">Email:</label>
         <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" class="form-control" />
 
         <label for="punts">Punts:</label>
@@ -63,20 +72,67 @@
         $("#failure").hide();
         $("#checkForm").validate({
             rules: {
-                user_nom: {required: true},
-                user_cognom: {required: true},
-                user_adreca: {required: true},
-                user_telefon: {required: true},
-                user_email: {required: true, email: true},
-                user_presentacio: {required: true}
+                user_pass: {
+                    required: true,
+                    minlength : 8
+                },
+                user_passRepeat: {
+                    required: true,
+                    equalTo: user_pass
+                },
+                user_nom: {
+                    minlength : 3,
+                    maxlength : 15
+                },
+                user_cognom: {
+                    minlength : 3,
+                    maxlength : 20
+                },
+                user_adreca: {
+                    minlength : 3,
+                    maxlength : 30
+                },
+                user_telefon: {
+                    minlength: 9,
+                    maxlength: 11,
+                    number: true
+                },
+                user_email: {
+                    email: true
+                },
+                user_presentacio: {
+                    minlength : 1,
+                    maxlength : 100
+                }
             },
             messages: {
-                user_nom: "Falta el nom.",
-                user_cognom: "Falta el cognom.",
-                user_adreca: "Debe introducir un email válido.",
-                user_telefon: "Falta el telefon.",
-                user_email: "Es necessari un email valid.",
-                user_presentacio: "El campo Mensaje es obligatorio."
+                user_pass: {
+                    required: "El password es obligatori",
+                    minlength: "El password ha de ser minim de 8 caracters"
+                },
+                user_passRepeat: {
+                    required: "Has de confirmar el password",
+                    equalTo: "Els passwords no coincideixen"
+                },
+                user_nom: {
+                    minlength: "El nom ha de tenir un minim de 3 caracters",
+                    maxlength: "El nom ha de tenir un màxim de 15 caracters"
+                },
+                user_cognom: {
+                    minlength: "El cognom ha de tenir un minim de 3 caracters",
+                    maxlength: "El cognom ha de tenir un màxim de 20 caracters"
+                },
+                user_adreca: "No es una adreça vàlida",
+                user_telefon: {
+                    minlength: "El telefon ha de tenir un minim de 9 caracters",
+                    maxlength: "El telefon ha de tenir un màxim de 11 caracters",
+                    number: "El telefon ha de ser numeric"
+                },
+                user_email: "Ha de ser un email vàlid",
+                user_presentacio: {
+                    minlength: "Estaria bé tenir una presentació",
+                    maxlenght: "La teva presentació es masa llarga"
+                }
             },
             submitHandler: function(form) {
                 var dataString = 'nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
