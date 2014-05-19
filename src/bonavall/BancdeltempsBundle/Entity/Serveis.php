@@ -42,14 +42,14 @@ class Serveis
     /**
      * @var string
      *
-     * @ORM\Column(name="nomServei", type="string", length=55, nullable=true)
+     * @ORM\Column(name="nomServei", type="string", length=55, nullable=false)
      */
     private $nomServei;
             
      /**
      * @var string
      *
-     * @ORM\Column(name="descripcioServei", type="string", length=255, nullable=true)
+     * @ORM\Column(name="descripcioServei", type="string", length=255, nullable=false)
      */
     private $descripcioServei;
     
@@ -77,7 +77,7 @@ class Serveis
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_final", type="date", nullable=true)
+     * @ORM\Column(name="data_final", type="date", nullable=false)
      */
     private $dataFinal;
     
@@ -101,6 +101,11 @@ class Serveis
      * })
      */
     private $estatServei;
+    
+    public function __construct() {
+        $this->dataInici = new \DateTime("now");
+        $this->dataFinal = new \DateTime("now");
+    }
 
 
 
@@ -301,7 +306,7 @@ class Serveis
     }
     
     public function __toString() {
-        return $this->descripcioServei;
+        return $this->nomServei;
     }
 
 }

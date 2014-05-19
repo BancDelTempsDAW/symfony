@@ -13,7 +13,7 @@ use bonavall\BancdeltempsBundle\Form\ServeisType;
 /**
  * Serveis controller.
  *
- * @Route("/admin/serveis")
+ * @Route("/user/serveis")
  */
 class UserServeisController extends Controller
 {
@@ -21,7 +21,7 @@ class UserServeisController extends Controller
     /**
      * Lists all Serveis entities.
      *
-     * @Route("/", name="admin_serveis")
+     * @Route("/", name="user_serveis")
      * @Method("GET")
      * @Template()
      */
@@ -30,15 +30,17 @@ class UserServeisController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findAll();
+        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findAll();
 
         return array(
             'entities' => $entities,
+            'solicituts' => $solicituts,
         );
     }
     /**
      * Creates a new Serveis entity.
      *
-     * @Route("/", name="admin_serveis_create")
+     * @Route("/", name="user_serveis_create")
      * @Method("POST")
      * @Template("bonavallBancdeltempsBundle:Serveis:new.html.twig")
      */
@@ -53,7 +55,7 @@ class UserServeisController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_serveis_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('user_serveis_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -72,11 +74,11 @@ class UserServeisController extends Controller
     private function createCreateForm(Serveis $entity)
     {
         $form = $this->createForm(new ServeisType(), $entity, array(
-            'action' => $this->generateUrl('admin_serveis_create'),
+            'action' => $this->generateUrl('user_serveis_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Crea server'));
 
         return $form;
     }
@@ -84,7 +86,7 @@ class UserServeisController extends Controller
     /**
      * Displays a form to create a new Serveis entity.
      *
-     * @Route("/new", name="admin_serveis_new")
+     * @Route("/new", name="user_serveis_new")
      * @Method("GET")
      * @Template()
      */
@@ -102,7 +104,7 @@ class UserServeisController extends Controller
     /**
      * Finds and displays a Serveis entity.
      *
-     * @Route("/{id}", name="admin_serveis_show")
+     * @Route("/{id}", name="user_serveis_show")
      * @Method("GET")
      * @Template()
      */
@@ -116,18 +118,18 @@ class UserServeisController extends Controller
             throw $this->createNotFoundException('Unable to find Serveis entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $solicitaForm = $this->createSolicitaForm($id);
 
         return array(
             'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+            'solicita_form' => $solicitaForm->createView(),
         );
     }
 
     /**
      * Displays a form to edit an existing Serveis entity.
      *
-     * @Route("/{id}/edit", name="admin_serveis_edit")
+     * @Route("/{id}/edit", name="user_serveis_edit")
      * @Method("GET")
      * @Template()
      */
@@ -161,7 +163,7 @@ class UserServeisController extends Controller
     private function createEditForm(Serveis $entity)
     {
         $form = $this->createForm(new ServeisType(), $entity, array(
-            'action' => $this->generateUrl('admin_serveis_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('user_serveis_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -172,7 +174,7 @@ class UserServeisController extends Controller
     /**
      * Edits an existing Serveis entity.
      *
-     * @Route("/{id}", name="admin_serveis_update")
+     * @Route("/{id}", name="user_serveis_update")
      * @Method("PUT")
      * @Template("bonavallBancdeltempsBundle:Serveis:edit.html.twig")
      */
@@ -193,7 +195,7 @@ class UserServeisController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_serveis_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user_serveis_edit', array('id' => $id)));
         }
 
         return array(
@@ -205,7 +207,7 @@ class UserServeisController extends Controller
     /**
      * Deletes a Serveis entity.
      *
-     * @Route("/{id}", name="admin_serveis_delete")
+     * @Route("/{id}", name="user_serveis_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -225,7 +227,7 @@ class UserServeisController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_serveis'));
+        return $this->redirect($this->generateUrl('user_serveis'));
     }
 
     /**
@@ -238,9 +240,29 @@ class UserServeisController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_serveis_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('user_serveis_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
+    }
+    
+    private function createSolicitaForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('user_missatges_solicita', array('id' => $id)))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Solicitar'))
+            ->getForm()
+        ;
+    }
+    
+    private function solicitaAction($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('user_missatges_solicita', array('id' => $id)))
+            ->setMethod('POST')
+            ->add('submit', 'submit', array('label' => 'Solicitar'))
             ->getForm()
         ;
     }

@@ -51,9 +51,9 @@ class Usuari extends Persona
     private $telefon;
 
     /**
-     * @var string
+     * @var file
      *
-     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
+     * @ORM\Column(name="fotografia", type="file", length=255, nullable=false)
      */
     private $fotografia;
 
@@ -306,7 +306,7 @@ class Usuari extends Persona
      */
     public function getSalt()
     {
-        return $this->salt;
+        return Null;
     }
 
     /**

@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class MissatgesType extends AbstractType
+class UserMissatgesType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -16,9 +16,10 @@ class MissatgesType extends AbstractType
     {
         $builder
             ->add('missatge')
-            ->add('data','datetime')
-            ->add('autor')
-            ->add('solicituts')
+            //->add('data','datetime')
+            //->add('autor')
+            
+            //->add('solicituts')
         ;
     }
     

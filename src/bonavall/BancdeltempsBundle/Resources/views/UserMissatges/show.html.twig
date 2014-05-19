@@ -15,19 +15,19 @@
             </tr>
             <tr>
                 <th>Data</th>
-                <td>{{ entity.data|date('Y-m-d H:i:s') }}</td>
+                <td>{{ entity.data|date('d-m-Y H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('admin_missatges') }}">
+        <a href="{{ path('user_missatges') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('admin_missatges_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('user_missatges_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>

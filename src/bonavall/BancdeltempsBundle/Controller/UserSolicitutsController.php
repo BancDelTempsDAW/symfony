@@ -8,12 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Solicituts;
-use bonavall\BancdeltempsBundle\Form\SolicitutsType;
+use bonavall\BancdeltempsBundle\Entity\EstatServei;
+use bonavall\BancdeltempsBundle\Form\UserSolicitutsType;
 
 /**
  * Solicituts controller.
  *
- * @Route("/admin/solicituts")
+ * @Route("/user/solicituts")
  */
 class UserSolicitutsController extends Controller
 {
@@ -21,7 +22,7 @@ class UserSolicitutsController extends Controller
     /**
      * Lists all Solicituts entities.
      *
-     * @Route("/", name="admin_solicituts")
+     * @Route("/", name="user_solicituts")
      * @Method("GET")
      * @Template()
      */
@@ -37,6 +38,9 @@ class UserSolicitutsController extends Controller
                 ->getQuery();
 
         $solicituts = $query->getResult();
+        if (!$solicituts) {
+            throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
+        }
         return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
     }
     
@@ -57,13 +61,14 @@ class UserSolicitutsController extends Controller
     /**
      * Creates a new Solicituts entity.
      *
-     * @Route("/", name="admin_solicituts_create")
+     * @Route("/", name="user_solicituts_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Solicituts:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UserSolicituts:new.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity = new Solicituts();
+        //$entity->setSolicitant($this->getUser()); 
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -72,7 +77,7 @@ class UserSolicitutsController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_solicituts_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('user_solicituts_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -90,12 +95,12 @@ class UserSolicitutsController extends Controller
     */
     private function createCreateForm(Solicituts $entity)
     {
-        $form = $this->createForm(new SolicitutsType(), $entity, array(
-            'action' => $this->generateUrl('admin_solicituts_create'),
+        $form = $this->createForm(new UserSolicitutsType(), $entity, array(
+            'action' => $this->generateUrl('user_solicituts_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Solicita'));
 
         return $form;
     }
@@ -103,14 +108,29 @@ class UserSolicitutsController extends Controller
     /**
      * Displays a form to create a new Solicituts entity.
      *
-     * @Route("/new", name="admin_solicituts_new")
+     * @Route("/new", name="user_solicituts_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new Solicituts();
-        $form   = $this->createCreateForm($entity);
+        
+        $em = $this->getDoctrine()->getManager();        
+        $serv = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+        
+        $em2 = $this->getDoctrine()->getManager();        
+        $estat = $em2->getRepository('bonavallBancdeltempsBundle:EstatServei')->find(1);
+        
+                
+        
+        if (!$serv) {
+            throw $this->createNotFoundException('Unable to find Serveis entity.');
+        }
+        $entity = new Solicituts();       
+        $entity->setSolicitant($this->getUser());
+        $entity->setServeiSolicitat($serv);
+        $entity->setEstatsolicitut($estat);
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
@@ -121,14 +141,13 @@ class UserSolicitutsController extends Controller
     /**
      * Finds and displays a Solicituts entity.
      *
-     * @Route("/{id}", name="admin_solicituts_show")
+     * @Route("/{id}", name="user_solicituts_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
         if (!$entity) {
@@ -146,7 +165,7 @@ class UserSolicitutsController extends Controller
     /**
      * Displays a form to edit an existing Solicituts entity.
      *
-     * @Route("/{id}/edit", name="admin_solicituts_edit")
+     * @Route("/{id}/edit", name="user_solicituts_edit")
      * @Method("GET")
      * @Template()
      */
@@ -179,8 +198,8 @@ class UserSolicitutsController extends Controller
     */
     private function createEditForm(Solicituts $entity)
     {
-        $form = $this->createForm(new SolicitutsType(), $entity, array(
-            'action' => $this->generateUrl('admin_solicituts_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UserSolicitutsType(), $entity, array(
+            'action' => $this->generateUrl('user_solicituts_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -191,14 +210,13 @@ class UserSolicitutsController extends Controller
     /**
      * Edits an existing Solicituts entity.
      *
-     * @Route("/{id}", name="admin_solicituts_update")
+     * @Route("/{id}", name="user_solicituts_update")
      * @Method("PUT")
-     * @Template("bonavallBancdeltempsBundle:Solicituts:edit.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UserSolicituts:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->find($id);
 
         if (!$entity) {
@@ -212,7 +230,7 @@ class UserSolicitutsController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_solicituts_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user_solicituts_edit', array('id' => $id)));
         }
 
         return array(
@@ -224,7 +242,7 @@ class UserSolicitutsController extends Controller
     /**
      * Deletes a Solicituts entity.
      *
-     * @Route("/{id}", name="admin_solicituts_delete")
+     * @Route("/{id}", name="user_solicituts_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -244,7 +262,7 @@ class UserSolicitutsController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_solicituts'));
+        return $this->redirect($this->generateUrl('user_solicituts'));
     }
 
     /**
@@ -257,7 +275,7 @@ class UserSolicitutsController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_solicituts_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('user_solicituts_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

@@ -67,7 +67,7 @@
                   <li>
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Serveis<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="#">Buscar</a></li>
+                          <li><a href="{{path('user_serveis')}}">Buscar</a></li>
                           {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                               <li class="divider"></li>
                               <li><a href="#">Crear</a></li>
@@ -100,7 +100,7 @@
                 {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                     <form class="navbar-form navbar-right">
                       <div class="form-group">
-                          Hola <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
+                          Hola <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.nom }}</a>
                           <a id="disconnect-button" class="btn btn-danger" data-toggle="tooltip" title="Tornaras Aviat?" href="{{path('logout')}}" ><span class="glyphicon glyphicon-off"></span> Desconnecta't</a>
                       </div>
                     </form>
