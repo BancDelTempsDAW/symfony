@@ -34,7 +34,7 @@ $(document).ready(function() {
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
-                $('#outputButton_'+id).html("<div><a id='nou_miss_{{solicitut.id}}' class='btn btn-success' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
+                $('#outputButton_'+id).html("<div><a id='nou_miss_{{solicitut.id}}' data-toggle='modal' data-target='#modal_nou_missatge_"+id+"' class='btn btn-default' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
@@ -53,17 +53,35 @@ $(document).ready(function() {
 
       //we dont what the browser to submit the form
       
-        
+        //Obrir missatges
       $("#miss_btn_"+id).click(function(e){
           e.preventDefault();
-          $("#row_missatges_"+id).slideToggle("Slow");
+          $("#row_missatges_"+id).slideToggle("Fast");
           
       });
        
+       //NOU MISSATGE
+       $("#nou_missatge_btn_"+id).click(function(){
+           if($("#nou_missatge_txt_"+id).val()==""){
+               var errormsg = "<br><div class='alert alert-danger alert-dismissable' >Has d'escriure un missatge.</div>";
+               $("#nou_msg_modal_body_"+id).append(errormsg);
+               $("#nou_missatge_txt_"+id).focus();
+           }else{
+                $.get($("#url_nou_msg").val()),{
+                        id_sol:id,
+                        msg:$("#nou_missatge_txt_"+id).val()
+                },function(data){ 
+
+                }
+           }
+           
+       });
        
     });
     
     
+  
+
   
 
 });
