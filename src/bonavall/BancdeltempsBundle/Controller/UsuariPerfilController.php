@@ -4,11 +4,11 @@ namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
-use bonavall\BancdeltempsBundle\Form\UsuariType;
+//use bonavall\BancdeltempsBundle\Form\UsuariType;
 use Symfony\Component\HttpFoundation\Response;
 
 class UsuariPerfilController extends Controller {
@@ -18,28 +18,27 @@ class UsuariPerfilController extends Controller {
      */
     public function perfilAction(Request $request) {
 
-        #http://symfony2forum.org/threads/5-Using-Symfony2-jQuery-and-Ajax
-        
         if ($request->isXmlHttpRequest()) {
-            $em = $this->getDoctrine()->getManager();
 
-            $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById(5);
+            $em = $this->getDoctrine()->getManager();
+            $userId = $this->get('security.context')->getToken()->getUser()->getId();
+            $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId);
+
             if (is_object($usuari)) {
                 
-//                $user = new Usuari();
-//                $user->setPassword(1234);
-//                $user->setNom("Ricard");
-//                $user->setCognom("asdf");
-//                $user->setAdreca("C/adsf");
-//                $user->setTelefon(682155466);
-//                $user->setEmail("asdf@asdf.com");
-//                $user->setPresentacio("asdfadsf");
-//
-//                $em = $this->getDoctrine()->getManager();
-//                $em->persist($user);
-//                $em->flush();
-                
-                $request = $this->get('request');
+                $usuari->setPassword($request->request->get('password'));
+                $usuari->setNom($request->request->get('nom'));
+                $usuari->setCognom($request->request->get('cognom'));
+                $usuari->setAdreca($request->request->get('adreca'));
+                $usuari->setTelefon($request->request->get('telefon'));
+                $usuari->setEmail($request->request->get('email'));
+                $usuari->setPresentacio($request->request->get('presentacio'));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($usuari);
+                $em->flush();
+
+                //$request = $this->get('request');
                 $return = array(
                     'responseCode' => 200,
                 );
@@ -50,7 +49,7 @@ class UsuariPerfilController extends Controller {
             }
             return new Response(json_encode($return), $return['responseCode']);
         } else {
-            return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
+            return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array('aaa' => $request));
         }
     }
 

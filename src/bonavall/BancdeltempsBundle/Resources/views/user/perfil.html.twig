@@ -7,14 +7,19 @@
         font-size: 21px;
         text-align: center;
         display:block; 
-	position:absolute; 
-	top:50%; 
-	left:60%; 
-	margin-top:-150px; 
-	margin-left:-300px;
+        position:absolute; 
+        top:50%; 
+        left:60%; 
+        margin-top:-150px; 
+        margin-left:-300px;
     }
-    #label.error {
-        color: #CC0033;
+    #checkForm label.error {
+        color: #FB3A3A;
+        display: inline-block;
+        margin: 4px 0 5px 125px;
+        padding: 0;
+        text-align: left;
+        width: 220px;
     }
 </style>
 
@@ -26,34 +31,34 @@
     <div style="width: 300px" >
 
         <label for="fotografia">Fotografia:</label>
-        <input id="user_fotografia" type="file" name="user_fotografia" value="{{ app.user.fotografia }}" />
+        <input id="user_fotografia" type="file" name="user_fotografia" />
 
         <label for="nom">Password:</label>
-        <input id="user_pass" type="password" name="user_pass" class="form-control" />
-        
+        <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass" class="form-control" />
+
         <label for="nom">Confirmació del password:</label>
         <input id="user_passRepeat" type="password" name="user_passRepeat" class="form-control" />
-        
+
         <label for="nom">Nom:</label>
-        <input id="user_nom" type="text" name="user_nom" value="" class="form-control" />
+        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}" placeholder="{{ app.user.nom }}" class="form-control" />
 
         <label for="cognom">Cognom:</label>
-        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" class="form-control" />
+        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" placeholder="{{ app.user.cognom }}" class="form-control" />
 
         <label for="adreca">Adreça:</label>
-        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" class="form-control" />
+        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" placeholder="{{ app.user.adreca }}" class="form-control" />
 
         <label for="telefon">Telefon:</labe>
-        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" class="form-control" />
+        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" placeholder="{{ app.user.telefon }}" class="form-control" />
 
         <label for="email">Email:</label>
-        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" class="form-control" />
+        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" placeholder="{{ app.user.email}}" class="form-control" />
 
         <label for="punts">Punts:</label>
-        <input id="user_punts" type="text" name="user_punts" value="{{ app.user.punts }}" readonly="" class="form-control" />
+        <input id="user_punts" type="text" name="user_punts" value="{{ app.user.punts }}" placeholder="{{ app.user.nom }}" readonly="" class="form-control" />
 
         <label for="presentacio">Presentació:</label>
-        <textarea id="user_presentacio" type="text" name="user_presentacio" value="{{ app.user.presentacio }}" class="form-control" style="width: 400px; height: 100px"></textarea><br>
+        <textarea id="user_presentacio" type="text" name="user_presentacio" class="form-control" style="width: 400px; height: 100px">{{ app.user.presentacio }}</textarea>
 
         <div class="form-inline">
             <input type="submit" id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary"   value="Modificar perfil" style="height: 34px" />
@@ -72,42 +77,18 @@
         $("#failure").hide();
         $("#checkForm").validate({
             rules: {
-                user_pass: {
-                    required: true,
-                    minlength : 8
-                },
-                user_passRepeat: {
-                    required: true,
-                    equalTo: user_pass
-                },
-                user_nom: {
-                    minlength : 3,
-                    maxlength : 15
-                },
-                user_cognom: {
-                    minlength : 3,
-                    maxlength : 20
-                },
-                user_adreca: {
-                    minlength : 3,
-                    maxlength : 30
-                },
-                user_telefon: {
-                    minlength: 9,
-                    maxlength: 11,
-                    number: true
-                },
-                user_email: {
-                    email: true
-                },
-                user_presentacio: {
-                    minlength : 1,
-                    maxlength : 100
-                }
+                user_pass: {required: true, minlength: 5},
+                user_passRepeat: {required:true, equalTo: user_pass},
+                user_nom: {required: true, minlength: 3, maxlength: 15},
+                user_cognom: {required: true, minlength: 3, maxlength: 20},
+                user_adreca: {required: true, minlength: 3, maxlength: 30},
+                user_telefon: {required: true, minlength: 9, maxlength: 11, number: true},
+                user_email: {required: true, email: true},
+                user_presentacio: {required: true, minlength: 1, maxlength: 100}
             },
             messages: {
                 user_pass: {
-                    required: "El password es obligatori",
+                    required: "El password no pot estar en blanc",
                     minlength: "El password ha de ser minim de 8 caracters"
                 },
                 user_passRepeat: {
@@ -115,15 +96,22 @@
                     equalTo: "Els passwords no coincideixen"
                 },
                 user_nom: {
+                    required: "El nom no pot estar en blanc",
                     minlength: "El nom ha de tenir un minim de 3 caracters",
                     maxlength: "El nom ha de tenir un màxim de 15 caracters"
                 },
                 user_cognom: {
+                    required: "El cognom no pot estar en blanc",
                     minlength: "El cognom ha de tenir un minim de 3 caracters",
                     maxlength: "El cognom ha de tenir un màxim de 20 caracters"
                 },
-                user_adreca: "No es una adreça vàlida",
+                user_adreca: {
+                    required: "L'adreça no pot estar en blanc",
+                    minlength: "L'adreça ha de tenir un minim de 3 caracters",
+                    maxlength: "L'adreça ha de tenir un màxim de 50 caracters"
+                },
                 user_telefon: {
+                    required: "El telefon no pot estar en blanc",
                     minlength: "El telefon ha de tenir un minim de 9 caracters",
                     maxlength: "El telefon ha de tenir un màxim de 11 caracters",
                     number: "El telefon ha de ser numeric"
@@ -135,15 +123,15 @@
                 }
             },
             submitHandler: function(form) {
-                var dataString = 'nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
+                var dataString = 'password=' + $('#user_pass').val() + '&nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
                 $.ajax({
                     type: "POST",
                     url: "{{ path('perfil_user') }}",
                     data: dataString,
                     success: function(data) {
                         if (data === '{"responseCode":200}') {
-                            $("#success").html("S'ha modificat amb exit").show().fadeOut(6000);
-                        }else{
+                            $("#success").html("S'ha modificar amb exit").show().fadeOut(6000);
+                        } else {
                             $("#failure").html("Error al modificar el perfil").show().fadeOut(6000);
                         }
                     }
