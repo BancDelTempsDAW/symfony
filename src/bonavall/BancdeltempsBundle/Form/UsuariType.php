@@ -22,8 +22,8 @@ class UsuariType extends AbstractType
             ->add('nom')
             ->add('cognom')
             ->add('adreca')
-            ->add('poblacio')
-            ->add('codi_postal')
+            /*->add('poblacio')
+            ->add('codi_postal')*/ //Comentado hasta que se implemente en la BB.DD.
             ->add('telefon')
             ->add('fotografia')
             ->add('password')
