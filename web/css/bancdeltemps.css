@@ -4,11 +4,21 @@ body{
     text-align: justify;
     padding-top: 70px;
     padding-bottom: 70px;
+    background-color: #F1FFFB;
+}
+
+.nou_missatge_txt{ 
+    resize: none; 
+    overflow:auto; 
+}
+
+.modal-dialog{
+    max-width: 400px;
 }
 
 .llista-missatges{
     max-height: 308px;
-    overflow-y:scroll; 
+    overflow-y:auto; 
 }
 
 #missatges-panel{

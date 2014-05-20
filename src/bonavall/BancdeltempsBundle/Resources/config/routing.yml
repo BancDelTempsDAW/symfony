@@ -288,7 +288,11 @@ missatges_ajax:
       defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:greeting }
       requirements:
         _method:  POST
-  
+
+nou_missatge_ajax:
+    pattern: /user/solicituts/noumsg
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatge }
+    methods:  [GET]
 
 
 #Rutes de usuari no persona

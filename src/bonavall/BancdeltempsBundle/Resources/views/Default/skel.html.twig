@@ -30,7 +30,7 @@
           <nav id="navbar-head" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
               <div class="navbar-header">
-                <a class="navbar-brand" href="{{path('bonavall_bancdeltemps_inici')}}">Banc del temps</a>
+                <a class="navbar-brand" href="{{path('bonavall_bancdeltemps_inici')}}"><span class="glyphicon glyphicon-time"></span> Banc del temps</a>
               </div>
               {% if is_granted('ROLE_ADMIN') %}
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -54,7 +54,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     <form class="navbar-form navbar-right">
                       <div class="form-group">
-                          Hola <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
+                          <span class="glyphicon glyphicon-user"></span> <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
                           <a id="disconnect-button" class="btn btn-danger" data-toggle="tooltip" title="Tornaras Aviat?" href="{{path('logout')}}" ><span class="glyphicon glyphicon-off"></span> Desconnecta't</a>
                       </div>
                     </form>
@@ -100,7 +100,7 @@
                 {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                     <form class="navbar-form navbar-right">
                       <div class="form-group">
-                          Hola <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
+                          <span class="glyphicon glyphicon-user"></span> <a href="" id="user-span" data-container="body" title="Perfil" data-toggle="popover" data-placement="bottom" >{{ app.user.username }}</a>
                           <a id="disconnect-button" class="btn btn-danger" data-toggle="tooltip" title="Tornaras Aviat?" href="{{path('logout')}}" ><span class="glyphicon glyphicon-off"></span> Desconnecta't</a>
                       </div>
                     </form>
@@ -114,6 +114,7 @@
                      </form>
                 {% endif %}
                 {% endblock %}
+                    <li></li>
                 </ul>
               </div><!-- /.navbar-collapse -->
               {% endif %}
