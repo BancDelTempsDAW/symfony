@@ -80,7 +80,7 @@ class Usuari extends Persona
 
     /**
      * @var string
-     *
+     *portada
      * @ORM\Column(name="email", type="string", length=75, nullable=false)
      */
     protected $email;

@@ -2,13 +2,6 @@
 
 namespace bonavall\BancdeltempsBundle\Controller;
 
-/*use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use bonavall\BancdeltempsBundle\Entity\Bancdeltemps;
-use bonavall\BancdeltempsBundle\Form\BancdeltempsType;*/
-use bonavall\BancdeltempsBundle\Entity\Usuari;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use bonavall\BancdeltempsBundle\Form\AltaUsuariType;
 
@@ -17,41 +10,54 @@ class AltaUsuariController extends Controller
 {
     public function registreAction()
     {
-        $form = $this->get('form.factory')->create(
-            new AltaUsuariType(),
-            array()
-        );
-
+        $form = $this->get('form.factory')->create(new AltaUsuariType(), array());
         $request = $this->get('request');
 
         if ($request->getMethod() == 'POST')
         {
-            $form->bindRequest($request);
+            $form->bind($request);
             if ($form->isValid())
             {
-                $usuari = new Usuari();
+                $var = $request->query->get('nom');
+                echo $var;
+                if($var != "")
+                {
+                    echo "no vacio";
+                }
+                else
+                {
+                    echo "Vacio";
+                }
 
-                $usuari->setNom($request->request->get('nom'));
-                $usuari->setCognom($request->request->get('cognom'));
-                $usuari->setAdreca($request->request->get('adreca'));
-                /*$usuari->setPoblacio($request->request->get('poblacio'));
-                $usuari->setCodiPostal($request->request->get('codi_postal'));*/
-                $usuari->setEmail($request->request->get('email'));
-                $usuari->setTelefon($request->request->get('telefon'));
-                //$usuari->setPassword($request->request->get('password'));
-                $usuari->setFotografia($request->request->get('fotografia'));
-
-                $em = $this -> getDoctrine()->getManager();
-                $em -> persist($usuari);
-                $em -> flush();
+            // Introducir datos en BB.DD.
 
 
-                //Implementacion de qué queremos hacer con el formulario, ingresar en BB.DD,...
+        /*        // Mensaje para notificar al usuario que todo ha salido bien
+                $session = $this->get('request')->getSession();
+                $session->setFlash('notice', 'Gracias por registrarte en Desymfony 2011');
+
+                // Obtenemos el usuario
+                $usuario = $form->getData();
+
+                // Codificamos el password
+                $factory = $this->get('security.encoder_factory');
+                $codificador = $factory->getEncoder($usuario);
+                $password = $codificador->encodePassword($usuario->getPassword(), $usuario->getSalt());
+                $usuario->setPassword($password);
+
+                // Guardamos el objeto en base de datos
+                $em = $this->get('doctrine')->getEntityManager();
+                $em->persist($usuario);
+                $em->flush();
+
+                // Logueamos al usuario
+                $token = new UsernamePasswordToken($usuario, null, 'main', $usuario->getRoles());
+                $this->get('security.context')->setToken($token);
+
+                return $this->redirect($this->generateUrl('portada')); */
             }
         }
-
         return $this->render('bonavallBancdeltempsBundle:Usuari:altausuari.html.twig',
-            array('form' => $form->createView())
-        );
+            array('form' => $form->createView()));
     }
 }

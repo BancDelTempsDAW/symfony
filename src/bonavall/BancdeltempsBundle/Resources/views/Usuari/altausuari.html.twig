@@ -4,15 +4,12 @@
     <h1>Registre Usuari</h1>
     <div class="form-group">
         <div class ="row">
-            <div class ="symfony-form-row col-xs-4 col-md-4 col-sm-4 col-lg-4 col-md-offset-4">
-                 <form action ="{{ path('/altausuari/') }}" method="post">
-
-                    {{ form_rest(form) }}
-
-                    <input type="submit" />
+            <div class ="symfony-form-row col-xs-6 col-md-6 col-sm-6 col-lg-6 col-md-offset-3">
+                 <form action ="{{ path('bonavall_bancdeltemps_altausuari') }}" method="post">
+                     {{ form_rest(form) }}
+                     <input type="submit" />
                  </form>
             </div>
         </div>
     </div>
-
 {% endblock %}
