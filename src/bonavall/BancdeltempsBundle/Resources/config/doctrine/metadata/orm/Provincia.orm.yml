@@ -1,0 +1,36 @@
+Provincia:
+    type: entity
+    table: provincia
+    uniqueConstraints:
+        provinciaseo:
+            columns:
+                - provinciaseo
+    id:
+        idprovincia:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        provincia:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        provinciaseo:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        provincia3:
+            type: string
+            nullable: true
+            length: 3
+            fixed: true
+            comment: ''
+    lifecycleCallbacks: {  }

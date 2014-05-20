@@ -46,6 +46,8 @@
                             <li><a href="{{path('admin_valoracioservei')}}">Valoració Serveis</a></li>
                             <li><a href="{{path('admin_solicituts')}}">Solicituts </a></li>
                             <li><a href="{{path('admin_missatges')}}">Missatges</a></li>
+                            <li><a href="{{path('admin_poblacion')}}">Poblacions</a></li>
+                            <li><a href="{{path('admin_provincia')}}">Provincies</a></li>
                             <li class="divider"></li>
                             <li><a href="{{path('Admin_bancdeltemps')}}">Configuració Global</a></li>
                         </ul>
@@ -67,7 +69,7 @@
                   <li>
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Serveis<b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <li><a href="#">Buscar</a></li>
+                          <li><a href="{{path('user_serveis')}}">Buscar</a></li>
                           {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                               <li class="divider"></li>
                               <li><a href="#">Crear</a></li>

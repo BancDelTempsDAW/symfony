@@ -17,7 +17,7 @@ class EstatServei
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -27,6 +27,12 @@ class EstatServei
      * @ORM\Column(name="descripcio", type="text", nullable=false)
      */
     private $descripcio;
+    
+    
+    public function __construct() {
+        $this->descripcio = 'Actiu';
+        
+    }
 
 
 

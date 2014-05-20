@@ -1,4 +1,6 @@
 bonavall\Bancdeltemps\Entity\Persona:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
     properties:
         email:
           - NotBlank:  { message: "persona.email.not_blank" }

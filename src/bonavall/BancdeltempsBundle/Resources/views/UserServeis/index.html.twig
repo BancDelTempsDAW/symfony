@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script src="{{ asset('js/serveisFind.js') }}" type="text/javascript"></script>
+Filtrar per codi postal:
+<select id="triaCp" reset={{path('user_serveis')}} action="{{path('triacp_ajax')}}">
+    <option value="reset">Tria una opció...</option>
+{%for poblacio in poblacions%}
+    <option value={{poblacio.id}}>{{poblacio.codiPostal}}</option>
+{% endfor %}
+</select>
+Filtrar per poblacio
+<select id="triaPob" reset={{path('user_serveis')}} action="{{path('triapob_ajax')}}">
+    <option value="reset">Tria una opció...</option>
+{%for poblacio in poblacions%}
+    <option value={{poblacio.id}}>{{poblacio.poblacio}}</option>
+{% endfor %}
+</select>
+Filtrar per provincia
+<select id="triaProv" reset={{path('user_serveis')}} action="{{path('triaprov_ajax')}}">
+    <option value="reset">Tria una opció...</option>
+{%for provincia in provincies%}
+    <option value={{provincia.id}}>{{provincia.provincia}}</option>
+{% endfor %}
+</select>
+<div id="sortida">
+<h1>Serveis list</h1>
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Usuari Ofertant</th>
+            <th>Punts</th>
+            <th>Nomservei</th>
+            <th>Descripcioservei</th>
+            <th>Poblacio</th>
+            <th>Datainici</th>
+            <th>Durada</th>
+            <th>Datafinal</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for entity in entities %}
+
+                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('Y-m-d') > 'now'|date('Y-m-d')) and (entity.iddonant.id != app.user.id) %}
+        <tr>
+            <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.iddonant.nom}}</td>
+            <td>{{ entity.punts }}</td>
+            <td>{{ entity.nomServei }}</td>
+            <td>{{ entity.descripcioServei }}</td>
+            <td>{{ entity.poblacio }}</td>
+            <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{{ entity.durada }}</td>
+            <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
+                    </li> 
+                    {% set counter = 0 %}
+                    {%for solicitut in solicituts %}
+                        {% if (solicitut.solicitant.id == app.user.id) and (entity.id == solicitut.serveiSolicitat.id) %}
+                            {% set counter = counter + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {%if counter > 0%}
+                    <li>Servei ja sol·licitat</li>
+                    {%else%}
+                        <li>
+                            <a href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicitamiss</a>
+                        </li>  
+                    {%endif%}
+                    </ul>
+                </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('user_serveis_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+</div>
+    {% endblock %}

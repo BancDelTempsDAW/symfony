@@ -1,11 +1,11 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
+
 <script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
 <h1>Solicituds</h1>
 <input type="hidden" value="" id="url_nou_msg">
 <div class="panel panel-default">
      <div id="missatges-panel" class="container-fluid">
-
             {% for solicitut in solicituts %}
                   <div id="solicituts_acordion_{{solicitut.id}}" class="panel-group" >
                  <!-- rebutjar solicitut modal -->
