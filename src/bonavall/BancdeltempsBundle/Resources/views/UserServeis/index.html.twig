@@ -12,7 +12,7 @@ Filtrar per codi postal:
 Filtrar per poblacio
 <select id="triaPob" reset={{path('user_serveis')}} action="{{path('triapob_ajax')}}">
     <option value="reset">Tria una opció...</option>
-{%for poblacio in poblacions%}
+{%for poblacio in poblacionsnom%}
     <option value={{poblacio.id}}>{{poblacio.poblacio}}</option>
 {% endfor %}
 </select>

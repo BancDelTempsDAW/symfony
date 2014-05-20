@@ -40,9 +40,9 @@ class Poblacion
     private $poblacio;
     
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="postal", type="integer", nullable=false)
+     * @ORM\Column(name="postal", type="string", nullable=false)
      */
     private $codiPostal;
     
