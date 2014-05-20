@@ -1,0 +1,65 @@
+Poblacion:
+    type: entity
+    table: poblacion
+    indexes:
+        idprovincia:
+            columns:
+                - idprovincia
+    uniqueConstraints:
+        poblacionseo:
+            columns:
+                - poblacionseo
+        lugar:
+            columns:
+                - latitud
+                - longitud
+    id:
+        idpoblacion:
+            type: integer
+            nullable: false
+            unsigned: true
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        poblacion:
+            type: string
+            nullable: false
+            length: 150
+            fixed: false
+            comment: ''
+        poblacionseo:
+            type: string
+            nullable: true
+            length: 150
+            fixed: false
+            comment: ''
+        postal:
+            type: integer
+            nullable: true
+            unsigned: true
+            comment: ''
+        latitud:
+            type: decimal
+            nullable: true
+            precision: 9
+            scale: 6
+            comment: ''
+        longitud:
+            type: decimal
+            nullable: true
+            precision: 9
+            scale: 6
+            comment: ''
+    manyToOne:
+        idprovincia:
+            targetEntity: Provincia
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idprovincia:
+                    referencedColumnName: idprovincia
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

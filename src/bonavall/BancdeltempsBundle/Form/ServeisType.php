@@ -18,11 +18,11 @@ class ServeisType extends AbstractType
             ->add('punts')
             ->add('nomServei')
             ->add('descripcioServei')
-            ->add('codiPostal')
             ->add('dataInici')
             ->add('durada')
             ->add('dataFinal')
             ->add('iddonant')
+            ->add('poblacio')
             ->add('tipusServei1')
             ->add('estatServei')
         ;

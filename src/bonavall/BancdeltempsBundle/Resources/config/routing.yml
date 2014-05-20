@@ -163,6 +163,49 @@ admin_estatservei_delete:
   pattern: /admin/estatservei/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:delete }
   
+admin_poblacion:
+  pattern: /admin/poblacion/
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:index }
+admin_poblacion_create:
+  pattern: /admin/poblacion/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:create }
+admin_poblacion_update:
+  pattern: /admin/poblacion/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:update }
+admin_poblacion_show:
+  pattern: /admin/poblacion/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:show }
+admin_poblacion_edit:
+  pattern: /admin/poblacion/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:edit }
+admin_poblacion_new:
+  pattern: /admin/poblacion/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:new }
+admin_poblacion_delete:
+  pattern: /admin/poblacion/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:delete }
+  
+admin_provincia:
+  pattern: /admin/provincia/
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:index }
+admin_provincia_create:
+  pattern: /admin/provincia/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:create }
+admin_provincia_update:
+  pattern: /admin/provincia/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:update }
+admin_provincia_show:
+  pattern: /admin/provincia/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:show }
+admin_provincia_edit:
+  pattern: /admin/provincia/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:edit }
+admin_provincia_new:
+  pattern: /admin/provincia/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:new }
+admin_provincia_delete:
+  pattern: /admin/provincia/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:delete }
   
 admin_serveisconsumits:
   pattern: /admin/serveisconsumits/
@@ -282,10 +325,25 @@ user_miss:
     pattern: /missatges/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
 
-
+#RUTES PETICIONS AJAX
 missatges_ajax:
       pattern: /user/solicituts/
       defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:greeting }
+      requirements:
+        _method:  POST
+triacp_ajax:
+      pattern: /user/serveiscp/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexcp }
+      requirements:
+        _method:  POST
+triapob_ajax:
+      pattern: /user/serveispo/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexpob }
+      requirements:
+        _method:  POST
+triaprov_ajax:
+      pattern: /user/serveispr/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexprov }
       requirements:
         _method:  POST
 
@@ -315,9 +373,83 @@ gestio_solicituds_rebudes:
 
 gestio_serveis:
   pattern: /user/serveis/
-  defaults: { _controller: bonavallBancdeltempsBundle:Serveis:index }
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
   
-gestionar_solicituds:
-  pattern: /user/solicituts/
-  defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
+user_serveis:
+  pattern: /user/serveis/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
+user_serveis_create:
+  pattern: /user/serveis/create
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:create }
+user_serveis_update:
+  pattern: /user/serveis/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:update }
+user_serveis_show:
+  pattern: /user/serveis/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:show }
+user_serveis_edit:
+  pattern: /user/serveis/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:edit }
+user_serveis_new:
+  pattern: /user/serveis/new
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:new }
+user_serveis_delete:
+  pattern: /user/serveis/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:delete }
+user_serveis_solicita:
+  pattern: /user/serveis/solicita{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:new }
+# 
+#user_solicituts:
+#  pattern: /user/solicituts/
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:index }
+#user_solicituts_create:
+#  pattern: /user/solicituts/create
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:create }
+#user_solicituts_update:
+#  pattern: /user/solicituts/update{id}
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:update }
+#user_solicituts_show:
+#  pattern: /user/solicituts/show{id}
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:show }
+#user_solicituts_edit:
+#  pattern: /user/solicituts/edit{id}
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:edit }
+#user_solicituts_new:
+#  pattern: /user/solicituts/{id}
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:new }
+#user_solicituts_delete:
+#  pattern: /user/solicituts/delete{id}
+#  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:delete } 
+  
+user_missatges:
+  pattern: /user/missatges/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:index }
+user_missatges_create:
+  pattern: /user/missatges/create{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:create }
+user_missatges_update:
+  pattern: /user/missatges/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:update }
+user_missatges_show:
+  pattern: /user/missatges/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:show }
+user_missatges_edit:
+  pattern: /user/missatges/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:edit }
+user_missatges_new:
+  pattern: /user/missatges/new{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:new }
+user_missatges_delete:
+  pattern: /user/missatges/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:delete } 
+user_missatges_solicita:
+  pattern: /user/missatges/solicita{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:new }
+
+  
+#gestionar_solicituds:
+ # pattern: /user/solicituts/
+  #defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
+
 

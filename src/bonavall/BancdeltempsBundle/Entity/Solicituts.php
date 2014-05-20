@@ -4,6 +4,7 @@ namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Solicituts
  *
@@ -32,17 +33,6 @@ class Solicituts
     private $solicitant;
     
     /**
-     * @var \Persona
-     *
-     * @ORM\ManyToOne(targetEntity="Persona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="ofertant_id", referencedColumnName="id")
-     * })
-     */
-    private $ofertant;
-    
-    
-    /**
      * @var \Serveis
      *
      * @ORM\ManyToOne(targetEntity="Serveis")
@@ -68,6 +58,13 @@ class Solicituts
      * })
      */
     private $estatSolicitut;
+    
+    
+    public function __construct() {
+        
+        $this->dataSolicitut = new \DateTime("now");
+        
+    }
 
 
 
@@ -129,28 +126,6 @@ class Solicituts
     }
     
     
-     /* Set ofertant
-     *
-     * @param \bonavall\BancdeltempsBundle\Entity\Persona $ofertant
-     * @return Solicituts
-     */
-    public function setOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $ofertant = null)
-    {
-        $this->ofertant = $ofertant;
-
-        return $this;
-    }
-
-    /**
-     * Get ofertant
-     *
-     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
-     */
-    public function getOfertant()
-    {
-        return $this->ofertant;
-    }
-    
     public function getDataSolicitut() {
         return $this->dataSolicitut;
     }
@@ -159,7 +134,7 @@ class Solicituts
         $this->dataSolicitut = $dataSolicitut;
     }
 
-        /**
+    /**
      * Set serveiSolicitat
      *
      * @param \bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat
