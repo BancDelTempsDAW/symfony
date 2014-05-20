@@ -126,28 +126,6 @@ class Solicituts
     }
     
     
-     /* Set ofertant
-     *
-     * @param \bonavall\BancdeltempsBundle\Entity\Persona $ofertant
-     * @return Solicituts
-     */
-    public function setOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $ofertant = null)
-    {
-        $this->ofertant = $ofertant;
-
-        return $this;
-    }
-
-    /**
-     * Get ofertant
-     *
-     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
-     */
-    public function getOfertant()
-    {
-        return $this->ofertant;
-    }
-    
     public function getDataSolicitut() {
         return $this->dataSolicitut;
     }
