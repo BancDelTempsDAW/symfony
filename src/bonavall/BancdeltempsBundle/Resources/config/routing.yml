@@ -337,12 +337,12 @@ triacp_ajax:
       requirements:
         _method:  POST
 triapob_ajax:
-      pattern: /user/serveis/
+      pattern: /user/serveispo/
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexpob }
       requirements:
         _method:  POST
 triaprov_ajax:
-      pattern: /user/serveis/
+      pattern: /user/serveispr/
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexprov }
       requirements:
         _method:  POST

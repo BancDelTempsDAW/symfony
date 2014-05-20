@@ -40,8 +40,7 @@ $(document).ready(function() {
     });
     
     $('#triaProv').change(function(){
-        var id = $('#triaProv').val();
-        
+        var id = $('#triaProv').val();        
         if(id == "reset"){
             location.reload();
         }else{

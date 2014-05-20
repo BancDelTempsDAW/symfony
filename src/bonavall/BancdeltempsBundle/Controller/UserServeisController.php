@@ -55,7 +55,7 @@ class UserServeisController extends Controller
         $request = $this->get('request');
         $cp = $request->request->get('idCp');
         $em = $this->getDoctrine()->getManager();
-        
+        echo $cp;
         $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('poblacio' => $cp ));
         $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findAll();
         $poblacions = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findAll();
@@ -109,20 +109,18 @@ class UserServeisController extends Controller
         $request = $this->get('request');
         $cp = $request->request->get('idCp');
         $em = $this->getDoctrine()->getManager();
-        
+        echo $cp;
         $repository = $this->getDoctrine()
                 ->getRepository('bonavallBancdeltempsBundle:Serveis');
-
         //$entities = $em->getRepository('bonavallBancdeltempsBundle:Missatges');
         //SELECT serveis.* FROM serveis join poblacion where poblacion.idprovincia=33 and serveis.poblacio_id=poblacion.idpoblacion;
-        $query = $repository->createQueryBuilder('p')
-                ->where('p.idprovincia = :idprovincia')
-                ->setParameter('idprovincia', $cp)
+        $query = $em->createQuery('SELECT s FROM bonavallBancdeltempsBundle:Serveis s JOIN bonavallBancdeltempsBundle:Poblacion p WHERE p.idProvincia=:idprov AND s.poblacio=p.id')
+                ->setParameter('idprov', $cp)
                 ->getQuery();
 
         $entities = $query->getResult();
         
-        //$entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('idprovincia' => $cp ));
+        //$entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findAll();
         $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findAll();
         $poblacions = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findAll();
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
