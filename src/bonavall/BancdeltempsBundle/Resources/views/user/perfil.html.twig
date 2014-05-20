@@ -2,6 +2,13 @@
 {% block body %}
 
 <style>
+    /*#optionsPerfil input{
+        margin-right: 10px;
+        margin-top: 10px;
+        float: left;
+        height: 34px;
+        width: 150px;
+    }
     #success,#failure {
         opacity: 1;
         font-size: 21px;
@@ -15,12 +22,16 @@
     }
     #checkForm label.error {
         color: #FB3A3A;
-        display: inline-block;
-        margin: 4px 0 5px 125px;
-        padding: 0;
-        text-align: left;
-        width: 220px;
-    }
+        //display: inline-block;
+        float: right;
+        //margin: 4px 0 5px 125px;
+        //padding: 0;
+        //text-align: left;
+        //width: 220px;
+    }*/
+    
+    //#checkForm { margin: 0 auto; width: 50%; }
+    
 </style>
 
 <script src="{{ asset('js/validate/dist/jquery.validate.min.js') }}" type="text/javascript"></script>
@@ -28,7 +39,7 @@
 
 <form id="checkForm" method="post" >
 
-    <div style="width: 300px" >
+    <div>
 
         <label for="fotografia">Fotografia:</label>
         <input id="user_fotografia" type="file" name="user_fotografia" />
@@ -40,46 +51,46 @@
         <input id="user_passRepeat" type="password" name="user_passRepeat" class="form-control" />
 
         <label for="nom">Nom:</label>
-        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}" placeholder="{{ app.user.nom }}" class="form-control" />
+        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}" class="form-control" />
 
         <label for="cognom">Cognom:</label>
-        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" placeholder="{{ app.user.cognom }}" class="form-control" />
+        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" class="form-control" />
 
         <label for="adreca">Adreça:</label>
-        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" placeholder="{{ app.user.adreca }}" class="form-control" />
+        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" class="form-control" />
 
         <label for="telefon">Telefon:</labe>
-        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" placeholder="{{ app.user.telefon }}" class="form-control" />
+        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" class="form-control" />
 
         <label for="email">Email:</label>
-        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" placeholder="{{ app.user.email}}" class="form-control" />
+        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" class="form-control" />
 
         <label for="punts">Punts:</label>
         <input id="user_punts" type="text" name="user_punts" value="{{ app.user.punts }}" placeholder="{{ app.user.nom }}" readonly="" class="form-control" />
 
         <label for="presentacio">Presentació:</label>
-        <textarea id="user_presentacio" type="text" name="user_presentacio" class="form-control" style="width: 400px; height: 100px">{{ app.user.presentacio }}</textarea>
+        <textarea id="user_presentacio" type="text" name="user_presentacio" class="form-control" >{{ app.user.presentacio }}</textarea>
 
         <div id="optionsPerfil" >
 
-            <input type="submit" id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary"   value="Modificar perfil" style="height: 34px; width: 200px; margin-top: 10px" />
-{#            <a id="botoUserBaixa" name="donarseBaixa" class="btn btn-warning" style="height: 34px; width: 200px" href="{{ path('baixa_perfil') }}" >Donarse de baixa</a>#}
+            <input type="submit" id="botoModificarPerfil" class="btn btn-primary"   value="Modificar perfil" />
+            <input type="button" id="botoUserBaixa" class="btn btn-warning" value="Donarse de baixa" data-toggle="modal" data-target="#modal_baixa" />
             
         </div>
         
         <!-- Modal donarse de baixa -->
-        <div id="modal_baixa_{{ app.user.id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Donarse de baixa</h4>
                     </div>
-                    <div class="modal-body" id="baixa_body_{{app.user.id}}" >
+                    <div class="modal-body" id="baixa_body" >
                         <p>Segur que et vols donar de baixa?</p>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{path('baixa_perfil')}}" id="baixa_btn_{{ app.user.id }}" type="button" class="btn btn-primary">Si</a>
+                        <a href="{{path('baixa_perfil')}}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
                         <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace bonavall\BancdeltempsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+//use Symfony\Component\Routing\RouteCollection;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 //use bonavall\BancdeltempsBundle\Entity\Usuari;
@@ -66,6 +67,9 @@ class UsuariPerfilController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($usuari);
             $em->flush();
+            
+            $this->get('security.context')->setToken(null);
+            $this->get('request')->getSession()->invalidate();
             
             return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array());
             
