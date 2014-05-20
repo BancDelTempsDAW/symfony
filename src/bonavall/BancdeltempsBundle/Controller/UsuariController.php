@@ -244,4 +244,6 @@ class UsuariController extends Controller
             ->getForm()
         ;
     }
+    
+    
 }

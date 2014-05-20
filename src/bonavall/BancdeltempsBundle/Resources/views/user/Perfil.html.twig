@@ -1,0 +1,52 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+
+<style>
+    #checkForm label.error {
+        margin-left: 10px;
+        width: auto;
+        display: inline;
+        color: #e38d13;
+    }
+</style>
+
+
+<script src="{{ asset('js/ricard.js') }}" type="text/javascript"></script>
+
+<form id="checkForm" method="post" >
+
+    <div id="ok" class="alert alert-success" ></div>
+    <div style="width: 300px" >
+
+        <label for="fotografia">Fotografia:</label><br>
+        <input id="user_fotografia" type="file" name="user_fotografia" />
+
+        <label for="nom">Nom:</label><br>
+        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}" class="form-control" />
+
+        <label for="cognom">Cognom:</label><br>
+        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}" class="form-control" />
+
+        <label for="adreca">Adreça:</label><br>
+        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}" class="form-control" />
+
+        <label for="telefon">Telefon:</label><br>
+        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}" class="form-control" />
+
+        <label for="email">Email:</label><br>
+        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}" class="form-control" />
+
+        <label for="punts">Punts:</label>
+        <input id="user_punts" type="text" name="user_punts" value="{{ app.user.punts }}" readonly="" class="form-control" />
+
+        <label for="presentacio">Presentació:</label>
+        <textarea id="user_presentacio" type="text" name="user_presentacio" value="{{ app.user.presentacio }}" class="form-control" style="width: 400px; height: 100px"></textarea><br>
+
+        <input type="button" id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary"  href="{{ path('perfil_user') }}" value="Modificar perfil" style="height: 34px" />
+        <a id="botoUserBaixa" name="donarseBaixa" class="btn btn-warning" href="{{ path('baixa_perfil') }}" >Donarse de baixa</a>
+
+    </div>
+
+</form>
+
+{% endblock %}
