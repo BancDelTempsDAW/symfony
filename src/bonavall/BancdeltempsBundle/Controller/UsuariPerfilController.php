@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use bonavall\BancdeltempsBundle\Entity\Usuari;
+//use bonavall\BancdeltempsBundle\Entity\Usuari;
 //use bonavall\BancdeltempsBundle\Form\UsuariType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,7 +25,7 @@ class UsuariPerfilController extends Controller {
             $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId);
 
             if (is_object($usuari)) {
-                
+
                 $usuari->setPassword($request->request->get('password'));
                 $usuari->setNom($request->request->get('nom'));
                 $usuari->setCognom($request->request->get('cognom'));
@@ -54,7 +54,27 @@ class UsuariPerfilController extends Controller {
     }
 
     public function baixaAction() {
-        return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
+
+        $em = $this->getDoctrine()->getManager();
+        $userId = $this->get('security.context')->getToken()->getUser()->getId();
+        $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId);
+
+        if (is_object($usuari)) {
+
+            $usuari->setIsActive(0);
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($usuari);
+            $em->flush();
+            
+            return $this->render('bonavallBancdeltempsBundle:Default:index.html.twig', array());
+            
+        } else {
+
+            $error = "Error al donar de baixa l'usuari";
+            return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array('error' => $error));
+        }
+        //return $this->render('bonavallBancdeltempsBundle:user:baixaPerfil.html.twig', array());
     }
 
 }

@@ -60,12 +60,36 @@
         <label for="presentacio">Presentació:</label>
         <textarea id="user_presentacio" type="text" name="user_presentacio" class="form-control" style="width: 400px; height: 100px">{{ app.user.presentacio }}</textarea>
 
-        <div class="form-inline">
-            <input type="submit" id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary"   value="Modificar perfil" style="height: 34px" />
-            <a id="botoUserBaixa" name="donarseBaixa" class="btn btn-warning" href="{{ path('baixa_perfil') }}" >Donarse de baixa</a>
-            <div id="success" class="alert alert-success" ></div>
-            <div id="failure" class="alert alert-danger" ></div>
+        <div id="optionsPerfil" >
+
+            <input type="submit" id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary"   value="Modificar perfil" style="height: 34px; width: 200px; margin-top: 10px" />
+{#            <a id="botoUserBaixa" name="donarseBaixa" class="btn btn-warning" style="height: 34px; width: 200px" href="{{ path('baixa_perfil') }}" >Donarse de baixa</a>#}
+            
         </div>
+        
+        <!-- Modal donarse de baixa -->
+        <div id="modal_baixa_{{ app.user.id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Donarse de baixa</h4>
+                    </div>
+                    <div class="modal-body" id="baixa_body_{{app.user.id}}" >
+                        <p>Segur que et vols donar de baixa?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{path('baixa_perfil')}}" id="baixa_btn_{{ app.user.id }}" type="button" class="btn btn-primary">Si</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Div's de alertes al modificar la base de dades -->
+        <div id="success" class="alert alert-success" ></div>
+        <div id="failure" class="alert alert-danger" ></div>
+        
     </div>
 
 </form>
@@ -78,7 +102,7 @@
         $("#checkForm").validate({
             rules: {
                 user_pass: {required: true, minlength: 5},
-                user_passRepeat: {required:true, equalTo: user_pass},
+                user_passRepeat: {required: true, equalTo: user_pass},
                 user_nom: {required: true, minlength: 3, maxlength: 15},
                 user_cognom: {required: true, minlength: 3, maxlength: 20},
                 user_adreca: {required: true, minlength: 3, maxlength: 30},
@@ -130,7 +154,7 @@
                     data: dataString,
                     success: function(data) {
                         if (data === '{"responseCode":200}') {
-                            $("#success").html("S'ha modificar amb exit").show().fadeOut(6000);
+                            $("#success").html("S'ha modificat amb exit").show().fadeOut(6000);
                         } else {
                             $("#failure").html("Error al modificar el perfil").show().fadeOut(6000);
                         }
