@@ -51,9 +51,9 @@ class Usuari extends Persona
     private $telefon;
 
     /**
-     * @var file
+     * @var string
      *
-     * @ORM\Column(name="fotografia", type="file", length=255, nullable=false)
+     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
      */
     private $fotografia;
 

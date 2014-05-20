@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Serveis
  *
- * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"})})
+ * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"}), @ORM\Index(name="serveis_ibfk_3", columns={"poblacio_id"})})
  * @ORM\Entity
  */
-class Serveis
+class Serveis 
 {
     /**
      * @var integer
@@ -54,11 +54,14 @@ class Serveis
     private $descripcioServei;
     
     /**
-     * @var integer
+     * @var \Poblacion
      *
-     * @ORM\Column(name="CodiPostal", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Poblacion")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="poblacio_id", referencedColumnName="idpoblacion")
+     * })
      */
-    private $codiPostal;
+    private $poblacio;
 
     /**
      * @var \DateTime
@@ -178,19 +181,15 @@ class Serveis
         return $this->descripcioServei;
     }
 
-    public function getCodiPostal() {
-        return $this->codiPostal;
-    }
+    
 
     public function setDescripcioServei($descripcioServei) {
         $this->descripcioServei = $descripcioServei;
     }
 
-    public function setCodiPostal($codiPostal) {
-        $this->codiPostal = $codiPostal;
-    }
+   
 
-        /**
+    /**
      * Set dataInici
      *
      * @param \DateTime $dataInici
@@ -212,7 +211,16 @@ class Serveis
     {
         return $this->dataInici;
     }
+    
+    public function getPoblacio() {
+        return $this->poblacio;
+    }
 
+    public function setPoblacio($poblacio) {
+        $this->poblacio = $poblacio;
+    }
+
+    
     /**
      * Set durada
      *

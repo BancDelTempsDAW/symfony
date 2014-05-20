@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ServeisType extends AbstractType
+class PoblacionType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -15,16 +15,9 @@ class ServeisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('punts')
-            ->add('nomServei')
-            ->add('descripcioServei')
-            ->add('dataInici')
-            ->add('durada')
-            ->add('dataFinal')
-            ->add('iddonant')
             ->add('poblacio')
-            ->add('tipusServei1')
-            ->add('estatServei')
+            ->add('codiPostal')
+            ->add('idProvincia')
         ;
     }
     
@@ -34,7 +27,7 @@ class ServeisType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'bonavall\BancdeltempsBundle\Entity\Serveis'
+            'data_class' => 'bonavall\BancdeltempsBundle\Entity\Poblacion'
         ));
     }
 
@@ -43,6 +36,6 @@ class ServeisType extends AbstractType
      */
     public function getName()
     {
-        return 'bonavall_bancdeltempsbundle_serveis';
+        return 'bonavall_bancdeltempsbundle_poblacion';
     }
 }

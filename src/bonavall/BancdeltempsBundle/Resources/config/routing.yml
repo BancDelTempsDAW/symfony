@@ -163,6 +163,49 @@ admin_estatservei_delete:
   pattern: /admin/estatservei/delete{id}
   defaults: { _controller: bonavallBancdeltempsBundle:EstatServei:delete }
   
+admin_poblacion:
+  pattern: /admin/poblacion/
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:index }
+admin_poblacion_create:
+  pattern: /admin/poblacion/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:create }
+admin_poblacion_update:
+  pattern: /admin/poblacion/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:update }
+admin_poblacion_show:
+  pattern: /admin/poblacion/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:show }
+admin_poblacion_edit:
+  pattern: /admin/poblacion/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:edit }
+admin_poblacion_new:
+  pattern: /admin/poblacion/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:new }
+admin_poblacion_delete:
+  pattern: /admin/poblacion/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Poblacion:delete }
+  
+admin_provincia:
+  pattern: /admin/provincia/
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:index }
+admin_provincia_create:
+  pattern: /admin/provincia/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:create }
+admin_provincia_update:
+  pattern: /admin/provincia/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:update }
+admin_provincia_show:
+  pattern: /admin/provincia/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:show }
+admin_provincia_edit:
+  pattern: /admin/provincia/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:edit }
+admin_provincia_new:
+  pattern: /admin/provincia/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:new }
+admin_provincia_delete:
+  pattern: /admin/provincia/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Provincia:delete }
   
 admin_serveisconsumits:
   pattern: /admin/serveisconsumits/
@@ -282,13 +325,27 @@ user_miss:
     pattern: /missatges/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
 
-
+#RUTES PETICIONS AJAX
 missatges_ajax:
       pattern: /user/solicituts/
       defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:greeting }
       requirements:
         _method:  POST
-  
+triacp_ajax:
+      pattern: /user/serveiscp/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexcp }
+      requirements:
+        _method:  POST
+triapob_ajax:
+      pattern: /user/serveis/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexpob }
+      requirements:
+        _method:  POST
+triaprov_ajax:
+      pattern: /user/serveis/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexprov }
+      requirements:
+        _method:  POST
 
 
 #Rutes de user no administrador

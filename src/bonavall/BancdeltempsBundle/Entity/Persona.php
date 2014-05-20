@@ -37,7 +37,7 @@ class Persona implements UserInterface, \Serializable {
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="email", unique=true, length=75, nullable=false)
+     * @ORM\Column(name="email", type="string", unique=true, length=75, nullable=false)
      */
     protected $email;
 

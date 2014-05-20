@@ -4,10 +4,11 @@ namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Solicituts
  *
- * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"solicitant_id"}), @ORM\Index(name="fk_Solicituts_serveis1", columns={"servei_solicitat_id"}), @ORM\Index(name="estatSolicitut", columns={"estatSolicitut"})})
+ * @ORM\Table(name="Solicituts", indexes={@ORM\Index(name="fk_usuari_has_serveis_usuari1", columns={"solicitant_id"}), @ORM\Index(name="Solicituts_ibfk_13", columns={"ofertant_id"}), @ORM\Index(name="fk_Solicituts_serveis1", columns={"servei_solicitat_id"}), @ORM\Index(name="Solicituts_ibfk_2", columns={"estatSolicitut"})})
  * @ORM\Entity
  */
 class Solicituts
@@ -22,27 +23,6 @@ class Solicituts
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="servei_solicitat_id", type="integer", nullable=true)
-     */
-    private $serveiSolicitatId;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="data_solicitut", type="datetime", nullable=false)
-     */
-    private $dataSolicitut;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="estatSolicitut", type="integer", nullable=false)
-     */
-    private $estatsolicitut;
-
-    /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -51,6 +31,157 @@ class Solicituts
      * })
      */
     private $solicitant;
+    
+    /**
+     * @var \Serveis
+     *
+     * @ORM\ManyToOne(targetEntity="Serveis")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="servei_solicitat_id", referencedColumnName="id")
+     * })
+     */
+    private $serveiSolicitat;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_solicitut", type="datetime", nullable=false)
+     */
+    private $dataSolicitut;
+    
+    /**
+     * @var \EstatServei
+     *
+     * @ORM\ManyToOne(targetEntity="EstatServei")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="estatSolicitut", referencedColumnName="id")
+     * })
+     */
+    private $estatSolicitut;
+    
+    
+    public function __construct() {
+        
+        $this->dataSolicitut = new \DateTime("now");
+        
+    }
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set estatSolicitut
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei
+     * @return Solicituts
+     */
+    public function setEstatsolicitut(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei = null)
+    {
+        $this->estatSolicitut = $estatServei;
+
+        return $this;
+    }
+
+    /**
+     * Get estatSolicitut
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\EstatServei 
+     */
+    public function getEstatsolicitut()
+    {
+        return $this->estatSolicitut;
+    }
+    
+    
+    /**
+     * Set solicitant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $solicitant
+     * @return Solicituts
+     */
+    public function setSolicitant(\bonavall\BancdeltempsBundle\Entity\Persona $solicitant = null)
+    {
+        $this->solicitant = $solicitant;
+
+        return $this;
+    }
+
+    /**
+     * Get solicitant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     */
+    public function getSolicitant()
+    {
+        return $this->solicitant;
+    }
+    
+    
+     /* Set ofertant
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Persona $ofertant
+     * @return Solicituts
+     */
+    public function setOfertant(\bonavall\BancdeltempsBundle\Entity\Persona $ofertant = null)
+    {
+        $this->ofertant = $ofertant;
+
+        return $this;
+    }
+
+    /**
+     * Get ofertant
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Persona 
+     */
+    public function getOfertant()
+    {
+        return $this->ofertant;
+    }
+    
+    public function getDataSolicitut() {
+        return $this->dataSolicitut;
+    }
+
+    public function setDataSolicitut(\DateTime $dataSolicitut) {
+        $this->dataSolicitut = $dataSolicitut;
+    }
+
+    /**
+     * Set serveiSolicitat
+     *
+     * @param \bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat
+     * @return Solicituts
+     */
+    public function setServeiSolicitat(\bonavall\BancdeltempsBundle\Entity\Serveis $serveiSolicitat = null)
+    {
+        $this->serveiSolicitat = $serveiSolicitat;
+
+        return $this;
+    }
+
+    /**
+     * Get serveiSolicitat
+     *
+     * @return \bonavall\BancdeltempsBundle\Entity\Serveis 
+     */
+    public function getServeiSolicitat()
+    {
+        return $this->serveiSolicitat;
+    }
+    
+    public function __toString() {
+        return (String)$this->serveiSolicitat;        
+    }
+
+    
 }
