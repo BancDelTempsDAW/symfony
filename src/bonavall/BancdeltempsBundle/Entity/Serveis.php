@@ -62,7 +62,8 @@ class Serveis
      * })
      */
     private $poblacio;
-
+    
+    
     /**
      * @var \DateTime
      *
