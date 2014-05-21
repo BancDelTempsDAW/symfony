@@ -43,6 +43,7 @@
 
         <label for="fotografia">Fotografia:</label>
         <input id="user_fotografia" type="file" name="user_fotografia" />
+        <img src="{{ app.user.fotografia }}">
 
         <label for="nom">Password:</label>
         <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass" class="form-control" />
