@@ -3,7 +3,7 @@
 
 <script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
 <h1>Solicituds</h1>
-<input type="hidden" value="" id="url_nou_msg">
+<div id="url_nou_msg" url="{{path('nou_missatge_ajax')}}"></div>
 <div class="panel panel-default">
      <div id="missatges-panel" class="container-fluid">
             {% for solicitut in solicituts %}
@@ -18,7 +18,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>Estas segur que vols rebutjar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
-                                    <b>{{solicitut.ofertant.email}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
+                                    <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
                                 </p>
                             </div>
                             <div class="modal-footer">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>Vols acceptar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
-                                    <b>{{solicitut.ofertant.email}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
+                                    <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
                                 </p>
                                 <p>Es consumiran <b>{{solicitut.serveiSolicitat.punts}}</b> punts del teu compte.</p>
                             </div>
@@ -58,7 +58,7 @@
                                 <h4 class="modal-title">Nou Missatge</h4>
                             </div>
                             <div class="modal-body" id="nou_msg_modal_body_{{solicitut.id}}" >
-                                <p>Escriu un nou missatge per a <b>{{solicitut.ofertant.email}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
+                                <p>Escriu un nou missatge per a <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
                                     amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b>
                                 </p>
                                 <div>
@@ -86,13 +86,13 @@
                         {% else %}
                             panel-primary
                         {%endif%}
-                    ">
+                    " data-toggle="collapse" data-parent="#solicituts_acordion_{{solicitut.id}}">
                         <div class="panel-heading">
-                            <div class="panel-title" data-toggle="collapse" data-parent="#solicituts_acordion_{{solicitut.id}}" href="#collapse_{{solicitut.id}}" >
+                            <div class="panel-title" href="#collapse_{{solicitut.id}}" >
                                 <div class="container-fluid" >
                                     <div class="row">
                                         <h4 class="col-md-12">{{solicitut.serveiSolicitat.nomServei}} | <span class="glyphicon glyphicon-user"></span> 
-                                        {{solicitut.ofertant.email}} <span class="glyphicon glyphicon-calendar"></span> 
+                                        {{solicitut.serveiSolicitat.iddonant.nom}} <span class="glyphicon glyphicon-calendar"></span> 
                                         {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}
                                         <span class="badge">{{ solicitut.estatSolicitut }}</span>
                                         </h4>                                     
@@ -109,7 +109,7 @@
                                                 <div>{{ solicitut.serveiSolicitat.descripcioServei }}</div>
                                                 <hr>
                                                 <div>Cost: <b>{{ solicitut.serveiSolicitat.punts }}</b> punts</div>
-                                                <div>Codi Postal: {{ solicitut.serveiSolicitat.codiPostal }}</div>
+                                                <div>Codi Postal: {{ solicitut.serveiSolicitat.poblacio.codiPostal }}</div>
                                                 <hr>
                                                 <div>Inici: {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</div>
                                                 <div>Final: {{ solicitut.serveiSolicitat.dataFinal|date('d-m-Y') }}</div>
