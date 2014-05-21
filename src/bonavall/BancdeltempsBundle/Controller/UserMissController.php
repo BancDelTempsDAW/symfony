@@ -12,6 +12,30 @@ use bonavall\BancdeltempsBundle\Form\MissatgesType;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserMissController extends Controller {
+    /*
+     * @Route("/user/perfil/", name="perfil_check")
+     */
+    public function checkAction(Request $request){
+       $request = $this->get('request');
+       $dades = $request->request->get('nomUsuari');
+        $dades[]="hola";
+        /*$repository = $this->getDoctrine()
+                ->getRepository('bonavallBancdeltempsBundle:Missatges');*/
+        if ($dades) {
+            throw $this->createNotFoundException('Unable to find Missatges entity. '.$dades);
+        }
+       
+       if ($dades == "") {//if the user has written his name
+            $greeting = $dades;
+            $return = array("responseCode" => 200, "greeting" => $greeting);
+        } else {
+            $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+        }
+        
+        //return $this->render('bonavallBancdeltempsBundle:UsuariPerfil:perfil.html.twig', array('missatges' => $dades));
+        $return = json_encode($return); //jscon encode the array
+        return new Response($return, 200, array('Content-Type' => 'application/json'));
+    }
 
     /**
      * Return a ajax response
@@ -38,13 +62,38 @@ class UserMissController extends Controller {
             $greeting = $missatges;
             $return = array("responseCode" => 200, "greeting" => $greeting);
         } else {
-            $return = array("responseCode" => 400, "greeting" => "You have to write your name!");
+            $return = array("responseCode" => 400, "greeting" => "No hi han missatges!");
         }
 
         $return = json_encode($return); //jscon encode the array
         return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
         //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
     }
+    
+      public function nouMissatgeAction() {
+        $request = $this->get('request');
+        $sol_id = $request->request->get('id');
+        $msg = $request->request->get('msg');
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $usr->getUsername();
+        
+        $missatge_nou = new Missatges();
+        $missatge_nou->setMissatge($msg);
+        $missatge_nou->setSolicituts($sol_id);
+        $missatge_nou->setAutor($usr);
+        
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($missatge_nou);
+        $em->flush();
+        
+        $return = array("nou_msg" => $missatge_nou);
+        $return = json_encode($return); //jscon encode the array
+        return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
+        //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
+    }
+    
+    
 
     public function indexAction() {
         $repository = $this->getDoctrine()

@@ -10,7 +10,6 @@
                 <th>Punts</th>
                 <th>Nomservei</th>
                 <th>Descripcioservei</th>
-                <th>Codipostal</th>
                 <th>Datainici</th>
                 <th>Durada</th>
                 <th>Datafinal</th>
@@ -24,7 +23,6 @@
                 <td>{{ entity.punts }}</td>
                 <td>{{ entity.nomServei }}</td>
                 <td>{{ entity.descripcioServei }}</td>
-                <td>{{ entity.codiPostal }}</td>
                 <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.durada }}</td>
                 <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>

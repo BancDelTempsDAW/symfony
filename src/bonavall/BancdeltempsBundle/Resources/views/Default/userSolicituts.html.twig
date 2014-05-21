@@ -1,39 +1,150 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
-<script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
-<div class="panel panel-default">
-     <div id="missatges-body-header" class="panel-heading"><h1 class="panel-title">Solicituds</h1></div>
-     <div id="missatges-panel" class="container-fluid">
-    {% for solicitut in solicituts %}
-        <div class="solicitut panel panel-primary">
-            <div class="panel-heading"><h3 class="panel-title">Nom del Servei</h3></div>
-            <div class="panel-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-8">
-                            <div class="sol_id">{{ solicitut.id }}</div>
-                            <div>{{ solicitut.solicitant }}</div>
-                            <div>{% if solicitut.dataSolicitut %}{{ solicitut.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</div>
-                            <div>{{ solicitut.estatSolicitut }}</div>                    
-                        </div>
-                        <div class="">
-                            <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-info" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-book"></span> Missatges</a></div>
-                        </div>
-                    </div>
-                    <div id="row_missatges_{{solicitut.id}}" class="row">
-                        <div class="col-md-8">
-                            <div id="output_{{solicitut.id}}">
 
+<script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
+<h1>Solicituds</h1>
+<input type="hidden" value="" id="url_nou_msg">
+<div class="panel panel-default">
+     <div id="missatges-panel" class="container-fluid">
+            {% for solicitut in solicituts %}
+                  <div id="solicituts_acordion_{{solicitut.id}}" class="panel-group" >
+                 <!-- rebutjar solicitut modal -->
+                <div id="modal_rebutjar_{{solicitut.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Rebutjar Solicitud</h4>
                             </div>
-                            <div id="outputButton_{{solicitut.id}}">
-                                
-                            </div>  
-                        </div>
-                    </div>
+                            <div class="modal-body">
+                                <p>Estas segur que vols rebutjar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
+                                    <b>{{solicitut.ofertant.email}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="rebutjar_solicitud_{{solicitut.id}}" type="button" class="btn btn-primary">Rebutjar Solicitut</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                            </div>
+                         </div>
+                     </div>
                 </div>
-            </div>
-        </div>
-    {% endfor %}
+                <!-- acceptar solicitud modal -->
+                <div id="modal_acceptar_{{solicitut.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Acceptar Solicitud</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Vols acceptar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
+                                    <b>{{solicitut.ofertant.email}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
+                                </p>
+                                <p>Es consumiran <b>{{solicitut.serveiSolicitat.punts}}</b> punts del teu compte.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="cancelar_solicitud_{{solicitut.id}}" type="button" class="btn btn-primary">Acceptar Solicitut</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+                <!-- Nou missatge Modal -->
+                <div id="modal_nou_missatge_{{solicitut.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                     <div class="modal-dialog">
+                         <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Nou Missatge</h4>
+                            </div>
+                            <div class="modal-body" id="nou_msg_modal_body_{{solicitut.id}}" >
+                                <p>Escriu un nou missatge per a <b>{{solicitut.ofertant.email}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
+                                    amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b>
+                                </p>
+                                <div>
+                                    <textarea id="nou_missatge_txt_{{solicitut.id}}" class="nou_missatge_txt form-control" rows="4" ></textarea>                                    
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{{path('nou_missatge_ajax')}}" id="nou_missatge_btn_{{solicitut.id}}" type="button" class="btn btn-primary">Enviar Missatge</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                            </div>
+                         </div>
+                     </div>
+                </div>
+
+
+
+
+                    <div class="solicitut panel 
+                        {% if solicitut.estatSolicitut == 'Actiu' %}
+                            panel-primary
+                        {%elseif solicitut.estatSolicitut == 'Pendent' %}
+                            panel-warning
+                        {%elseif solicitut.estatSolicitut == 'Rebutjada' %}
+                            panel-danger
+                        {% else %}
+                            panel-primary
+                        {%endif%}
+                    ">
+                        <div class="panel-heading">
+                            <div class="panel-title" data-toggle="collapse" data-parent="#solicituts_acordion_{{solicitut.id}}" href="#collapse_{{solicitut.id}}" >
+                                <div class="container-fluid" >
+                                    <div class="row">
+                                        <h4 class="col-md-12">{{solicitut.serveiSolicitat.nomServei}} | <span class="glyphicon glyphicon-user"></span> 
+                                        {{solicitut.ofertant.email}} <span class="glyphicon glyphicon-calendar"></span> 
+                                        {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}
+                                        <span class="badge">{{ solicitut.estatSolicitut }}</span>
+                                        </h4>                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div id="collapse_{{solicitut.id}}" class="panel-collapse collapse">
+                                <div class="panel-body" id="collapse_{{solicitut.id}}" >
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="sol_id">{{ solicitut.id }}</div>
+                                                <div>{{ solicitut.serveiSolicitat.descripcioServei }}</div>
+                                                <hr>
+                                                <div>Cost: <b>{{ solicitut.serveiSolicitat.punts }}</b> punts</div>
+                                                <div>Codi Postal: {{ solicitut.serveiSolicitat.codiPostal }}</div>
+                                                <hr>
+                                                <div>Inici: {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</div>
+                                                <div>Final: {{ solicitut.serveiSolicitat.dataFinal|date('d-m-Y') }}</div>
+                                                <div>Durada: {{ solicitut.serveiSolicitat.durada }}</div>
+                                                <br>
+                                            </div>
+                                            <div class="col-md-4">                            
+                                                <div><a id="acceptar_btn_{{solicitut.id}}" class="btn btn-success" data-toggle="modal" data-target="#modal_acceptar_{{solicitut.id}}" href="#" ><span class="glyphicon glyphicon-ok"></span> Acceptar Solicitud</a></div><br>                            
+                                                <div>
+                                                    <div class="btn btn-danger" data-toggle="modal" data-target="#modal_rebutjar_{{solicitut.id}}">
+                                                        <span id="cancelar_{{solicitut.id}}" class="glyphicon glyphicon-remove"></span> Rebutjar Solicitud
+                                                    </div>
+                                                </div><br>
+                                                <div><a id="miss_btn_{{solicitut.id}}" class="btn btn-info" data-toggle="tooltip" title="Veure missatges?" href="{{path('missatges_ajax')}}" ><span class="glyphicon glyphicon-comment"></span> Missatges</a></div>
+                                            </div>
+                                        </div>
+                                        <div id="row_missatges_{{solicitut.id}}" class="row">
+                                            <div class="col-md-12">
+                                                <div id="output_{{solicitut.id}}">
+
+                                                </div>
+                                                <div id="outputButton_{{solicitut.id}}">
+
+                                                </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                  </div>
+                
+            {% endfor %}
+      
+         
     </div>
 </div>
 {% endblock %}

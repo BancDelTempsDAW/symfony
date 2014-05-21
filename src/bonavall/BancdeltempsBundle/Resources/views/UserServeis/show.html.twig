@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Serveis</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Punts</th>
+                <td>{{ entity.punts }}</td>
+            </tr>
+            <tr>
+                <th>Nomservei</th>
+                <td>{{ entity.nomServei }}</td>
+            </tr>
+            <tr>
+                <th>Descripcioservei</th>
+                <td>{{ entity.descripcioServei }}</td>
+            </tr>
+            <tr>
+                <th>Poblacio</th>
+                <td>{{ entity.poblacio }}</td>
+            </tr>
+            <tr>
+                <th>Datainici</th>
+                <td>{{ entity.dataInici|date('d-m-Y H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Durada</th>
+                <td>{{ entity.durada }}</td>
+            </tr>
+            <tr>
+                <th>Datafinal</th>
+                <td>{{ entity.dataFinal|date('d-m-Y H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user_serveis') }}">
+            Torna al llistat
+        </a>
+    </li>
+    <li>{{ form(solicita_form) }}</li>
+</ul>
+{% endblock %}
