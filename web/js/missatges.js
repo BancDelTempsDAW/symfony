@@ -3,6 +3,7 @@ $(document).ready(function() {
        var id = $(".sol_id", this).html();
        $(".sol_id", this).hide();
        $("#row_missatges_"+id).hide();
+       $("#url_nou_msg").hide();
 
       //get the url for the form
       var url=$("#miss_btn_"+id).attr("href");
@@ -62,16 +63,19 @@ $(document).ready(function() {
        
        //NOU MISSATGE
        $("#nou_missatge_btn_"+id).click(function(){
+           var msg = $("#nou_missatge_txt_"+id).val();
+           var url_ajax = $("#url_nou_msg").attr("url");
+           alert(url_ajax);
            if($("#nou_missatge_txt_"+id).val()==""){
                var errormsg = "<br><div class='alert alert-danger alert-dismissable' >Has d'escriure un missatge.</div>";
                $("#nou_msg_modal_body_"+id).append(errormsg);
                $("#nou_missatge_txt_"+id).focus();
            }else{
-                $.get($("#url_nou_msg").val()),{
+                $.get(url_ajax),{
                         id_sol:id,
-                        msg:$("#nou_missatge_txt_"+id).val()
+                        msg:msg
                 },function(data){ 
-
+                    alert(data);
                 }
            }
            
