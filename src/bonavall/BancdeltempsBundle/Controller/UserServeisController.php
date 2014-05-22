@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Serveis;
-use bonavall\BancdeltempsBundle\Form\ServeisType;
+use bonavall\BancdeltempsBundle\Form\UserServeisType;
 
 /**
  * Serveis controller.
@@ -34,6 +34,7 @@ class UserServeisController extends Controller
         $poblacionscp = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('codiPostal' => 'ASC'));
         $poblacionsnom = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('poblacio' => 'ASC'));
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
+        $categories = $em->getRepository('bonavallBancdeltempsBundle:TipusServei')->findAll();
         
 
         return array(
@@ -42,6 +43,7 @@ class UserServeisController extends Controller
             'poblacions' => $poblacionscp,
             'poblacionsnom' => $poblacionsnom,
             'provincies' => $provincies,
+            'categories' => $categories,
         );
     }
     
@@ -63,6 +65,7 @@ class UserServeisController extends Controller
         $poblacionscp = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('codiPostal' => 'ASC'));
         $poblacionsnom = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('poblacio' => 'ASC'));
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
+        $categories = $em->getRepository('bonavallBancdeltempsBundle:TipusServei')->findAll();
         
 
         return $this->render('bonavallBancdeltempsBundle:UserServeis:indexCP.html.twig', array(
@@ -71,6 +74,7 @@ class UserServeisController extends Controller
             'poblacions' => $poblacionscp,
             'poblacionsnom' => $poblacionsnom,
             'provincies' => $provincies,
+            'categories' => $categories,
         ));
     }
     
@@ -92,6 +96,7 @@ class UserServeisController extends Controller
         $poblacionscp = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('codiPostal' => 'ASC'));
         $poblacionsnom = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('poblacio' => 'ASC'));
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
+        $categories = $em->getRepository('bonavallBancdeltempsBundle:TipusServei')->findAll();
         
 
         return $this->render('bonavallBancdeltempsBundle:UserServeis:indexCP.html.twig', array(
@@ -100,6 +105,7 @@ class UserServeisController extends Controller
             'poblacions' => $poblacionscp,
             'poblacionsnom' => $poblacionsnom,
             'provincies' => $provincies,
+            'categories' => $categories,
         ));
     }
     
@@ -123,7 +129,7 @@ class UserServeisController extends Controller
         $poblacionscp = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('codiPostal' => 'ASC'));
         $poblacionsnom = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('poblacio' => 'ASC'));
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
-        
+        $categories = $em->getRepository('bonavallBancdeltempsBundle:TipusServei')->findAll();
 
         return $this->render('bonavallBancdeltempsBundle:UserServeis:indexCP.html.twig', array(
             'entities' => $entities,
@@ -131,6 +137,37 @@ class UserServeisController extends Controller
             'poblacions' => $poblacionscp,
             'poblacionsnom' => $poblacionsnom,
             'provincies' => $provincies,
+            'categories' => $categories,
+        ));
+    }
+    
+    /**
+     * Lists all Serveis entities.
+     *
+     * @Route("/", name="user_serveis")
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexcatAction()
+    {
+        $request = $this->get('request');
+        $cp = $request->request->get('idCp');
+        $em = $this->getDoctrine()->getManager();
+               
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('tipusServei1' => $cp));
+        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findAll();
+        $poblacionscp = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('codiPostal' => 'ASC'));
+        $poblacionsnom = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(), array('poblacio' => 'ASC'));
+        $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
+        $categories = $em->getRepository('bonavallBancdeltempsBundle:TipusServei')->findAll();
+
+        return $this->render('bonavallBancdeltempsBundle:UserServeis:indexCP.html.twig', array(
+            'entities' => $entities,
+            'solicituts' => $solicituts,
+            'poblacions' => $poblacionscp,
+            'poblacionsnom' => $poblacionsnom,
+            'provincies' => $provincies,
+            'categories' => $categories,
         ));
     }
     
@@ -144,6 +181,7 @@ class UserServeisController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Serveis();
+        $entity->setIddonant($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -170,12 +208,14 @@ class UserServeisController extends Controller
     */
     private function createCreateForm(Serveis $entity)
     {
-        $form = $this->createForm(new ServeisType(), $entity, array(
+        
+        $entity->setIddonant($this->getUser());
+        $form = $this->createForm(new UserServeisType(), $entity, array(
             'action' => $this->generateUrl('user_serveis_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Crea server'));
+        $form->add('submit', 'submit', array('label' => 'Crea servei'));
 
         return $form;
     }
@@ -189,11 +229,13 @@ class UserServeisController extends Controller
      */
     public function newAction()
     {
+        
         $entity = new Serveis();
+        $entity->setIddonant($this->getUser());
         $form   = $this->createCreateForm($entity);
         
         $em = $this->getDoctrine()->getManager();
-        $poblacions = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findAll();
+        $poblacions = $em->getRepository('bonavallBancdeltempsBundle:Poblacion')->findBy(array(),array('poblacio' => 'ASC'));
         $provincies = $em->getRepository('bonavallBancdeltempsBundle:Provincia')->findAll();
 
         return array(

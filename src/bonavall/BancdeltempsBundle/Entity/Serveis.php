@@ -49,7 +49,7 @@ class Serveis
      /**
      * @var string
      *
-     * @ORM\Column(name="descripcioServei", type="string", length=255, nullable=false)
+     * @ORM\Column(name="descripcioServei", type="text", length=255, nullable=false)
      */
     private $descripcioServei;
     
