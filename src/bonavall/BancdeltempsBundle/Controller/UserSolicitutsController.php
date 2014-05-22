@@ -48,14 +48,12 @@ class UserSolicitutsController extends Controller
     {        
         $repository = $this->getDoctrine()
                 ->getRepository('bonavallBancdeltempsBundle:Solicituts');
+        //carles
+        $em = $this->getDoctrine()->getManager();
+        
+        $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array( 'iddonant' => $this->getUser()));
+        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat'=> $serveis));
 
-        $query = $repository->createQueryBuilder('p')
-                ->where('p.ofertant = :ofertant')
-                ->setParameter('ofertant', $this->getUser())
-                ->orderBy('p.dataSolicitut', 'ASC')
-                ->getQuery();
-
-        $solicituts = $query->getResult();
         return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
     }
     /**
