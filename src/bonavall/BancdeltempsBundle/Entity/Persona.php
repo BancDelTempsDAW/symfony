@@ -3,7 +3,7 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\DiscriminatorColumn(name="discr", type="string");
  * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})
  */
-class Persona implements UserInterface, \Serializable {
+class Persona implements AdvancedUserInterface, \Serializable {
 
     /**
      * @var integer
@@ -185,6 +185,7 @@ class Persona implements UserInterface, \Serializable {
             $this->id,
             $this->email,
             $this->password,
+            $this->isActive,
             // see section on salt below
             // $this->salt,
         ));
@@ -197,6 +198,7 @@ class Persona implements UserInterface, \Serializable {
             $this->id,
             $this->email,
             $this->password,
+            $this->isActive,
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
@@ -265,9 +267,20 @@ class Persona implements UserInterface, \Serializable {
         $this->isActive = $isActive;
     }
     
-    public function isEnabled()
-    {
+    public function isEnabled() {        
         return $this->isActive;
+    }
+
+    public function isAccountNonExpired() {
+        return true;
+    }
+
+    public function isAccountNonLocked() {
+        return true;
+    }
+
+    public function isCredentialsNonExpired() {
+        return true;
     }
     
     

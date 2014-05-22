@@ -1,58 +1,28 @@
-<h1>Serveis list</h1>
-<table class="records_list">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Usuari Ofertant</th>
-            <th>Punts</th>
-            <th>Nomservei</th>
-            <th>Descripcioservei</th>
-            <th>Poblacio</th>
-            <th>Datainici</th>
-            <th>Durada</th>
-            <th>Datafinal</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
 
+<div class="table-responsive" id="sortida">
+    <h1>Llistat de serveis</h1>
+    <table class="table table-condensed">
+        <thead>
+            <tr class="info">
+                <th>Id</th>
+                <th>Usuari Ofertant</th>
+                <th>Punts</th>
+                <th>Nom Servei</th>
+                <th>Descripcio Servei</th>
+                <th>Poblacio</th>
+                <th>Data inicial</th>
+                <th>Durada</th>
+                <th>Data final</th>
+                <th>Opcions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% set pintats = 0 %}
         {% for entity in entities %}
             {%if is_granted('IS_AUTHENTICATED_FULLY')%}
-                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('Y-m-d') > 'now'|date('Y-m-d')) and (entity.iddonant.id != app.user.id) %}
-        <tr>
-            <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.iddonant.nom}}</td>
-            <td>{{ entity.punts }}</td>
-            <td>{{ entity.nomServei }}</td>
-            <td>{{ entity.descripcioServei }}</td>
-            <td>{{ entity.poblacio }}</td>
-            <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>{{ entity.durada }}</td>
-            <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
-                    </li> 
-                    {% set counter = 0 %}
-                    {%for solicitut in solicituts %}
-                        {% if (solicitut.solicitant.id == app.user.id) and (entity.id == solicitut.serveiSolicitat.id) %}
-                            {% set counter = counter + 1 %}
-                        {% endif %}
-                    {% endfor %}
-                    {%if counter > 0%}
-                    <li>Servei ja sol·licitat</li>
-                    {%else%}
-                        <li>
-                            <a href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicitamiss</a>
-                        </li>  
-                    {%endif%}
-                    </ul>
-                </td>
-            </tr>
-            {% endif %}
-            {% else %}
-                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('Y-m-d') > 'now'|date('Y-m-d')) %}
+                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('d-m-Y') > 'now'|date('d-m-Y')) and (entity.iddonant.id != app.user.id) %}
+            {% set pintats = pintats + 1 %}
             <tr>
                 <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.iddonant.nom}}</td>
@@ -60,17 +30,53 @@
                 <td>{{ entity.nomServei }}</td>
                 <td>{{ entity.descripcioServei }}</td>
                 <td>{{ entity.poblacio }}</td>
-                <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataInici %}{{ entity.dataInici|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.durada }}</td>
-                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('d-m-Y') }}{% endif %}</td>
                 <td>
-                    <ul>
+                    <ul class="list-unstyled">
                         <li>
-                            <a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
+                            <a class="btn btn-info" href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
+                        </li> 
+                    {% set counter = 0 %}
+                    {%for solicitut in solicituts %}
+                        {% if (solicitut.solicitant.id == app.user.id) and (entity.id == solicitut.serveiSolicitat.id) %}
+                            {% set counter = counter + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {%if counter > 0%}
+                        <p class="text-danger">Servei ja sol·licitat</p>
+                    {%else%}
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicita</a>
+                        </li>  
+                    {%endif%}
+                    </ul>
+                </td>
+            </tr>                      
+
+            {% endif %}
+            {% else %}
+                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('d-m-Y') > 'now'|date('d-m-Y')) %}
+            {% set pintats = pintats + 1 %}
+            <tr>
+                <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.iddonant.nom}}</td>
+                <td>{{ entity.punts }}</td>
+                <td>{{ entity.nomServei }}</td>
+                <td>{{ entity.descripcioServei }}</td>
+                <td>{{ entity.poblacio }}</td>
+                <td>{% if entity.dataInici %}{{ entity.dataInici|date('d-m-Y') }}{% endif %}</td>
+                <td>{{ entity.durada }}</td>
+                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="btn btn-info" href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
                         </li> 
 
                         <li>
-                            <a href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicitamiss</a>
+                            <a class="btn btn-warning" href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicita</a>
                         </li>  
 
                     </ul>
@@ -79,15 +85,25 @@
             {% endif %}
 
             {%endif%}
-
         {% endfor %}
+        {% if pintats == 0 %}
+            <tr></tr>
+            <tr class="danger"><td colspan=10 style="text-align:center"><h3>No hi han resultats</h3></td></tr> 
+        {% endif %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('user_serveis_new') }}">
-                Create a new entry
+{%if is_granted('IS_AUTHENTICATED_FULLY')%}
+    <div class="row">
+        <div class="col-md-3">   
+            <a class="btn btn-success" href="{{ path('user_serveis_new') }}">
+                Crea un servei
             </a>
-        </li>
-    </ul>
+
+        </div>
+    </div>
+    <br>
+     {%endif%}
+</div>
+</div>
+</div>
+

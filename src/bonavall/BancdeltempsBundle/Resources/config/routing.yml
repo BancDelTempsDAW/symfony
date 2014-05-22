@@ -346,6 +346,11 @@ triaprov_ajax:
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexprov }
       requirements:
         _method:  POST
+triacat_ajax:
+      pattern: /serveiscat/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexcat }
+      requirements:
+        _method:  POST
 
 nou_missatge_ajax:
     pattern: /user/solicituts/noumsg
