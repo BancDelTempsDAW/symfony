@@ -1,21 +1,36 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
-
 {% block body -%}
     <h1>Registre d'usuari</h1>
-<div class="form-group">
-    <div class ="row">
-        <div class ="symfony-form-row col-xs-6 col-md-6 col-sm-6 col-lg-6 col-md-offset-3">
-    {{ form(form) }}
+    <div class="form-group">
+        <div class ="row">
+            <div class ="symfony-form-row col-xs-6 col-md-6 col-sm-6 col-lg-6 col-md-offset-3">
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('usuari') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+                <form action={{ path('alta_usuari_create') }} method="post" {{ form_enctype(form) }}>
+                {{ form_label(form.nom) }} <br />
+                {{ form_widget(form.nom) }} <br />
+                {{ form_label(form.cognom) }} <br />
+                {{ form_widget(form.cognom) }} <br />
+                {{ form_label(form.adreca) }} <br />
+                {{ form_widget(form.adreca) }} <br />
+                {{ form_label(form.telefon) }} <br />
+                {{ form_widget(form.telefon) }} <br />
+                {{ form_label(form.email) }} <br />
+                {{ form_widget(form.email) }} <br />
+                {{ form_label(form.presentacio) }} <br />
+                {{ form_widget(form.presentacio) }} <br />
+                {{ form_label(form.password) }} <br />
+                {{ form_widget(form.password) }} <br />
+                {{ form_label(form.punts) }} <br />
+                {{ form_widget(form.punts) }} <br />
+                {{ form_label(form.rol) }} <br />
+                {{ form_widget(form.rol) }} <br />
+                {{ form_label(form.isActive) }} <br />
+                {{ form_widget(form.isActive) }} <br />
+                {{ form_label(form.fotografia) }} <br />
+                {{ form_widget(form.fotografia) }} <br />
+                {{ form(form) }}
+
+            </div>
         </div>
     </div>
-</div>
-
 {% endblock %}

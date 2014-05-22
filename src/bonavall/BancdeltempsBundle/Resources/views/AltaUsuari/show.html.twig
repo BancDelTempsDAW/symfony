@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>Usuari</h1>
 
-    <table class="record_properties">
+    <table class="table-responsive">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -22,7 +22,7 @@
                 <td>{{ entity.password }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
+                <th>Is Active</th>
                 <td>{{ entity.isActive }}</td>
             </tr>
             <tr>
@@ -56,17 +56,4 @@
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('usuari') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('usuari_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-
-</ul>
 {% endblock %}

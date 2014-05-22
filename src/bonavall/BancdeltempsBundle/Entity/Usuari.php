@@ -108,7 +108,7 @@ class Usuari extends Persona
         
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
-        
+
         
     }
 
@@ -306,7 +306,7 @@ class Usuari extends Persona
      */
     public function getSalt()
     {
-        return Null;
+        return null;
     }
 
     /**

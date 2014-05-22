@@ -77,23 +77,25 @@ class AltaUsuariController extends Controller
      */
     public function createAction(Request $request)
     {
+
         $entity = new Usuari();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('alta_usuari_show', array('id' => $entity->getId())));
-        }
+                return $this->redirect($this->generateUrl('alta_usuari_show', array('id' => $entity->getId())));
+            }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );
     }
+
 
 
     /**
@@ -110,7 +112,7 @@ class AltaUsuariController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Registrat'));
+        $form->add('submit', 'submit', array('label' => 'Registra\'t'));
 
         return $form;
     }
