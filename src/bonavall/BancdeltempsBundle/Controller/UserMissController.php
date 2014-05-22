@@ -74,9 +74,12 @@ class UserMissController extends Controller {
         $request = $this->get('request');
         $sol_id = $request->request->get('id');
         $msg = $request->request->get('msg');
+        
+        if($msg){
+            throw $this->createNotFoundException($msg." aixo és msg");
+        }
 
         $usr= $this->get('security.context')->getToken()->getUser();
-        $usr->getUsername();
         
         $missatge_nou = new Missatges();
         $missatge_nou->setMissatge($msg);

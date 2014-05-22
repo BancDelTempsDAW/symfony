@@ -90,7 +90,7 @@ class PersonaController extends Controller
      */
     public function newAction()
     {
-        $entity = new Persona();
+        $entity = new Persona();        
         $form   = $this->createCreateForm($entity);
 
         return array(

@@ -1,45 +1,6 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
 
-<div style="width: 300px">
-
-    <div class="form-inline" >
-        <label for="fotografia">Fotografia: {{ app.user.fotografia }}</label><br>
-    </div>
-
-    <div class="form-inline">
-        <label for="nom">Nom: {{ app.user.nom }}</label><br>
-    </div>
-
-    <div class="form-inline">
-        <label for="cognom">Cognom: {{ app.user.cognom }}</label><br>
-    </div>
-
-    <div class="form-inline">
-        <label for="adreca">Adreça: {{ app.user.adreca }}</label><br>
-    </div>
-
-    <div class="form-inline">
-        <label for="telefon">Telefon: {{ app.user.telefon }}</label><br>
-    </div>
-
-    <div class="form-inline">
-        <label for="email">Email: {{ app.user.email }}</label><br>
-    </div>
-
-    <div class="form-group">
-        <label for="presentacio">Presentació:</label>
-        <textarea id="user_presentacio" type="text" name="_presentacio" value="" placeholder="{{ app.user.presentacio }}" class="form-control" style="width: 400px; height: 100px"></textarea><br>
-    </div>
-
-    <div class="form-group">
-        <label for="punts">Punts: {{ app.user.punts }}</label>
-    </div>
-    
-    <div class="form-inline">
-        <a id="botoModificarPerfil" name="modificarPerfil" class="btn btn-primary" href="{{ path('modificar_perfil') }}" >Modificar perfil</a>
-        <a id="botoUserBaixa" name="donarseBaixa" class="btn btn-warning" href="{{ path('baixa_perfil') }}" >Donarse de baixa</a>
-    </div>
-</div>
+<h1>Donarse de baixa</h1>
 
 {% endblock %}

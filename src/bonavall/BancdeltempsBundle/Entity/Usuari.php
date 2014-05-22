@@ -387,4 +387,9 @@ class Usuari extends Persona
     {
         return $this->rol;
     }
+    
+    public function isEnabled() {
+        return parent::isEnabled();
+    }
+
 }
