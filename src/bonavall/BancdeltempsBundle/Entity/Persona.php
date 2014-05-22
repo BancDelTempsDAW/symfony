@@ -66,7 +66,7 @@ class Persona implements UserInterface, \Serializable {
 
     public function __construct() {
         //$this->isActive = true;
-        $this->salt = md5(uniqid(null, true));
+        $this->salt = md5(uniqid(null, true));        
     }
 
     /**
@@ -269,5 +269,7 @@ class Persona implements UserInterface, \Serializable {
     {
         return $this->isActive;
     }
+    
+    
 
 }

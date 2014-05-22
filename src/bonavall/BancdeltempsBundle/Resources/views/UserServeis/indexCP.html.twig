@@ -1,8 +1,4 @@
-
-
-
 <h1>Serveis list</h1>
-<div id="sortida"></div>
 <table class="records_list">
     <thead>
         <tr>
@@ -21,7 +17,7 @@
     <tbody>
 
         {% for entity in entities %}
-
+            {%if is_granted('IS_AUTHENTICATED_FULLY')%}
                 {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('Y-m-d') > 'now'|date('Y-m-d')) and (entity.iddonant.id != app.user.id) %}
         <tr>
             <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
@@ -55,6 +51,35 @@
                 </td>
             </tr>
             {% endif %}
+            {% else %}
+                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('Y-m-d') > 'now'|date('Y-m-d')) %}
+            <tr>
+                <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.iddonant.nom}}</td>
+                <td>{{ entity.punts }}</td>
+                <td>{{ entity.nomServei }}</td>
+                <td>{{ entity.descripcioServei }}</td>
+                <td>{{ entity.poblacio }}</td>
+                <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.durada }}</td>
+                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
+                        </li> 
+
+                        <li>
+                            <a href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicitamiss</a>
+                        </li>  
+
+                    </ul>
+                </td>
+            </tr>
+            {% endif %}
+
+            {%endif%}
+
         {% endfor %}
         </tbody>
     </table>
@@ -66,4 +91,3 @@
             </a>
         </li>
     </ul>
-    
