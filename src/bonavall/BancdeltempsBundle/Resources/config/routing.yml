@@ -361,8 +361,12 @@ nou_missatge_ajax:
 #Rutes de usuari no persona
 
 perfil_user:
-  pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:perfil }
+  pattern: /user/perfil/{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:edit }
+
+user_update:
+  pattern: /user/usuari/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:update }
 
 baixa_perfil:
   pattern: /user/perfil/baixa/
