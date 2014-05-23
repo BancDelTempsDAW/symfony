@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use bonavall\BancdeltempsBundle\Entity\Serveis;
-use bonavall\BancdeltempsBundle\Form\ServeisType;
+use bonavall\BancdeltempsBundle\Entity\Usuari;
+use bonavall\BancdeltempsBundle\Form\UserUsuariType;
 
 /**
- * Serveis controller.
+ * Usuari controller.
  *
- * @Route("/admin/serveis")
+ * @Route("/usuari")
  */
-class ServeisController extends Controller
+class UserUsuariController extends Controller
 {
 
     /**
-     * Lists all Serveis entities.
+     * Lists all Usuari entities.
      *
-     * @Route("/", name="admin_serveis")
+     * @Route("/", name="usuari")
      * @Method("GET")
      * @Template()
      */
@@ -29,31 +29,33 @@ class ServeisController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findAll();
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Serveis entity.
+     * Creates a new Usuari entity.
      *
-     * @Route("/", name="admin_serveis_create")
+     * @Route("/", name="usuari_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Serveis:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:Usuari:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Serveis();
+        $entity = new Usuari();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
+       
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
 
-            return $this->redirect($this->generateUrl('admin_serveis_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuari_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,16 +65,16 @@ class ServeisController extends Controller
     }
 
     /**
-    * Creates a form to create a Serveis entity.
+    * Creates a form to create a Usuari entity.
     *
-    * @param Serveis $entity The entity
+    * @param Usuari $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Serveis $entity)
+    private function createCreateForm(Usuari $entity)
     {
-        $form = $this->createForm(new ServeisType(), $entity, array(
-            'action' => $this->generateUrl('admin_serveis_create'),
+        $form = $this->createForm(new UserUsuariType(), $entity, array(
+            'action' => $this->generateUrl('usuari_create'),
             'method' => 'POST',
         ));
 
@@ -82,15 +84,15 @@ class ServeisController extends Controller
     }
 
     /**
-     * Displays a form to create a new Serveis entity.
+     * Displays a form to create a new Usuari entity.
      *
-     * @Route("/new", name="admin_serveis_new")
+     * @Route("/new", name="usuari_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
-        $entity = new Serveis();
+        $entity = new Usuari();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -100,9 +102,9 @@ class ServeisController extends Controller
     }
 
     /**
-     * Finds and displays a Serveis entity.
+     * Finds and displays a Usuari entity.
      *
-     * @Route("/{id}", name="admin_serveis_show")
+     * @Route("/{id}", name="usuari_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +112,10 @@ class ServeisController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Serveis entity.');
+            throw $this->createNotFoundException('Unable to find Usuari entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +127,9 @@ class ServeisController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Serveis entity.
+     * Displays a form to edit an existing Usuari entity.
      *
-     * @Route("/{id}/edit", name="admin_serveis_edit")
+     * @Route("/{id}/edit", name="usuari_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +137,10 @@ class ServeisController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Serveis entity.');
+            throw $this->createNotFoundException('Unable to find Usuari entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +154,16 @@ class ServeisController extends Controller
     }
 
     /**
-    * Creates a form to edit a Serveis entity.
+    * Creates a form to edit a Usuari entity.
     *
-    * @param Serveis $entity The entity
+    * @param Usuari $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Serveis $entity)
+    private function createEditForm(Usuari $entity)
     {
-        $form = $this->createForm(new ServeisType(), $entity, array(
-            'action' => $this->generateUrl('admin_serveis_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UsuariType(), $entity, array(
+            'action' => $this->generateUrl('usuari_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +172,20 @@ class ServeisController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Serveis entity.
+     * Edits an existing Usuari entity.
      *
-     * @Route("/{id}", name="admin_serveis_update")
+     * @Route("/{id}", name="usuari_update")
      * @Method("PUT")
-     * @Template("bonavallBancdeltempsBundle:Serveis:edit.html.twig")
+     * @Template("bonavallBancdeltempsBundle:Usuari:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+        $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Serveis entity.');
+            throw $this->createNotFoundException('Unable to find Usuari entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +195,7 @@ class ServeisController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_serveis_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuari_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +205,9 @@ class ServeisController extends Controller
         );
     }
     /**
-     * Deletes a Serveis entity.
+     * Deletes a Usuari entity.
      *
-     * @Route("/{id}", name="admin_serveis_delete")
+     * @Route("/{id}", name="usuari_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +217,21 @@ class ServeisController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+            $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Serveis entity.');
+                throw $this->createNotFoundException('Unable to find Usuari entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_serveis'));
+        return $this->redirect($this->generateUrl('usuari'));
     }
 
     /**
-     * Creates a form to delete a Serveis entity by id.
+     * Creates a form to delete a Usuari entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,10 +240,12 @@ class ServeisController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_serveis_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuari_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
+    
+    
 }

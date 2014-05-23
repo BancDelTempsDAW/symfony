@@ -1,0 +1,64 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>Dades d'usuari {{entity.nom}}</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <br>
+        <div class="row">
+            <div class="col-md-3"> 
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <th class="info">Id</th>
+                                <td>{{ entity.id }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Email</th>
+                                <td>{{ entity.email }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Nom</th>
+                                <td>{{ entity.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Cognom</th>
+                                <td>{{ entity.cognom }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Adreca</th>
+                                <td>{{ entity.adreca }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Telefon</th>
+                                <td>{{ entity.telefon }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Presentacio</th>
+                                <td>{{ entity.presentacio }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Punts</th>
+                                <td>{{ entity.punts }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-3">  
+                <div class="container-fluid">
+                    <br />
+                    <img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="200" width="200" />                     
+                    </div>
+                </div>
+                <div class="col-md-3"> 
+                    holas3
+                </div>
+                <div class="col-md-3"> 
+                    holas4
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

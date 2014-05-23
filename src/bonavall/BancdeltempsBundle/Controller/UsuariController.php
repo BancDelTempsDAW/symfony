@@ -47,13 +47,11 @@ class UsuariController extends Controller
         $entity = new Usuari();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-        $em = $this->getDoctrine()->getManager();
-       
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            
 
             return $this->redirect($this->generateUrl('usuari_show', array('id' => $entity->getId())));
         }
@@ -246,6 +244,4 @@ class UsuariController extends Controller
             ->getForm()
         ;
     }
-    
-    
 }
