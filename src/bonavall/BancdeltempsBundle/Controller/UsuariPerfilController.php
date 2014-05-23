@@ -26,7 +26,8 @@ class UsuariPerfilController extends Controller {
             $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId);
 
             if (is_object($usuari)) {
-
+                                
+                $usuari->setFotografia($request->request->get('fotografia'));
                 $usuari->setPassword($request->request->get('password'));
                 $usuari->setNom($request->request->get('nom'));
                 $usuari->setCognom($request->request->get('cognom'));
