@@ -332,18 +332,23 @@ missatges_ajax:
       requirements:
         _method:  POST
 triacp_ajax:
-      pattern: /user/serveiscp/
+      pattern: /serveiscp/
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexcp }
       requirements:
         _method:  POST
 triapob_ajax:
-      pattern: /user/serveispo/
+      pattern: /serveispo/
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexpob }
       requirements:
         _method:  POST
 triaprov_ajax:
-      pattern: /user/serveispr/
+      pattern: /serveispr/
       defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexprov }
+      requirements:
+        _method:  POST
+triacat_ajax:
+      pattern: /serveiscat/
+      defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:indexcat }
       requirements:
         _method:  POST
 
@@ -376,7 +381,7 @@ gestio_serveis:
   defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
   
 user_serveis:
-  pattern: /user/serveis/
+  pattern: /serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
 user_serveis_create:
   pattern: /user/serveis/create
