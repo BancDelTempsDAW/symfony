@@ -69,10 +69,11 @@ class UserMissController extends Controller {
         return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
         //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
     }
+
     
       public function nouMissatgeAction() {
         $request = $this->get('request');
-        $sol_id = $request->request->get('id');
+        $id = $request->request->get('id_sol');
         $msg = $request->request->get('msg');
         
         if($msg){
@@ -83,7 +84,7 @@ class UserMissController extends Controller {
         
         $missatge_nou = new Missatges();
         $missatge_nou->setMissatge($msg);
-        $missatge_nou->setSolicituts($sol_id);
+        $missatge_nou->setSolicituts($id);
         $missatge_nou->setAutor($usr);
         
         $em = $this->getDoctrine()->getManager();

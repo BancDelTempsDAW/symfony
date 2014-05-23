@@ -353,9 +353,20 @@ triacat_ajax:
         _method:  POST
 
 nou_missatge_ajax:
-    pattern: /user/solicituts/noumsg
+    pattern: /user/solicituts/rebudes/noumsg/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatge }
-    methods:  [GET]
+    requirements:
+        _method:  POST|GET
+    
+cancelar_sol_ajax:
+    pattern: /user/solicituts/cancelar
+    defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:cancelar }
+    methods:  [POST]
+
+acceptar_sol_ajax:
+    pattern: /user/solicituts/acceptar
+    defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:acceptar }
+    methods:  [POST]
 
 
 #Rutes de usuari no persona

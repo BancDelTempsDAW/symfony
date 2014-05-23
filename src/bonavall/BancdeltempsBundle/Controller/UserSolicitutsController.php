@@ -3,6 +3,7 @@
 namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,8 +42,24 @@ class UserSolicitutsController extends Controller
         if (!$solicituts) {
             throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
         }
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
     }
+    
+    public function cancelarAction(Request $request)
+    {        
+
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsRebudes.html.twig', array('solicituts' => $solicituts));
+    }
+    
+    public function acceptarAction()
+    {        
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+
+        
+        return  new Response('id='.$id);
+    }
+    
     
     public function rebudesAction()
     {        
@@ -54,7 +71,7 @@ class UserSolicitutsController extends Controller
         $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array( 'iddonant' => $this->getUser()));
         $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat'=> $serveis));
 
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsRebudes.html.twig', array('solicituts' => $solicituts));
     }
     /**
      * Creates a new Solicituts entity.

@@ -7,6 +7,15 @@ body{
     background-color: #F1FFFB;
 }
 
+.punts_cont{
+    margin: auto;
+}
+
+.punts_sol{
+    padding-bottom: 1px;
+    margin-bottom: 1px;
+}
+
 .nou_missatge_txt{ 
     resize: none; 
     overflow:auto; 

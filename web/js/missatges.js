@@ -4,6 +4,8 @@ $(document).ready(function() {
        $(".sol_id", this).hide();
        $("#row_missatges_"+id).hide();
        $("#url_nou_msg").hide();
+       $("#url_acceptar_sol").hide();
+       $("#url_cancelar_sol").hide();
 
       //get the url for the form
       var url=$("#miss_btn_"+id).attr("href");
@@ -64,28 +66,40 @@ $(document).ready(function() {
        //NOU MISSATGE
        $("#nou_missatge_btn_"+id).click(function(){
            var msg = $("#nou_missatge_txt_"+id).val();
-           var url_ajax = $("#url_nou_msg").attr("url");
-           alert(url_ajax);
+           var url_nou_msg = $("#url_nou_msg").html();
+           //alert("msg:"+msg);
            if($("#nou_missatge_txt_"+id).val()==""){
                var errormsg = "<br><div class='alert alert-danger alert-dismissable' >Has d'escriure un missatge.</div>";
                $("#nou_msg_modal_body_"+id).append(errormsg);
                $("#nou_missatge_txt_"+id).focus();
-           }else{
-                $.get(url_ajax),{
-                        id_sol:id,
-                        msg:msg
-                },function(data){ 
-                    alert(data);
-                }
-           }
-           
+           }/*else{
+               $.post(url_nou_msg,{id_sol:id,msg:msg}
+                    ,function(data){ 
+                         alert(data);
+                    });
+           }  */         
        });
        
-    });
+            $("#acceptar_solicitud_"+id).click(function(){
+                var url_acceptar_sol = $("#url_acceptar_sol").html();
+                 $.post(url_acceptar_sol,{
+                             id:id
+                     },function(data){ 
+                         alert(data);
+                     });
+            });
+            
+            $("#cancelar_solicitud_"+id).click(function(){
+                var url_cancelar_sol = $("#url_cancelar_sol").html();
+                 $.post(url_cancelar_sol,{
+                             id:id
+                     },function(data){ 
+                         alert(data);
+                     });
+            });
+       
     
     
   
-
-  
-
+  });
 });
