@@ -53,11 +53,11 @@ class Usuari extends Persona
     private $telefon;
 
       /**
-     * @var string $image
+     * @var string $fotografia
      * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Si us plau, puja una imatge vàlida")
      * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
      */
-    private $fotografia;
+    protected $fotografia;
 
     /**
      * @var string

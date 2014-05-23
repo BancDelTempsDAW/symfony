@@ -15,10 +15,10 @@
             <form id="checkForm" method="post" >
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset(app.user.fotografia) }}" style="height: 100px; width: 100px">
+                        <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" style="height: 100px; width: 100px">
                     </div>
                     <div class="col-md-6">
-                        <input id="user_fotografia" type="file" name="user_fotografia" />
+                      {#  <input id="user_fotografia" type="file" name="user_fotografia" />#}
                     </div>
                 </div>
                 <div class="row">

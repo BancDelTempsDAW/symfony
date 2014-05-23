@@ -4,11 +4,12 @@ namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 //use Symfony\Component\Routing\RouteCollection;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-//use bonavall\BancdeltempsBundle\Entity\Usuari;
+use bonavall\BancdeltempsBundle\Entity\Usuari;
 //use bonavall\BancdeltempsBundle\Form\UsuariType;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,14 +21,14 @@ class UsuariPerfilController extends Controller {
     public function perfilAction(Request $request) {
 
         if ($request->isXmlHttpRequest()) {
-
+           
+                     
             $em = $this->getDoctrine()->getManager();
             $userId = $this->get('security.context')->getToken()->getUser()->getId();
-            $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId);
+            $usuari = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneById($userId); 
 
-            if (is_object($usuari)) {
-                                
-                $usuari->setFotografia($request->request->get('fotografia'));
+            if (is_object($usuari)) {                     
+                          
                 $usuari->setPassword($request->request->get('password'));
                 $usuari->setNom($request->request->get('nom'));
                 $usuari->setCognom($request->request->get('cognom'));

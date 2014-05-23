@@ -2,15 +2,15 @@
 
 {% block body -%}
     <h1>Usuari edit</h1>
-
+ 
     
-    {{ form_label(edit_form) }}    
+       
         {{ form_errors(edit_form) }}
     {% if edit_form.vars.value.fotografia is not null %}
             <img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="200" width="200"/>
         {% endif %}
-        {{ form_widget(edit_form) }}
-    
+        
+    {{ form(edit_form) }}
             
 
         <ul class="record_actions">
