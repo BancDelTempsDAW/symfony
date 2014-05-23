@@ -5,6 +5,7 @@ namespace bonavall\BancdeltempsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use bonavall\BancdeltempsBundle\Form\AltaUsuariType;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
+use bonavall\BancdeltempsBundle\Entity\Bancdeltemps;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,35 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class AltaUsuariController extends Controller
 {
-    /*public function sferegistrevellAction()
-    {
-        $form = $this->get('form.factory')->create(
-            new AltaUsuariType(),
-            array()
-        );
-        $request = $this->get('request');
-
-        if ($request->getMethod() == 'POST')
-        {
-            $form->bind($request);
-            if ($form->isValid())
-            {
-                $var = $request->query->get('nom');
-                echo $var;
-                if($var != "")
-                {
-                    echo "no vacio";
-                }
-                else
-                {
-                    echo "Vacio";
-                }
-
-            }
-        }
-        return $this->render('bonavallBancdeltempsBundle:Usuari:altausuari.html.twig',
-            array('form' => $form->createView()));
-    }*/
 
     /**
      * Finds and displays a Usuari entity.
@@ -77,8 +49,11 @@ class AltaUsuariController extends Controller
      */
     public function createAction(Request $request)
     {
+        $bdt= new Bancdeltemps();
+        $pt = $bdt->getSaldoMinim();
 
         $entity = new Usuari();
+        $entity->setPunts($pt);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -126,7 +101,10 @@ class AltaUsuariController extends Controller
      * @Template()
      */
     public function registreAction(){
+        $bdt = new Bancdeltemps();
+        $pt = $bdt->getSaldoMinim();
         $entity = new Usuari();
+        $entity->setPunts($pt);
         $form   = $this->createCreateForm($entity);
 
         return array(

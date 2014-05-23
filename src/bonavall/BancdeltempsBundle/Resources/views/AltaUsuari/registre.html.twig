@@ -20,15 +20,40 @@
                 {{ form_widget(form.presentacio) }} <br />
                 {{ form_label(form.password) }} <br />
                 {{ form_widget(form.password) }} <br />
-                {{ form_label(form.punts) }} <br />
-                {{ form_widget(form.punts) }} <br />
-                {{ form_label(form.rol) }} <br />
-                {{ form_widget(form.rol) }} <br />
-                {{ form_label(form.isActive) }} <br />
-                {{ form_widget(form.isActive) }} <br />
+
+                <div id="amagar">
+                    <div id="punts">
+                        {{ form_label(form.punts) }} <br />
+                        {{ form_widget(form.punts) }} <br />
+                    </div>
+                    <div id="rol">
+                        {{ form_label(form.rol) }} <br />
+                        {{ form_widget(form.rol) }} <br />
+                    </div>
+                    <div id="actiu">
+                        {{ form_label(form.isActive) }} <br />
+                        {{ form_widget(form.isActive) }} <br />
+                    </div>
+                </div>
+
                 {{ form_label(form.fotografia) }} <br />
                 {{ form_widget(form.fotografia) }} <br />
                 {{ form(form) }}
+
+                <script type="text/javascript">
+                $(document).ready(function()
+                {
+                    // Per defecte tenim el valor ROLE_USER
+                    $("#rol option[value="+ 1 +"]").attr("selected",true);
+
+                    //Amaguem els camps que no necessitem mostrar a l'usuari per donar d'alta
+                    amagar = document.getElementById("amagar");
+                    amagar.style.display = "none";
+
+                });
+
+
+                </script>
 
             </div>
         </div>

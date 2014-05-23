@@ -105,10 +105,8 @@ class Usuari extends Persona
     
     public function __construct()
     {
-        
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
-
         
     }
 
