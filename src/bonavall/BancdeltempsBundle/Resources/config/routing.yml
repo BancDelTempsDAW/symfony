@@ -352,9 +352,21 @@ triacat_ajax:
       requirements:
         _method:  POST
 
-nou_missatge_ajax:
+nou_missatge_enviades:
+    pattern: /user/solicituts/enviades2
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatgeEnviades }
+
+nou_missatge_rebudes:
+    pattern: /user/solicituts/rebudes2
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatgeRebudes }
+
+missatge_enviades_creat:
+    pattern: /user/solicituts/enviades/noumsg/
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:creatMissatgeEnviades }    
+    
+missatge_rebudes_creat:
     pattern: /user/solicituts/rebudes/noumsg/
-    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatge }
+    defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:creatMissatgeRebudes }
     
 cancelar_sol_ajax:
     pattern: /user/solicituts/cancelar

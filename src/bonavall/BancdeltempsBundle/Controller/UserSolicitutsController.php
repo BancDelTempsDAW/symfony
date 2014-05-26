@@ -48,10 +48,8 @@ class UserSolicitutsController extends Controller
         }
         
         
-        $entity = new Missatges();
-        $form   = $this->createMissatgesForm($entity);
-        
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts, 'entity' => $entity, 'form' => $form->createView()));
+
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
     }
     
     private function createMissatgesForm(Missatges $entity)

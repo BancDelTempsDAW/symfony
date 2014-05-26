@@ -3,13 +3,13 @@
 namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Missatges;
-use bonavall\BancdeltempsBundle\Form\MissatgesType;
-use Symfony\Component\HttpFoundation\Response;
+use bonavall\BancdeltempsBundle\Form\UserMissatgesType;
 
 class UserMissController extends Controller {
     /*
@@ -69,28 +69,43 @@ class UserMissController extends Controller {
         return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
         //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
     }
-
     
-      public function nouMissatgeAction() {
-        $request = $this->get('request');
-        $id = $request->request->get('id');
-        $msg = $request->request->get('msg');
-        
-        if($msg){
-            throw $this->createNotFoundException($msg." aixo és msg");
-        }
+    private function createMissatgesForm(Missatges $entity)
+    {
+        $form = $this->createForm(new UserMissatgesType(), $entity, array(
+            //'action' => $this->generateUrl('nou_missatge'),
+            'method' => 'POST'
+        ));
 
-        $usr= $this->get('security.context')->getToken()->getUser();
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    
+    public function nouMissatgeRebudesAction() {
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+
+        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeRebudes.html.twig', array("form"=>$form->createView(),"entity"=>$entity));
         
-        $missatge_nou = new Missatges();
-        $missatge_nou->setMissatge($msg);
-        $missatge_nou->setSolicituts($id);
-        $missatge_nou->setAutor($usr);
+    }
+    
+    public function nouMissatgeEnviadesAction() {
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+
+        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeEnviades.html.twig', array("form"=>$form->createView(),"entity"=>$entity));
         
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($missatge_nou);
-        $em->flush();
+    }
+    
+    public function creatMissatgeEnviadesAction() {
         
+        
+        
+        //Preparem la vista Solicituts
+        $repository = $this->getDoctrine()
+                ->getRepository('bonavallBancdeltempsBundle:Solicituts');
 
         $query = $repository->createQueryBuilder('p')
                 ->where('p.solicitant = :solicitant')
@@ -102,7 +117,29 @@ class UserMissController extends Controller {
         if (!$solicituts) {
             throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
         }
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
+        
+        
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+
+        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatge.html.twig', array('solicituts' => $solicituts));
+        
+    }
+    
+    public function creatMissatgeRebudesAction() {
+
+       
+        //preparem la vista solicituts
+        $repository = $this->getDoctrine()
+                ->getRepository('bonavallBancdeltempsBundle:Solicituts');
+
+        $em = $this->getDoctrine()->getManager();
+        
+        $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array( 'iddonant' => $this->getUser()));
+        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat'=> $serveis));
+
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsRebudes.html.twig', array('solicituts' => $solicituts));
+
         
     }
     

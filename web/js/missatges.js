@@ -37,7 +37,7 @@ $(document).ready(function() {
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
-                $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' data-toggle='modal' data-target='#modal_nou_missatge_"+id+"' class='btn btn-default' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
+                $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' class='btn btn-default' href='/symfony/web/app_dev.php/user/solicituts/enviades2' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
