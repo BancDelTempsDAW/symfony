@@ -184,7 +184,7 @@ class UserServeisController extends Controller
         $entity->setIddonant($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+       
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
@@ -265,9 +265,16 @@ class UserServeisController extends Controller
         }
 
         $solicitaForm = $this->createSolicitaForm($id);
+        $user = $entity->getIddonant();
+        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat' => $id));
+        $donaServei = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->findOneBy(array('id' => $user));
+        $valoracions = $em->getRepository('bonavallBancdeltempsBundle:Serveisconsumits')->findBy(array('idservei' => $id));
 
         return array(
             'entity'      => $entity,
+            'solicituts' => $solicituts,
+            'donaServei' => $donaServei,
+            'valoracions' => $valoracions,
             'solicita_form' => $solicitaForm->createView(),
         );
     }

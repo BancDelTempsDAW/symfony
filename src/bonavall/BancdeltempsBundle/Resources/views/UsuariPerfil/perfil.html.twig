@@ -1,0 +1,139 @@
+{% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
+{% block body %}
+
+<script src="{{ asset('js/validate/dist/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/validate/dist/jquery.validate.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/validacioPerfil.js') }}" type="text/javascript"></script>
+
+<h1>Perfil</h1>
+
+<h3> Aqui pots modificar el teu perfil </h3>
+<style>
+    
+    
+    
+</style>
+<div class="panel">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <form id="checkForm" method="post" >
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" style="height: 100px; width: 100px">
+                    </div>
+                    <div class="col-md-6">
+                      {#  <input id="user_fotografia" type="file" name="user_fotografia" />#}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nom">Password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nom">Confirmació del password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_passRepeat" type="password" name="user_passRepeat"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="nom">Nom:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_nom" type="text" name="user_nom" value="{{ app.user.nom }}"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="cognom">Cognom:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_cognom" type="text" name="user_cognom" value="{{ app.user.cognom }}"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="adreca">Adreça:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_adreca" type="text" name="user_adreca" value="{{ app.user.adreca }}"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="telefon">Telefon:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_telefon" type="text" name="user_telefon" value="{{ app.user.telefon }}"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_email" type="text" name="user_email" value="{{ app.user.email }}"  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="punts">Punts:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_punts" type="text" name="user_punts" value="{{ app.user.punts }}" placeholder="{{ app.user.nom }}" readonly=""  />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="presentacio">Presentació:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <textarea id="user_presentacio" type="text" name="user_presentacio" class="form-control" >{{ app.user.presentacio }}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="optionsPerfil" >
+                            <input type="submit" id="botoModificarPerfil" class="btn btn-primary"   value="Modificar perfil" />
+                            <input type="hidden" id="urlString" value="{{ path('perfil_user') }}"/>
+                            <input type="button" id="botoUserBaixa" class="btn btn-warning" value="Donarse de baixa" data-toggle="modal" data-target="#modal_baixa" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal donarse de baixa -->
+                <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Donarse de baixa</h4>
+                            </div>
+                            <div class="modal-body" id="baixa_body" >
+                                <p>Segur que et vols donar de baixa?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{{path('baixa_perfil')}}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Div's de alertes al modificar la base de dades -->
+                        <div id="success" class="alert alert-success" ></div>
+                        <div id="failure" class="alert alert-danger" ></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

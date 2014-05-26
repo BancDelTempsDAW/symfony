@@ -366,10 +366,23 @@ user_usuari:
 user_usuari_show:
   pattern: /show{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UserUsuari:show }
-
+user_usuari_serv:
+  pattern: /show  
+  defaults: { _controller: bonavallBancdeltempsBundle:UserUsuari:userShowService }
+user_usuari_val:
+  pattern: /shov
+  defaults: { _controller: bonavallBancdeltempsBundle:UserUsuari:userShowValora }
+user_usuari_hist:
+  pattern: /user/shoh
+  defaults: { _controller: bonavallBancdeltempsBundle:UserUsuari:userHistInt }
+  
 perfil_user:
   pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:perfil }
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:edit }
+
+user_update:
+  pattern: /user/usuari/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:update }
 
 baixa_perfil:
   pattern: /user/perfil/baixa/

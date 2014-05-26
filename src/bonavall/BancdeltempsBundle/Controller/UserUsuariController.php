@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
+use bonavall\BancdeltempsBundle\Entity\Serveis;
 use bonavall\BancdeltempsBundle\Form\UserUsuariType;
 
 /**
@@ -248,4 +249,57 @@ class UserUsuariController extends Controller
     }
     
     
+    /**
+     * Lists all Serveis entities.
+     *
+     * @Route("/", name="user_serveis")
+     * @Method("GET")
+     * @Template()
+     */
+    
+    public function userShowServiceAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexServ.html.twig', array(
+             'entities' => $entities,
+        ));
+    }
+    
+    public function userShowValoraAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $serv = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveisconsumits')->findBy(array('idservei' => $serv ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexVal.html.twig', array(
+             'entities' => $entities,
+        ));
+    }
+    
+    public function userHistIntAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $enviades = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('solicitant' => $id ));
+        $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        $rebudes  = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat' => $serveis ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexSol.html.twig', array(
+             'enviades' => $enviades,
+             'rebudes' => $rebudes,
+        ));
+    }
 }

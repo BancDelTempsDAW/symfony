@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
+<script src="{{ asset('js/userShow.js') }}" type="text/javascript"></script>
 <h1>Dades d'usuari {{entity.nom}}</h1>
 <div class="panel panel-default">
     <div class="container-fluid">
@@ -46,19 +47,54 @@
                     </table>
                 </div>
             </div>
-            <div class="col-md-3">  
+            <div class="col-md-2">  
                 <div class="container-fluid">
                     <br />
                     <img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="200" width="200" />                     
-                    </div>
                 </div>
-                <div class="col-md-3"> 
-                    holas3
-                </div>
-                <div class="col-md-3"> 
-                    holas4
+            </div>
+            <div class="col-md-2"> 
+                <div class="container-fluid">
+                    <ul class="list-unstyled">
+                        {% if app.user is null and not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <br />                        
+                        {% endif %}
+                        <br />
+                        <li>
+                            <a class="btn btn-success" id="usrServ" href="{{ path('user_usuari_serv')}}" user="{{ entity.id }}">
+                                Mostra serveis oferts
+                            </a>
+                        </li> 
+                        <br />
+                        <li>
+                            <a class="btn btn-warning" id="usrVal" href="{{ path('user_usuari_val') }}" user="{{ entity.id }}">
+                                Mostra avaluacions rebudes
+                            </a>
+                        </li> 
+                        <br />
+                        {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li>
+                            <a class="btn btn-info" id="usrHist" href="{{ path('user_usuari_hist') }}" user="{{ entity.id }}">
+                                Historial d'intercanvis
+                            </a>
+                        </li>
+                        <br />
+                        {% endif %}
+                        <li>
+                            <a class="btn btn-danger" href="{{ path('user_serveis_new') }}">
+                                Denunciar usuari
+                            </a>
+                        </li> 
+                </div>   
+
+            </div>
+            <div class="col-md-5"> 
+                <div class="container-fluid">
+                    <div id="sortidaUsr"></div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 {% endblock %}

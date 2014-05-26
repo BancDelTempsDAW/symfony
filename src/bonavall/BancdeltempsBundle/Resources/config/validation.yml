@@ -6,4 +6,4 @@ bonavall\Bancdeltemps\Entity\Persona:
           - NotBlank:  { message: "persona.email.not_blank" }
         password:
           - NotBlank: { message: "persona.password.not_blank" }
-          
+        
