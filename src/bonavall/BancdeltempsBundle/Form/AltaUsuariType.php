@@ -11,7 +11,6 @@ class AltaUsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            //->add('salt')
             ->add('email', 'email', array(
                 'label'=>'Correu Electrònic'
             ))
@@ -45,6 +44,7 @@ class AltaUsuariType extends AbstractType
             ->add('rol');
             //->add('poblacio')
             //->add('codi_postal')
+            //->add('salt')
     }
 
     public function getDefaultOptions(array $options)

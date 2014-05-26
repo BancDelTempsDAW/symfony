@@ -45,7 +45,7 @@ class AltaUsuariController extends Controller
      *
      * @Route("/", name="alta_usuari_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:AltaUsuari:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:AltaUsuari:show.html.twig")
      */
     public function createAction(Request $request)
     {
