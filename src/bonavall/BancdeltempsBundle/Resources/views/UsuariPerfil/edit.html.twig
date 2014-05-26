@@ -3,13 +3,13 @@
 {% block body -%}
 <h1 style="">Perfil</h1>
 <p>Aqui també pots modificar el teu perfil</p>
-<div class="panel">
-    <div class="panel-body">
+<div class="panel panel-default">
         <div class="container-fluid">
+            <br />
             <form action={{ path('user_update', {'id': app.user.id}) }}) method="post" >
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset(app.user.fotografia) }}" style="height: 100px; width: 100px">
+                        <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" alt="" height="150" width="150" />
                     </div>
                     <div class="col-md-6">
                             {{ form_widget(edit_form.fotografia) }}
@@ -107,9 +107,9 @@
                 </div>
                 <div id="amagar">{{ form(edit_form) }}</div>
             </form>
+            <br />
         </div>
     </div>
-</div>
 
     <script>
     

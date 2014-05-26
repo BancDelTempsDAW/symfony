@@ -1,0 +1,26 @@
+
+    <h3>Serveisconsumits list</h3>
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr class="info">
+                <th>Id</th>
+                <th>Comentaris</th>
+                <th>Servei</th>
+                <th>Consumidor</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.comentaris }}</td>
+                <td><a href="{{ path('user_serveis_show', { 'id': entity.idservei.id }) }}">{{ entity.idservei }}</a></td>
+                <td><a href="{{ path('user_usuari_show', { 'id': entity.idusuari.id })}} ">{{ entity.idusuari.nom }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+    </div>

@@ -4,10 +4,12 @@ namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use bonavall\BancdeltempsBundle\Entity\Persona;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Usuari
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="usuari")
  * 
  */
@@ -50,12 +52,12 @@ class Usuari extends Persona
      */
     private $telefon;
 
-    /**
-     * @var string
-     *
+      /**
+     * @var string $fotografia
+     * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Si us plau, puja una imatge vàlida")
      * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
      */
-    private $fotografia;
+    protected $fotografia;
 
     /**
      * @var string
@@ -391,5 +393,66 @@ class Usuari extends Persona
     public function isEnabled() {
         return parent::isEnabled();
     }
+    
+    
+    /*****************************************************************************
+    *                               Gestio de la fotografia
+    /*******************************************************************************/
+    
+        public function getFullImagePath() {
+        return null === $this->fotografia ? null : $this->getUploadRootDir(). $this->fotografia;
+    }
+ 
+    protected function getUploadRootDir() {
+        // the absolute directory path where uploaded documents should be saved
+        return $this->getTmpUploadRootDir().$this->getId()."/";
+    }
+ 
+    protected function getTmpUploadRootDir() {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__ . '/../../../../web/upload/';
+    }
+ 
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function uploadImage() {
+        // the file property can be empty if the field is not required
+        if (null === $this->fotografia) {
+            return;
+        }
+        if(!$this->id){
+            $this->fotografia->move($this->getTmpUploadRootDir(), $this->fotografia->getClientOriginalName());
+        }else{
+            $this->fotografia->move($this->getUploadRootDir(), $this->fotografia->getClientOriginalName());
+        }
+        $this->setFotografia($this->fotografia->getClientOriginalName());
+    }
+ 
+    /**
+     * @ORM\PostPersist()
+     */
+    public function moveImage()
+    {
+        if (null === $this->fotografia) {
+            return;
+        }
+        if(!is_dir($this->getUploadRootDir())){
+            mkdir($this->getUploadRootDir());
+        }
+        copy($this->getTmpUploadRootDir().$this->fotografia, $this->getFullImagePath());
+        unlink($this->getTmpUploadRootDir().$this->fotografia);
+    }
+ 
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeImage()
+    {
+        unlink($this->getFullImagePath());
+        rmdir($this->getUploadRootDir());
+    }
+
 
 }
