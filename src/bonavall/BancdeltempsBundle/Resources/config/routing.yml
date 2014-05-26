@@ -377,8 +377,8 @@ user_usuari_hist:
   defaults: { _controller: bonavallBancdeltempsBundle:UserUsuari:userHistInt }
   
 perfil_user:
-  pattern: /user/perfil/
-  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:edit }
+  pattern: /user/perfil/{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:perfil }
 
 user_update:
   pattern: /user/usuari/update{id}
