@@ -380,7 +380,7 @@ perfil_user:
   pattern: /user/perfil/{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:edit }
 
-user_update:
+perfil_update:
   pattern: /user/usuari/update{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:update }
 
