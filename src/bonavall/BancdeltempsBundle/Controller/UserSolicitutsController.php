@@ -8,9 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use bonavall\BancdeltempsBundle\Entity\Missatges;
 use bonavall\BancdeltempsBundle\Entity\Solicituts;
+use bonavall\BancdeltempsBundle\Entity\Serveis;
+use bonavall\BancdeltempsBundle\Entity\Serveisconsumits;
 use bonavall\BancdeltempsBundle\Entity\EstatServei;
 use bonavall\BancdeltempsBundle\Form\UserSolicitutsType;
+use bonavall\BancdeltempsBundle\Form\UserMissatgesType;
 
 /**
  * Solicituts controller.
@@ -42,7 +46,55 @@ class UserSolicitutsController extends Controller
         if (!$solicituts) {
             throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
         }
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
+        
+        
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+        
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts, 'entity' => $entity, 'form' => $form->createView()));
+    }
+    
+    private function createMissatgesForm(Missatges $entity)
+    {
+        $form = $this->createForm(new UserMissatgesType(), $entity, array(
+            'action' => $this->generateUrl('nou_missatge_ajax'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    public function consumirAction(Request $request)
+    {        
+        	
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+
+        $usr= $this->get('security.context')->getToken()->getUser();
+
+        $servei_cons = new Serveisconsumits();
+        
+        $query = $repository->createQueryBuilder('s')
+                ->where('s.solicitant = :solicitant')
+                ->setParameter('solicitant', $this->getUser())
+                ->orderBy('p.dataSolicitut', 'ASC')
+                ->getQuery();
+                
+                
+                
+        $servei_cons->setIdservei($id);
+        $servei_cons->setIdusuari($usr);
+        //$servei_cons->setValoracioservei($usr);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($servei_cons);
+        $em->flush();
+	
+        
+        
+        return $this->render('bonavallBancdeltempsBundle:Default:serveiConsumit.html.twig', array('id' => $id));
     }
     
     public function cancelarAction(Request $request)

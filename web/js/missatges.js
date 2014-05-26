@@ -37,7 +37,7 @@ $(document).ready(function() {
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
-                $('#outputButton_'+id).html("<div><a id='nou_miss_{{solicitut.id}}' data-toggle='modal' data-target='#modal_nou_missatge_"+id+"' class='btn btn-default' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
+                $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' data-toggle='modal' data-target='#modal_nou_missatge_"+id+"' class='btn btn-default' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
@@ -55,6 +55,12 @@ $(document).ready(function() {
        });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
 
       //we dont what the browser to submit the form
+      
+      
+      $('#nou_miss_'+id).click(function(){
+           alert(msg_form);
+           $('nou_msg_form_'+id).html(msg_form); 
+      });
       
         //Obrir missatges
       $("#miss_btn_"+id).click(function(e){

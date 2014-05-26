@@ -355,8 +355,6 @@ triacat_ajax:
 nou_missatge_ajax:
     pattern: /user/solicituts/rebudes/noumsg/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatge }
-    requirements:
-        _method:  POST|GET
     
 cancelar_sol_ajax:
     pattern: /user/solicituts/cancelar
@@ -469,3 +467,6 @@ user_missatges_solicita:
   #defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
 
 
+consumir_servei:
+  pattern: /user/serveis/consumir
+  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:consumir }

@@ -8,6 +8,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserMissatgesType extends AbstractType
 {
+     private static $count = 0;
+     private $suffix;
+    
+     public function __construct() {
+        $this->suffix = self::$count++;
+     }
         /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -38,6 +44,6 @@ class UserMissatgesType extends AbstractType
      */
     public function getName()
     {
-        return 'bonavall_bancdeltempsbundle_missatges';
+        return 'bonavall_bancdeltempsbundle_missatges'.$this->suffix;
     }
 }

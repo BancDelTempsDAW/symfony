@@ -55,22 +55,25 @@
                 <div id="modal_nou_missatge_{{solicitut.id}}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                      <div class="modal-dialog">
                          <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Nou Missatge</h4>
-                            </div>
-                            <div class="modal-body" id="nou_msg_modal_body_{{solicitut.id}}" >
-                                <p>Escriu un nou missatge per a <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
-                                    amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b>
-                                </p>
-                                <div>
-                                    <textarea id="nou_missatge_txt_{{solicitut.id}}" class="nou_missatge_txt form-control" rows="4" ></textarea>                                    
+                             <form action="{{path('nou_missatge_ajax')}}" name="noumsg">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Nou Missatge</h4>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="{{path('nou_missatge_ajax')}}" id="nou_missatge_btn_{{solicitut.id}}" type="button" class="btn btn-primary">Enviar Missatge</a>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
-                            </div>
+                                <div class="modal-body" id="nou_msg_modal_body_{{solicitut.id}}" >
+                                    <p>Escriu un nou missatge per a <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
+                                        amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b>
+                                    </p>
+                                    <div>
+                                        <input type="hidden" name="id" value="{{solicitut.id}}" />
+                                        <textarea name="msg" id="nou_missatge_txt_{{solicitut.id}}" class="nou_missatge_txt form-control" rows="4" ></textarea>                                    
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input id="nou_missatge_btn_{{solicitut.id}}" type="submit" class="btn btn-primary" value="Enviar Missatge" />
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+                                </div>
+                            </form>
                          </div>
                      </div>
                 </div>

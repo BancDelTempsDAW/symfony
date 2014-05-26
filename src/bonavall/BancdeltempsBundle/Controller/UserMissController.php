@@ -73,7 +73,7 @@ class UserMissController extends Controller {
     
       public function nouMissatgeAction() {
         $request = $this->get('request');
-        $id = $request->request->get('id_sol');
+        $id = $request->request->get('id');
         $msg = $request->request->get('msg');
         
         if($msg){
@@ -91,10 +91,19 @@ class UserMissController extends Controller {
         $em->persist($missatge_nou);
         $em->flush();
         
-        $return = array("nou_msg" => $missatge_nou);
-        $return = json_encode($return); //jscon encode the array
-        return new Response($return, 200, array('Content-Type' => 'application/json')); //make sure it has the correct content type
-        //return $this->render('bonavallBancdeltempsBundle:Default:userMissatges.html.twig', array('missatges' => $missatges));
+
+        $query = $repository->createQueryBuilder('p')
+                ->where('p.solicitant = :solicitant')
+                ->setParameter('solicitant', $this->getUser())
+                ->orderBy('p.dataSolicitut', 'ASC')
+                ->getQuery();
+
+        $solicituts = $query->getResult();
+        if (!$solicituts) {
+            throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
+        }
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
+        
     }
     
     
