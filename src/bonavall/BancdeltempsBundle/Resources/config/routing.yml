@@ -381,11 +381,11 @@ perfil_user:
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:edit }
 
 perfil_update:
-  pattern: /user/usuari/update{id}
+  pattern: /user/usuari/update/{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:update }
 
 baixa_perfil:
-  pattern: /user/perfil/baixa/
+  pattern: /user/perfil/baixa/{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UsuariPerfil:baixa }
 
 #Rutes de gestio de solicituds

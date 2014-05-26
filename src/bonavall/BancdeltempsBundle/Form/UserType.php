@@ -27,7 +27,7 @@ class UserType extends AbstractType
             ->add('telefon')
             ->add('fotografia', 'file', array('data_class' => null))
             ->add('presentacio')
-            ->add('punts')
+            ->add('punts', 'text', array('read_only' => true))
            
         ;
     }

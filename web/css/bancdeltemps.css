@@ -7,6 +7,11 @@ body{
     background-color: #F1FFFB;
 }
 
+#modificarBody{
+    width: 60%;
+    
+}
+
 .nou_missatge_txt{ 
     resize: none; 
     overflow:auto; 
