@@ -182,7 +182,7 @@ class UsuariPerfilController extends Controller {
 //            }
 //            return new Response(json_encode($return), $return['responseCode']);
 //        } else {
-//            return $this->render('bonavallBancdeltempsBundle:user:perfil.html.twig', array());
+//            return $this->render('bonavallBancdeltempsBundle:UsuariPerfil:perfil.html.twig', array());
 //        }
 //    }
 
