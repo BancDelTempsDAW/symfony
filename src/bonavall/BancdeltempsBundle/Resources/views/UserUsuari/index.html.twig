@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>Llistat d'usuaris</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="info">
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>Nom</th>
+                        <th>Cognom</th>
+                        <th>Adreca</th>
+                        <th>Telefon</th>
+                        <th>Fotografia</th>
+                        <th>Presentacio</th>
+                        <th>Punts</th>
+                        <th>Opcions</th>
+                    </tr>
+                </thead>
+                <tbody>
+        {% for entity in entities %}
+                {%if entity.isActive %}
+                        <tr>
+                            <td><a href="{{ path('user_usuari_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>                
+                            <td>{{ entity.email }}</td>
+                            <td>{{ entity.nom }}</td>
+                            <td>{{ entity.cognom }}</td>
+                            <td>{{ entity.adreca }}</td>
+                            <td>{{ entity.telefon }}</td>
+                            <td><img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="45" width="45" />  </td>
+                            <td>{{ entity.presentacio }}</td>
+                            <td>{{ entity.punts }}</td>
+                            <td>
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a class="btn btn-info" href="{{ path('user_usuari_show', { 'id': entity.id }) }}">Mostra</a>
+                                    </li>
+
+                                </ul>
+                            </td>
+                        </tr>
+            {%endif%}
+        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}
