@@ -25,7 +25,7 @@ class UserType extends AbstractType
                                 ->orderBy('u.poblacio', 'ASC');
                     }))
             ->add('telefon')
-            ->add('fotografia', 'file',array('data_class' => null))
+            ->add('fotografia', 'file', array('data_class' => null))
             ->add('presentacio')
             ->add('punts')
            

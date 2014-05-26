@@ -24,27 +24,24 @@ class UsuariPerfilController extends Controller {
     /**
      * Displays a form to edit an existing Usuari entity.
      *
-     * @Route("/{id}/edit", name="usuari_edit")
+     * @Route("/{id}", name="perfil_user")
      * @Method("GET")
      * @Template()
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('bonavallBancdeltempsBundle:Usuari')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuari entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);        
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView(),            
         );
     }
     
@@ -58,38 +55,23 @@ class UsuariPerfilController extends Controller {
     private function createEditForm(Usuari $entity)
     {
         $form = $this->createForm(new UserType(), $entity, array(
-            'action' => $this->generateUrl('user_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('perfil_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualitza Perfil'));
 
         return $form;
     }
     
-    /**
-     * Creates a form to delete a Usuari entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('usuari_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
-    }
+    
             
     /**
      * Edits an existing Usuari entity.
      *
-     * @Route("/{id}", name="usuari_update")
+     * @Route("/{id}", name="perfil_update")
      * @Method("PUT")
-     * @Template("bonavallBancdeltempsBundle:Usuari:edit.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UsuariPerfil:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -100,8 +82,7 @@ class UsuariPerfilController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuari entity.');
         }
-
-        $deleteForm = $this->createDeleteForm($id);
+        
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -113,8 +94,7 @@ class UsuariPerfilController extends Controller {
 
         return array(
             'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'edit_form'   => $editForm->createView(),            
         );
     }
     
