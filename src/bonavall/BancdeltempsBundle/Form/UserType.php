@@ -17,7 +17,7 @@ class UserType extends AbstractType
         
         $builder
             ->add('email')
-            ->add('password')
+            ->add('password','password')
             ->add('nom')
             ->add('cognom')
             ->add('adreca','entity', array('class' => 'bonavallBancdeltempsBundle:Poblacion', 'query_builder' => function($er) {
