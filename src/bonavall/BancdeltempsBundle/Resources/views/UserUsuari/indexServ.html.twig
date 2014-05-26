@@ -1,0 +1,31 @@
+<h3>Serveis de l'usuari</h3>
+
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr class="info">
+                <th>Id</th>
+                <th>Punts</th>
+                <th>Nomservei</th>  
+                <th>Descripcioservei</th>
+                <th>Datainici</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.punts }}</td>
+                    <td>{{ entity.nomServei }}</td>
+                    <td>{{ entity.descripcioServei }}</td>
+                    <td>{% if entity.dataInici %}{{ entity.dataInici|date('d-m-Y') }}{% endif %}</td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+</div>
+</div>
+

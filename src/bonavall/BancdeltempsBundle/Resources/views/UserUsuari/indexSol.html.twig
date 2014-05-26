@@ -1,0 +1,50 @@
+
+<h3>Solicituts Enviades</h3>
+
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+            <tr class="info">
+                <th>Id</th>
+                <th>Datasolicitut</th>
+                <th>Servei Solicitat</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in enviades %}
+                <tr>
+                    <td>{{ entity.id }}</td>
+                    <td>{% if entity.dataSolicitut %}{{ entity.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ entity.serveiSolicitat.descripcioServei }}</td>
+                </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <h3>Solicituts Rebudes</h3>
+
+    <div class="table-responsive">
+        <table class="table table-condensed">
+            <thead>
+                <tr class="info">
+                    <th>Id</th>
+                    <th>Datasolicitut</th>
+                    <th>Servei Solicitat</th>
+                    <th>Usuari que ho solicita</th>
+
+                </tr>
+            </thead>
+            <tbody>
+        {% for entity in rebudes %}
+                    <tr>
+                        <td>{{ entity.id }}</td>
+                        <td>{% if entity.dataSolicitut %}{{ entity.dataSolicitut|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        <td>{{ entity.serveiSolicitat.descripcioServei }}</td>
+                        <td><a href="{{ path('user_usuari_show', { 'id': entity.solicitant.id })}} ">{{ entity.solicitant }} </a></td>
+                    </tr>
+        {% endfor %}
+                </tbody>
+            </table>
+        </div>
+

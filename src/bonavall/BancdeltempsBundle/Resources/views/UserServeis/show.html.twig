@@ -1,55 +1,153 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Serveis</h1>
+<h1>Dades del Servei {{ entity.nomServei }}</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4"> 
+                <h3>Servei</h3>
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <th class="info">Id</th>
+                                <td>{{ entity.id }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Punts</th>
+                                <td>{{ entity.punts }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Nomservei</th>
+                                <td>{{ entity.nomServei }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Descripcio servei</th>
+                                <td>{{ entity.descripcioServei }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">L'ofereix</th>
+                                <td>{{ entity.iddonant }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Poblacio</th>
+                                <td>{{ entity.poblacio }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Datainici</th>
+                                <td>{{ entity.dataInici|date('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Durada</th>
+                                <td>{{ entity.durada }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Datafinal</th>
+                                <td>{{ entity.dataFinal|date('d-m-Y H:i:s') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Categoria</th>
+                                <td>{{ entity.tipusServei1 }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Punts</th>
-                <td>{{ entity.punts }}</td>
-            </tr>
-            <tr>
-                <th>Nomservei</th>
-                <td>{{ entity.nomServei }}</td>
-            </tr>
-            <tr>
-                <th>Descripcioservei</th>
-                <td>{{ entity.descripcioServei }}</td>
-            </tr>
-            <tr>
-                <th>Poblacio</th>
-                <td>{{ entity.poblacio }}</td>
-            </tr>
-            <tr>
-                <th>Datainici</th>
-                <td>{{ entity.dataInici|date('d-m-Y H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Durada</th>
-                <td>{{ entity.durada }}</td>
-            </tr>
-            <tr>
-                <th>Datafinal</th>
-                <td>{{ entity.dataFinal|date('d-m-Y H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Categoria</th>
-                <td>{{ entity.tipusServei1 }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    <ul class="record_actions">
+                        <li>
+                            <a href="{{ path('user_serveis') }}">
+                                Torna al llistat
+                            </a>
+                        </li>
+    {% set counter = 0 %}
+                    {%for solicitut in solicituts %}
+                        {% if (solicitut.solicitant.id == app.user.id) and (entity.id == solicitut.serveiSolicitat.id) %}
+                            {% set counter = counter + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {%if counter > 0%}
+                        <p class="text-danger">Servei ja sol·licitat</p>
+                    {%else%}
+                        <li>
+                            <a class="btn btn-warning" href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicita</a>
+                        </li>  
+                    {%endif%}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4"> 
+                <h3>Qui el dona?</h3>
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr>
+                                <th class="info">Id</th>
+                                <td>{{ donaServei.id }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Email</th>
+                                <td>{{ donaServei.email }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Fotografia</th>
+                                <td><img src="{{ asset('upload/' ~ donaServei.id ~'/' ~ donaServei.fotografia)}}" alt="" height="35" width="35" /></td>
+                            </tr>
+                            <tr>
+                                <th class="info">Nom</th>
+                                <td>{{ donaServei.nom }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Cognom</th>
+                                <td>{{ donaServei.cognom }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Adreca</th>
+                                <td>{{ donaServei.adreca }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Telefon</th>
+                                <td>{{ donaServei.telefon }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Presentacio</th>
+                                <td>{{ donaServei.presentacio }}</td>
+                            </tr>
+                            <tr>
+                                <th class="info">Punts</th>
+                                <td>{{ donaServei.punts }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-4"> 
+                <h3>Valoracions</h3>
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr class="info">
+                                <th>Id</th>
+                                <th>Comentaris</th>
+                                <th>Servei</th>
+                                <th>Consumidor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+        {% for entity in valoracions %}
+                                <tr>
+                                    <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                    <td>{{ entity.comentaris }}</td>
+                                    <td><a href="{{ path('user_serveis_show', { 'id': entity.idservei.id }) }}">{{ entity.idservei }}</a></td>
+                                    <td><a href="{{ path('user_usuari_show', { 'id': entity.idusuari.id })}} ">{{ entity.idusuari.nom }}</a></td>
+                                </tr>
+        {% endfor %}
+                            </tbody>
+                        </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user_serveis') }}">
-            Torna al llistat
-        </a>
-    </li>
-    <li>{{ form(solicita_form) }}</li>
-</ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

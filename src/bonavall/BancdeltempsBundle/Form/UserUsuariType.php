@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UsuariType extends AbstractType
+class UserUsuariType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -14,6 +14,7 @@ class UsuariType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         $builder
             ->add('salt')
             ->add('email')
@@ -21,14 +22,16 @@ class UsuariType extends AbstractType
             ->add('isActive')
             ->add('nom')
             ->add('cognom')
-            ->add('adreca')
+            ->add('adreca','entity', array('class' => 'bonavallBancdeltempsBundle:Poblacion', 'query_builder' => function($er) {
+                        return $er->createQueryBuilder('u')
+                                ->orderBy('u.poblacio', 'ASC');
+                    }))
             ->add('telefon')
-            ->add('fotografia','file',array(
-                'data_class' => null
-            ))
+            ->add('fotografia')
             ->add('presentacio')
             ->add('punts')
             ->add('rol')
+           
         ;
     }
     

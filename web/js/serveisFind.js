@@ -1,4 +1,5 @@
 $(document).ready(function() {
+   // $('#triaCp').select2({ allowClear: false});
     $('#triaCp').change(function() {
         var id = $('#triaCp').val();
         $('#triaCat').get(0).selectedIndex = 0;

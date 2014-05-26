@@ -50,7 +50,7 @@ $(document).ready(function() {
         },
         submitHandler: function(form) {
             var urlString = $('#urlString').val();
-            var dataString = 'fotografia=' + $('#user_fotografia').val() + '&password=' + $('#user_pass').val() + '&nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
+            var dataString = '&password=' + $('#user_pass').val() + '&nom=' + $('#user_nom').val() + '&cognom=' + $('#user_cognom').val() + '&adreca=' + $('#user_adreca').val() + '&telefon=' + $('#user_telefon').val() + '&email=' + $('#user_email').val() + '&presentacio=' + $('#user_presentacio').val();
             $.ajax({
                 type: "POST",
                 url: urlString,
@@ -58,6 +58,7 @@ $(document).ready(function() {
                 success: function(data) {
                     if (data === '{"responseCode":200}') {
                         $("#success").html("S'ha modificat amb exit").show().fadeOut(6000);
+                        location.reload();
                     } else {
                         $("#failure").html("Error al modificar el perfil").show().fadeOut(6000);
                     }

@@ -8,14 +8,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use bonavall\BancdeltempsBundle\Entity\Usuari;
-use bonavall\BancdeltempsBundle\Form\UsuariType;
+use bonavall\BancdeltempsBundle\Entity\Serveis;
+use bonavall\BancdeltempsBundle\Form\UserUsuariType;
 
 /**
  * Usuari controller.
  *
  * @Route("/usuari")
  */
-class UsuariController extends Controller
+class UserUsuariController extends Controller
 {
 
     /**
@@ -47,11 +48,13 @@ class UsuariController extends Controller
         $entity = new Usuari();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
-
+        $em = $this->getDoctrine()->getManager();
+       
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+            
 
             return $this->redirect($this->generateUrl('usuari_show', array('id' => $entity->getId())));
         }
@@ -71,7 +74,7 @@ class UsuariController extends Controller
     */
     private function createCreateForm(Usuari $entity)
     {
-        $form = $this->createForm(new UsuariType(), $entity, array(
+        $form = $this->createForm(new UserUsuariType(), $entity, array(
             'action' => $this->generateUrl('usuari_create'),
             'method' => 'POST',
         ));
@@ -243,5 +246,60 @@ class UsuariController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    
+    /**
+     * Lists all Serveis entities.
+     *
+     * @Route("/", name="user_serveis")
+     * @Method("GET")
+     * @Template()
+     */
+    
+    public function userShowServiceAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexServ.html.twig', array(
+             'entities' => $entities,
+        ));
+    }
+    
+    public function userShowValoraAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $serv = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveisconsumits')->findBy(array('idservei' => $serv ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexVal.html.twig', array(
+             'entities' => $entities,
+        ));
+    }
+    
+    public function userHistIntAction()
+    {
+        $request = $this->get('request');
+        $id = $request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+        $enviades = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('solicitant' => $id ));
+        $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id ));
+        $rebudes  = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat' => $serveis ));
+        
+
+         return $this->render('bonavallBancdeltempsBundle:UserUsuari:indexSol.html.twig', array(
+             'enviades' => $enviades,
+             'rebudes' => $rebudes,
+        ));
     }
 }

@@ -58,7 +58,7 @@ class Serveis
      *
      * @ORM\ManyToOne(targetEntity="Poblacion")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="poblacio_id", referencedColumnName="idpoblacion")
+     *   @ORM\JoinColumn(name="poblacio_id", referencedColumnName="idpoblacion", nullable=false)
      * })
      */
     private $poblacio;
@@ -80,7 +80,7 @@ class Serveis
 
     /**
      * @var \DateTime
-     *
+     * 
      * @ORM\Column(name="data_final", type="date", nullable=false)
      */
     private $dataFinal;
@@ -91,7 +91,7 @@ class Serveis
      *
      * @ORM\ManyToOne(targetEntity="TipusServei")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="tipus_servei_id1", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="tipus_servei_id1", referencedColumnName="id", nullable=false)
      * })
      */
     private $tipusServei1;
@@ -101,14 +101,16 @@ class Serveis
      *
      * @ORM\ManyToOne(targetEntity="EstatServei")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="estat_servei_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="estat_servei_id", referencedColumnName="id", nullable=false)
      * })
      */
     private $estatServei;
     
     public function __construct() {
         $this->dataInici = new \DateTime("now");
-        $this->dataFinal = new \DateTime("now");
+        $final=new \DateTime("now");
+        date_add($final, date_interval_create_from_date_string('365 days'));        
+        $this->dataFinal = $final;
     }
 
 
@@ -313,7 +315,7 @@ class Serveis
     {
         return $this->estatServei;
     }
-    
+
     public function __toString() {
         return $this->nomServei;
     }
