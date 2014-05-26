@@ -21,10 +21,13 @@ class UsuariType extends AbstractType
             ->add('isActive')
             ->add('nom')
             ->add('cognom')
-            ->add('adreca')
+            ->add('adreca','entity', array('class' => 'bonavallBancdeltempsBundle:Poblacion',
+                'query_builder' => function($er) {
+            return $er->createQueryBuilder('u')
+                ->orderBy('u.poblacio', 'ASC');
+        }))
             ->add('telefon')
             ->add('password')
-
             ->add('fotografia','file',array(
                 'data_class' => null
             ))

@@ -37,7 +37,7 @@
                 </div>
 
                 {{ form_label(form.fotografia) }} <br />
-                {{ form_widget(form.fotografia) }} <br />
+                {{ form_widget(form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }} <br />
 
 
                 {{ form(form) }}

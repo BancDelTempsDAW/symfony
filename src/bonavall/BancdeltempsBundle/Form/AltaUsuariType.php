@@ -42,9 +42,7 @@ class AltaUsuariType extends AbstractType
                 'label'=>'Rol'
             ))
             ->add('rol');
-            //->add('poblacio')
-            //->add('codi_postal')
-            //->add('salt')
+
     }
 
     public function getDefaultOptions(array $options)

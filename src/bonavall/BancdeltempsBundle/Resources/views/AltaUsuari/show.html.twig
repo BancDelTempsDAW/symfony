@@ -55,7 +55,7 @@
             </tr>
             <tr>
                 <th>Fotografia</th>
-                <td>{{ entity.fotografia }}</td>
+                <td><img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="45" width="45" /></td>
             </tr>
                 <th>Adreça</th>
                 <td>{{ entity.adreca }}</td>
