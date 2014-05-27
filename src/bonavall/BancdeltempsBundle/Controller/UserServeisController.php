@@ -344,7 +344,6 @@ class UserServeisController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
         $idDonant = $this->get('security.context')->getToken()->getUser()->getId();
         
