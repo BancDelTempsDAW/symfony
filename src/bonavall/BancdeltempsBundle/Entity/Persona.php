@@ -51,7 +51,7 @@ class Persona implements AdvancedUserInterface, \Serializable {
     /**
      * @var boolean
      *
-     * @ORM\Column(name="actiu", type="boolean", nullable=false)
+     * @ORM\Column(name="actiu", type="boolean", nullable=true)
      */
     protected $isActive;
 

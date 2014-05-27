@@ -8,13 +8,17 @@
             <br />
             <form action={{ path('perfil_update', {'id': app.user.id}) }} method="post"{{ form_enctype(edit_form) }} >
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-6">
                         <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" alt="" height="150" width="150" />
                     </div>
-                    <div class="col-md-6">                        
+                        
+                        <div class="col-2">{{ form_errors(edit_form.fotografia) }}</div>
+                    <div class="col-1">                        
                             {{ form_widget(edit_form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }}
-                    </div>
+                    </div>    
+                       
                 </div>
+                    <div class="row">{{ form_errors(edit_form.fotografia) }}</div>
                 <div class="row">
                     <div class="col-md-6">
                             {{ form_label(edit_form.password) }}

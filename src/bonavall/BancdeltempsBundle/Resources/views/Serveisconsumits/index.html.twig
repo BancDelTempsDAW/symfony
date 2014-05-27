@@ -2,13 +2,16 @@
 
 {% block body -%}
     <h1>Serveisconsumits list</h1>
-
-    <table class="records_list">
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <br>
+    <table class="table table-condensed"">
         <thead>
-            <tr>
+            <tr class="info">
                 <th>Id</th>
                 <th>Comentaris</th>
                 <th>Actions</th>
+                <th>Valoracio</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +19,7 @@
             <tr>
                 <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.comentaris }}</td>
+                <td>{{ entity.valoracioServei }}</td>
                 <td>
                 <ul>
                     <li>
@@ -38,4 +42,7 @@
             </a>
         </li>
     </ul>
+        
+        </div>
+        </div>
     {% endblock %}
