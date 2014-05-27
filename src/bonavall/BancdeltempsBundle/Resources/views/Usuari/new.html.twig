@@ -1,14 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Usuari creation</h1>
-
+<h1>Usuari creation</h1>
+{{ form_label(form.fotografia) }} <br />
+                {{ form_widget(form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }} <br />
     {{ form(form) }}
-    {% if form.vars.value.image is not null %}
-            <img src="{{ asset('upload/dir/' ~ form.vars.value.fotografia) }}" />
-        {% endif %}
 
-        <ul class="record_actions">
+
+<ul class="record_actions">
     <li>
         <a href="{{ path('usuari') }}">
             Back to the list

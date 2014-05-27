@@ -336,8 +336,33 @@ admin_missatges_new:
   defaults: { _controller: bonavallBancdeltempsBundle:Missatges:new }
 admin_missatges_delete:
   pattern: /admin/missatges/delete{id}
-  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }    
+  defaults: { _controller: bonavallBancdeltempsBundle:Missatges:delete }  
   
+  
+admin_denuncies:
+  pattern: /admin/denuncies/
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:index }
+admin_denuncies_create:
+  pattern: /admin/denuncies/create
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:create }
+admin_denuncies_update:
+  pattern: /admin/denuncies/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:update }
+admin_denuncies_show:
+  pattern: /admin/denuncies/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:show }
+admin_denuncies_edit:
+  pattern: /admin/denuncies/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:edit }
+admin_denuncies_new:
+  pattern: /admin/denuncies/new
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:new }
+admin_denuncies_delete:
+  pattern: /admin/denuncies/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:Denuncies:delete }  
+  
+  
+
 user_miss:
     pattern: /missatges/
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:index }
@@ -495,6 +520,19 @@ user_missatges_solicita:
   pattern: /user/missatges/solicita{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:new }
 
+user_denuncies:
+    pattern: /denuncies/
+    defaults: { _controller: bonavallBancdeltempsBundle:UserDenuncies:index }
+user_denuncies_create:
+  pattern: /user/denuncies/create{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserDenuncies:create }
+user_denuncies_show:
+  pattern: /user/denuncies/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserDenuncies:show }
+user_denuncies_new:
+  pattern: /user/denuncies/new{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserDenuncies:new }
+ 
 
 #gestionar_solicituds:
  # pattern: /user/solicituts/

@@ -18,7 +18,7 @@ class AltaUsuariController extends Controller
     /**
      * Finds and displays a Usuari entity.
      *
-     * @Route("/{id}", name="usuari_show")
+     * @Route("/{id}", name="alta_usuari_show")
      * @Method("GET")
      * @Template()
      */
@@ -45,20 +45,22 @@ class AltaUsuariController extends Controller
      *
      * @Route("/", name="alta_usuari_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:AltaUsuari:show.html.twig")
+     * @Template("bonavallBancdeltempsBundle:AltaUsuari:registre.html.twig")
      */
     public function createAction(Request $request)
     {
-        $bdt= new Bancdeltemps();
-        $pt = $bdt->getSaldoMinim();
+        $em = $this->getDoctrine()->getManager();
+        $minim = $em->getRepository('bonavallBancdeltempsBundle:Bancdeltemps')->findOneBy(array('id' => 1));
+        $pt= $minim->getSaldoMinim();
 
         $entity = new Usuari();
-        $entity->setPunts($pt);
+        
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
             if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
+                $entity->setPunts($pt);
                 $em->persist($entity);
                 $em->flush();
 

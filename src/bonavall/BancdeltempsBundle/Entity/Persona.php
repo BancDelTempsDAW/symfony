@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="Persona")
  * @ORM\Entity
- * @UniqueEntity("email")
+ * @UniqueEntity(fields="email", message="Aquest email ja està registrat")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string");
  * @ORM\DiscriminatorMap({"persona" = "Persona", "usuari" = "Usuari"})

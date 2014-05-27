@@ -1,13 +1,14 @@
 $(document).ready(function() {
-    $('#triaCp').select2();
-    $('#triaPob').select2();
-    $('#triaProv').select2();
-    $('#triaCat').select2();
+    
+    $('#triaCp').select2({ allowClear: true });
+    $('#triaPob').select2({ allowClear: true });
+    $('#triaProv').select2({ allowClear: true });
+    $('#triaCat').select2({ allowClear: true });
     $('#triaCp').change(function() {
         var id = $('#triaCp').val();
-        $('#triaCat').get(0).selectedIndex = 0;
-        $('#triaPob').get(0).selectedIndex = 0;
-        $('#triaProv').get(0).selectedIndex = 0;
+        $('#triaCat').select2('data', null);
+        $('#triaPob').select2('data',null);
+        $('#triaProv').select2('data',null);
         if (id == "reset") {
             location.reload();
         } else {
@@ -28,9 +29,9 @@ $(document).ready(function() {
 
     $('#triaPob').change(function() {
         var id = $('#triaPob').val();
-        $('#triaCat').get(0).selectedIndex = 0;
-        $('#triaCp').get(0).selectedIndex = 0;
-        $('#triaProv').get(0).selectedIndex = 0;
+        $('#triaCat').select2('data', null);
+        $('#triaCp').select2('data', null);
+        $('#triaProv').select2('data', null);
         if (id == "reset") {
             location.reload();
         } else {
@@ -51,9 +52,9 @@ $(document).ready(function() {
 
     $('#triaProv').change(function() {
         var id = $('#triaProv').val();
-        $('#triaCat').get(0).selectedIndex = 0;
-        $('#triaCp').get(0).selectedIndex = 0;
-        $('#triaPob').get(0).selectedIndex = 0;        
+        $('#triaCat').select2('data', null);
+        $('#triaCp').select2('data', null);
+        $('#triaPob').select2('data', null);
         if (id == "reset") {
             location.reload();
         } else {
@@ -74,9 +75,9 @@ $(document).ready(function() {
     
     $('#triaCat').change(function() {
         var id = $('#triaCat').val();       
-        $('#triaCp').get(0).selectedIndex = 0;
-        $('#triaPob').get(0).selectedIndex = 0;
-        $('#triaProv').get(0).selectedIndex = 0;
+        $('#triaCp').select2('data', null);
+        $('#triaPob').select2('data', null);
+        $('#triaProv').select2('data', null);
         if (id == "reset") {
             location.reload();
         } else {
@@ -97,10 +98,10 @@ $(document).ready(function() {
     
     $('#btnReset').click(function() {
         location.reload();
-        $('#triaCat').get(0).selectedIndex = 0;
-        $('#triaCp').get(0).selectedIndex = 0;
-        $('#triaPob').get(0).selectedIndex = 0;
-        $('#triaProv').get(0).selectedIndex = 0;
+        $('#triaCat').select2('data', null);
+        $('#triaCp').select2('data', null);
+        $('#triaPob').select2('data', null);
+        $('#triaProv').select2('data', null);
     });
 
 });

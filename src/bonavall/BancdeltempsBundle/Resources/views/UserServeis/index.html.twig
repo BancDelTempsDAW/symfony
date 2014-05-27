@@ -18,7 +18,7 @@
                 </select>               
             </div>
             <div class="col-md-3">
-                <div id="cptitle">Filtrar per poblacio</div>
+                <div id="pobtitle">Filtrar per poblacio</div>
                 <select class="form-control" id="triaPob" reset={{path('user_serveis')}} action="{{path('triapob_ajax')}}">
                     <option value="reset">Tria una opció...</option>
 {%for poblacio in poblacionsnom%}
@@ -27,7 +27,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <div id="cptitle">Filtrar per provincia</div>
+                <div id="provtitle">Filtrar per provincia</div>
                 <select class="form-control" id="triaProv" reset={{path('user_serveis')}} action="{{path('triaprov_ajax')}}">
                     <option value="reset">Tria una opció...</option>
 {%for provincia in provincies%}
@@ -36,7 +36,7 @@
                 </select>
             </div>
             <div class="col-md-3">
-                <div id="cptitle">Filtrar per categoria</div>
+                <div id="cattitle">Filtrar per categoria</div>
                 <select class="form-control" id="triaCat" reset={{path('user_serveis')}} action="{{path('triacat_ajax')}}">
                     <option value="reset">Tria una opció...</option>
 {%for categoria in categories%}
@@ -92,19 +92,26 @@
                                 <li>
                                     <a class="btn btn-info" href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
                                 </li> 
+     {% if not colabora %}
+             <p class="text-danger">No has ofert cap servei</p>             
+     {% elseif  saldominim < app.user.punts %}
+             <p class="text-danger">No tens prous punts</p>
+     {% else %}
                     {% set counter = 0 %}
-                    {%for solicitut in solicituts %}
+                    {% for solicitut in solicituts %}
                         {% if (solicitut.solicitant.id == app.user.id) and (entity.id == solicitut.serveiSolicitat.id) %}
                             {% set counter = counter + 1 %}
                         {% endif %}
                     {% endfor %}
-                    {%if counter > 0%}
+                    {%if counter > 0 %}
                                 <p class="text-danger">Servei ja sol·licitat</p>
                     {%else%}
                                 <li>
                                     <a class="btn btn-warning" href="{{ path('user_missatges_solicita', { 'id': entity.id }) }}">Solicita</a>
-                                </li>  
+                                </li>                                
                     {%endif%}
+                                
+        {% endif %}
                             </ul>
                         </td>
                     </tr>                      
