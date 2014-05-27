@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<h1 style="">Perfil</h1>
+<h1 >Perfil</h1>
 <p>Aqui també pots modificar el teu perfil</p>
 <div class="panel panel-default">
         <div class="container-fluid">
             <br />
-            <form action={{ path('perfil_update', {'id': app.user.id}) }}) method="post"{{ form_enctype(edit_form) }} >
+            <form action={{ path('perfil_update', {'id': app.user.id}) }} method="post"{{ form_enctype(edit_form) }} >
                 <div class="row">
                     <div class="col-md-6">
                         <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" alt="" height="150" width="150" />

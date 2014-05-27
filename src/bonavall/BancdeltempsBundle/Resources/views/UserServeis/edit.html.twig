@@ -1,16 +1,93 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Serveis edit</h1>
-
+<h1>Edita el servei {{ entity }}</h1>
+<div class="panel panel-default">
+        <div class="container-fluid">
+            <br />
+            <form action={{ path('user_serveis') }} method="post"{{ form_enctype(edit_form) }} >                
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.punts) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.punts) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                             {{ form_label(edit_form.nomServei) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.nomServei) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.descripcioServei) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.descripcioServei) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.poblacio) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.poblacio) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                             {{ form_label(edit_form.dataInici) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.dataInici) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.durada) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.durada) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.dataFinal) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.dataFinal) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.iddonant) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.iddonant,{'attr': {'class': 'file', 'disabled': 'true'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(edit_form.tipusServei1) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.tipusServei1) }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="col-md-3">
+                            {{ form_label(edit_form.submit) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.submit,{'attr': {'class': 'btn btn-info'}}) }}
+                    </div>
+                </div>
+                    <br />
+   </div>
+</div>
     {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user_serveis') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}

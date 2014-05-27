@@ -88,8 +88,7 @@
                           {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                               <li class="divider"></li>
                               <li><a href="{{ path('user_serveis_new') }}">Crear</a></li>
-                              <li><a href="#">Editar</a></li>
-                              <li><a href="#">Historial</a></li>
+                              <li><a href="{{ path('user_serveis_llista', { 'id': app.user.id }) }}">Els meus serveis</a></li>
                           {% endif %}
                       </ul>
                   </li>

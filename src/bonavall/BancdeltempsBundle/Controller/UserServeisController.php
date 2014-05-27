@@ -315,7 +315,7 @@ class UserServeisController extends Controller
     */
     private function createEditForm(Serveis $entity)
     {
-        $form = $this->createForm(new ServeisType(), $entity, array(
+        $form = $this->createForm(new UserServeisType(), $entity, array(
             'action' => $this->generateUrl('user_serveis_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
@@ -418,5 +418,38 @@ class UserServeisController extends Controller
             ->add('submit', 'submit', array('label' => 'Solicitar'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Lists all Serveis entities.
+     *
+     * @Route("/", name="user_serveis")
+     * @Method("GET")
+     * @Template()
+     */
+    public function llistaAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array('iddonant' => $id));
+              
+
+        return array(
+            'entities' => $entities,            
+        );
+    }
+    
+    public function reactivaAction($id,$iduser)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $final=new \DateTime("now");
+        date_add($final, date_interval_create_from_date_string('365 days'));
+
+        $entities = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
+        $entities->setDataInici(new \DateTime("now"));
+        $entities->setDataFinal($final);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('user_serveis_llista', array('id' => $iduser)));
     }
 }

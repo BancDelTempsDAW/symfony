@@ -424,6 +424,12 @@ user_serveis_delete:
 user_serveis_solicita:
   pattern: /user/serveis/solicita{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:new }
+user_serveis_llista:
+  pattern: /user/serveis/llista{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:llista }
+user_serveis_reactiva:
+  pattern: /user/serveis/reactiva{id}/{iduser}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:reactiva }
 # 
 #user_solicituts:
 #  pattern: /user/solicituts/

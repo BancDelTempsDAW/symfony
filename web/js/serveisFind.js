@@ -1,5 +1,8 @@
 $(document).ready(function() {
-   // $('#triaCp').select2({ allowClear: false});
+    $('#triaCp').select2();
+    $('#triaPob').select2();
+    $('#triaProv').select2();
+    $('#triaCat').select2();
     $('#triaCp').change(function() {
         var id = $('#triaCp').val();
         $('#triaCat').get(0).selectedIndex = 0;

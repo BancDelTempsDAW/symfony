@@ -1,15 +1,94 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Dona d'alta un servei</h1>
+<h1>Dona d'alta un servei</h1>
+<div class="panel panel-default">
+        <div class="container-fluid">
+            <br />
+            <form action={{ path('user_serveis') }} method="post"{{ form_enctype(form) }} >                
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.punts) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.punts) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                             {{ form_label(form.nomServei) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.nomServei) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.descripcioServei) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.descripcioServei) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.poblacio) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.poblacio) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                             {{ form_label(form.dataInici) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.dataInici) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.durada) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.durada) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.dataFinal) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.dataFinal) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.iddonant) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.iddonant,{'attr': {'class': 'file', 'disabled': 'true'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.tipusServei1) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.tipusServei1) }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="col-md-3">
+                            {{ form_label(form.submit) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.submit,{'attr': {'class': 'btn btn-info'}}) }}
+                    </div>
+                </div>
+                    <br />
+   </div>
+</div>
+    {{ form(form) }}    
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('user_serveis') }}">
-            Torna al llistat
-        </a>
-    </li>
-</ul>
 {% endblock %}
