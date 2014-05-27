@@ -7,133 +7,133 @@
 <script src="{{ asset('js/validacioPerfil.js') }}" type="text/javascript"></script>
 
 <script>
-
     $(document).ready(function() {
-
+        $('#user_pass').tooltip({placement: 'right'});    
         $("input").attr("size", 34);
-
+        $(".file").attr("size", 20);
     });
-
 </script>
 
 <h1 style="">Perfil</h1>
-<div class="panel panel-default">
+<div class="panel panel-default" >
     <div id="modificarBody" class="container-fluid">
         <br />
         <form action={{ path('perfil_update', {'id': app.user.id}) }} method="post" {{ form_enctype(edit_form) }} >
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" height="130" width="100" />
+            <div id="globalRowModificar" class="row">
+                <div class="row modal-header">
+                    <div class="col-md-6">
+                        <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" height="130" width="100" />
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(edit_form.fotografia,{'attr': {'class': 'file upload_foto','data-show-upload':'false'}}) }}
+                    </div>
                 </div>
-                <div class="col-md-6">                        
-                            {{ form_widget(edit_form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }}
-                </div>
-            </div>
-            <br />
-            <div class="row">
-                <div class="col-md-6">
+                <br />
+                <div class="row">
+                    <div class="col-md-6">
                              {{ form_label(edit_form.nom) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.nom) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                             {{ form_label(edit_form.cognom) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.cognom) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                             {{ form_label(edit_form.adreca) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.adreca) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                              {{ form_label(edit_form.telefon) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.telefon) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                             {{ form_label(edit_form.email) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.email) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                             {{ form_label(edit_form.punts) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.punts) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                             {{ form_label(edit_form.presentacio) }}
-                </div>
-                <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
                             {{ form_widget(edit_form.presentacio) }}
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                            <label>Password:</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass" data-toggle="tooltip" title="Modifica aquest camp per canviar el password"  />
+                    </div>
                 </div>
-                <div class="col-md-6">
-                            <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass"  />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
 {#                          {{ form_label(edit_form.password) }}#}
-                            <label id="labelConfirm" for="confirmPassword">Confirmació del password:</label>
+                        <label id="labelConfirm" for="confirmPassword">Confirmació del password:</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_widget(edit_form.password) }}
+                        <label id="equalError" style="color: firebrick">Els passwords no coincideixen</label>
+                        <label id="confirmError" style="color: firebrick">Has de confirmar el password</label>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                            {{ form_widget(edit_form.password) }}
-                            <label id="equalError">Els passwords no coincideixen:</label>
-                </div>
-            </div>
-            
-
-            <!-- Modal donarse de baixa -->
-            <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Donarse de baixa</h4>
-                        </div>
-                        <div class="modal-body" id="baixa_body" >
-                            <p>Segur que et vols donar de baixa?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="{{ path('baixa_perfil', {'id': app.user.id}) }}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
+                <!-- Modal donarse de baixa -->
+                <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Donarse de baixa</h4>
+                            </div>
+                            <div class="modal-body" id="baixa_body" >
+                                <p>Segur que et vols donar de baixa?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{{ path('baixa_perfil', {'id': app.user.id}) }}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="col-md-8">
+                <div class="modal-footer">
+                    <div class="col-md-8">
                         {{ form_widget(edit_form.submit,{'attr': {'class': 'btn btn-primary'}}) }}
-                    <button type="button" id="botoUserBaixa" class="btn btn-warning" data-toggle="modal" data-target="#modal_baixa" />Donarse de baixa</button>
+                        <button type="button" id="botoUserBaixa" class="btn btn-warning" data-toggle="modal" data-target="#modal_baixa" />Donarse de baixa</button>
+                    </div>
                 </div>
-            </div>
-                {{ form(edit_form) }}
-        </form>
-        <br />
+            {{ form(edit_form) }}
+            </form>
+            <br />
+        </div>
     </div>
 </div>
+
 
 {% endblock %}
