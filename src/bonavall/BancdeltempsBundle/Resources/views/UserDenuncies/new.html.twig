@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Denunciar a un usuari</h1>
+<div class="panel panel-default">
+        <div class="container-fluid">
+            <br />
+
+    <form action={{ path('user_denuncies_create', { 'id' : id }) }} method="post" {{ form_enctype(form) }} >                
+                <div class="row">
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.motiu) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.motiu) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.denunciat) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.denunciat,{'attr': {'disabled': 'true'}}) }}
+                    </div>
+                </div>
+             <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.denunciant) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.denunciant,{'attr': {'disabled': 'true'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                            {{ form_label(form.dataDenuncia) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.dataDenuncia) }}
+                    </div>
+                </div>
+                    <div class="row">
+                    <div class="col-md-3">
+                            {{ form_label(form.submit) }}
+                    </div>
+                    <div class="col-md-6">
+                            {{ form_widget(form.submit,{'attr': {'class': 'btn btn-info'}}) }}
+                    </div>
+                </div>
+                    <br />
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user_usuari_show', { 'id' : id }) }}">
+            torna al usuari
+        </a>
+    </li>
+</ul>
+            </div>
+        </div>
+{% endblock %}

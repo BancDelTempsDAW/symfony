@@ -45,7 +45,7 @@ class Bancdeltemps
     function __construct()
     {
 
-        $this->saldoMinim = 100;
+        $this->saldoMinim = 5;
 
     }
 

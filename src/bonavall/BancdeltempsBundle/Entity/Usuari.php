@@ -392,7 +392,10 @@ class Usuari extends Persona
         return parent::isEnabled();
     }
     
-    
+    public function __toString() {
+        return $this->nom." ".$this->cognom;
+    }
+
     /*****************************************************************************
     *                               Gestio de la fotografia
     /*******************************************************************************/

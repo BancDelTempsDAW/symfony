@@ -11,9 +11,8 @@ class AltaUsuariType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', 'email', array(
-                'label'=>'Correu Electrònic'
-            ))
+            ->add('email')
+            
             ->add('nom', 'text', array(
                 'label'=>'Nom'
             ))
@@ -45,11 +44,14 @@ class AltaUsuariType extends AbstractType
 
     }
 
-    public function getDefaultOptions(array $options)
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'data_class' => 'bonavall\BancdeltempsBundle\Entity\Usuari'
-        );
+        ));
     }
 
 

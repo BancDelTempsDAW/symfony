@@ -29,8 +29,7 @@ class EstatServei
     private $descripcio;
     
     
-    public function __construct() {
-        $this->descripcio = 'Actiu';
+    public function __construct() {        
         
     }
 

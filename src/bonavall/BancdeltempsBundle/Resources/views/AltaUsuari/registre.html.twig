@@ -1,7 +1,9 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body -%}
     <h1>Registre d'usuari</h1>
-    <div class="form-group">
+    <div class="panel panel-default">
+    <div class="container-fluid">
+        <br />
         <div class ="row">
             <div class ="symfony-form-row col-xs-6 col-md-6 col-sm-6 col-lg-6 col-md-offset-3">
 
@@ -16,6 +18,7 @@
                 {{ form_widget(form.telefon) }} <br />
                 {{ form_label(form.email) }} <br />
                 {{ form_widget(form.email) }} <br />
+                {{ form_errors(form.email) }}
                 {{ form_label(form.presentacio) }} <br />
                 {{ form_widget(form.presentacio) }} <br />
                 {{ form_label(form.password) }} <br />
@@ -41,7 +44,7 @@
 
 
                 {{ form(form) }}
-
+</form>
                 <script type="text/javascript">
                 $(document).ready(function()
                 {
@@ -55,6 +58,9 @@
 
                 </script>
             </div>
+                
         </div>
+            <br />
+            </div>
     </div>
 {% endblock %}
