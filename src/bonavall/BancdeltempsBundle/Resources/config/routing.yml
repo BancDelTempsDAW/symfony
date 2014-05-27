@@ -6,7 +6,24 @@ bonavall_bancdeltemps_homepage:
 bonavall_bancdeltemps_inici:
     pattern:  /
     defaults: { _controller: bonavallBancdeltempsBundle:Default:index }
-    
+
+bonavall_bancdeltemps_alta:
+    pattern:  /alta
+    defaults: { _controller: bonavallBancdeltempsBundle:Registre:index }
+
+### Prova nova alta usuari
+bonavall_bancdeltemps_altausuari:
+    pattern:  /altausuari/
+    defaults: { _controller: bonavallBancdeltempsBundle:AltaUsuari:registre }
+alta_usuari_create:
+  pattern: /altausuari/create
+  defaults: { _controller: bonavallBancdeltempsBundle:AltaUsuari:create }
+alta_usuari_show:
+  pattern: /altausuari/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:AltaUsuari:show }
+### Final Prova
+
+
 bonavall_bancdeltemps_user:
     pattern:  /user/
     defaults: { _controller: bonavallBancdeltempsBundle:Default:user }
@@ -399,7 +416,7 @@ gestio_solicituds_rebudes:
 gestio_serveis:
   pattern: /user/serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
-  
+
 user_serveis:
   pattern: /serveis/
   defaults: { _controller: bonavallBancdeltempsBundle:UserServeis:index }
@@ -478,7 +495,7 @@ user_missatges_solicita:
   pattern: /user/missatges/solicita{id}
   defaults: { _controller: bonavallBancdeltempsBundle:UserMissatges:new }
 
-  
+
 #gestionar_solicituds:
  # pattern: /user/solicituts/
   #defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
