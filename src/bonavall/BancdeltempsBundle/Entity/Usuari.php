@@ -55,7 +55,7 @@ class Usuari extends Persona
       /**
      * @var string $fotografia
      * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Si us plau, puja una imatge vàlida")
-     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
+     * @ORM\Column(name="fotografia", type="string", length=255, nullable=true)
      */
     protected $fotografia;
 
