@@ -1,7 +1,7 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
 <script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
-<h1>Solicituds</h1>
+<h1>Sol·licituds</h1>
 <input type="hidden" value="" id="url_nou_msg">
 <div class="panel panel-default">
      <div id="missatges-panel" class="container-fluid">
@@ -14,15 +14,17 @@
                          <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Rebutjar Solicitud</h4>
+                                <h4 class="modal-title">Rebutjar Sol·licitud</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Estas segur que vols rebutjar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
+                                <p>Estas segur que vols rebutjar la sol·licitud <b>{{solicitut.serveiSolicitat
+                                        .nomServei}}</b> de
                                     <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <button id="rebutjar_solicitud_{{solicitut.id}}" type="button" class="btn btn-primary">Rebutjar Solicitut</button>
+                                <button id="rebutjar_solicitud_{{solicitut.id}}" type="button" class="btn
+                                btn-primary">Rebutjar Sol·licitut</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
                             </div>
                          </div>
@@ -34,10 +36,10 @@
                          <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Acceptar Solicitud</h4>
+                                <h4 class="modal-title">Acceptar Sol·licitud</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Vols acceptar la solicitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
+                                <p>Vols acceptar la sol·licitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de
                                     <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
                                 </p>
                                 <p>Es consumiran <b>{{solicitut.serveiSolicitat.punts}}</b> punts del teu compte.</p>
@@ -58,7 +60,8 @@
                                 <h4 class="modal-title">Nou Missatge</h4>
                             </div>
                             <div class="modal-body" id="nou_msg_modal_body_{{solicitut.id}}" >
-                                <p>Escriu un nou missatge per a <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> en relacio al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> 
+                                <p>Escriu un nou missatge per a <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> en
+                                    relació al servei <b>{{solicitut.serveiSolicitat.nomServei}}</b>
                                     amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b>
                                 </p>
                                 <div>
