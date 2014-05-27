@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Denuncies</h1>
+
+    <table class="record_properties">
+        <tbody>
+            {% for entity in entities %}
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Usuari denunciat</th>
+                <td>{{ entity.denunciat }}</td>
+            </tr>
+            <tr>
+                <th>Motiu</th>
+                <td>{{ entity.motiu }}</td>
+            </tr>
+            <tr>
+                <th>Resolucio</th>
+                <td>{{ entity.resolucio }}</td>
+            </tr>
+            <tr>
+                <th>Datadenuncia</th>
+                <td>{{ entity.dataDenuncia|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_denuncies') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('admin_denuncies_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+
+</ul>
+{% endblock %}

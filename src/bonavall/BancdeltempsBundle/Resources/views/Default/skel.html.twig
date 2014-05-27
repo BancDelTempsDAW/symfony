@@ -63,6 +63,7 @@
                             <li><a href="{{path('admin_missatges')}}">Missatges</a></li>
                             <li><a href="{{path('admin_poblacion')}}">Poblacions</a></li>
                             <li><a href="{{path('admin_provincia')}}">Provincies</a></li>
+                            <li><a href="{{path('admin_denuncies')}}">Denuncies</a></li>
                             <li class="divider"></li>
                             <li><a href="{{path('Admin_bancdeltemps')}}">Configuració Global</a></li>
                         </ul>
@@ -88,8 +89,7 @@
                           {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                               <li class="divider"></li>
                               <li><a href="{{ path('user_serveis_new') }}">Crear</a></li>
-                              <li><a href="#">Editar</a></li>
-                              <li><a href="#">Historial</a></li>
+                              <li><a href="{{ path('user_serveis_llista', { 'id': app.user.id }) }}">Els meus serveis</a></li>
                           {% endif %}
                       </ul>
                   </li>
@@ -113,6 +113,14 @@
                              </ul>
                          </li>
                      {% endif %}
+                   {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
+                   <li>
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Denuncies<b class="caret"></b></a>                                       
+                      <ul class="dropdown-menu">
+                          <li><a href="{{ path('user_denuncies') }}">Veure denuncies</a></li>
+                      </ul>
+                  </li>
+                  {% endif %}
                 </ul>
                 {% block login %}
                 <ul class="nav navbar-nav navbar-right">
@@ -128,7 +136,7 @@
                     <form class="navbar-form navbar-right">
                         <li class="form-group">
                             <a id="login-button" class="btn btn-primary" data-toggle="tooltip" title="Benvingut!" href="{{path('login')}}" ><span class="glyphicon glyphicon-user"></span> Accedeix</a>
-                            <a id="register-button" class="btn btn-success" data-toggle="tooltip" title="Es gratis eh!" href="{{path('login')}}" ><span class="glyphicon glyphicon-pencil"></span> Registra't</a>
+                            <a id="register-button" class="btn btn-success" data-toggle="tooltip" title="Es gratis eh!" href="{{path('bonavall_bancdeltemps_altausuari')}}" ><span class="glyphicon glyphicon-pencil"></span> Registra't</a>
                         </li>
                      </form>
                 {% endif %}

@@ -42,6 +42,12 @@ class Bancdeltemps
      */
     private $tempsInactivitat;
 
+    function __construct()
+    {
+
+        $this->saldoMinim = 5;
+
+    }
 
 
     /**
