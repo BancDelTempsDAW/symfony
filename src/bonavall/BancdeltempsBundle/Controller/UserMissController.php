@@ -83,64 +83,76 @@ class UserMissController extends Controller {
     }
     
     
-    public function nouMissatgeRebudesAction() {
-        $entity = new Missatges();
-        $form   = $this->createMissatgesForm($entity);
-
-        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeRebudes.html.twig', array("form"=>$form->createView(),"entity"=>$entity));
-        
-    }
-    
-    public function nouMissatgeEnviadesAction() {
-        $entity = new Missatges();
-        $form   = $this->createMissatgesForm($entity);
-
-        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeEnviades.html.twig', array("form"=>$form->createView(),"entity"=>$entity));
-        
-    }
-    
-    public function creatMissatgeEnviadesAction() {
-        
-        
-        
-        //Preparem la vista Solicituts
-        $repository = $this->getDoctrine()
-                ->getRepository('bonavallBancdeltempsBundle:Solicituts');
-
-        $query = $repository->createQueryBuilder('p')
-                ->where('p.solicitant = :solicitant')
-                ->setParameter('solicitant', $this->getUser())
-                ->orderBy('p.dataSolicitut', 'ASC')
-                ->getQuery();
-
-        $solicituts = $query->getResult();
-        if (!$solicituts) {
-            throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
-        }
-        
+    public function nouMissatgeRebudesAction($id) {
         
         $entity = new Missatges();
         $form   = $this->createMissatgesForm($entity);
-
-        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatge.html.twig', array('solicituts' => $solicituts));
+        
+      
+        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeRebudes.html.twig', array("form"=>$form->createView(),"entity"=>$entity,"id"=>$id));
         
     }
     
-    public function creatMissatgeRebudesAction() {
+    public function nouMissatgeEnviadesAction($id) {
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
 
-       
-        //preparem la vista solicituts
-        $repository = $this->getDoctrine()
-                ->getRepository('bonavallBancdeltempsBundle:Solicituts');
 
+        return $this->render('bonavallBancdeltempsBundle:Default:nouMissatgeEnviades.html.twig', array("form"=>$form->createView(),"entity"=>$entity,"id"=>$id));
+        
+    }
+    
+    public function creatMissatgeEnviadesAction(Request $request, $id) {                          
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+        $form->handleRequest($request);
+        
         $em = $this->getDoctrine()->getManager();
+        $solicitut = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findOneById($id);
+        $user = $this->get('security.context')->getToken()->getUser();
         
-        $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array( 'iddonant' => $this->getUser()));
-        $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat'=> $serveis));
-
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsRebudes.html.twig', array('solicituts' => $solicituts));
 
         
+        if($form->isValid()){
+
+            $entity->setAutor($user);
+            $entity->setSolicituts($solicitut);
+            $em->persist($entity);            
+            $em->flush();
+            
+     
+            
+            return $this->redirect($this->generateUrl('gestio_solicituds_enviades'));
+        }                          
+
+        return array('entity' => $entity, 'form'=>$form->createView(),'id'=>$id);
+        
+    }
+    
+    public function creatMissatgeRebudesAction(Request $request, $id) {
+        $entity = new Missatges();
+        $form   = $this->createMissatgesForm($entity);
+        $form->handleRequest($request);
+        
+        $em = $this->getDoctrine()->getManager();
+        $solicitut = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findOneById($id);
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+
+        
+        if($form->isValid()){
+
+            $entity->setAutor($user);
+            $entity->setSolicituts($solicitut);
+            $em->persist($entity);            
+            $em->flush();
+            
+     
+            
+            return $this->redirect($this->generateUrl('gestio_solicituds_rebudes'));
+        }                          
+
+        return array('entity' => $entity, 'form'=>$form->createView(),'id'=>$id);
     }
     
     

@@ -353,19 +353,19 @@ triacat_ajax:
         _method:  POST
 
 nou_missatge_enviades:
-    pattern: /user/solicituts/enviades2
+    pattern: /user/solicituts/enviades2/{id}
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatgeEnviades }
 
 nou_missatge_rebudes:
-    pattern: /user/solicituts/rebudes2
+    pattern: /user/solicituts/rebudes2/{id}
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:nouMissatgeRebudes }
 
 missatge_enviades_creat:
-    pattern: /user/solicituts/enviades/noumsg/
+    pattern: /user/solicituts/enviades/noumsg{id}
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:creatMissatgeEnviades }    
     
 missatge_rebudes_creat:
-    pattern: /user/solicituts/rebudes/noumsg/
+    pattern: /user/solicituts/rebudes/noumsg{id}
     defaults: { _controller: bonavallBancdeltempsBundle:UserMiss:creatMissatgeRebudes }
     
 cancelar_sol_ajax:
@@ -499,6 +499,32 @@ user_missatges_solicita:
   #defaults: { _controller: bonavallBancdeltempsBundle:Solicituts:index }
 
 
+valorar_servei:
+  pattern: /user/serveis/valorar{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:valorar }
 consumir_servei:
-  pattern: /user/serveis/consumir
-  defaults: { _controller: bonavallBancdeltempsBundle:UserSolicituts:consumir }
+  pattern: /user/serveis/consumir{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:consumir }
+
+
+user_serveisconsumits:
+  pattern: /user/serveisconsumits/
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:index }
+user_serveisconsumits_create:
+  pattern: /user/serveisconsumits/create
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:create }
+user_serveisconsumits_update:
+  pattern: /user/serveisconsumits/update{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:update }
+user_serveisconsumits_show:
+  pattern: /user/serveisconsumits/show{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:show }
+user_serveisconsumits_edit:
+  pattern: /user/serveisconsumits/edit{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:edit }
+user_serveisconsumits_new:
+  pattern: /user/serveisconsumits/new
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:new }
+user_serveisconsumits_delete:
+  pattern: /user/serveisconsumits/delete{id}
+  defaults: { _controller: bonavallBancdeltempsBundle:UserServeisconsumits:delete }

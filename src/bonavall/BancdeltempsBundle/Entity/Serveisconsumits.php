@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Serveisconsumits
  *
- * @ORM\Table(name="serveisconsumits", indexes={@ORM\Index(name="fk_idservei_oferit", columns={"idServei"}), @ORM\Index(name="fk_serveisconsumits_valoracio_servei1", columns={"valoracio_servei_id"}), @ORM\Index(name="fk_idusuari_consumidor", columns={"idUsuari"})})
+ * @ORM\Table(name="serveisconsumits", indexes={@ORM\Index(name="fk_idservei_oferit", columns={"idServei"}), @ORM\Index(name="fk_serveisconsumits_valoracio_servei1", columns={"valoracio_servei_id"}), @ORM\Index(name="FK_FB978542BDD3C65", columns={"idUsuari"})})
  * @ORM\Entity
  */
 class Serveisconsumits
@@ -39,9 +39,9 @@ class Serveisconsumits
     private $idservei;
 
     /**
-     * @var \Usuari
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Usuari")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idUsuari", referencedColumnName="id")
      * })

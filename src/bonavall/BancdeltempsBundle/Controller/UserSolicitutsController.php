@@ -64,36 +64,6 @@ class UserSolicitutsController extends Controller
         return $form;
     }
     
-    public function consumirAction(Request $request)
-    {        
-        	
-        $request = $this->get('request');
-        $id = $request->request->get('id');
-
-        $usr= $this->get('security.context')->getToken()->getUser();
-
-        $servei_cons = new Serveisconsumits();
-        
-        $query = $repository->createQueryBuilder('s')
-                ->where('s.solicitant = :solicitant')
-                ->setParameter('solicitant', $this->getUser())
-                ->orderBy('p.dataSolicitut', 'ASC')
-                ->getQuery();
-                
-                
-                
-        $servei_cons->setIdservei($id);
-        $servei_cons->setIdusuari($usr);
-        //$servei_cons->setValoracioservei($usr);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($servei_cons);
-        $em->flush();
-	
-        
-        
-        return $this->render('bonavallBancdeltempsBundle:Default:serveiConsumit.html.twig', array('id' => $id));
-    }
     
     public function cancelarAction(Request $request)
     {        

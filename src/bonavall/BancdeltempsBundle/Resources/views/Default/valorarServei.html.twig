@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script>
+    $(document).ready(function(){
+        $("#bonavall_bancdeltempsbundle_serveisconsumits_idservei").hide();
+        $("#bonavall_bancdeltempsbundle_serveisconsumits_idusuari").hide();
+
+        var idservei = '{{id}}';
+        var iduser = '{{app.user}}';
+         $("#bonavall_bancdeltempsbundle_serveisconsumits_idusuari option").filter(function() {
+             //may want to use $.trim in here
+             return $(this).text() == iduser; 
+         }).prop('selected', true);
+         
+         $("#bonavall_bancdeltempsbundle_serveisconsumits_idservei option").filter(function() {
+             //may want to use $.trim in here
+             return $(this).attr("value") == idservei; 
+         }).prop('selected', true);
+    });
+</script>
+
+<h1>Valoració de Servei</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">  
+        <form action="{{path('consumir_servei', {'id':id})}}" method="post" {{form_enctype(form)}} > 
+        <div>Comentari: {{form_widget(form.comentaris)}}</div>
+        <div>Escull una valoració: {{form_widget(form.valoracioServei)}}</div>
+        {{form_widget(form.idservei)}}
+        {{form_widget(form.idusuari)}}
+        {{form_widget(form.submit)}}
+        {{form(form)}}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

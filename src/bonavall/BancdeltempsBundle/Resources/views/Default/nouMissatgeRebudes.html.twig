@@ -4,7 +4,8 @@
 <h1>Nou Missatge</h1>
 <div class="panel panel-default">
     <div class="container-fluid">
-        {{ form_start(form, {'action': path('missatge_rebudes_creat')}) }}
+        <form action="{{path('missatge_enviades_creat', {'id':id})}}" method="post" {{form_enctype(form)}} > 
+        <input type="hidden" value="" name="id">
         {{form_widget(form.missatge)}}
         {{form_row(form.submit)}}
         {{ form_end(form) }}
