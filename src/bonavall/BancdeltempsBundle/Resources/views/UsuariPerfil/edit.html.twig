@@ -1,130 +1,139 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-<h1 >Perfil</h1>
-<p>Aqui també pots modificar el teu perfil</p>
-<div class="panel panel-default">
-        <div class="container-fluid">
-            <br />
-            <form action={{ path('perfil_update', {'id': app.user.id}) }} method="post"{{ form_enctype(edit_form) }} >
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" alt="" height="150" width="150" />
-                    </div>
-                    <div class="col-md-6">                        
-                            {{ form_widget(edit_form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.password) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.password) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                             {{ form_label(edit_form.nom) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.nom) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.cognom) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.cognom) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.adreca) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.adreca) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                             {{ form_label(edit_form.telefon) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.telefon) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.email) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.email) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.punts) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.punts) }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                            {{ form_label(edit_form.presentacio) }}
-                    </div>
-                    <div class="col-md-6">
-                            {{ form_widget(edit_form.presentacio) }}
-                    </div>
-                </div>
 
-                <!-- Modal donarse de baixa -->
-                <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title">Donarse de baixa</h4>
-                            </div>
-                            <div class="modal-body" id="baixa_body" >
-                                <p>Segur que et vols donar de baixa?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="{{path('baixa_perfil')}}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
-                            </div>
+<script src="{{ asset('js/validate/dist/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/validate/dist/jquery.validate.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/validacioPerfil.js') }}" type="text/javascript"></script>
+
+<script>
+
+    $(document).ready(function() {
+
+        $("input").attr("size", 34);
+
+    });
+
+</script>
+
+<h1 style="">Perfil</h1>
+<div class="panel panel-default">
+    <div id="modificarBody" class="container-fluid">
+        <br />
+        <form action={{ path('perfil_update', {'id': app.user.id}) }} method="post" {{ form_enctype(edit_form) }} >
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ asset('upload/' ~ app.user.id ~'/' ~ app.user.fotografia)}}" height="130" width="100" />
+                </div>
+                <div class="col-md-6">                        
+                            {{ form_widget(edit_form.fotografia,{'attr': {'class': 'file','data-show-upload':'false'}}) }}
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                             {{ form_label(edit_form.nom) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.nom) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            {{ form_label(edit_form.cognom) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.cognom) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            {{ form_label(edit_form.adreca) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.adreca) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                             {{ form_label(edit_form.telefon) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.telefon) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            {{ form_label(edit_form.email) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.email) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            {{ form_label(edit_form.punts) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.punts) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            {{ form_label(edit_form.presentacio) }}
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.presentacio) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                            <label>Password:</label>
+                </div>
+                <div class="col-md-6">
+                            <input id="user_pass" type="password" value="{{ app.user.password }}" name="user_pass"  />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+{#                          {{ form_label(edit_form.password) }}#}
+                            <label id="labelConfirm" for="confirmPassword">Confirmació del password:</label>
+                </div>
+                <div class="col-md-6">
+                            {{ form_widget(edit_form.password) }}
+                            <label id="equalError">Els passwords no coincideixen:</label>
+                </div>
+            </div>
+            
+
+            <!-- Modal donarse de baixa -->
+            <div id="modal_baixa" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Donarse de baixa</h4>
+                        </div>
+                        <div class="modal-body" id="baixa_body" >
+                            <p>Segur que et vols donar de baixa?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('baixa_perfil', {'id': app.user.id}) }}" id="baixa_btn" type="button" class="btn btn-primary">Si</a>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">No, Tancar</button>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        
-                        <input type="submit" class="btn btn-primary" value="Modificar" />
-                        <input type="button" id="botoUserBaixa" class="btn btn-warning" value="Donarse de baixa" data-toggle="modal" data-target="#modal_baixa" />
-                    </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-8">
+                        {{ form_widget(edit_form.submit,{'attr': {'class': 'btn btn-primary'}}) }}
+                    <button type="button" id="botoUserBaixa" class="btn btn-warning" data-toggle="modal" data-target="#modal_baixa" />Donarse de baixa</button>
                 </div>
-                <div id="amagar">{{ form(edit_form) }}</div>
-            </form>
-            <br />
-        </div>
+            </div>
+                {{ form(edit_form) }}
+        </form>
+        <br />
     </div>
-
-    <script>
-    
-        $(document).ready(function() {
-           
-           $("#amagar").hide();
-            
-        });
-    
-    </script>
-    {#<h1>Perfil</h1>
-    <p>Aqui també pots modificar el teu perfil</p>
-
-    {{ form(edit_form) }}
-
-        #}
+</div>
 
 {% endblock %}
