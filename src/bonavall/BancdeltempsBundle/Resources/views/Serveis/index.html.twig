@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Llista de serveis</h1>
+    <h1>Serveis</h1>
 
     <div class="table-responsive">
     <table class="table table-condensed">
@@ -9,12 +9,12 @@
             <tr class="info">
                 <th>Id</th>
                 <th>Punts</th>
-                <th>Nomservei</th>
-                <th>Descripcioservei</th>
-                <th>Datainici</th>
+                <th>Nom del servei</th>
+                <th>Descripció del servei</th>
+                <th>Data Inici</th>
                 <th>Durada</th>
-                <th>Datafinal</th>
-                <th>Actions</th>
+                <th>Data Final</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,16 +24,16 @@
                 <td>{{ entity.punts }}</td>
                 <td>{{ entity.nomServei }}</td>
                 <td>{{ entity.descripcioServei }}</td>
-                <td>{% if entity.dataInici %}{{ entity.dataInici|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataInici %}{{ entity.dataInici|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.durada }}</td>
-                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('d-m-Y') }}{% endif %}</td>
                 <td>
-                <ul>
+                    <ul style="list-style:none;">
                     <li>
-                        <a href="{{ path('admin_serveis_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_serveis_show', { 'id': entity.id }) }}">Veure</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_serveis_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_serveis_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -42,11 +42,9 @@
         </tbody>
     </table>
 
-        <ul>
+        <ul style="list-style:none;">
         <li>
-            <a href="{{ path('admin_serveis_new') }}">
-                Create a new entry
-            </a>
+            <a href="{{ path('admin_serveis_new') }}">Crear nova entrada</a>
         </li>
     </ul>
     {% endblock %}
