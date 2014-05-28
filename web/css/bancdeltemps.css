@@ -7,9 +7,13 @@ body{
     background-color: #F1FFFB;
 }
 
+.upload_foto{
+    width: 20%;
+    height: 5%;
+}
+
 #modificarBody{
-    width: 65%;
-    
+    width: 60%;
 }
 
 .nou_missatge_txt{ 
