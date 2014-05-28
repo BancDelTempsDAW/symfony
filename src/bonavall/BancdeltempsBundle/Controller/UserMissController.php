@@ -41,6 +41,7 @@ class UserMissController extends Controller {
      * Return a ajax response
      */
     public function greetingAction() {
+        $em = $this->getDoctrine()->getManager();
         $request = $this->get('request');
         $sol_id = $request->request->get('formName');
         //$name = $request->request->get('formName');
@@ -50,13 +51,15 @@ class UserMissController extends Controller {
         //$entities = $em->getRepository('bonavallBancdeltempsBundle:Missatges');
 
         $query = $repository->createQueryBuilder('p')
-                ->where('p.autor = :autor AND p.solicituts = :solicituts')
-                ->setParameter('autor', $this->getUser())
+                ->where('p.solicituts = :solicituts')
+                //->setParameter('autor', $this->getUser())
                 ->setParameter('solicituts', $sol_id)
                 ->orderBy('p.data', 'DESC')
                 ->getQuery();
 
         $missatges = $query->getArrayResult();
+        
+        
 
         if ($missatges != "") {//if the user has written his name
             $greeting = $missatges;

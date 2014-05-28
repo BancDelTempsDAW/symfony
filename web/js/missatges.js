@@ -31,13 +31,12 @@ $(document).ready(function() {
                             var data_missatge = "<h4 class='list-group-item-heading'>"+data.greeting[i][p]['date']+"</h4>";
                         }else if(p == "missatge"){
                             var missatge = "<p class='list-group-item-text'>"+data.greeting[i][p]+"</p>";
-                        }
-                    }
+                        }                    }
                     output += data_missatge + missatge+"</div>";
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
-                $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' class='btn btn-default' href="+nou_msg_path+id+"' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
+               // $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' class='btn btn-default' href="+nou_msg_path+id+"' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
