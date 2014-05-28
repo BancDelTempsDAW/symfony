@@ -1,14 +1,18 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 
 {% block body -%}
-    <h1>Serveisconsumits list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
+<h1>Serveis consumits</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                <tr class="info">
                 <th>Id</th>
                 <th>Comentaris</th>
-                <th>Actions</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,13 +20,14 @@
             <tr>
                 <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.comentaris }}</td>
+                <td>{{ entity.valoracioServei }}</td>
                 <td>
-                <ul>
+                <ul style="list-style:none;">
                     <li>
-                        <a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">Veure</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_serveisconsumits_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_serveisconsumits_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -31,11 +36,18 @@
         </tbody>
     </table>
 
-        <ul>
+        <ul style="list-style:none;">
         <li>
-            <a href="{{ path('admin_serveisconsumits_new') }}">
-                Create a new entry
-            </a>
+            <a href="{{ path('admin_serveisconsumits_new') }}">Crear nova entrada</a>
         </li>
     </ul>
+<<<<<<< HEAD
+        
+        </div>
+        </div>
+=======
+            </div>
+        </div>
+    </div>
+>>>>>>> master
     {% endblock %}

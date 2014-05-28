@@ -78,6 +78,7 @@ class UsuariPerfilController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+           
             $em->flush();
 
             return $this->redirect($this->generateUrl('perfil_user', array('id' => $id)));
@@ -97,7 +98,7 @@ class UsuariPerfilController extends Controller {
         
         if ($usuari) {
             
-            $usuari->setFotografia(null);
+            //$usuari->setFotografia(null);
             $usuari->setIsActive(false);
             
             $em->persist($usuari);

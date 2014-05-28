@@ -1,17 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Persona list</h1>
+    <h1>Persones</h1>
 
-    <table class="records_list">
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
         <thead>
-            <tr>
+            <tr class="info">
                 <th>Id</th>
                 <th>Salt</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Isactive</th>
-                <th>Actions</th>
+                <th>Correu Electrònic</th>
+                <th>Contrasenya</th>
+                <th>Esta actiu</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,12 +27,12 @@
                 <td>{{ entity.password }}</td>
                 <td>{{ entity.isActive }}</td>
                 <td>
-                <ul>
+                <ul style="list-style:none;">
                     <li>
-                        <a href="{{ path('persona_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('persona_show', { 'id': entity.id }) }}">Veure</a>
                     </li>
                     <li>
-                        <a href="{{ path('persona_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('persona_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -37,11 +41,13 @@
         </tbody>
     </table>
 
-        <ul>
+        <ul style="list-style:none;">
         <li>
-            <a href="{{ path('persona_new') }}">
-                Create a new entry
-            </a>
+            <a href="{{ path('persona_new') }}">Crear nova entrada</a>
         </li>
     </ul>
+            </div>
+        </div>
+    </div>
+
     {% endblock %}
