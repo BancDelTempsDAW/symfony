@@ -6,7 +6,7 @@
 
 <div class="panel panel-default">
      <div id="missatges-panel" class="container-fluid">
-
+{% if solicituts is defined %}
             {% for solicitut in solicituts %}
                   <div id="solicituts_acordion_{{solicitut.id}}" class="panel-group" >
                       <!-- CONSUMIR SERVEI -->
@@ -20,7 +20,8 @@
                                        <div class="modal-body">
                                                <p>Vols consumir el servei <b>{{solicitut.serveiSolicitat.nomServei}}</b> de 
                                                        <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
-                                               </p>			
+                                               </p>	
+                                               <p>Es restaran <b>{{solicitut.serveiSolicitat.punts}}</b> punts del teu compte.</p>
                                        </div>
                                        <div class="modal-footer">
                                                <a id="consumir_servei_{{solicitut.id}}" href="{{path('valorar_servei', {'id':solicitut.id})}}" class="btn btn-primary">Consumir</a>
@@ -28,11 +29,7 @@
                                        </div>
                                 </div>
                             </div>
-                       </div>           
-
-
-
-
+                       </div>          
                      <div class="solicitut panel 
                         {% if solicitut.estatSolicitut == 'Acceptada' %}
                             panel-success
@@ -98,7 +95,9 @@
                 
             {% endfor %}
       
-         
+      {% else %}
+         No hi han solicituts
+     {% endif %} 
     </div>
 </div>
 {% endblock %}
