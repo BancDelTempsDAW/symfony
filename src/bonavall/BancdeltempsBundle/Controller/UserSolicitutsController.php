@@ -44,7 +44,7 @@ class UserSolicitutsController extends Controller
 
         $solicituts = $query->getResult();
         if (!$solicituts) {
-            throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
+           // throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
         }
         
         

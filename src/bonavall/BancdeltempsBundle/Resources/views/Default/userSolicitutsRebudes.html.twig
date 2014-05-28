@@ -6,7 +6,7 @@
 <div class="panel panel-default">
      <div id="missatges-panel" class="container-fluid">
 
-         
+   {% if solicituts is defined %}      
             {% for solicitut in solicituts %}
               <div id="solicituts_acordion_{{solicitut.id}}" class="panel-group" >
                
@@ -43,7 +43,7 @@
                                 <p>Vols acceptar la sol·licitud <b>{{solicitut.serveiSolicitat.nomServei}}</b> de
                                     <b>{{solicitut.serveiSolicitat.iddonant.nom}}</b> amb data d'inici <b>{{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}</b> ?
                                 </p>
-                                <p>Es consumiran <b>{{solicitut.serveiSolicitat.punts}}</b> punts del teu compte.</p>
+                                
                             </div>
                             <div class="modal-footer">
                                 <a id="acceptar_solicitud_{{solicitut.id}}" href="{{path('acceptar_sol', {'id':solicitut.id})}}" class="btn btn-primary">Acceptar Solicitut</a>
@@ -75,7 +75,7 @@
                                 <div class="container-fluid" >
                                     <div class="row">
                                         <h4 class="col-md-12">{{solicitut.serveiSolicitat.nomServei}} | <span class="glyphicon glyphicon-user"></span> 
-                                        {{solicitut.serveiSolicitat.iddonant.nom}} <span class="glyphicon glyphicon-calendar"></span> 
+                                        {{ solicitut.solicitant.nom }} <span class="glyphicon glyphicon-calendar"></span> 
                                         {{ solicitut.serveiSolicitat.dataInici|date('d-m-Y') }}
                                         <span class="badge">{{ solicitut.estatSolicitut }}</span>
                                         </h4>                                     
@@ -128,7 +128,10 @@
                   </div>
                 
             {% endfor %}
-      
+         {% else %}
+         No hi han solicituts
+     {% endif %}
+         
          
     </div>
 </div>
