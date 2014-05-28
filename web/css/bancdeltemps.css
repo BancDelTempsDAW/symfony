@@ -7,6 +7,7 @@ body{
     background-color: #F1FFFB;
 }
 
+
 .punts_cont{
     margin: auto;
 }
@@ -14,6 +15,15 @@ body{
 .punts_sol{
     padding-bottom: 1px;
     margin-bottom: 1px;
+}
+.upload_foto{
+    width: 20%;
+    height: 5%;
+}
+
+#modificarBody{
+    width: 60%;
+
 }
 
 .nou_missatge_txt{ 
@@ -64,4 +74,8 @@ body{
 .user-message{
     color: white;
     
+}
+
+.ombra tr:hover{
+    background: #d2d2d2;
 }

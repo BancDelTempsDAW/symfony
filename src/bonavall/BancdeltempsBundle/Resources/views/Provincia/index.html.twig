@@ -1,15 +1,19 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Provincia list</h1>
+    <h1>Provincies</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                <tr class="info">
                 <th>Id</th>
                 <th>Provincia</th>
-                <th>Provinciaseo</th>
-                <th>Actions</th>
+                <th>Provincia SEO</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,12 +23,12 @@
                 <td>{{ entity.provincia }}</td>
                 <td>{{ entity.provinciaseo }}</td>
                 <td>
-                <ul>
+                    <ul style="list-style:none;">
                     <li>
-                        <a href="{{ path('admin_provincia_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('admin_provincia_show', { 'id': entity.id }) }}">Veure</a>
                     </li>
                     <li>
-                        <a href="{{ path('admin_provincia_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('admin_provincia_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -33,11 +37,12 @@
         </tbody>
     </table>
 
-        <ul>
+            <ul style="list-style:none;">
         <li>
-            <a href="{{ path('admin_provincia_new') }}">
-                Create a new entry
-            </a>
+            <a href="{{ path('admin_provincia_new') }}">Crear nova entrada</a>
         </li>
     </ul>
+            </div>
+        </div>
+    </div>
     {% endblock %}

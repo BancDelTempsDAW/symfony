@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Denuncies list</h1>
+
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                <tr class="info">
+                <th>Id</th>
+                <th>Motiu</th>
+                <th>Resolució</th>
+                <th>Data de denúncia</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('admin_denuncies_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.motiu }}</td>
+                <td>{{ entity.resolucio }}</td>
+                <td>{% if entity.dataDenuncia %}{{ entity.dataDenuncia|date('d-m-Y') }}{% endif %}</td>
+                <td>
+                    <ul style="list-style:none;">
+                    <li>
+                        <a href="{{ path('admin_denuncies_show', { 'id': entity.id }) }}">Veure</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin_denuncies_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+            <ul style="list-style:none;">
+        <li>
+            <a href="{{ path('admin_denuncies_new') }}">Crear nova entrada</a>
+        </li>
+    </ul>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

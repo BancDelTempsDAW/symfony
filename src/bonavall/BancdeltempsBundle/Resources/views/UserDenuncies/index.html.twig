@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Denuncies emeses</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <br>
+    <table class="table table-condensed">
+        <thead>
+            <tr class="info">
+                <th>Id</th>
+                <th>Motiu</th>
+                <th>Data denuncia</th>
+                <th>Resolucio</th>                
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.motiu }}</td>               
+                <td>{% if entity.dataDenuncia %}{{ entity.dataDenuncia|date('Y-m-d H:i:s') }}{% endif %}</td>  
+                <td>{{ entity.resolucio }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+        </div>
+    {% endblock %}

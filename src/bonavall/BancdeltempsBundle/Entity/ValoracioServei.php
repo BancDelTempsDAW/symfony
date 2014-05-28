@@ -62,8 +62,15 @@ class ValoracioServei
     {
         return $this->nom;
     }
-    public function __toString() {
-        return $this->getNom();
+
+    
+    /**
+     * 
+     * @return type
+     */
+    public function __toString()
+    {
+        return $this->nom;
     }
 
 }

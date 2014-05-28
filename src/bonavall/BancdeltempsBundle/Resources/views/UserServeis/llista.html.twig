@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script src="{{ asset('js/serveisFind.js') }}" type="text/javascript"></script>
+<h1>Llistat de Serveis de {{ app.user}}</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <table class="table table-condensed">
+            <thead>
+                <tr class="info">
+                    <th>Id</th>
+                    <th>Usuari Ofertant</th>
+                    <th>Punts</th>
+                    <th>Nom Servei</th>
+                    <th>Descripcio Servei</th>
+                    <th>Poblacio</th>
+                    <th>Data inicial</th>
+                    <th>Durada</th>
+                    <th>Data final</th>
+                    <th>Opcions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+        {% for entity in entities %}            
+                <tr>
+                    <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{{ entity.iddonant.nom}}</td>
+                    <td>{{ entity.punts }}</td>
+                    <td>{{ entity.nomServei }}</td>
+                    <td>{{ entity.descripcioServei }}</td>
+                    <td>{{ entity.poblacio }}</td>
+                    <td>{% if entity.dataInici %}{{ entity.dataInici|date('d-m-Y') }}{% endif %}</td>
+                    <td>{{ entity.durada }}</td>
+                    <td>{% if entity.dataFinal %}{{ entity.dataFinal|date('d-m-Y') }}{% endif %}</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="btn btn-info" href="{{ path('user_serveis_edit', { 'id': entity.id }) }}">editar</a>
+                            </li> 
+                            {% if 'now'|date('Y-m-d') > entity.dataFinal|date('Y-m-d')   %}
+                            <li>
+                                <a class="btn btn-danger" href="{{ path('user_serveis_reactiva', { 'id': entity.id ,'iduser': app.user.id }) }}">reactivar</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                    </td>
+                </tr>              
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+
+    {% endblock %}

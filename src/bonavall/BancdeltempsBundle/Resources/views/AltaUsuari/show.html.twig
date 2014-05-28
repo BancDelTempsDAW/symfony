@@ -1,0 +1,94 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<script>
+    $(document).ready(function() {
+        $('#modal-registrat').modal('show');
+        $('#modal-content').on('shown', function() {
+            $("#txtname").focus();
+        })
+    });
+</script>
+<div id="modal-registrat" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Registre</h4>
+            </div>
+            <div class="modal-body" id="baixa_body" >
+                <p>Enhorabona, t'has registrat perfectament</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Tancar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-responsive" id="sortida">
+    <h1>Nou usuari</h1>
+
+    <table class="table table-condensed ombra">
+        <tbody>
+        {#     <tr>
+             <th>Id</th>
+               <td>{{ entity.id }}</td>
+           </tr>
+           <tr>
+               <th>Salt</th>
+               <td>{{ entity.salt }}</td>
+           </tr> #}
+
+            <tr>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
+            </tr>
+            <tr>
+                <th>Cognom</th>
+                <td>{{ entity.cognom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Fotografia</th>
+                <td><img src="{{ asset('upload/' ~ entity.id ~'/' ~ entity.fotografia)}}" alt="" height="45" width="45" /></td>
+            </tr>
+                <th>Adreça</th>
+                <td>{{ entity.adreca }}</td>
+            </tr>
+                <th>Contrasenya</th>
+                <td>{{ entity.password }}</td>
+            </tr>
+ 
+            <tr>
+                <th>Telèfon</th>
+                <td>{{ entity.telefon }}</td>
+            </tr>
+
+            <tr>
+                <th>Presentació</th>
+                <td>{{ entity.presentacio }}</td>
+            </tr>
+            <tr>
+                <th>Punts</th>
+                <td>{{ entity.punts }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}
