@@ -134,12 +134,14 @@
                         </thead>
                         <tbody>
         {% for entity in valoracions %}
+                                {% if entity is defined %}
                                 <tr>
                                     <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                                     <td>{{ entity.comentaris }}</td>
                                     <td><a href="{{ path('user_serveis_show', { 'id': entity.idservei.id }) }}">{{ entity.idservei }}</a></td>
                                     <td><a href="{{ path('user_usuari_show', { 'id': entity.idusuari.id })}} ">{{ entity.idusuari.nom }}</a></td>
                                 </tr>
+                                {% endif %}
         {% endfor %}
                             </tbody>
                         </table>

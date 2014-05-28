@@ -3,7 +3,10 @@
 {% block body -%}
     <h1>TipusServei</h1>
 
-    <table class="record_properties">
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+    <table class="table table-condensed">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -23,14 +26,17 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_tipusservei') }}">
-            Back to the list
+            Torna a la llista
         </a>
     </li>
     <li>
         <a href="{{ path('admin_tipusservei_edit', { 'id': entity.id }) }}">
-            Edit
+            Edita
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+</div>
+</div>
+</div>        
 {% endblock %}
