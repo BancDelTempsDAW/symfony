@@ -312,7 +312,7 @@ class Serveis {
      */
     public function isIniciValid() {
         $inici = new \DateTime("now");       
-        return ( $this->dataInici <= $inici );
+        return ( $this->dataInici < $inici );
     }
 
     public function __toString() {
