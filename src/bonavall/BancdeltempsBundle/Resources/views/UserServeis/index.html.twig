@@ -75,7 +75,7 @@
         {% set pintats = 0 %}
         {% for entity in entities %}
             {%if is_granted('IS_AUTHENTICATED_FULLY')%}
-                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('d-m-Y') > 'now'|date('d-m-Y')) and (entity.iddonant.id != app.user.id) %}
+                {% if (entity.estatServei.descripcio == "Actiu") and ('now'|date('Y-m-d') < entity.dataFinal|date('Y-m-d')) and (entity.iddonant.id != app.user.id) %}
             {% set pintats = pintats + 1 %}
                     <tr>
                         <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
@@ -118,7 +118,7 @@
 
             {% endif %}
             {% else %}
-                {% if (entity.estatServei.descripcio == "Actiu") and (entity.dataFinal|date('d-m-Y') > 'now'|date('d-m-Y')) %}
+                {% if (entity.estatServei.descripcio == "Actiu") and ('now'|date('Y-m-d') < entity.dataFinal|date('Y-m-d')) %}
             {% set pintats = pintats + 1 %}
                     <tr>
                         <td><a href="{{ path('user_serveis_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>

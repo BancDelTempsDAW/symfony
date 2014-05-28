@@ -78,12 +78,7 @@ class UsuariPerfilController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $dades = $editForm->getData();
-            if($dades->getFile() instanceof UploadedFile){
-        
-             }else{
-                 $entity->setFotografia($entity->getFotografia());
-             }
+           
             $em->flush();
 
             return $this->redirect($this->generateUrl('perfil_user', array('id' => $id)));

@@ -86,7 +86,6 @@ class Persona implements AdvancedUserInterface, \Serializable {
      */
     public function setSalt($salt) {
         $this->salt = $salt;
-
         return $this;
     }
 
@@ -96,7 +95,7 @@ class Persona implements AdvancedUserInterface, \Serializable {
      * @return string 
      */
     public function getSalt() {
-        return Null;
+        return null;
     }
 
     /**
@@ -128,7 +127,7 @@ class Persona implements AdvancedUserInterface, \Serializable {
      */
     public function setPassword($password) {
         $this->password = $password;
-
+        
         return $this;
     }
 
