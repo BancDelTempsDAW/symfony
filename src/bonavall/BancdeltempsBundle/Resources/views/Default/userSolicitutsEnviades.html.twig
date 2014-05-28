@@ -1,8 +1,6 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 {% block body %}
-<script>
-    var nou_msg_path = "{{path('nou_missatge_enviades')}}";
-</script>
+
 <script src="{{ asset('js/missatges.js') }}" type="text/javascript"></script>
 <h1>Solicituts</h1>
 
@@ -88,7 +86,7 @@
 
                                                 </div>
                                                 <div id="outputButton_{{solicitut.id}}">
-
+                                                    <div><a id='nou_miss_{{solicitut.id}}' class='btn btn-default' href="{{path('nou_missatge_enviades', {'id':solicitut.id})}}" ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>
                                                 </div>  
                                             </div>
                                         </div>
