@@ -2,8 +2,10 @@
 
 {% block body -%}
     <h1>Usuari</h1>
-
-    <table class="record_properties">
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+    <table class="table table-condensed">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -59,14 +61,17 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('usuari') }}">
-            Back to the list
+            Torna a la llista
         </a>
     </li>
     <li>
         <a href="{{ path('usuari_edit', { 'id': entity.id }) }}">
-            Edit
+            Edita
         </a>
     </li>
 
 </ul>
+</div>
+</div>
+</div>        
 {% endblock %}
