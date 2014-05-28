@@ -62,6 +62,7 @@ class ValoracioServei
     {
         return $this->nom;
     }
+
     
 
     /**
@@ -71,6 +72,7 @@ class ValoracioServei
     public function __toString()
     {
         return $this->nom;
+
     }
 
 }

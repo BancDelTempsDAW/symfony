@@ -3,13 +3,18 @@
 namespace bonavall\BancdeltempsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use bonavall\BancdeltempsBundle\Entity\Missatges;
 use bonavall\BancdeltempsBundle\Entity\Solicituts;
+use bonavall\BancdeltempsBundle\Entity\Serveis;
+use bonavall\BancdeltempsBundle\Entity\Serveisconsumits;
 use bonavall\BancdeltempsBundle\Entity\EstatServei;
 use bonavall\BancdeltempsBundle\Form\UserSolicitutsType;
+use bonavall\BancdeltempsBundle\Form\UserMissatgesType;
 
 /**
  * Solicituts controller.
@@ -41,8 +46,56 @@ class UserSolicitutsController extends Controller
         if (!$solicituts) {
             throw $this->createNotFoundException(print_r($solicituts).'Unable to find Solicituts entity.');
         }
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
+        
+        
+
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsEnviades.html.twig', array('solicituts' => $solicituts));
     }
+    
+    public function cancelarAction(Request $request, $id)
+    {        
+        $em = $this->getDoctrine()->getManager();
+        $solicitut = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findOneById($id);
+        
+        $estat = $em->getRepository('bonavallBancdeltempsBundle:EstatServei')->findOneById(7);
+        
+        $solicitut->setEstatSolicitut($estat);
+        $em->persist($solicitut);            
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('gestio_solicituds_rebudes'));
+    }
+    
+     public function acceptarAction(Request $request, $id)
+    {        
+        $em = $this->getDoctrine()->getManager();
+        $solicitut = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findOneById($id);
+        
+        $estat = $em->getRepository('bonavallBancdeltempsBundle:EstatServei')->findOneById(6);
+        
+        $solicitut->setEstatSolicitut($estat);
+        $em->persist($solicitut);            
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('gestio_solicituds_rebudes'));
+    }
+    
+    
+    private function createMissatgesForm(Missatges $entity)
+    {
+        $form = $this->createForm(new UserMissatgesType(), $entity, array(
+            'action' => $this->generateUrl('nou_missatge_ajax'),
+            'method' => 'POST',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Create'));
+
+        return $form;
+    }
+    
+    
+
+    
     
     public function rebudesAction()
     {        
@@ -54,7 +107,7 @@ class UserSolicitutsController extends Controller
         $serveis = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->findBy(array( 'iddonant' => $this->getUser()));
         $solicituts = $em->getRepository('bonavallBancdeltempsBundle:Solicituts')->findBy(array('serveiSolicitat'=> $serveis));
 
-        return $this->render('bonavallBancdeltempsBundle:Default:userSolicituts.html.twig', array('solicituts' => $solicituts));
+        return $this->render('bonavallBancdeltempsBundle:Default:userSolicitutsRebudes.html.twig', array('solicituts' => $solicituts));
     }
     /**
      * Creates a new Solicituts entity.

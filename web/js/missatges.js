@@ -4,6 +4,8 @@ $(document).ready(function() {
        $(".sol_id", this).hide();
        $("#row_missatges_"+id).hide();
        $("#url_nou_msg").hide();
+       $("#url_acceptar_sol").hide();
+       $("#url_cancelar_sol").hide();
 
       //get the url for the form
       var url=$("#miss_btn_"+id).attr("href");
@@ -35,7 +37,7 @@ $(document).ready(function() {
                 }
                 output += "</div>";
                 $('#output_'+id).html(output);
-                $('#outputButton_'+id).html("<div><a id='nou_miss_{{solicitut.id}}' data-toggle='modal' data-target='#modal_nou_missatge_"+id+"' class='btn btn-default' href='#' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
+                $('#outputButton_'+id).html("<div><a id='nou_miss_"+id+"' class='btn btn-default' href="+nou_msg_path+id+"' ><span class='glyphicon glyphicon-pencil'></span> Nou Missatge</a></div>");
             }
            else if(data.responseCode==400){//bad request
                $('#output_'+id).css("color","red");
@@ -54,6 +56,12 @@ $(document).ready(function() {
 
       //we dont what the browser to submit the form
       
+      
+      $('#nou_miss_'+id).click(function(){
+           alert(msg_form);
+           $('nou_msg_form_'+id).html(msg_form); 
+      });
+      
         //Obrir missatges
       $("#miss_btn_"+id).click(function(e){
           e.preventDefault();
@@ -64,28 +72,40 @@ $(document).ready(function() {
        //NOU MISSATGE
        $("#nou_missatge_btn_"+id).click(function(){
            var msg = $("#nou_missatge_txt_"+id).val();
-           var url_ajax = $("#url_nou_msg").attr("url");
-           alert(url_ajax);
+           var url_nou_msg = $("#url_nou_msg").html();
+           //alert("msg:"+msg);
            if($("#nou_missatge_txt_"+id).val()==""){
                var errormsg = "<br><div class='alert alert-danger alert-dismissable' >Has d'escriure un missatge.</div>";
                $("#nou_msg_modal_body_"+id).append(errormsg);
                $("#nou_missatge_txt_"+id).focus();
-           }else{
-                $.get(url_ajax),{
-                        id_sol:id,
-                        msg:msg
-                },function(data){ 
-                    alert(data);
-                }
-           }
-           
+           }/*else{
+               $.post(url_nou_msg,{id_sol:id,msg:msg}
+                    ,function(data){ 
+                         alert(data);
+                    });
+           }  */         
        });
        
-    });
+            $("#acceptar_solicitud_"+id).click(function(){
+                var url_acceptar_sol = $("#url_acceptar_sol").html();
+                 $.post(url_acceptar_sol,{
+                             id:id
+                     },function(data){ 
+                         alert(data);
+                     });
+            });
+            
+            $("#cancelar_solicitud_"+id).click(function(){
+                var url_cancelar_sol = $("#url_cancelar_sol").html();
+                 $.post(url_cancelar_sol,{
+                             id:id
+                     },function(data){ 
+                         alert(data);
+                     });
+            });
+       
     
     
   
-
-  
-
+  });
 });

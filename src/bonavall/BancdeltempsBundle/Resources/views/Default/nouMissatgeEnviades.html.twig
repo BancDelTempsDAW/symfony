@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+<h1>Nou Missatge</h1>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <form action="{{path('missatge_enviades_creat', {'id':id})}}" method="post" {{form_enctype(form)}} > 
+        <input type="hidden" value="" name="id">
+        {{form_widget(form.missatge)}}
+        {{form_row(form.submit)}}
+        {{ form_end(form) }}
+    </div>
+</div>
+
+{% endblock %}
