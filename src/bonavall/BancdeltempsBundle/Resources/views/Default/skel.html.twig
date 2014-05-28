@@ -66,7 +66,7 @@
                             <li><a href="{{path('admin_missatges')}}">Missatges</a></li>
                             <li><a href="{{path('admin_poblacion')}}">Poblacions</a></li>
                             <li><a href="{{path('admin_provincia')}}">Provincies</a></li>
-                            <li><a href="{{path('admin_denuncies')}}">Denuncies</a></li>
+                            <li><a href="{{path('admin_denuncies')}}">Denúncies</a></li>
                             <li class="divider"></li>
                             <li><a href="{{path('Admin_bancdeltemps')}}">Configuració Global</a></li>
                         </ul>
@@ -116,9 +116,9 @@
                      {% endif %}
                    {% if app.user is not null and is_granted('IS_AUTHENTICATED_FULLY') %}
                    <li>
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Denuncies<b class="caret"></b></a>                                       
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Denúncies<b class="caret"></b></a>                                       
                       <ul class="dropdown-menu">
-                          <li><a href="{{ path('user_denuncies') }}">Veure denuncies</a></li>
+                          <li><a href="{{ path('user_denuncies') }}">Veure denúncies</a></li>
                       </ul>
                   </li>
                   {% endif %}
@@ -132,7 +132,6 @@
                           <a id="disconnect-button" class="btn btn-danger" data-toggle="tooltip" title="Tornaras Aviat?" href="{{path('logout')}}" ><span class="glyphicon glyphicon-off"></span> Desconnecta't</a>
                       </div>
                     </form>
-                
                 {% else %}
                     <form class="navbar-form navbar-right">
                         <li class="form-group">
@@ -140,8 +139,12 @@
                             <a id="register-button" class="btn btn-success" data-toggle="tooltip" title="Es gratis eh!" href="{{path('bonavall_bancdeltemps_altausuari')}}" ><span class="glyphicon glyphicon-pencil"></span> Registra't</a>
                         </li>
                      </form>
+                    
                 {% endif %}
                 {% endblock %}
+                    <ul class="list-unstyled">
+                        <li></li>
+                    </ul>
                     
                 </ul>
               </div><!-- /.navbar-collapse -->
