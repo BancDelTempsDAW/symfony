@@ -92,9 +92,10 @@
                                 <li>
                                     <a class="btn btn-info" href="{{ path('user_serveis_show', { 'id': entity.id }) }}">Mostrar</a>
                                 </li> 
+                             
      {% if not colabora %}
              <p class="text-danger">No has ofert cap servei</p>             
-     {% elseif  saldominim < app.user.punts %}
+     {% elseif  app.user.punts < saldominim %}
              <p class="text-danger">No tens prous punts</p>
      {% else %}
                     {% set counter = 0 %}

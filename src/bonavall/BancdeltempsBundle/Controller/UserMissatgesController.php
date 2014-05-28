@@ -55,8 +55,9 @@ class UserMissatgesController extends Controller {
             $serv = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
 
 
-            $em2 = $this->getDoctrine()->getManager();
-            $estat = $em2->getRepository('bonavallBancdeltempsBundle:EstatServei')->find(1);
+            
+            $estat = $em->getRepository('bonavallBancdeltempsBundle:EstatServei')->findOneBy(array('id' => 4));
+           // $entity2 ->setEstatsolicitut($estat);
 
             $em3 = $this->getDoctrine()->getEntityManager();
 

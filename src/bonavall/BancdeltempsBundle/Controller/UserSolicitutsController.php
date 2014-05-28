@@ -125,6 +125,8 @@ class UserSolicitutsController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $estat = $em->getRepository('bonavallBancdeltempsBundle:EstatServei')->findBy(array('id' => 4));
+            $entity->setEstatsolicitut($estat);
             $em->persist($entity);
             $em->flush();
 
@@ -168,9 +170,7 @@ class UserSolicitutsController extends Controller
         
         $em = $this->getDoctrine()->getManager();        
         $serv = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
-        
-        $em2 = $this->getDoctrine()->getManager();        
-        $estat = $em2->getRepository('bonavallBancdeltempsBundle:EstatServei')->find(1);
+        $estat = $em->getRepository('bonavallBancdeltempsBundle:EstatServei')->find(4);
         
                 
         
