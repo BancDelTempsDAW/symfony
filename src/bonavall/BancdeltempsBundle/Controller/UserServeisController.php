@@ -185,7 +185,8 @@ class UserServeisController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Serveis();        
+        $entity = new Serveis(); 
+        $entity->setIddonant($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();

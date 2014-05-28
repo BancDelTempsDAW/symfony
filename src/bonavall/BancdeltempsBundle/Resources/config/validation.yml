@@ -11,3 +11,7 @@ bonavall\Bancdeltemps\Entity\Serveis:
     getters:
         datesValid:
             - "True": { message: "La data inicial no pot ser superior a la final" }
+        anyValid:
+            - "True": { message: "La data final no pot ser superior a un any" }
+        iniciValid:
+            - "True": { message: "La data inicial no pot ser més petita que avui" }

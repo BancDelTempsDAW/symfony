@@ -297,6 +297,23 @@ class Serveis {
     public function isDatesValid() {
         return ($this->dataInici < $this->dataFinal);
     }
+    
+    /**
+     * @Assert\True(message = "La data final no pot ser superior a un any")
+     */
+    public function isAnyValid() {
+        $final = new \DateTime("now");
+        date_add($final, date_interval_create_from_date_string('365 days'));
+        return ( $this->dataFinal < $final );
+    }
+    
+    /**
+     * @Assert\True(message = "La data inicial no pot ser mes petita que avui")
+     */
+    public function isIniciValid() {
+        $inici = new \DateTime("now");       
+        return ( $this->dataInici > $inici );
+    }
 
     public function __toString() {
         return $this->nomServei;
