@@ -62,6 +62,7 @@ class ValoracioServei
     {
         return $this->nom;
     }
+
     
     /**
      * 
@@ -71,4 +72,5 @@ class ValoracioServei
     {
         return $this->nom;
     }
+
 }
