@@ -3,6 +3,7 @@
 namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Serveis
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="serveis", indexes={@ORM\Index(name="fk_idusuari_iddonant", columns={"idDonant"}), @ORM\Index(name="fk_serveis_tipus_servei1", columns={"tipus_servei_id1"}), @ORM\Index(name="fk_serveis_estat_servei1", columns={"estat_servei_id"}), @ORM\Index(name="serveis_ibfk_3", columns={"poblacio_id"})})
  * @ORM\Entity
  */
-class Serveis 
-{
+class Serveis {
+
     /**
      * @var integer
      *
@@ -21,7 +22,7 @@ class Serveis
      */
     private $id;
 
-     /**
+    /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -29,7 +30,6 @@ class Serveis
      *   @ORM\JoinColumn(name="idDonant", referencedColumnName="id")
      * })
      */
-     
     private $iddonant;
 
     /**
@@ -38,21 +38,21 @@ class Serveis
      * @ORM\Column(name="punts", type="integer", nullable=false)
      */
     private $punts;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="nomServei", type="string", length=55, nullable=false)
      */
     private $nomServei;
-            
-     /**
+
+    /**
      * @var string
      *
      * @ORM\Column(name="descripcioServei", type="text", length=255, nullable=false)
      */
     private $descripcioServei;
-    
+
     /**
      * @var \Poblacion
      *
@@ -62,8 +62,7 @@ class Serveis
      * })
      */
     private $poblacio;
-    
-    
+
     /**
      * @var \DateTime
      *
@@ -84,7 +83,6 @@ class Serveis
      * @ORM\Column(name="data_final", type="date", nullable=false)
      */
     private $dataFinal;
-    
 
     /**
      * @var \TipusServei
@@ -105,26 +103,23 @@ class Serveis
      * })
      */
     private $estatServei;
-    
+
     public function __construct() {
         $this->dataInici = new \DateTime("now");
-        $final=new \DateTime("now");
-        date_add($final, date_interval_create_from_date_string('365 days'));        
+        $final = new \DateTime("now");
+        date_add($final, date_interval_create_from_date_string('365 days'));
         $this->dataFinal = $final;
     }
-
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     public function getNomServei() {
         return $this->nomServei;
     }
@@ -133,15 +128,13 @@ class Serveis
         $this->nomServei = $nomServei;
     }
 
-    
     /**
      * Set iddonant
      *
      * @param integer $iddonant
      * @return Serveis
      */
-    public function setIddonant($iddonant)
-    {
+    public function setIddonant($iddonant) {
         $this->iddonant = $iddonant;
 
         return $this;
@@ -152,8 +145,7 @@ class Serveis
      *
      * @return integer 
      */
-    public function getIddonant()
-    {
+    public function getIddonant() {
         return $this->iddonant;
     }
 
@@ -163,8 +155,7 @@ class Serveis
      * @param integer $punts
      * @return Serveis
      */
-    public function setPunts($punts)
-    {
+    public function setPunts($punts) {
         $this->punts = $punts;
 
         return $this;
@@ -175,22 +166,17 @@ class Serveis
      *
      * @return integer 
      */
-    public function getPunts()
-    {
+    public function getPunts() {
         return $this->punts;
     }
-    
+
     public function getDescripcioServei() {
         return $this->descripcioServei;
     }
 
-    
-
     public function setDescripcioServei($descripcioServei) {
         $this->descripcioServei = $descripcioServei;
     }
-
-   
 
     /**
      * Set dataInici
@@ -198,8 +184,7 @@ class Serveis
      * @param \DateTime $dataInici
      * @return Serveis
      */
-    public function setDataInici($dataInici)
-    {
+    public function setDataInici($dataInici) {
         $this->dataInici = $dataInici;
 
         return $this;
@@ -210,11 +195,10 @@ class Serveis
      *
      * @return \DateTime 
      */
-    public function getDataInici()
-    {
+    public function getDataInici() {
         return $this->dataInici;
     }
-    
+
     public function getPoblacio() {
         return $this->poblacio;
     }
@@ -223,15 +207,13 @@ class Serveis
         $this->poblacio = $poblacio;
     }
 
-    
     /**
      * Set durada
      *
      * @param \DateTime $durada
      * @return Serveis
      */
-    public function setDurada($durada)
-    {
+    public function setDurada($durada) {
         $this->durada = $durada;
 
         return $this;
@@ -242,8 +224,7 @@ class Serveis
      *
      * @return \DateTime 
      */
-    public function getDurada()
-    {
+    public function getDurada() {
         return $this->durada;
     }
 
@@ -253,8 +234,7 @@ class Serveis
      * @param \DateTime $dataFinal
      * @return Serveis
      */
-    public function setDataFinal($dataFinal)
-    {
+    public function setDataFinal($dataFinal) {
         $this->dataFinal = $dataFinal;
 
         return $this;
@@ -265,10 +245,9 @@ class Serveis
      *
      * @return \DateTime 
      */
-    public function getDataFinal()
-    {
+    public function getDataFinal() {
         return $this->dataFinal;
-    }    
+    }
 
     /**
      * Set tipusServei1
@@ -276,8 +255,7 @@ class Serveis
      * @param \bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1
      * @return Serveis
      */
-    public function setTipusServei1(\bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1 = null)
-    {
+    public function setTipusServei1(\bonavall\BancdeltempsBundle\Entity\TipusServei $tipusServei1 = null) {
         $this->tipusServei1 = $tipusServei1;
 
         return $this;
@@ -288,8 +266,7 @@ class Serveis
      *
      * @return \bonavall\BancdeltempsBundle\Entity\TipusServei 
      */
-    public function getTipusServei1()
-    {
+    public function getTipusServei1() {
         return $this->tipusServei1;
     }
 
@@ -299,8 +276,7 @@ class Serveis
      * @param \bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei
      * @return Serveis
      */
-    public function setEstatServei(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei = null)
-    {
+    public function setEstatServei(\bonavall\BancdeltempsBundle\Entity\EstatServei $estatServei = null) {
         $this->estatServei = $estatServei;
 
         return $this;
@@ -311,9 +287,15 @@ class Serveis
      *
      * @return \bonavall\BancdeltempsBundle\Entity\EstatServei 
      */
-    public function getEstatServei()
-    {
+    public function getEstatServei() {
         return $this->estatServei;
+    }
+
+    /**
+     * @Assert\True(message = "La data final no pot ser superior a la inicial")
+     */
+    public function isDatesValid() {
+        return ($this->dataInici < $this->dataFinal);
     }
 
     public function __toString() {

@@ -223,7 +223,7 @@ class Usuari extends Persona
      */
     public function setFotografia($fotografia)
     {
-        if($fotografia != null){
+        if(($fotografia !== null) && (strlen($fotografia) > 4)){
             $this->fotografia = $fotografia;
         }
         
@@ -423,12 +423,12 @@ class Usuari extends Persona
      */
     public function uploadImage() {
         // the file property can be empty if the field is not required
-        if (($this->fotografia === null) || (gettype($this->fotografia) == 'string')) {
+        if (($this->fotografia === null) || (gettype($this->fotografia) != 'object')) {
             return;
         }
         if(!$this->id){             
             $this->fotografia->move($this->getTmpUploadRootDir(), $this->fotografia->getClientOriginalName());
-        }else{
+        }else{            
             $this->fotografia->move($this->getUploadRootDir(), $this->fotografia->getClientOriginalName());
         }
         $this->setFotografia($this->fotografia->getClientOriginalName());

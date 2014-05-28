@@ -6,4 +6,8 @@ bonavall\Bancdeltemps\Entity\Persona:
           - NotBlank:  { message: "persona.email.not_blank" }
         password:
           - NotBlank: { message: "persona.password.not_blank" }
-        
+
+bonavall\Bancdeltemps\Entity\Serveis:        
+    getters:
+        datesValid:
+            - "True": { message: "La data inicial no pot ser superior a la final" }

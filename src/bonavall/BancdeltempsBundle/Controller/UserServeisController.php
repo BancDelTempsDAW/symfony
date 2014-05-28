@@ -181,7 +181,7 @@ class UserServeisController extends Controller
      *
      * @Route("/", name="user_serveis_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Serveis:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UserServeis:new.html.twig")
      */
     public function createAction(Request $request)
     {

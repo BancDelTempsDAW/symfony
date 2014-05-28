@@ -98,7 +98,7 @@ class UsuariPerfilController extends Controller {
         
         if ($usuari) {
             
-            $usuari->setFotografia(null);
+            //$usuari->setFotografia(null);
             $usuari->setIsActive(false);
             
             $em->persist($usuari);
