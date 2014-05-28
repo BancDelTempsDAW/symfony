@@ -1,32 +1,31 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Solicituts</h1>
+    <h1>Sol·licituds</h1>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Datasolicitut</th>
-                <td>{{ entity.dataSolicitut|date('d-m-Y H:i:s') }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="info">
+                    <th>Id</th>
+                    <td>{{ entity.id }}</td>
+                </tr>
+                <tr>
+                    <th>Data de sol·licitut</th>
+                    <td>{{ entity.dataSolicitut|date('d-m-Y H:i:s') }}</td>
+                </tr>
+            </tbody>
+        </table>
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('user_serveis') }}">
-            Torna als serveis
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('user_solicituts_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <li><a href="{{ path('user_serveis') }}">Torna als serveis</a></li>
+            <li><a href="{{ path('user_solicituts_edit', { 'id': entity.id }) }}">Editar</a></li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}
