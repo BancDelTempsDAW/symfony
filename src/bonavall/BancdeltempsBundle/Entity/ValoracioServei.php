@@ -63,6 +63,7 @@ class ValoracioServei
         return $this->nom;
     }
     
+
     /**
      * 
      * @return type
@@ -71,4 +72,5 @@ class ValoracioServei
     {
         return $this->nom;
     }
+
 }

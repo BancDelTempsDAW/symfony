@@ -181,11 +181,12 @@ class UserServeisController extends Controller
      *
      * @Route("/", name="user_serveis_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Serveis:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UserServeis:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Serveis();        
+        $entity = new Serveis(); 
+        $entity->setIddonant($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
