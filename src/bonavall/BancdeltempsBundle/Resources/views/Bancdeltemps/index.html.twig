@@ -1,16 +1,20 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 
 {% block body -%}
-    <h1>Bancdeltemps list</h1>
+    <h1>Banc del temps</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
+<div class="panel panel-default">
+    <div class="container-fluid">
+        <div class="table-responsive" >
+            <br />
+            <table class="table table-condensed">
+                <thead>
+                <tr class="info">
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Saldominim</th>
-                <th>Tempsinactivitat</th>
-                <th>Actions</th>
+                <th>Saldo Mínim</th>
+                <th>Temps d'inactivitat</th>
+                <th>Accions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,12 +25,12 @@
                 <td>{{ entity.saldoMinim }}</td>
                 <td>{{ entity.tempsInactivitat }}</td>
                 <td>
-                <ul>
+                    <ul style="list-style:none;">
                     <li>
-                        <a href="{{ path('Admin_bancdeltemps_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('Admin_bancdeltemps_show', { 'id': entity.id }) }}">Veure</a>
                     </li>
                     <li>
-                        <a href="{{ path('Admin_bancdeltemps_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('Admin_bancdeltemps_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
                 </td>
@@ -35,11 +39,13 @@
         </tbody>
     </table>
 
-        <ul>
+            <ul style="list-style:none;">
         <li>
-            <a href="{{ path('Admin_bancdeltemps_new') }}">
-                Create a new entry
-            </a>
+            <a href="{{ path('Admin_bancdeltemps_new') }}">Crear nova entrada</a>
         </li>
     </ul>
+            </div>
+        </div>
+    </div>
+
     {% endblock %}
