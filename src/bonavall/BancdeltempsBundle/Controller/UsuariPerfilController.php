@@ -81,7 +81,7 @@ class UsuariPerfilController extends Controller {
            
             $em->flush();
 
-            return $this->redirect($this->generateUrl('perfil_user', array('id' => $id)));
+            return $this->redirect($this->generateUrl('perfil_user', array('id' => $id, 'totOk' => 1)));
         }
 
         return array(
