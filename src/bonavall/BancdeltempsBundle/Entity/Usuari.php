@@ -4,7 +4,7 @@ namespace bonavall\BancdeltempsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use bonavall\BancdeltempsBundle\Entity\Persona;
-use Symfony\Component\Validator\Constraints as Assert;
+//use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Usuari
@@ -54,8 +54,8 @@ class Usuari extends Persona
 
       /**
      * @var string $fotografia
-     * @Assert\File( maxSize = "1024k", mimeTypesMessage = "Si us plau, puja una imatge vàlida")
-     * @ORM\Column(name="fotografia", type="string", length=255, nullable=false)
+     * 
+     * @ORM\Column(name="fotografia", type="string", length=255, nullable=true)
      */
     protected $fotografia;
 
@@ -223,7 +223,10 @@ class Usuari extends Persona
      */
     public function setFotografia($fotografia)
     {
-        $this->fotografia = $fotografia;
+        if(($fotografia !== null) && (strlen($fotografia) > 4)){
+            $this->fotografia = $fotografia;
+        }
+        
 
         return $this;
     }
@@ -400,7 +403,7 @@ class Usuari extends Persona
     *                               Gestio de la fotografia
     /*******************************************************************************/
     
-        public function getFullImagePath() {
+    public function getFullImagePath() {
         return null === $this->fotografia ? null : $this->getUploadRootDir(). $this->fotografia;
     }
  
@@ -420,15 +423,17 @@ class Usuari extends Persona
      */
     public function uploadImage() {
         // the file property can be empty if the field is not required
-        if (null === $this->fotografia) {
+        if (($this->fotografia === null) || (gettype($this->fotografia) != 'object')) {
             return;
         }
-        if(!$this->id){
+        if(!$this->id){             
             $this->fotografia->move($this->getTmpUploadRootDir(), $this->fotografia->getClientOriginalName());
-        }else{
+        }else{            
             $this->fotografia->move($this->getUploadRootDir(), $this->fotografia->getClientOriginalName());
         }
         $this->setFotografia($this->fotografia->getClientOriginalName());
+        
+       
     }
  
     /**
@@ -436,7 +441,7 @@ class Usuari extends Persona
      */
     public function moveImage()
     {
-        if (null === $this->fotografia) {
+        if ($this->fotografia === null) {
             return;
         }
         if(!is_dir($this->getUploadRootDir())){

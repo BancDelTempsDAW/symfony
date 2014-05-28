@@ -181,11 +181,12 @@ class UserServeisController extends Controller
      *
      * @Route("/", name="user_serveis_create")
      * @Method("POST")
-     * @Template("bonavallBancdeltempsBundle:Serveis:new.html.twig")
+     * @Template("bonavallBancdeltempsBundle:UserServeis:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Serveis();        
+        $entity = new Serveis(); 
+        $entity->setIddonant($this->getUser());
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
@@ -344,9 +345,9 @@ class UserServeisController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('bonavallBancdeltempsBundle:Serveis')->find($id);
-
+        $idDonant = $this->get('security.context')->getToken()->getUser()->getId();
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Serveis entity.');
         }
@@ -354,11 +355,12 @@ class UserServeisController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-
+        
+        
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('user_serveis_llista', array('id' => $id)));
+            return $this->redirect($this->generateUrl('user_serveis_llista', array('id' => $idDonant)));
         }
 
         return array(

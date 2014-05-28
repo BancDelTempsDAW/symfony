@@ -17,17 +17,14 @@ class UserType extends AbstractType
         
         $builder
             ->add('email')
-            ->add('password')
+            ->add('password','password')
             ->add('nom')
             ->add('cognom')
-            ->add('adreca','entity', array('class' => 'bonavallBancdeltempsBundle:Poblacion', 'query_builder' => function($er) {
-                        return $er->createQueryBuilder('u')
-                                ->orderBy('u.poblacio', 'ASC');
-                    }))
+            ->add('adreca','textarea')
             ->add('telefon')
-            ->add('fotografia', 'file', array('data_class' => null))
+            ->add('fotografia', 'file', array('data_class' => null, 'required' => false, 'empty_data' => true,))
             ->add('presentacio')
-            ->add('punts')
+            ->add('punts', 'text', array('read_only' => true))
            
         ;
     }

@@ -54,9 +54,11 @@
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>                                       
                         <ul class="dropdown-menu">
+                            <li><a href="{{path('Admin_bancdeltemps')}}">Banc del temps</a></li>
                             <li><a href="{{path('persona')}}">Persona</a></li>
                             <li><a href="{{path('usuari')}}">Usuari</a></li>
                             <li><a href="{{path('admin_serveis')}}">Serveis</a></li>
+                            <li><a href="{{path('admin_tipusservei')}}">Tipus Serveis</a></li>
                             <li><a href="{{path('admin_estatservei')}}">Estats</a></li>
                             <li><a href="{{path('admin_serveisconsumits')}}">Serveis Consumits</a></li>
                             <li><a href="{{path('admin_valoracioservei')}}">Valoració Serveis</a></li>
@@ -108,9 +110,7 @@
                              <ul class="dropdown-menu">
                                  <li><a href="{{ path('perfil_user', {'id': app.user.id}) }}">Informació Personal</a></li>
                                  <li><a href="{{path('gestio_solicituds_enviades')}}">Sol·licituds enviades</a></li>
-                                 <li><a href="{{path('gestio_solicituds_rebudes')}}">Sol·licituds rebudes</a></li>
-                                 <li><a href="{{path('gestio_serveis')}}">Els meus serveis</a></li>
-                                 
+                                 <li><a href="{{path('gestio_solicituds_rebudes')}}">Sol·licituds rebudes</a></li>                                                                
                              </ul>
                          </li>
                      {% endif %}
@@ -142,7 +142,7 @@
                      </form>
                 {% endif %}
                 {% endblock %}
-                    <li></li>
+                    
                 </ul>
               </div><!-- /.navbar-collapse -->
               {% endif %}

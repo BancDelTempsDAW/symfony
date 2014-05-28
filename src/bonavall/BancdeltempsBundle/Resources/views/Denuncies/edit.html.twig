@@ -1,16 +1,31 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Denuncies edit</h1>
+<h1>Denuncies edit</h1>
 
+<div class="panel panel-default">
+    <div class="container-fluid">
     {{ form(edit_form) }}
 
+<<<<<<< HEAD
+            <ul class="record_actions">
+                <li>
+                    <a href="{{ path('admin_denuncies') }}">
+                        Back to the list
+                    </a>
+                </li>
+                <li>{{ form(delete_form) }}</li>
+            </ul>
+        </div>
+    </div>
+=======
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_denuncies') }}">
             Back to the list
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+
 </ul>
+>>>>>>> master
 {% endblock %}

@@ -1,7 +1,8 @@
 {% extends 'bonavallBancdeltempsBundle:Default:skel.html.twig' %}
 
 {% block body -%}
-    <h1>Serveis consumits</h1>
+
+<h1>Serveis consumits</h1>
 <div class="panel panel-default">
     <div class="container-fluid">
         <div class="table-responsive" >
@@ -19,6 +20,7 @@
             <tr>
                 <td><a href="{{ path('admin_serveisconsumits_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.comentaris }}</td>
+                <td>{{ entity.valoracioServei }}</td>
                 <td>
                 <ul style="list-style:none;">
                     <li>
@@ -39,7 +41,13 @@
             <a href="{{ path('admin_serveisconsumits_new') }}">Crear nova entrada</a>
         </li>
     </ul>
+<<<<<<< HEAD
+        
+        </div>
+        </div>
+=======
             </div>
         </div>
     </div>
+>>>>>>> master
     {% endblock %}
